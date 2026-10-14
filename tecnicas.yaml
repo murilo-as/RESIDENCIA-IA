@@ -1,0 +1,482 @@
+# tecnicas.yaml v0.2
+# Catalogo de tecnicas de eficiencia como regras executaveis para as etapas 3 (candidatar) e 4 (estimar).
+# Regra do arquivo: NENHUM numero de efeito aqui, so a direcao. Numeros vivem no efeitos.csv (com fonte e tag).
+# Tags: A = verificado na fonte ou medido por nos | B = fonte/memoria sem checagem independente | C = inferencia, fonte unica, proxy.
+# Fonte dos campos movimento/etapa/custo_adaptacao/alvo: Taxonomia (Murilo), tag B. Demais campos: conhecimento do assistente, tag em `tag_efeitos`.
+
+versao: "0.2"
+
+movimentos:   # espaco qualidade x footprint (Menghani) + 1 movimento novo
+  Shrink:   "footprint melhora, qualidade piora"
+  Improve:  "qualidade melhora, footprint de inferencia igual"
+  Grow:     "qualidade melhora, footprint piora"
+  Speed-up: "footprint melhora, qualidade igual (sem perda)"   # movimento novo, proposto nesta fase
+# Movimento descreve o footprint de INFERENCIA (a ferramenta nao considera custo de treino).
+# Quando memoria e latencia se movem em sentidos opostos, o movimento e so um rotulo; vale o `efeito_esperado` por eixo.
+
+vocabularios:
+  aplica_em:
+    modelo_pronto: "candidata na etapa 3: pode ser aplicada a um modelo que o usuario ja tem"
+    embutida_no_modelo: "ja vem no desenho do modelo; vira criterio de ESCOLHA do modelo (ver fichas.json)"
+    exige_treino_do_zero: "so existe no treino original; fica no catalogo, nunca candidata"
+  exige: "sim | nao | talvez (logica de 3 valores)"
+  efeito_esperado: "melhora | piora | neutro | varia   (sentido da melhora de cada eixo; memoria melhora = usa menos)"
+  custo_adaptacao: "nenhum | leve | alto | varia"
+
+# Predicados sobre a ficha de um modelo (fichas.json). Implementados em regras.py; cada um devolve True / False / None (None = talvez).
+# `requer_modelo` de cada tecnica e uma lista de predicados ligados por E: qualquer False -> a tecnica nao se aplica ao modelo;
+# sem False e com algum None -> talvez; todos True -> aplica. Texto livre fica so em `notas` (nao e lido pelo codigo).
+predicados:
+  tem_kv_por_token:      "o modelo tem camadas com KV por token (full_attention ou sliding_attention em arquitetura.camadas_proprias)"
+  tem_atencao_completa:  "arquitetura.camadas_proprias.full_attention > 0"
+  tipo_em:               "ficha.tipo esta na lista `valores` (base | instruct | thinking | hibrido)"
+  existe_rascunho:       "existe outro modelo no catalogo com o mesmo `tokenizer`, menos parametros e o mesmo grupo de tipo (base com base; nao-base com nao-base)"
+  existe_professor:      "existe outro modelo no catalogo com o mesmo `tokenizer` e mais parametros"
+
+# Configuracao = modelo + tecnicas (cada uma com nivel) + contexto. E a CHAVE do efeitos.csv.
+# Forma canonica (regras.config_id): "<modelo>|<tecnica>:<nivel>+<tecnica>:<nivel>|ctx=<tokens>"; tecnicas em ordem alfabetica;
+# sem tecnica: "<modelo>|nenhuma|ctx=<tokens>". Todo nivel precisa estar definido em `niveis.valores` (a_definir nao entra no efeitos.csv).
+configuracao:
+  max_tecnicas: 3     # HIPOTESE: o piloto tem 3 tecnicas baratas (pesos, KV, modo de raciocinio); o limite de 2 discutido antes nao as comportaria
+
+# Infraestrutura (area da taxonomia): fora desta versao, sem tecnicas na taxonomia atual.
+infraestrutura: []
+
+candidatas_futuras:   # ideias discutidas, ainda nao decididas; entram quando a Infraestrutura for definida
+  - offload_camadas_cpu          # PC com pouca VRAM; no Spark (memoria unificada) tem pouco efeito (B)
+  - flash_attention              # Speed-up de prefill/memoria; recurso do motor (B)
+  - prefix_caching               # Speed-up com prompt repetido; recurso do motor (B)
+  - fine_tuning_completo         # variante de PEFT quando recursos permitem (B)
+  - rag                          # Improve de dominio; hoje so aparece em decoding_recuperacao
+  - model_merging
+  - compressao_de_prompt
+
+# Parametro de carga (NAO e tecnica): comprimento_contexto, modo de raciocinio como atributo do perfil, tamanho do lote.
+
+tecnicas:
+
+  # ---------------- COMPRESSAO ----------------
+  pruning:
+    nome: Pruning
+    area: Compressao
+    movimento: Shrink
+    etapa: pos-treino ou durante o treino
+    custo_adaptacao: varia            # nenhum (one-shot) a leve (fine-tune para recuperar)
+    alvo: [pesos, cabecas, camadas]
+    aplica_em: modelo_pronto
+    exige: {dados: talvez, treino: talvez, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: piora, memoria: varia, latencia_decodificacao: varia, latencia_prefill: varia}
+    niveis: {parametro: esparsidade, valores: a_definir}
+    combina_com: [quantizacao_pesos, peft_lora]
+    conflita_com: []
+    ferramenta: [LLM-Pruner, Wanda, SparseGPT, OWL]
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "N:M 2:4 acelera em GPUs Ampere+ (Menghani); suporte no motor local a confirmar. Ganho real de memoria/latencia so com poda estruturada ou padrao N:M que o motor aproveite; poda nao estruturada mantem pesos densos no formato (B)."
+
+  quantizacao_pesos:
+    nome: Quantizacao de pesos (pos-treino)
+    area: Compressao
+    movimento: Shrink
+    etapa: pos-treino
+    custo_adaptacao: nenhum           # PTQ; QAT exige retreino (fora de escopo)
+    alvo: [pesos]
+    aplica_em: modelo_pronto
+    exige: {dados: talvez, treino: nao, gpu_para_aplicar: talvez}   # GPTQ/AWQ pedem calibracao; formatos GGUF nao
+    requer_modelo: []
+    efeito_esperado: {qualidade: piora, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: varia}
+    niveis:
+      parametro: bits_por_peso
+      valores: [8, 6, 5, 4, 3]        # nominais; bits EFETIVOS (inclui escalas) = tamanho_em_disco*8 / params, medido
+      baseline: 16                    # bf16, linha "nenhuma" do efeitos.csv
+    combina_com: [quantizacao_kv, peft_lora, decoding_especulativo, kv_cache_evicao, modo_raciocinio]
+    conflita_com: []
+    ferramenta: [llama.cpp]
+    medida_na_v1: sim
+    tag_efeitos: B
+    notas: "Latencia de decodificacao ~ banda / bytes lidos por token (B). Pesos+ativacoes (SmoothQuant etc.) ficam fora."
+
+  quantizacao_kv:
+    nome: Quantizacao do KV cache
+    area: Inferencia                  # sub-tecnica de KV-cache; adicao nesta fase (nao esta na taxonomia)
+    movimento: Shrink
+    etapa: inferencia
+    custo_adaptacao: nenhum
+    alvo: [cache]
+    aplica_em: modelo_pronto
+    exige: {dados: nao, treino: nao, gpu_para_aplicar: nao}
+    requer_modelo: [tem_kv_por_token]
+    efeito_esperado: {qualidade: piora, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: neutro}
+    niveis: {parametro: bits_kv, valores: [16, 8, 4], baseline: 16}
+    combina_com: [quantizacao_pesos, kv_cache_evicao]
+    conflita_com: []
+    ferramenta: [llama.cpp]
+    medida_na_v1: sim
+    tag_efeitos: B
+    notas: "O motor pode exigir flash attention para quantizar V (a confirmar no Spark, C). Ganho cresce com o contexto. Nao quantiza o estado linear constante (C)."
+
+  decomposicao_low_rank:
+    nome: Decomposicao low-rank
+    area: Compressao
+    movimento: Shrink
+    etapa: pos-treino
+    custo_adaptacao: varia            # LASER pede pouco fine-tuning
+    alvo: [matrizes de pesos]
+    aplica_em: modelo_pronto
+    exige: {dados: talvez, treino: talvez, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: piora, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: melhora}
+    niveis: {parametro: posto, valores: a_definir}
+    combina_com: [quantizacao_pesos, peft_lora]
+    conflita_com: []
+    ferramenta: [SVD-LLM, LASER]
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Cheng: raramente testada em aplicacoes reais. Sem suporte conhecido nos motores de uso pessoal (C)."
+
+  weight_sharing:
+    nome: Weight sharing
+    area: Compressao
+    movimento: Shrink
+    etapa: pos-treino ou desde o treino
+    custo_adaptacao: varia            # k-means + retreino; ALBERT/MobileLLM treinam ja compartilhado
+    alvo: [pesos]
+    aplica_em: modelo_pronto
+    exige: {dados: talvez, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: piora, memoria: melhora, latencia_decodificacao: neutro, latencia_prefill: neutro}
+    niveis: {parametro: centroides, valores: a_definir}
+    combina_com: [quantizacao_pesos]
+    conflita_com: []
+    ferramenta: []
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Memoria cai, calculo nao (observacao da taxonomia). Sem ferramenta madura para LLMs prontos (C). Compartilhamento entre camadas so vem do treino; em modelo pronto resta agrupamento pos-treino (C)."
+
+  # ---------------- APRENDIZADO ----------------
+  destilacao:
+    nome: Destilacao
+    area: Aprendizado
+    movimento: Improve
+    etapa: treino do aluno
+    custo_adaptacao: alto
+    alvo: [modelo aluno]
+    aplica_em: modelo_pronto           # parte de um professor pronto; produz/melhora um aluno
+    exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: [existe_professor]
+    efeito_esperado: {qualidade: melhora, memoria: neutro, latencia_decodificacao: neutro, latencia_prefill: neutro}
+    niveis: {parametro: par_professor_aluno, valores: a_definir}
+    combina_com: [quantizacao_pesos, decoding_especulativo]
+    conflita_com: []
+    ferramenta: [GKD, MiniLLM]
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "Efeito medido contra o aluno treinado sem destilacao. DistillSpec liga com decoding especulativo. Aluno e professor da mesma familia/tokenizer."
+
+  data_augmentation:
+    nome: Data augmentation
+    area: Aprendizado
+    movimento: Improve
+    etapa: treino
+    custo_adaptacao: alto
+    alvo: [dados]
+    aplica_em: exige_treino_do_zero
+    exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: melhora, memoria: neutro, latencia_decodificacao: neutro, latencia_prefill: neutro}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: []
+    conflita_com: []
+    ferramenta: []
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "Exemplos da fonte sao de imagem (Menghani)."
+
+  self_supervised:
+    nome: Self-supervised learning
+    area: Aprendizado
+    movimento: Improve
+    etapa: pre-treino
+    custo_adaptacao: alto
+    alvo: [dados nao rotulados]
+    aplica_em: exige_treino_do_zero
+    exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: melhora, memoria: neutro, latencia_decodificacao: neutro, latencia_prefill: neutro}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: []
+    conflita_com: []
+    ferramenta: []
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "O pre-treino dos modelos do catalogo ja foi feito pelos autores."
+
+  peft_lora:
+    nome: PEFT / LoRA
+    area: Aprendizado
+    movimento: Improve                # na taxonomia: Shrink (footprint de treino). Para a ferramenta (so inferencia) = Improve
+    etapa: fine-tuning
+    custo_adaptacao: leve
+    alvo: [pesos treinaveis adicionais]
+    aplica_em: modelo_pronto
+    exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: melhora, memoria: neutro, latencia_decodificacao: neutro, latencia_prefill: neutro}
+    niveis: {parametro: posto_r, valores: a_definir}
+    combina_com: [quantizacao_pesos, pruning, decomposicao_low_rank]
+    conflita_com: []
+    ferramenta: [QLoRA, LoftQ, AdaLoRA, DoRA]
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "Melhora qualidade NO DOMINIO do ajuste. LoRA pode ser fundido a W: sem latencia extra (taxonomia). Exige o recurso 'treinar' do usuario."
+
+  # ---------------- AUTOMACAO ----------------
+  hpo:
+    nome: Otimizacao de hiperparametros (HPO)
+    area: Automacao
+    movimento: Improve
+    etapa: treino (busca)
+    custo_adaptacao: alto
+    alvo: [hiperparametros]
+    aplica_em: exige_treino_do_zero
+    exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: melhora, memoria: neutro, latencia_decodificacao: neutro, latencia_prefill: neutro}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: [peft_lora]
+    conflita_com: []
+    ferramenta: [Vizier, PBT, successive halving]
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "Util para escolher posto/alfa do LoRA (liga com peft_lora), mas nao e candidata propria."
+
+  nas:
+    nome: Neural Architecture Search (NAS)
+    area: Automacao
+    movimento: Shrink                 # taxonomia: Shrink ou Improve conforme o objetivo
+    etapa: treino (busca)
+    custo_adaptacao: alto
+    alvo: [arquitetura]
+    aplica_em: exige_treino_do_zero
+    exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: varia, memoria: varia, latencia_decodificacao: varia, latencia_prefill: varia}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: []
+    conflita_com: []
+    ferramenta: [MNasNet, FBNet, MONAS]
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "Custo de busca (Zoph e Le: 22.400 h de GPU, citado na taxonomia) inviabiliza para o usuario-alvo."
+
+  # ---------------- ARQUITETURAS EFICIENTES (embutidas no modelo) ----------------
+  atencao_eficiente:
+    nome: Atencao eficiente
+    area: Arquiteturas eficientes
+    movimento: Shrink
+    etapa: treino e inferencia
+    custo_adaptacao: alto
+    alvo: [camada de atencao]
+    aplica_em: embutida_no_modelo
+    exige: {dados: nao, treino: sim, gpu_para_aplicar: nao}
+    requer_modelo: []
+    efeito_esperado: {qualidade: varia, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: melhora}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: []
+    conflita_com: []
+    ferramenta: []
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "No catalogo: janela deslizante do Gemma 3/4 (campo arquitetura.janela do fichas.json) e a forma mais proxima da familia 'olhar so alguns tokens' (C)."
+
+  sem_atencao:
+    nome: Sem atencao (estado recorrente / lineares)
+    area: Arquiteturas eficientes
+    movimento: Shrink
+    etapa: treino e inferencia
+    custo_adaptacao: alto
+    alvo: [camada de atencao inteira]
+    aplica_em: embutida_no_modelo
+    exige: {dados: nao, treino: sim, gpu_para_aplicar: nao}
+    requer_modelo: []
+    efeito_esperado: {qualidade: varia, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: melhora}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: []
+    conflita_com: []
+    ferramenta: []
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "No catalogo: Qwen3.5+ (camadas linear_attention + full_attention, estado constante); e hibrido, na familia 'SMA/BST' da taxonomia (C). KV vira constante por camada linear (fichas_kv.py)."
+
+  moe:
+    nome: Mixture of Experts (MoE)
+    area: Arquiteturas eficientes
+    movimento: Grow
+    etapa: treino e inferencia
+    custo_adaptacao: alto
+    alvo: [camadas feed-forward]
+    aplica_em: embutida_no_modelo
+    exige: {dados: nao, treino: sim, gpu_para_aplicar: nao}
+    requer_modelo: []
+    efeito_esperado: {qualidade: melhora, memoria: piora, latencia_decodificacao: melhora, latencia_prefill: varia}   # memoria: todos os especialistas ficam na memoria; decodificacao le so os ativos
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: [quantizacao_pesos]
+    conflita_com: []
+    ferramenta: []
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "No catalogo: fichas.json params.moe, ativos, experts_por_token. Memoria usa params.total; latencia usa params.ativos."
+
+  random_projection:
+    nome: Random projection layers
+    area: Arquiteturas eficientes
+    movimento: Shrink
+    etapa: treino e inferencia
+    custo_adaptacao: alto
+    alvo: [tabela de embeddings]
+    aplica_em: embutida_no_modelo
+    exige: {dados: nao, treino: sim, gpu_para_aplicar: nao}
+    requer_modelo: []
+    efeito_esperado: {qualidade: varia, memoria: melhora, latencia_decodificacao: neutro, latencia_prefill: neutro}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: []
+    conflita_com: []
+    ferramenta: []
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Nenhum modelo do escopo e conhecido por usar (C). Fica no catalogo por fidelidade a taxonomia."
+
+  # ---------------- INFERENCIA ----------------
+  early_exit:
+    nome: Early exit
+    area: Inferencia
+    movimento: Shrink
+    etapa: inferencia
+    custo_adaptacao: varia            # treinar ou calibrar o criterio de saida
+    alvo: [camadas percorridas por token]
+    aplica_em: modelo_pronto
+    exige: {dados: talvez, treino: talvez, gpu_para_aplicar: talvez}
+    requer_modelo: []
+    efeito_esperado: {qualidade: piora, memoria: neutro, latencia_decodificacao: melhora, latencia_prefill: melhora}
+    niveis: {parametro: limiar_confianca, valores: a_definir}
+    combina_com: []
+    conflita_com: []
+    ferramenta: [CALM, SkipDecode]
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Mais eficaz em tarefas simples; rende menos em resumo e codigo (taxonomia). Sem suporte nos motores de uso pessoal (C)."
+
+  kv_cache_evicao:
+    nome: KV-cache (evicao / selecao de tokens)
+    area: Inferencia
+    movimento: Shrink
+    etapa: inferencia
+    custo_adaptacao: nenhum
+    alvo: [cache de chaves e valores]
+    aplica_em: modelo_pronto
+    exige: {dados: nao, treino: nao, gpu_para_aplicar: nao}
+    requer_modelo: [tem_atencao_completa]
+    efeito_esperado: {qualidade: varia, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: neutro}
+    niveis: {parametro: orcamento_de_cache, valores: a_definir}
+    combina_com: [quantizacao_kv, quantizacao_pesos]
+    conflita_com: []
+    ferramenta: [H2O, Scissorhands]
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Cheng diz que preserva qualidade; evicao descarta informacao, conferir nos artigos originais (taxonomia). Nao atua no estado linear constante."
+
+  token_pruning:
+    nome: Token pruning
+    area: Inferencia
+    movimento: Shrink
+    etapa: inferencia
+    custo_adaptacao: varia
+    alvo: [tokens]
+    aplica_em: modelo_pronto
+    exige: {dados: talvez, treino: talvez, gpu_para_aplicar: talvez}
+    requer_modelo: []
+    efeito_esperado: {qualidade: piora, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: melhora}
+    niveis: {parametro: fracao_removida, valores: a_definir}
+    combina_com: [kv_cache_evicao]
+    conflita_com: []
+    ferramenta: [SpAtten, LTP]
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Vale em entradas longas. Exemplos de visao-linguagem ficam fora do escopo."
+
+  decoding_especulativo:
+    nome: Decoding especulativo
+    area: Inferencia
+    movimento: Speed-up               # na taxonomia: Decoding inteiro = Shrink
+    etapa: inferencia
+    custo_adaptacao: nenhum           # no modelo-alvo
+    alvo: [passos de decodificacao]
+    aplica_em: modelo_pronto
+    exige: {dados: nao, treino: nao, gpu_para_aplicar: nao}
+    requer_modelo: [existe_rascunho]
+    efeito_esperado: {qualidade: neutro, memoria: piora, latencia_decodificacao: melhora, latencia_prefill: neutro}
+    niveis: {parametro: modelo_rascunho, valores: a_definir}
+    combina_com: [quantizacao_pesos, quantizacao_kv, destilacao]
+    conflita_com: [decoding_paralelo]
+    ferramenta: [llama.cpp]
+    medida_na_v1: nao
+    tag_efeitos: B
+    notas: "Qualidade neutra porque o modelo grande verifica o rascunho (B, paper original). Ganho depende da taxa de aceitacao do rascunho. Rascunho com mesmo tokenizer (chave familia-geracao, B). A regra anterior 'mesmo vocab_size' foi descartada: vocab_size varia na mesma geracao."
+
+  decoding_paralelo:
+    nome: Decoding paralelo (Medusa, EAGLE)
+    area: Inferencia
+    movimento: Speed-up
+    etapa: inferencia
+    custo_adaptacao: alto             # treina cabecas extras
+    alvo: [passos de decodificacao]
+    aplica_em: modelo_pronto
+    exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
+    requer_modelo: []
+    efeito_esperado: {qualidade: varia, memoria: piora, latencia_decodificacao: melhora, latencia_prefill: neutro}
+    niveis: {parametro: null, valores: a_definir}
+    combina_com: [quantizacao_pesos]
+    conflita_com: [decoding_especulativo]
+    ferramenta: [Medusa, EAGLE]
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Exige arquiteturas/treino extra (taxonomia). Se a variante nao for exatamente sem perda, passa a Shrink: conferir na fonte."
+
+  decoding_recuperacao:
+    nome: Decoding baseado em recuperacao (RAG)
+    area: Inferencia
+    movimento: Improve
+    etapa: inferencia
+    custo_adaptacao: leve
+    alvo: [contexto de entrada]
+    aplica_em: modelo_pronto
+    exige: {dados: sim, treino: nao, gpu_para_aplicar: nao}
+    requer_modelo: []
+    efeito_esperado: {qualidade: melhora, memoria: varia, latencia_decodificacao: neutro, latencia_prefill: piora}
+    niveis: {parametro: tokens_recuperados, valores: a_definir}
+    combina_com: [quantizacao_pesos, quantizacao_kv]
+    conflita_com: []
+    ferramenta: [LLMA, CoG]
+    medida_na_v1: nao
+    tag_efeitos: C
+    notas: "Taxonomia: mais ganho de qualidade que de eficiencia. Memoria varia porque o contexto maior aumenta o KV."
+
+  modo_raciocinio:
+    nome: Modo de raciocinio (liga/desliga e orcamento)
+    area: Inferencia                  # ADICAO do assistente, sem fonte na taxonomia
+    movimento: Grow
+    etapa: inferencia
+    custo_adaptacao: nenhum
+    alvo: [tokens gerados]
+    aplica_em: modelo_pronto
+    exige: {dados: nao, treino: nao, gpu_para_aplicar: nao}
+    requer_modelo: [{tipo_em: [hibrido]}]
+    efeito_esperado: {qualidade: melhora, memoria: varia, latencia_decodificacao: piora, latencia_prefill: neutro}   # latencia total piora: mais tokens gerados
+    niveis: {parametro: modo, valores: [desligado, ligado], extra: orcamento_tokens_a_definir}
+    combina_com: [quantizacao_pesos, quantizacao_kv]
+    conflita_com: []
+    ferramenta: [template do chat / flag do motor (a confirmar)]
+    medida_na_v1: sim
+    tag_efeitos: B
+    notas: "Unico Grow aplicavel a modelo pronto. Qualidade e latencia total medidas por tarefa; memoria varia pelo KV dos tokens extras. Gemma 4 esta como 'base' no fichas por regra de nome: conferir se tem modo de raciocinio (C). Hibrido liga e desliga; thinking so liga (nada a comparar); base e instruct nao se aplicam."
