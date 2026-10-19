@@ -42,7 +42,7 @@ def avaliar(backend, modelo=None, url=None):
             if campo == "modelo": gold = c["modelo_id_esperado"]
             if final is None: cont[campo]["erro_execucao"] += 1; continue
             pred = pegar(final, campo)["valor"]
-            if campo == "modelo": pred = final["modelo"].get("id") if pred else None
+            if campo == "modelo": pred = final["modelo"].get("id") or pred     # mencao nao resolvida conta como valor (pega falso positivo)
             if gold is None and pred is None: cont[campo]["acerto"] += 1
             elif gold is None: cont[campo]["alucinacao"] += 1
             elif pred is None: cont[campo]["omissao"] += 1

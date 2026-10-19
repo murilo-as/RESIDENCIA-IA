@@ -3,8 +3,7 @@
 Regra de ouro: o LLM so EXTRAI (valor + trecho literal do texto). Toda decisao fica no codigo:
   - valor sem evidencia literal no texto -> descartado (vira vazio) e registrado em `avisos`;
   - mencao de modelo -> id do fichas.json por regra deterministica (nao pelo LLM);
-  - mencao de hardware -> id do hardware.json, se o arquivo existir;
-  - campos vazios continuam vazios: os padroes (ex.: tarefa vazia = Uso geral) sao da etapa 2.
+  - campos vazios continuam vazios: os padroes (ex.: tarefa vazia = QA) sao da etapa 2.
 
 Backends do LLM:
   llamacpp  -> llama-cpp-python com um .gguf local (usado nos testes)
@@ -35,9 +34,9 @@ Cada campo tem "valor" e "evidencia". "evidencia" = trecho copiado palavra por p
 REGRA PRINCIPAL: preencha um campo só se o TEXTO o diz de forma explícita. Não deduza, não suponha, não complete por bom senso. Na dúvida: valor null e evidencia null. O trecho de evidência precisa dizer diretamente o que o valor afirma.
 
 Campos:
-- modelo: nome de modelo de linguagem citado no TEXTO (um nome próprio, não uma descrição como "um modelo pequeno").
-- tarefa: QA (perguntas e respostas), Uso geral (assistente, resumir, escrever), Codigo (programar), Traducao (traduzir). Só se o TEXTO descrever o que o modelo vai fazer.
-- dominio: geral, saude, juridico, ciencia, matematica ou outro. Só se o TEXTO indicar o assunto.
+- modelo: nome de modelo de linguagem que o usuário usa ou quer usar (um nome próprio, não uma descrição como "um modelo pequeno"). Nomes citados só como exemplo ou comparação ("tipo um ChatGPT") não contam.
+- tarefa: QA (responder perguntas, conversar, explicar, resumir, escrever, analisar texto), Codigo (programar), Traducao (traduzir). Só se o TEXTO descrever o que o modelo vai fazer.
+- dominio: o ASSUNTO do conteúdo: geral (sem assunto específico), saude, juridico, ciencia, matematica ou outro (assunto específico fora dessa lista). A tarefa (programar, traduzir) não é assunto. Só se o TEXTO indicar o assunto.
 - hardware: máquina ou placa citada no TEXTO.
 - memoria_gb: número de GB de memória, só se o TEXTO disser o número.
 - preferencia: só se o TEXTO pedir isso explicitamente. "qualidade" = quer a melhor resposta/precisão, aceita lentidão. "footprint" = quer algo mais rápido, leve, pequeno ou com pouca memória. Elogios vagos como "bom" não contam.
@@ -115,15 +114,6 @@ def resolver_modelo(mencao, fichas):
     if len(nao_base) == 1: return nao_base[0], cands, "prefixo; preferido o modelo nao-base"
     return None, cands, "ambiguo: varios candidatos"
 
-def resolver_hardware(mencao, caminho=None):
-    caminho = caminho or _achar("hardware.json")
-    if not os.path.exists(caminho): return None, "hardware.json ainda nao existe"
-    hw = json.load(open(caminho))
-    alvo = _compacto(mencao)
-    achados = [k for k, v in hw.items() if alvo and (alvo in _compacto(k) or any(alvo in _compacto(a) for a in v.get("apelidos", [])))]
-    return (achados[0], "correspondencia por nome") if len(achados) == 1 else (None, f"{len(achados)} correspondencias")
-
-
 def pos_processar(texto, bruto, fichas):
     avisos, pedido = [], {"texto": texto}
 
@@ -154,10 +144,7 @@ def pos_processar(texto, bruto, fichas):
         if not mo["id"]: avisos.append(f"modelo: {mo['valor']!r} nao resolvido ({mo['regra']}; candidatos: {mo['candidatos'][:5]})")
     pedido["modelo"] = mo
 
-    hw = campo("hardware", bruto["hardware"])
-    if hw["valor"]:
-        hw["id"], hw["regra"] = resolver_hardware(hw["valor"])
-    pedido["hardware"] = hw
+    pedido["hardware"] = campo("hardware", bruto["hardware"])     # so a mencao; a etapa 2 usa a memoria, nao a maquina
 
     pedido["avisos"] = avisos
     return pedido

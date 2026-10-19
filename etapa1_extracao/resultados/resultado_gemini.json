@@ -1,7 +1,7 @@
 {
  "backend": "gemini",
  "modelo": "gemini-2.5-flash",
- "tempo_s": 32.6,
+ "tempo_s": 44.2,
  "contagem": {
   "modelo": {
    "acerto": 10,
@@ -98,7 +98,7 @@
     },
     "idioma": {
      "valor": "pt",
-     "evidencia": "Quero um",
+     "evidencia": "Quero",
      "origem": "texto"
     },
     "entrada_longa": {
@@ -114,12 +114,12 @@
     "recursos": {
      "dados": {
       "valor": false,
-      "evidencia": "Não tenho dados para treinar",
+      "evidencia": "Não tenho dados",
       "origem": "texto"
      },
      "treino": {
       "valor": false,
-      "evidencia": "Não tenho dados para treinar",
+      "evidencia": "para treinar",
       "origem": "texto"
      },
      "gpu": {
@@ -154,12 +154,12 @@
     "texto": "Preciso traduzir manuais técnicos do inglês para o português. Tenho uma RTX 4090 e quero a melhor qualidade possível.",
     "tarefa": {
      "valor": "Tradução",
-     "evidencia": "traduzir",
+     "evidencia": "traduzir manuais técnicos",
      "origem": "texto"
     },
     "dominio": {
      "valor": "outro",
-     "evidencia": "técnicos",
+     "evidencia": "manuais técnicos",
      "origem": "texto"
     },
     "preferencia": {
@@ -231,7 +231,7 @@
     "dominio": {
      "valor": null,
      "evidencia": null,
-     "origem": "vazio"
+     "origem": "descartado"
     },
     "preferencia": {
      "valor": "footprint",
@@ -293,7 +293,9 @@
      "id": null,
      "regra": "hardware.json ainda nao existe"
     },
-    "avisos": []
+    "avisos": [
+     "dominio: valor 'geral' descartado (evidencia None nao esta no texto)"
+    ]
    }
   },
   {
@@ -301,7 +303,7 @@
    "final": {
     "texto": "Quero um assistente de uso geral, tipo um ChatGPT local, no meu Mac com 32 GB de memória.",
     "tarefa": {
-     "valor": "Uso geral",
+     "valor": "QA",
      "evidencia": "assistente de uso geral",
      "origem": "texto"
     },
@@ -353,12 +355,9 @@
      "origem": "texto"
     },
     "modelo": {
-     "valor": "ChatGPT",
-     "evidencia": "ChatGPT",
-     "origem": "texto",
-     "id": null,
-     "candidatos": [],
-     "regra": "nenhum modelo do catalogo corresponde"
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
     },
     "hardware": {
      "valor": "Mac",
@@ -367,9 +366,7 @@
      "id": null,
      "regra": "hardware.json ainda nao existe"
     },
-    "avisos": [
-     "modelo: 'ChatGPT' nao resolvido (nenhum modelo do catalogo corresponde; candidatos: [])"
-    ]
+    "avisos": []
    }
   },
   {
@@ -409,7 +406,7 @@
     "recursos": {
      "dados": {
       "valor": true,
-      "evidencia": "Tenho alguns milhares de exemplos de petições",
+      "evidencia": "milhares de exemplos de petições",
       "origem": "texto"
      },
      "treino": {
@@ -419,7 +416,7 @@
      },
      "gpu": {
       "valor": true,
-      "evidencia": "uma GPU",
+      "evidencia": "GPU",
       "origem": "texto"
      }
     },
@@ -449,7 +446,7 @@
     "texto": "Qual modelo resolve problemas de matemática do ensino médio? Uso um computador sem placa de vídeo, com 8 GB de RAM.",
     "tarefa": {
      "valor": "QA",
-     "evidencia": "resolve problemas de matemática",
+     "evidencia": "resolve problemas",
      "origem": "texto"
     },
     "dominio": {
@@ -464,7 +461,7 @@
     },
     "idioma": {
      "valor": "pt",
-     "evidencia": "Qual modelo",
+     "evidencia": "Qual",
      "origem": "texto"
     },
     "entrada_longa": {
@@ -519,8 +516,8 @@
    "final": {
     "texto": "Gemma 3 12B para resumir artigos científicos longos, priorizando pouca memória.",
     "tarefa": {
-     "valor": "Uso geral",
-     "evidencia": "resumir",
+     "valor": "QA",
+     "evidencia": "resumir artigos científicos",
      "origem": "texto"
     },
     "dominio": {
@@ -721,7 +718,7 @@
     },
     "hardware": {
      "valor": "laptop",
-     "evidencia": "a laptop",
+     "evidencia": "laptop",
      "origem": "texto",
      "id": null,
      "regra": "hardware.json ainda nao existe"

@@ -1,7 +1,7 @@
 {
  "backend": "gabarito",
  "modelo": null,
- "tempo_s": 0.0,
+ "tempo_s": 0.1,
  "contagem": {
   "modelo": {
    "acerto": 10,
@@ -301,7 +301,7 @@
    "final": {
     "texto": "Quero um assistente de uso geral, tipo um ChatGPT local, no meu Mac com 32 GB de memória.",
     "tarefa": {
-     "valor": "Uso geral",
+     "valor": "QA",
      "evidencia": "assistente de uso geral",
      "origem": "texto"
     },
@@ -514,7 +514,7 @@
    "final": {
     "texto": "Gemma 3 12B para resumir artigos científicos longos, priorizando pouca memória.",
     "tarefa": {
-     "valor": "Uso geral",
+     "valor": "QA",
      "evidencia": "resumir",
      "origem": "texto"
     },

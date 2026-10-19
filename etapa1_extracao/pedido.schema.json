@@ -14,7 +14,7 @@
   "properties": {
     "modelo":      {"$ref": "#/definitions/texto"},
     "tarefa":      {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
-                    "properties": {"valor": {"enum": ["QA", "Uso geral", "Codigo", "Traducao", null]}, "evidencia": {"type": ["string", "null"]}}},
+                    "properties": {"valor": {"enum": ["QA", "Codigo", "Traducao", null]}, "evidencia": {"type": ["string", "null"]}}},
     "dominio":     {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
                     "properties": {"valor": {"enum": ["geral", "saude", "juridico", "ciencia", "matematica", "outro", null]}, "evidencia": {"type": ["string", "null"]}}},
     "hardware":    {"$ref": "#/definitions/texto"},
