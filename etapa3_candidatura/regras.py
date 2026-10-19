@@ -1,9 +1,11 @@
 """Regras que ligam fichas.json e tecnicas.yaml (etapa 3). Predicados em 3 valores: True / False / None (= talvez)."""
-import json, sys
+import json, os, sys
 import yaml
 
 
-def carregar(fichas="fichas.json", tecnicas="tecnicas.yaml"):
+_DATA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+
+def carregar(fichas=os.path.join(_DATA, "fichas.json"), tecnicas=os.path.join(_DATA, "tecnicas.yaml")):
     return json.load(open(fichas))["fichas"], yaml.safe_load(open(tecnicas))
 
 
@@ -67,6 +69,73 @@ def config_id(modelo, tecnicas, ctx, T):
             if u in tec[t]["conflita_com"]: raise ValueError(f"{t} conflita com {u}")
     corpo = "+".join(f"{t}:{n}" for t, n in sorted(tecnicas)) or "nenhuma"
     return f"{modelo}|{corpo}|ctx={int(ctx)}"
+
+
+# ---------- etapa 3: recursos do usuario, preferencia, memoria ----------
+from fichas_kv import kv_gib
+
+# chave do `exige` (tecnicas.yaml) -> chave de `recursos` (entrada do usuario: True / False / None = nao informou)
+RECURSOS = {"dados": "dados", "treino": "treino", "gpu_para_aplicar": "gpu"}
+# preferencia -> movimentos que a favorecem. NAO exclui as demais tecnicas: a fronteira de Pareto mostra os dois lados.
+FAVORECE = {"qualidade": {"Improve", "Grow"}, "footprint": {"Shrink", "Speed-up"}}
+MARGEM = 0.20   # HIPOTESE (C): folga sobre o minimo teorico; sera trocada pelo fator de correcao medido por motor/arquitetura
+
+
+def _e3(valores):
+    """AND em 3 valores."""
+    if any(v is False for v in valores): return False
+    if any(v is None for v in valores): return None
+    return True
+
+def _exige_um(exige, tem):
+    if exige == "nao": return True
+    if exige == "sim": return tem            # True -> True, False -> False, None -> None
+    return True if tem is True else None     # 'talvez': ter o recurso basta; sem ele ou sem saber, so talvez
+
+def avalia_recursos(t, recursos):
+    return _e3([_exige_um(v, recursos.get(RECURSOS[k])) for k, v in t["exige"].items()])
+
+def preferencia_da(t, pref):
+    if pref is None: return "indiferente"
+    return "favorece" if t["movimento"] in FAVORECE[pref] else "nao_favorece"
+
+def _porque(t, f, cat, recursos):
+    """Regra e fonte de cada decisao (justificativa por passo)."""
+    p = []
+    for q in t["requer_modelo"]:
+        nome = q if isinstance(q, str) else next(iter(q))
+        p.append(f"modelo: {nome} = {_chamar(q, f, cat)}  [tecnicas.yaml:requer_modelo + fichas.json]")
+    if t["aplica_em"] != "modelo_pronto": p.append(f"aplica_em = {t['aplica_em']}  [tecnicas.yaml]")
+    for k, v in t["exige"].items():
+        if v != "nao": p.append(f"recurso: exige {k} = {v}; usuario {RECURSOS[k]} = {recursos.get(RECURSOS[k])}  [tecnicas.yaml:exige]")
+    return p
+
+def candidatar(f, cat, T, recursos=None, preferencia=None):
+    """Para um modelo: situacao de cada tecnica aplicavel a modelo pronto. status: True aplica | None talvez | False nao."""
+    recursos = recursos or {}; out = []
+    for k, t in T["tecnicas"].items():
+        if t["aplica_em"] != "modelo_pronto": continue
+        m, r = avalia(t, f, cat), avalia_recursos(t, recursos)
+        out.append({"tecnica": k, "modelo": m, "recursos": r, "status": _e3([m, r]), "preferencia": preferencia_da(t, preferencia),
+                    "medida_na_v1": t["medida_na_v1"], "tag_efeitos": t["tag_efeitos"], "porque": _porque(t, f, cat, recursos)})
+    return out
+
+def memoria_gib(f, ctx, bits_pesos=16, bits_kv=16):
+    """Minimo teorico (B; estado linear e k_eq_v sao C): pesos de texto + KV. Para MoE, todos os especialistas ficam em memoria."""
+    n = f["params"].get("texto") or f["params"]["total"]
+    return n * bits_pesos / 8 / 2 ** 30 + kv_gib(f, ctx, bytes_kv=bits_kv / 8)
+
+def cabe(minimo, disponivel, margem=MARGEM):
+    """False: nem o minimo cabe (certo) | None: o minimo cabe mas sem folga (talvez) | True: cabe com folga."""
+    if minimo > disponivel: return False
+    return True if minimo * (1 + margem) <= disponivel else None
+
+def grade_memoria(f, T, ctx, disponivel_gib):
+    """Todas as combinacoes de bits de pesos x bits de KV (niveis de tecnicas.yaml, mais o baseline 16 bits)."""
+    tec = T["tecnicas"]
+    bp = [16] + [b for b in tec["quantizacao_pesos"]["niveis"]["valores"]]
+    bk = list(tec["quantizacao_kv"]["niveis"]["valores"])
+    return {(p, k): (m := memoria_gib(f, ctx, p, k), cabe(m, disponivel_gib)) for p in bp for k in bk}
 
 
 # ---------- validacao cruzada ----------
