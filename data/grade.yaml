@@ -8,10 +8,10 @@ celulas:
   - {tarefa: QA,        dominio: saude,      benchmarks: [MedQA, PubMedQA],    medida: direta}
   - {tarefa: QA,        dominio: ciencia,    benchmarks: [GPQA Diamond],       medida: direta}
   - {tarefa: QA,        dominio: matematica, benchmarks: [GSM8K, MATH-500],    medida: direta}
-  - {tarefa: QA,        dominio: juridico,   benchmarks: [LegalBench],         medida: indireta}  # plano: sem medida direta
+  - {tarefa: QA,        dominio: juridico,   benchmarks: [OAB-Exams 1a fase], medida: direta} 
   - {tarefa: Codigo,    dominio: geral,      benchmarks: [HumanEval+, MBPP],   medida: direta}
   - {tarefa: Traducao,  dominio: geral,      benchmarks: [WMT24++],            medida: direta}
-especialidade:   # modelo especializado -> células compatíveis (plano)
+especialidade:  
   Coder: [Codigo]
   Math: [QA x matematica]
   MedGemma: [QA x saude]
