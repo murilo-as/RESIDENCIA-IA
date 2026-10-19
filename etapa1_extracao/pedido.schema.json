@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Extracao do pedido (saida do LLM, etapa 1)",
+  "description": "Cada campo tem `valor` e `evidencia` (trecho copiado LITERALMENTE do texto do usuario). Sem evidencia no texto, valor e evidencia sao null. O codigo descarta qualquer valor cuja evidencia nao esteja no texto.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["modelo", "tarefa", "dominio", "hardware", "memoria_gb", "preferencia", "recursos", "entrada_longa", "raciocinio", "idioma"],
+  "definitions": {
+    "texto": {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
+              "properties": {"valor": {"type": ["string", "null"]}, "evidencia": {"type": ["string", "null"]}}},
+    "booleano": {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
+                 "properties": {"valor": {"type": ["boolean", "null"]}, "evidencia": {"type": ["string", "null"]}}}
+  },
+  "properties": {
+    "modelo":      {"$ref": "#/definitions/texto"},
+    "tarefa":      {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
+                    "properties": {"valor": {"enum": ["QA", "Uso geral", "Codigo", "Traducao", null]}, "evidencia": {"type": ["string", "null"]}}},
+    "dominio":     {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
+                    "properties": {"valor": {"enum": ["geral", "saude", "juridico", "ciencia", "matematica", "outro", null]}, "evidencia": {"type": ["string", "null"]}}},
+    "hardware":    {"$ref": "#/definitions/texto"},
+    "memoria_gb":  {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
+                    "properties": {"valor": {"type": ["number", "null"]}, "evidencia": {"type": ["string", "null"]}}},
+    "preferencia": {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
+                    "properties": {"valor": {"enum": ["qualidade", "footprint", null]}, "evidencia": {"type": ["string", "null"]}}},
+    "recursos":    {"type": "object", "additionalProperties": false, "required": ["dados", "treino", "gpu"],
+                    "properties": {"dados": {"$ref": "#/definitions/booleano"}, "treino": {"$ref": "#/definitions/booleano"}, "gpu": {"$ref": "#/definitions/booleano"}}},
+    "entrada_longa": {"$ref": "#/definitions/booleano"},
+    "raciocinio":  {"$ref": "#/definitions/booleano"},
+    "idioma":      {"type": "object", "additionalProperties": false, "required": ["valor", "evidencia"],
+                    "properties": {"valor": {"enum": ["pt", "en", "outro", null]}, "evidencia": {"type": ["string", "null"]}}}
+  }
+}

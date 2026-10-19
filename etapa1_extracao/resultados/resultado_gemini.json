@@ -1,0 +1,804 @@
+{
+ "backend": "gemini",
+ "modelo": "gemini-2.5-flash",
+ "tempo_s": 32.6,
+ "contagem": {
+  "modelo": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "tarefa": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "dominio": {
+   "acerto": 8,
+   "errado": 1,
+   "omissao": 1,
+   "alucinacao": 0
+  },
+  "hardware": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "memoria_gb": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "preferencia": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "recursos.dados": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "recursos.treino": {
+   "alucinacao": 1,
+   "acerto": 9,
+   "omissao": 0,
+   "errado": 0
+  },
+  "recursos.gpu": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "entrada_longa": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "raciocinio": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  },
+  "idioma": {
+   "acerto": 10,
+   "alucinacao": 0,
+   "omissao": 0,
+   "errado": 0
+  }
+ },
+ "saidas": [
+  {
+   "id": "c01",
+   "final": {
+    "texto": "Quero um modelo para tirar dúvidas de saúde dos meus pacientes num app, rodando no meu notebook de 16 GB. Não tenho dados para treinar.",
+    "tarefa": {
+     "valor": "QA",
+     "evidencia": "tirar dúvidas",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "saúde",
+     "evidencia": "saúde",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Quero um",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": false,
+      "evidencia": "Não tenho dados para treinar",
+      "origem": "texto"
+     },
+     "treino": {
+      "valor": false,
+      "evidencia": "Não tenho dados para treinar",
+      "origem": "texto"
+     },
+     "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     }
+    },
+    "memoria_gb": {
+     "valor": 16,
+     "evidencia": "16 GB",
+     "origem": "texto"
+    },
+    "modelo": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "hardware": {
+     "valor": "notebook",
+     "evidencia": "meu notebook",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c02",
+   "final": {
+    "texto": "Preciso traduzir manuais técnicos do inglês para o português. Tenho uma RTX 4090 e quero a melhor qualidade possível.",
+    "tarefa": {
+     "valor": "Tradução",
+     "evidencia": "traduzir",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "outro",
+     "evidencia": "técnicos",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": "qualidade",
+     "evidencia": "melhor qualidade possível",
+     "origem": "texto"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Preciso",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": true,
+      "evidencia": "RTX 4090",
+      "origem": "texto"
+     }
+    },
+    "memoria_gb": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "modelo": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "hardware": {
+     "valor": "RTX 4090",
+     "evidencia": "RTX 4090",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c03",
+   "final": {
+    "texto": "Uso o Qwen3-8B para me ajudar a programar em Python, mas ele está lento no meu PC. Quero algo mais rápido.",
+    "tarefa": {
+     "valor": "Código",
+     "evidencia": "programar em Python",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "preferencia": {
+     "valor": "footprint",
+     "evidencia": "Quero algo mais rápido",
+     "origem": "texto"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Uso",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     }
+    },
+    "memoria_gb": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "modelo": {
+     "valor": "Qwen3-8B",
+     "evidencia": "Qwen3-8B",
+     "origem": "texto",
+     "id": "Qwen/Qwen3-8B",
+     "candidatos": [
+      "Qwen/Qwen3-8B",
+      "Qwen/Qwen3-8B-Base"
+     ],
+     "regra": "nome exato"
+    },
+    "hardware": {
+     "valor": "PC",
+     "evidencia": "PC",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c04",
+   "final": {
+    "texto": "Quero um assistente de uso geral, tipo um ChatGPT local, no meu Mac com 32 GB de memória.",
+    "tarefa": {
+     "valor": "Uso geral",
+     "evidencia": "assistente de uso geral",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "geral",
+     "evidencia": "uso geral",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Quero",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     }
+    },
+    "memoria_gb": {
+     "valor": 32,
+     "evidencia": "32 GB de memória",
+     "origem": "texto"
+    },
+    "modelo": {
+     "valor": "ChatGPT",
+     "evidencia": "ChatGPT",
+     "origem": "texto",
+     "id": null,
+     "candidatos": [],
+     "regra": "nenhum modelo do catalogo corresponde"
+    },
+    "hardware": {
+     "valor": "Mac",
+     "evidencia": "Mac",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": [
+     "modelo: 'ChatGPT' nao resolvido (nenhum modelo do catalogo corresponde; candidatos: [])"
+    ]
+   }
+  },
+  {
+   "id": "c05",
+   "final": {
+    "texto": "Tenho alguns milhares de exemplos de petições e uma GPU com 24 GB para treinar. Quero um modelo que responda perguntas sobre direito trabalhista.",
+    "tarefa": {
+     "valor": "QA",
+     "evidencia": "responda perguntas",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "jurídico",
+     "evidencia": "direito trabalhista",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Tenho",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": true,
+      "evidencia": "Tenho alguns milhares de exemplos de petições",
+      "origem": "texto"
+     },
+     "treino": {
+      "valor": true,
+      "evidencia": "para treinar",
+      "origem": "texto"
+     },
+     "gpu": {
+      "valor": true,
+      "evidencia": "uma GPU",
+      "origem": "texto"
+     }
+    },
+    "memoria_gb": {
+     "valor": 24,
+     "evidencia": "24 GB",
+     "origem": "texto"
+    },
+    "modelo": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "hardware": {
+     "valor": "GPU",
+     "evidencia": "GPU",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c06",
+   "final": {
+    "texto": "Qual modelo resolve problemas de matemática do ensino médio? Uso um computador sem placa de vídeo, com 8 GB de RAM.",
+    "tarefa": {
+     "valor": "QA",
+     "evidencia": "resolve problemas de matemática",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "matemática",
+     "evidencia": "matemática do ensino médio",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Qual modelo",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": false,
+      "evidencia": "sem placa de vídeo",
+      "origem": "texto"
+     }
+    },
+    "memoria_gb": {
+     "valor": 8,
+     "evidencia": "8 GB de RAM",
+     "origem": "texto"
+    },
+    "modelo": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "hardware": {
+     "valor": "computador",
+     "evidencia": "computador",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c07",
+   "final": {
+    "texto": "Gemma 3 12B para resumir artigos científicos longos, priorizando pouca memória.",
+    "tarefa": {
+     "valor": "Uso geral",
+     "evidencia": "resumir",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "ciência",
+     "evidencia": "artigos científicos",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": "footprint",
+     "evidencia": "priorizando pouca memória",
+     "origem": "texto"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Gemma",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": true,
+     "evidencia": "artigos científicos longos",
+     "origem": "texto"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     }
+    },
+    "memoria_gb": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "modelo": {
+     "valor": "Gemma 3 12B",
+     "evidencia": "Gemma 3 12B",
+     "origem": "texto",
+     "id": "google/gemma-3-12b-it",
+     "candidatos": [
+      "google/gemma-3-12b-it",
+      "google/gemma-3-12b-pt"
+     ],
+     "regra": "prefixo; preferido o modelo nao-base"
+    },
+    "hardware": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c08",
+   "final": {
+    "texto": "me indica um modelo bom",
+    "tarefa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "dominio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "preferencia": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "me indica",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     }
+    },
+    "memoria_gb": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "modelo": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "hardware": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c09",
+   "final": {
+    "texto": "I need a small model to answer questions about chemistry papers on a laptop with 12GB VRAM.",
+    "tarefa": {
+     "valor": "QA",
+     "evidencia": "answer questions",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "ciência",
+     "evidencia": "chemistry papers",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": "footprint",
+     "evidencia": "small model",
+     "origem": "texto"
+    },
+    "idioma": {
+     "valor": "en",
+     "evidencia": "I need",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": true,
+      "evidencia": "VRAM",
+      "origem": "texto"
+     }
+    },
+    "memoria_gb": {
+     "valor": 12,
+     "evidencia": "12GB VRAM",
+     "origem": "texto"
+    },
+    "modelo": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "hardware": {
+     "valor": "laptop",
+     "evidencia": "a laptop",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": []
+   }
+  },
+  {
+   "id": "c10",
+   "final": {
+    "texto": "Quero que o modelo pense passo a passo antes de responder dúvidas de física; tenho o DGX Spark e não ligo para velocidade.",
+    "tarefa": {
+     "valor": "QA",
+     "evidencia": "responder dúvidas",
+     "origem": "texto"
+    },
+    "dominio": {
+     "valor": "ciência",
+     "evidencia": "física",
+     "origem": "texto"
+    },
+    "preferencia": {
+     "valor": "qualidade",
+     "evidencia": "não ligo para velocidade",
+     "origem": "texto"
+    },
+    "idioma": {
+     "valor": "pt",
+     "evidencia": "Quero",
+     "origem": "texto"
+    },
+    "entrada_longa": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "raciocinio": {
+     "valor": true,
+     "evidencia": "pense passo a passo",
+     "origem": "texto"
+    },
+    "recursos": {
+     "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     },
+     "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+     }
+    },
+    "memoria_gb": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "modelo": {
+     "valor": null,
+     "evidencia": null,
+     "origem": "vazio"
+    },
+    "hardware": {
+     "valor": "DGX Spark",
+     "evidencia": "DGX Spark",
+     "origem": "texto",
+     "id": null,
+     "regra": "hardware.json ainda nao existe"
+    },
+    "avisos": []
+   }
+  }
+ ]
+}
