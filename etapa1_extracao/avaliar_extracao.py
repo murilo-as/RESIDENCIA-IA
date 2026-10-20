@@ -1,14 +1,9 @@
-"""Avalia a etapa 1 nos pedidos anotados (casos/pedidos.jsonl).
-
-Por campo, conta: acerto | alucinacao (preencheu o que o texto nao diz) | omissao (deixou vazio o que o texto diz) | errado (valor diferente).
-Compara o pedido FINAL (depois do pos-processamento), que e o que a etapa 2 recebe.
-
-Uso: python avaliar_extracao.py --backend gabarito
-     python avaliar_extracao.py --backend llamacpp --modelo llm/qwen2.5-1.5b-instruct-q4_k_m.gguf
-"""
+"""Avalia a etapa 1 nos casos de casos/pedidos.jsonl. Por campo: acerto, alucinação (preencheu o que o texto não diz), omissão, errado.
+  python avaliar_extracao.py              # LLM do config.yaml
+  python avaliar_extracao.py --gabarito   # sem LLM"""
 import argparse, json, os, sys, time
 from collections import defaultdict
-from extrair import extrair, NOMES, _norm, AQUI, _achar
+from extrair import extrair, NOMES, _norm, AQUI, _achar, carregar_config
 
 CAMPOS = ["modelo", "tarefa", "dominio", "hardware", "memoria_gb", "preferencia",
           "recursos.dados", "recursos.treino", "recursos.gpu", "entrada_longa", "raciocinio", "idioma"]
@@ -63,6 +58,8 @@ def avaliar(backend, modelo=None, url=None):
     return cont
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("--backend", default="gabarito")
-    ap.add_argument("--modelo"); ap.add_argument("--url"); a = ap.parse_args()
-    avaliar(a.backend, a.modelo, a.url)
+    ap = argparse.ArgumentParser(); ap.add_argument("--config")
+    ap.add_argument("--gabarito", action="store_true", help="sem LLM: testa so o pos-processamento (deve dar 120/120)")
+    a = ap.parse_args()
+    L = carregar_config(a.config, AQUI)["llm"]
+    avaliar("gabarito" if a.gabarito else L["backend"], None if a.gabarito else L["modelo"], L["url"])

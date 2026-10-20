@@ -1,26 +1,13 @@
-"""Etapa 1 - Extracao: texto livre -> pedido.json.
-
-Regra de ouro: o LLM so EXTRAI (valor + trecho literal do texto). Toda decisao fica no codigo:
-  - valor sem evidencia literal no texto -> descartado (vira vazio) e registrado em `avisos`;
-  - mencao de modelo -> id do fichas.json por regra deterministica (nao pelo LLM);
-  - campos vazios continuam vazios: os padroes (ex.: tarefa vazia = QA) sao da etapa 2.
-
-Backends do LLM:
-  llamacpp  -> llama-cpp-python com um .gguf local (usado nos testes)
-  openai    -> qualquer servidor compativel com a API OpenAI (llama-server no Spark, Ollama, API externa)
-  gemini    -> API do Gemini (chave em GEMINI_API_KEY)
-  gabarito  -> devolve a anotacao do caso (testa so o pos-processamento, sem LLM)
-
-Uso:
-  python extrair.py --backend gemini --modelo NOME_DO_MODELO "quero um modelo ..."
-  python extrair.py --backend llamacpp --modelo llm/qwen2.5-1.5b-instruct-q4_k_m.gguf "quero um modelo ..."
-  python extrair.py --backend openai --url http://localhost:8080/v1 --modelo qwen "quero um modelo ..."
-"""
+"""Etapa 1 - Extração: texto livre -> pedido.json.
+O LLM só extrai (valor + trecho literal). Valor sem trecho no texto é descartado e vira aviso; o nome do modelo vira id por regra, não pelo LLM; campo vazio fica vazio (os padrões são da etapa 2).
+Backends (config.yaml): gemini, openai (llama-server, Ollama), llamacpp (.gguf local)."""
 import argparse, json, os, re, sys, unicodedata
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+sys.path[:0] = [AQUI, os.path.join(AQUI, "..")]
+from config import carregar as carregar_config
 def _achar(nome):
-    """Procura o arquivo na pasta da etapa, em data/ ao lado dela e em ../data (dados compartilhados)."""
+    """Procura o arquivo na pasta da etapa, em data/ ou em ../data."""
     for p in (os.path.join(AQUI, nome), os.path.join(AQUI, "data", nome), os.path.join(AQUI, "..", "data", nome)):
         if os.path.exists(p): return p
     return os.path.join(AQUI, nome)
@@ -49,7 +36,13 @@ Campos:
 
 
 # ---------------- LLM ----------------
+def _chave_gemini():
+    if not os.environ.get("GEMINI_API_KEY"): raise SystemExit("GEMINI_API_KEY nao encontrada: crie o arquivo .env na raiz com GEMINI_API_KEY=... (ou exporte a variavel)")
+    return os.environ["GEMINI_API_KEY"]
+
+
 def chamar_llm(texto, backend, modelo=None, url=None, _cache={}):
+    if backend == "gemini" and not modelo: modelo = "gemini-2.5-flash"
     msgs = [{"role": "system", "content": PROMPT}, {"role": "user", "content": "TEXTO DO USUÁRIO:\n<<<\n" + texto + "\n>>>"}]
     if backend == "llamacpp":
         from llama_cpp import Llama
@@ -75,7 +68,7 @@ def chamar_llm(texto, backend, modelo=None, url=None, _cache={}):
                  "generationConfig": {"temperature": 0, "responseMimeType": "application/json", "responseJsonSchema": esquema}}
         req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent",
                                      data=json.dumps(corpo).encode(),
-                                     headers={"Content-Type": "application/json", "x-goog-api-key": os.environ["GEMINI_API_KEY"]})
+                                     headers={"Content-Type": "application/json", "x-goog-api-key": _chave_gemini()})
         import time, urllib.error
         for tentativa in range(4):          # repete em erro temporario da API (429/5xx) ou JSON invalido
             try:
@@ -102,8 +95,7 @@ def tem_evidencia(evid, texto):
     return bool(evid) and _norm(evid) in _norm(texto)
 
 def resolver_modelo(mencao, fichas):
-    """Mencao -> id do fichas.json. Regra (B): nome compactado (so letras e digitos) igual ao do id, ou prefixo dele;
-    com varios candidatos, prefere quem nao e 'base' (o usuario final usa modelo pronto para conversa)."""
+    """Menção -> id do fichas.json: nome só com letras e dígitos igual ao do id, ou prefixo dele. Com vários, prefere o não-base (B)."""
     alvo = _compacto(mencao)
     if not alvo: return None, [], "mencao vazia"
     cands = [i for i in fichas if _compacto(i.split("/")[1]).startswith(alvo)]
@@ -151,8 +143,7 @@ def pos_processar(texto, bruto, fichas):
 
 
 def sanear(bruto):
-    """Valida o JSON do LLM contra o schema. Um `valor` invalido (ex.: tarefa = 'Matematica', fora da lista)
-    e trocado por vazio e registrado em avisos; so levanta erro se a ESTRUTURA estiver quebrada."""
+    """Valida o JSON do LLM contra o schema. Valor inválido vira vazio + aviso; só estrutura quebrada dá erro."""
     import jsonschema
     avisos = []
     for _ in range(40):
@@ -168,7 +159,7 @@ def sanear(bruto):
     raise RuntimeError("sanear: erros demais")
 
 
-def extrair(texto, backend="llamacpp", modelo=None, url=None, bruto=None, fichas=None):
+def extrair(texto, backend="gemini", modelo=None, url=None, bruto=None, fichas=None):
     fichas = fichas or json.load(open(_achar("fichas.json")))["fichas"]
     if bruto is None: bruto = chamar_llm(texto, backend, modelo, url)
     avisos_formato = sanear(bruto)              # valor fora do formato vira vazio (nao derruba o pedido inteiro)
@@ -179,7 +170,7 @@ def extrair(texto, backend="llamacpp", modelo=None, url=None, bruto=None, fichas
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("texto"); ap.add_argument("--backend", default="llamacpp")
-    ap.add_argument("--modelo"); ap.add_argument("--url")
+    ap.add_argument("texto"); ap.add_argument("--config")
     a = ap.parse_args()
-    print(json.dumps(extrair(a.texto, a.backend, a.modelo, a.url), ensure_ascii=False, indent=1))
+    L = carregar_config(a.config, AQUI)["llm"]
+    print(json.dumps(extrair(a.texto, L["backend"], L["modelo"], L["url"]), ensure_ascii=False, indent=1))
