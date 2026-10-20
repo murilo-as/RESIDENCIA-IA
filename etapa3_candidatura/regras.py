@@ -1,15 +1,26 @@
-"""Regras que ligam fichas.json e tecnicas.yaml (etapa 3). Predicados em 3 valores: True / False / None (= talvez)."""
+"""Regras que ligam fichas.json e tecnicas.yaml (etapa 3). Predicados em 3 valores: True, False ou None (talvez)."""
 import json, os, sys
 import yaml
 
-
-_DATA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
-
-def carregar(fichas=os.path.join(_DATA, "fichas.json"), tecnicas=os.path.join(_DATA, "tecnicas.yaml")):
-    return json.load(open(fichas))["fichas"], yaml.safe_load(open(tecnicas))
+AQUI = os.path.dirname(os.path.abspath(__file__))
+DATA = os.path.join(AQUI, "..", "data")
+sys.path.insert(0, DATA)
 
 
-# ---------- predicados: (ficha, catalogo, **args) -> True | False | None ----------
+def _achar(nome, obrigatorio=True):
+    """Procura o arquivo aqui, em ./data e em ../data."""
+    for d in (AQUI, os.path.join(AQUI, "data"), DATA):
+        p = os.path.join(d, nome)
+        if os.path.exists(p): return p
+    if obrigatorio: raise FileNotFoundError(f"{nome} nao encontrado perto de {AQUI}")
+    return None
+
+
+def carregar(fichas=None, tecnicas=None):
+    return json.load(open(fichas or _achar("fichas.json")))["fichas"], yaml.safe_load(open(tecnicas or _achar("tecnicas.yaml")))
+
+
+# predicados: (ficha, catálogo, **args) -> True | False | None
 def _camadas(f):
     return f["arquitetura"]["camadas_proprias"]
 
@@ -54,7 +65,7 @@ def avalia(tecnica, f, cat):
     return True
 
 
-# ---------- chave de configuracao ----------
+# chave de configuracao
 def config_id(modelo, tecnicas, ctx, T):
     """tecnicas: lista de (id, nivel). Valida e devolve a chave canonica usada no efeitos.csv."""
     tec = T["tecnicas"]; ids = [t for t, _ in tecnicas]
@@ -71,7 +82,7 @@ def config_id(modelo, tecnicas, ctx, T):
     return f"{modelo}|{corpo}|ctx={int(ctx)}"
 
 
-# ---------- etapa 3: recursos do usuario, preferencia, memoria ----------
+# etapa 3: recursos do usuario, preferencia, memoria
 from fichas_kv import kv_gib
 
 # chave do `exige` (tecnicas.yaml) -> chave de `recursos` (entrada do usuario: True / False / None = nao informou)
@@ -121,24 +132,101 @@ def candidatar(f, cat, T, recursos=None, preferencia=None):
     return out
 
 def memoria_gib(f, ctx, bits_pesos=16, bits_kv=16):
-    """Minimo teorico (B; estado linear e k_eq_v sao C): pesos de texto + KV. Para MoE, todos os especialistas ficam em memoria."""
+    """Mínimo teórico: pesos de texto + KV (B; estado linear e k_eq_v são C). Em MoE, todos os especialistas ficam na memória."""
     n = f["params"].get("texto") or f["params"]["total"]
     return n * bits_pesos / 8 / 2 ** 30 + kv_gib(f, ctx, bytes_kv=bits_kv / 8)
 
 def cabe(minimo, disponivel, margem=MARGEM):
-    """False: nem o minimo cabe (certo) | None: o minimo cabe mas sem folga (talvez) | True: cabe com folga."""
+    """False: nem o mínimo cabe | None: cabe sem folga | True: cabe com folga."""
     if minimo > disponivel: return False
     return True if minimo * (1 + margem) <= disponivel else None
 
 def grade_memoria(f, T, ctx, disponivel_gib):
-    """Todas as combinacoes de bits de pesos x bits de KV (niveis de tecnicas.yaml, mais o baseline 16 bits)."""
+    """Combinações de bits de pesos x bits de KV (níveis do tecnicas.yaml + baseline 16)."""
     tec = T["tecnicas"]
     bp = [16] + [b for b in tec["quantizacao_pesos"]["niveis"]["valores"]]
     bk = list(tec["quantizacao_kv"]["niveis"]["valores"])
     return {(p, k): (m := memoria_gib(f, ctx, p, k), cabe(m, disponivel_gib)) for p in bp for k in bk}
 
 
-# ---------- validacao cruzada ----------
+# efeitos.csv
+import csv, datetime, os
+
+COLUNAS_EFEITOS = ["id", "modelo", "tecnicas", "ctx", "eixo", "benchmark", "metrica", "tipo_valor", "valor", "ic_baixo", "ic_alto",
+                   "n", "hardware", "motor", "origem", "fonte_ref", "run_id", "data", "tag", "observacao"]
+EIXOS = {"qualidade", "memoria", "disco", "latencia_decodificacao", "latencia_prefill"}
+
+
+def parse_tecnicas(s, T):
+    """'quantizacao_kv:8+quantizacao_pesos:4' -> [(id, nível)]; 'nenhuma' -> []."""
+    if s == "nenhuma": return []
+    out = []
+    for par in s.split("+"):
+        t, _, n = par.partition(":")
+        valores = T["tecnicas"].get(t, {}).get("niveis", {}).get("valores")
+        if isinstance(valores, list): n = next((v for v in valores if str(v) == n), n)
+        out.append((t, n))
+    return out
+
+
+def _num(x):
+    try: return float(x)
+    except (TypeError, ValueError): return None
+
+
+def validar_efeitos(caminho=None, benchmarks=None, runs=None, F=None, T=None):
+    """Devolve a lista de erros (vazia = ok)."""
+    if F is None or T is None: F, T = carregar()
+    caminho = caminho or _achar("efeitos.csv")
+    benchmarks = benchmarks or _achar("benchmarks_candidatos.csv")
+    runs = runs or os.path.join(os.path.dirname(caminho), "runs")
+    bench = {r["benchmark"] for r in csv.DictReader(open(benchmarks))}
+    linhas = list(csv.DictReader(open(caminho)))
+    cab = csv.DictReader(open(caminho)).fieldnames
+    erros = [] if cab == COLUNAS_EFEITOS else [f"cabecalho diferente do esquema: {cab}"]
+    vistos = {}
+    for n, r in enumerate(linhas, start=2):
+        e = lambda m: erros.append(f"linha {n}: {m}")
+        f = F.get(r["modelo"])
+        if not f: e(f"modelo fora do fichas.json: {r['modelo']}"); continue
+        lista = parse_tecnicas(r["tecnicas"], T)
+        try:
+            ctx = int(r["ctx"]); config_id(r["modelo"], lista, ctx, T)
+            if r["tecnicas"] != ("+".join(f"{t}:{v}" for t, v in sorted(lista)) or "nenhuma"): e("tecnicas fora da forma canonica (ordem alfabetica)")
+        except (ValueError, KeyError) as ex: e(f"configuracao invalida: {ex}"); continue
+        for t, _ in lista:
+            if avalia(T["tecnicas"][t], f, F) is False: e(f"{t} nao se aplica a {r['modelo']}")
+        if f["tipo"] == "hibrido" and "modo_raciocinio" not in [t for t, _ in lista]:
+            e("modelo hibrido exige modo_raciocinio explicito (a linha base fica ambigua)")
+        if r["eixo"] not in EIXOS: e(f"eixo invalido: {r['eixo']}"); continue
+        if r["eixo"] == "qualidade":
+            if r["benchmark"] not in bench: e(f"benchmark desconhecido: {r['benchmark']!r}")
+        elif r["benchmark"]: e("benchmark so vale para o eixo qualidade")
+        if r["eixo"] in ("memoria", "latencia_decodificacao", "latencia_prefill") and not (r["hardware"] and r["motor"]): e("memoria/latencia exigem hardware e motor")
+        if r["eixo"] == "disco" and not r["motor"]: e("disco exige motor (o tamanho depende do formato/quantizador)")
+        if not r["metrica"]: e("metrica vazia")
+        if r["tipo_valor"] not in ("absoluto", "razao"): e("tipo_valor deve ser absoluto ou razao")
+        if r["tipo_valor"] == "razao" and r["origem"] == "propria": e("razao so vale para paper/card; medicao propria entra como absoluto")
+        v, lo, hi = _num(r["valor"]), _num(r["ic_baixo"]), _num(r["ic_alto"])
+        if v is None: e("valor nao numerico")
+        elif (r["ic_baixo"] or r["ic_alto"]) and not (lo is not None and hi is not None and lo <= v <= hi): e("intervalo deve ter ic_baixo <= valor <= ic_alto")
+        if r["n"] and not (r["n"].isdigit() and int(r["n"]) >= 1): e("n deve ser inteiro >= 1")
+        if r["origem"] not in ("propria", "paper", "card"): e("origem deve ser propria, paper ou card")
+        if r["tag"] not in ("A", "B", "C"): e("tag deve ser A, B ou C")
+        if r["origem"] == "card" and r["tag"] != "C": e("numero de model card entra com tag C")
+        if r["origem"] == "propria":
+            if not (r["run_id"] and r["n"] and r["motor"]): e("medicao propria exige run_id, n e motor")
+            elif not os.path.exists(os.path.join(runs, r["run_id"] + ".json")): e(f"run_id sem arquivo em {runs}/: {r['run_id']}")
+        if not r["fonte_ref"]: e("fonte_ref vazia")
+        try: datetime.date.fromisoformat(r["data"])
+        except ValueError: e("data deve ser AAAA-MM-DD")
+        chave = (r["modelo"], r["tecnicas"], r["ctx"], r["eixo"], r["benchmark"], r["hardware"], r["motor"], r["origem"], r["run_id"] or r["fonte_ref"])
+        if chave in vistos: e(f"duplicada da linha {vistos[chave]}")
+        vistos.setdefault(chave, n)
+    return erros
+
+
+# validacao cruzada
 def validar():
     F, T = carregar(); tec = T["tecnicas"]; erros = []
     for k, t in tec.items():
@@ -150,6 +238,7 @@ def validar():
             if r not in tec: erros.append(f"{k}: referencia inexistente: {r}")
     for i, f in F.items():
         if not f.get("tokenizer"): erros.append(f"{i}: sem tokenizer")
+    if _achar("efeitos.csv", obrigatorio=False): erros += validar_efeitos(F=F, T=T)
     print("erros:", erros or "nenhum")
     print(f"{'tecnica':26s} {'aplica':>6s} {'nao':>4s} {'talvez':>6s}")
     for k, t in tec.items():
