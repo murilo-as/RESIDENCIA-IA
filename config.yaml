@@ -1,0 +1,13 @@
+# Configuração de todos os scripts. Vazio (null) = não informado.
+
+llm:                      # LLM que extrai o pedido (etapa 1), não o modelo otimizado
+  backend: gemini         # gemini | openai | llamacpp
+  modelo: gemini-2.5-flash
+  url: null               # só no backend openai
+
+limites:
+  memoria_gb:           # a etapa 3 corta o que não cabe
+  banda_gb_s:          # máquina simulada (padrão do projeto: 89.6 = PC médio; Spark = 273)
+  min_tok_s:            # meta de tokens/s
+
+saida: saidas
