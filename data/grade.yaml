@@ -1,5 +1,10 @@
+# grade.yaml v0.4 (RASCUNHO) - célula tarefa x domínio -> benchmark principal
+# Fonte: benchmarks_candidatos.csv + plano (11 benchmarks da v1). Tag B (nomes/regras sem checagem independente).
+# ATENÇÃO: a tabela "14 pares válidos" combinada antes NÃO está no plano; esta grade foi reconstruída do CSV (7 células; QA x juridico = OAB-Exams, direta, tag C).
 padroes: {tarefa: QA, dominio: geral}
-fallback: 
+# Uso geral foi FUNDIDA em QA (decisao do Murilo, 19/10): conversar/resumir/escrever medem-se por QA do dominio.
+# IFEval sai da v1 (ficava so em Uso geral); continua no benchmarks_candidatos.csv.
+fallback:   # ordem do plano, seção Etapa 2
   - mesma tarefa e mesmo domínio
   - mesma tarefa no domínio geral
   - falta medir
@@ -8,13 +13,13 @@ celulas:
   - {tarefa: QA,        dominio: saude,      benchmarks: [MedQA, PubMedQA],    medida: direta}
   - {tarefa: QA,        dominio: ciencia,    benchmarks: [GPQA Diamond],       medida: direta}
   - {tarefa: QA,        dominio: matematica, benchmarks: [GSM8K, MATH-500],    medida: direta}
-  - {tarefa: QA,        dominio: juridico,   benchmarks: [OAB-Exams 1a fase], medida: direta} 
+  - {tarefa: QA,        dominio: juridico,   benchmarks: [OAB-Exams 1a fase], medida: direta}  # C: licenca, download e contaminacao a verificar (own-pt/oab-exams, GitHub). Alternativa indireta em pt: LegalBench-BR
   - {tarefa: Codigo,    dominio: geral,      benchmarks: [HumanEval+, MBPP],   medida: direta}
   - {tarefa: Traducao,  dominio: geral,      benchmarks: [WMT24++],            medida: direta}
-especialidade:  
-  Coder: [Codigo]
-  Math: [QA x matematica]
-  MedGemma: [QA x saude]
-  TranslateGemma: [Traducao]
+especialidade:   # valor de `especialidade` em fichas.json -> celulas em que o modelo pode ser candidato
+  codigo: [Codigo]                 # uma tarefa inteira
+  matematica: [QA x matematica]    # uma celula
+  saude: [QA x saude]
+  traducao: [Traducao]
   geral: todas
-  FunctionGemma: nenhuma
+  ferramentas: nenhuma             # ex.: FunctionGemma: nenhum benchmark da v1 mede chamada de funcao
