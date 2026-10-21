@@ -1,8 +1,8 @@
 # Ferramenta de decisão de eficiência em LLMs
 
-Recebe a descrição de um problema em texto livre e recomenda um modelo (Qwen 2.5+ ou Gemma 3+) e técnicas de eficiência, com justificativa. Escopo: computadores pessoais; medições no DGX Spark.
+Recebe a descrição de um problema em texto livre e recomenda um modelo (família Qwen, 2.5 em diante) e técnicas de eficiência, com justificativa. Escopo: computadores pessoais; medições no DGX Spark; a recomendação é validada à mão também na RTX 4090 e na H100. A família Gemma saiu do escopo em 21/10.
 
-**Estado (outubro/2026):** etapas 1, 2 e 3 implementadas; etapa 4 em desenho; nada medido ainda (`efeitos.csv` vazio). Aplicar e verificar a recomendação (etapas 7 e 8) é manual.
+**Estado (outubro/2026):** etapas 1, 2 e 3 implementadas; etapa 4 com a v0 (memória e latência) e a estratégia de qualidade definida (ver "Etapa 4"); nada medido ainda (`efeitos.csv` vazio). Aplicar e verificar a recomendação (etapas 7 e 8) é manual.
 
 - Etapa 1 (Gemini 2.5 Flash, 10 casos anotados, os mesmos usados para ajustar o prompt): 117/120 (97,5%). Os 3 erros: um `treino=false` inferido de "não tenho dados" (a evidência existe no texto mas não sustenta o valor) e dois domínios `outro` vs `geral` sem efeito na etapa 2. Falta testar em casos novos, nunca vistos pelo prompt.
 - Etapa 2: roda nos 10 casos; a `grade.yaml` (7 células) é rascunho a conferir.
@@ -14,7 +14,7 @@ Recebe a descrição de um problema em texto livre e recomenda um modelo (Qwen 2
 | 1 | Extração | Um LLM (API) transforma o texto do usuário em campos estruturados | `etapa1_extracao/` |
 | 2 | Diagnóstico | Transforma o pedido em "o que medir e dentro de quais limites": benchmarks, orçamento de memória, banda, contexto | `etapa2_diagnostico/` |
 | 3 | Candidatura | Gera as combinações possíveis de modelo + técnicas e descarta as inviáveis | `etapa3_candidatura/` |
-| 4 | Estimativa | Estima memória, latência e qualidade de cada candidata | `etapa4_estimativa/` *(v0: fórmulas; qualidade só com medidas)* |
+| 4 | Estimativa | Estima memória, latência e qualidade de cada candidata | `etapa4_estimativa/` *(v0: fórmulas; qualidade: estimador a fazer)* |
 | 5 | Pareto | Elimina candidatas dominadas | *(a fazer)* |
 | 6 | Recomendação | Ordena conforme a preferência e justifica | *(a fazer)* |
 | 7 | Aplicação | Manual | — |
@@ -70,10 +70,10 @@ Para testar outro orçamento de memória, mude `limites.memoria_gb` no `config.y
 
 | Arquivo | Para que serve |
 |---|---|
-| `fichas.json` | Catálogo de 111 modelos (78 Qwen, 33 Gemma): parâmetros, atenção, tokenizer |
+| `fichas.json` | Catálogo de 111 fichas: 78 Qwen (no escopo) e 33 Gemma (fora do escopo; o filtro por família ainda não existe). Parâmetros, atenção, tokenizer |
 | `tecnicas.yaml` | 22 técnicas de eficiência em 4 movimentos (Shrink, Improve, Grow, Speed-up): requisitos, direção esperada do efeito, níveis |
 | `efeitos.csv` | *(a criar)* Efeitos medidos: uma linha por eixo, com origem, fonte e tag de confiança |
-| `grade.yaml` | Célula tarefa × domínio → benchmarks, medida direta ou indireta, ordem de fallback e especialidade dos modelos. Rascunho v0.3: 3 tarefas (QA, Código, Tradução), 7 células; QA × jurídico = OAB-Exams (direta, tag C, a verificar) |
+| `grade.yaml` | Célula tarefa × domínio → benchmarks, medida direta ou indireta, ordem de fallback e especialidade dos modelos. Rascunho v0.4: 3 tarefas (QA, Código, Tradução), 7 células; QA × jurídico = OAB-Exams (direta, tag C, a verificar) |
 | `fichas_kv.py` | Cache de KV teórico por tipo de atenção, a partir de uma ficha (usado na etapa 4) |
 
 ## Etapa 1: Extração (`etapa1_extracao/`)
@@ -157,6 +157,28 @@ Sem `efeitos.csv`, o arquivo ainda tem memória, tetos de tokens/s e a meta, mas
 ```
 python etapa4_estimativa/estimar.py saidas/candidatos.json saidas/diagnostico.json [-o saidas/estimativas.json]
 ```
+
+### Plano de qualidade (a implementar)
+
+Os números de qualidade vêm de dados públicos e de poucos modelos medidos (âncoras); o resto da família é estimado.
+
+- **Nota:** `nota(modelo, bits, benchmark) = nota em 16 bits do modelo × razão da quantização`. A nota em 16 bits segue uma curva por tamanho dentro de cada geração (medida nas âncoras). A razão da quantização vem das âncoras e do formato da curva do Qwen3 (artigo [arXiv 2505.02214](https://arxiv.org/abs/2505.02214), MMLU).
+- **Estimador:** lookup (valor medido ou publicado) → interpolação em log do tamanho entre vizinhos da mesma geração → extrapolação (palpite, tag C) → "sem dado". Árvore de regressão e XGBoost entram só como comparação. Validação: deixar um tamanho de fora e comparar com a linha de base (perda média por nível de bits).
+- **Níveis de pesos:** 16, 8 e 4 bits. O `tecnicas.yaml` ainda tem 6, 5 e 3: ajustar.
+- **Benchmarks:** os 10 da `grade.yaml`, determinísticos (alternativa, número ou testes, sem juiz LLM), medidos nas âncoras; amostra de 10% só no benchmark grande.
+- **Técnicas:** só a quantização de pesos tem qualidade estimada. As demais aparecem com a direção do efeito (etapa 3), ou com um número de artigo quando houver.
+
+Estado dos 78 modelos Qwen:
+
+| Estado | Fichas | Significado |
+|---|---|---|
+| Medir | 6 | Âncoras: Qwen2.5 3B, 7B e 14B instruct; Qwen3.5 4B e 9B; Qwen3-30B-A3B |
+| Artigo | 11 | Qwen3 denso, com dado público (só MMLU) |
+| Estimar | 46 | A partir das âncoras e da curva; 22 são extrapolações (palpite) |
+| Sem dado | 9 | MoE de arquitetura diferente da âncora; saem da ferramenta |
+| Fora | 6 | Não cabem em 128 GB nem em 4 bits; saem da ferramenta |
+
+Pendente: preencher o `efeitos.csv`, o filtro de família Qwen no `config.yaml`, a troca dos níveis no `tecnicas.yaml` e o estimador.
 
 ## Preparo dos dados (`preparo_dados/`)
 
