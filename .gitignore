@@ -3,6 +3,5 @@ __pycache__/
 .DS_Store
 .env
 
-# saidas (respostas), nao versionar
 saidas/
 etapa1_extracao/resultados/

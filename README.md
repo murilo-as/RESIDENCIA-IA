@@ -14,7 +14,7 @@ Recebe a descrição de um problema em texto livre e recomenda um modelo (Qwen 2
 | 1 | Extração | Um LLM (API) transforma o texto do usuário em campos estruturados | `etapa1_extracao/` |
 | 2 | Diagnóstico | Transforma o pedido em "o que medir e dentro de quais limites": benchmarks, orçamento de memória, banda, contexto | `etapa2_diagnostico/` |
 | 3 | Candidatura | Gera as combinações possíveis de modelo + técnicas e descarta as inviáveis | `etapa3_candidatura/` |
-| 4 | Estimativa | Estima memória, latência e qualidade de cada candidata | `etapa4_estimativa/` *(a fazer)* |
+| 4 | Estimativa | Estima memória, latência e qualidade de cada candidata | `etapa4_estimativa/` *(v0: fórmulas; qualidade só com medidas)* |
 | 5 | Pareto | Elimina candidatas dominadas | *(a fazer)* |
 | 6 | Recomendação | Ordena conforme a preferência e justifica | *(a fazer)* |
 | 7 | Aplicação | Manual | — |
@@ -30,6 +30,7 @@ data/                      dados compartilhados entre as etapas
 etapa1_extracao/
 etapa2_diagnostico/
 etapa3_candidatura/
+etapa4_estimativa/
 preparo_dados/             scripts que constroem a base (rodam raramente)
 saidas/                    JSON de cada etapa da última execução (não versionar)
 ```
@@ -54,7 +55,7 @@ Vazio = não informado. Os limites do `config.yaml` valem mais que os do texto d
 
 | Comando | O que faz |
 |---|---|
-| `python pipeline.py "texto do pedido"` | Etapas 1 → 2 → 3; grava `pedido.json`, `diagnostico.json` e `candidatos.json` na pasta de saída |
+| `python pipeline.py "texto do pedido"` | Etapas 1 → 2 → 3 → 4; grava `pedido.json`, `diagnostico.json`, `candidatos.json` e `estimativas.json` na pasta de saída |
 | `python pipeline.py --pedido saidas/pedido.json` | Pula a etapa 1 (sem API) |
 | `python etapa1_extracao/extrair.py "texto"` | Só a etapa 1; imprime o pedido |
 | `python etapa1_extracao/avaliar_extracao.py` | Avalia o LLM do `config.yaml` nos 10 casos; resultado em `resultados/` |
@@ -133,6 +134,28 @@ Regras (todas tag C, exceto a conta de memória, B):
 
 ```
 python etapa3_candidatura/candidatar.py saidas/diagnostico.json -o saidas/candidatos.json
+```
+
+## Etapa 4: Estimativa (`etapa4_estimativa/`)
+
+Entrada: `candidatos.json` e `diagnostico.json`. Saída: `estimativas.json`. Sem LLM. Para cada configuração, o que se calcula e o que se lê:
+
+| Eixo | De onde vem | Tag |
+|---|---|---|
+| Memória | Mínimo teórico da etapa 3 (pesos + KV); falta o overhead do motor, a medir no Spark | B |
+| Latência de decodificação, teto | banda ÷ bytes lidos por token. Dois tetos: só pesos (limite superior verdadeiro) e pesos + KV no contexto alvo | B |
+| Latência de decodificação, real | Linha do `efeitos.csv` (própria > paper > card), medida no Spark e escalada pela razão das bandas | A ou B; escala C |
+| Qualidade | Linha do `efeitos.csv` por benchmark da célula. Sem linha, fica nulo | A, B ou C |
+| Meta de tok/s | Teto só com pesos abaixo da meta = "nao" com certeza; acima = "talvez"; com medida = "sim" ou "nao" | — |
+
+| Arquivo | Para que serve |
+|---|---|
+| `estimar.py` | Faz as contas acima e grava `estimativas.json` com origem e tag em cada número |
+
+Sem `efeitos.csv`, o arquivo ainda tem memória, tetos de tokens/s e a meta, mas toda qualidade fica "sem dado". MoE com parâmetros ativos desconhecidos fica sem teto. A eficiência η (fração da banda realmente usada) e o prefill só existem depois das medições.
+
+```
+python etapa4_estimativa/estimar.py saidas/candidatos.json saidas/diagnostico.json [-o saidas/estimativas.json]
 ```
 
 ## Preparo dos dados (`preparo_dados/`)

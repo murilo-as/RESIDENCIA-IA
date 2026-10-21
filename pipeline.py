@@ -7,7 +7,7 @@ import argparse, json, os, sys
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, RAIZ)
 from config import carregar as carregar_config
-for pasta in ("etapa1_extracao", "etapa2_diagnostico", "etapa3_candidatura"):
+for pasta in ("etapa1_extracao", "etapa2_diagnostico", "etapa3_candidatura", "etapa4_estimativa"):
     sys.path.insert(0, os.path.join(RAIZ, pasta))
 
 
@@ -30,11 +30,17 @@ def etapa3_candidatura(ctx):
     return candidatar(ctx["diagnostico"])
 
 
+def etapa4_estimativa(ctx):
+    from estimar import estimar
+    return estimar(ctx["candidatos"], ctx["diagnostico"])
+
+
 # (arquivo de saída, função). Etapa nova = uma função no fim da lista.
 ETAPAS = [
     ("pedido", etapa1_extracao),
     ("diagnostico", etapa2_diagnostico),
     ("candidatos", etapa3_candidatura),
+    ("estimativas", etapa4_estimativa),
 ]
 
 
@@ -68,6 +74,8 @@ def main():
     c = ctx["candidatos"]["resumo"]
     print(f"candidatura : {c['modelos_considerados']} modelos, {c['modelos_com_configuracao']} com configuracao, {c['configuracoes']} configuracoes"
           + (" (orcamento desconhecido: nada excluido por memoria)" if c["orcamento_desconhecido"] else ""))
+    e = ctx["estimativas"]["resumo"]
+    print(f"estimativa  : {e['com_qualidade']}/{e['configuracoes']} com qualidade medida; meta de tok/s: {e['atende_meta']}")
     print(f"\ngravado em {a.saida}/")
 
 
