@@ -34,7 +34,7 @@ def tipo_em(f, cat, valores):
     return f["tipo"] in valores
 
 def _tamanho(f):
-    return f["params"]["total"]
+    return f["params"].get("texto") or f["params"]["total"]
 
 def _grupo_tipo(f):
     return f["tipo"] == "base"
