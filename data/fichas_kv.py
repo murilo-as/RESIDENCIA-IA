@@ -35,4 +35,4 @@ def kv_gib(ficha, ctx, **kw):
 
 
 def pesos_gib(ficha, bits_por_peso=16.0):
-    return ficha["params"]["total"] * bits_por_peso / 8 / 2 ** 30
+    return (ficha["params"].get("texto") or ficha["params"]["total"]) * bits_por_peso / 8 / 2 ** 30
