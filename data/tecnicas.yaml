@@ -83,19 +83,19 @@ tecnicas:
     custo_adaptacao: nenhum           # PTQ; QAT exige retreino (fora de escopo)
     alvo: [pesos]
     aplica_em: modelo_pronto
-    exige: {dados: talvez, treino: nao, gpu_para_aplicar: talvez}   # GPTQ/AWQ pedem calibracao; formatos GGUF nao
+    exige: {dados: nao, treino: nao, gpu_para_aplicar: nao}   # GGUF (llama-quantize) nao pede calibracao; GPTQ/AWQ pedem (fora do escopo)
     requer_modelo: []
     efeito_esperado: {qualidade: piora, memoria: melhora, latencia_decodificacao: melhora, latencia_prefill: varia}
     niveis:
       parametro: bits_por_peso
-      valores: [8, 6, 5, 4, 3]        # nominais; bits EFETIVOS (inclui escalas) = tamanho_em_disco*8 / params, medido
+      valores: [8, 4]                 # Q8_0 e Q4_K_M; bits EFETIVOS (inclui escalas) ~8,5 e ~4,9 (Qwen3.5: ~5,2) = tamanho_em_disco*8 / params, medido
       baseline: 16                    # bf16, linha "nenhuma" do efeitos.csv
     combina_com: [quantizacao_kv, peft_lora, decoding_especulativo, kv_cache_evicao, modo_raciocinio]
     conflita_com: []
     ferramenta: [llama.cpp]
     medida_na_v1: sim
     tag_efeitos: B
-    notas: "Latencia de decodificacao ~ banda / bytes lidos por token (B). Pesos+ativacoes (SmoothQuant etc.) ficam fora."
+    notas: "Latencia de decodificacao ~ banda / bytes lidos por token (B). Pesos+ativacoes (SmoothQuant etc.) ficam fora. Niveis 16/8/4 (decisao de 23/10/2026): GGUF F16, Q8_0 e Q4_K_M no llama.cpp, sem calibracao."
 
   quantizacao_kv:
     nome: Quantizacao do KV cache

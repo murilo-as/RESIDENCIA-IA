@@ -105,7 +105,7 @@ def tecnicas_nao_medidas(F, T, modelos, recursos):
 REGRAS = [
     {"passo": "3.1 modelos", "regra": "modelo citado: só ele; senão catálogo filtrado por especialidade da célula, tipo (base só com treino) e raciocínio", "fonte": "grade.yaml:especialidade, fichas.json", "tag": "C"},
     {"passo": "3.2 técnicas", "regra": "aplica_em = modelo_pronto, requer_modelo (ficha) e exige x recursos do usuário, em 3 valores (sim, talvez, não)", "fonte": "tecnicas.yaml, fichas.json", "tag": "B"},
-    {"passo": "3.3 enumeração", "regra": "pesos {16,8,6,5,4,3} x KV {16,8,4} x modo de raciocínio (híbridos); 16 bits = sem técnica; até 3 técnicas", "fonte": "tecnicas.yaml:niveis, configuracao.max_tecnicas", "tag": "B"},
+    {"passo": "3.3 enumeração", "regra": "pesos {16,8,4} x KV {16,8,4} x modo de raciocínio (híbridos); 16 bits = sem técnica; até 3 técnicas", "fonte": "tecnicas.yaml:niveis, configuracao.max_tecnicas", "tag": "B"},
     {"passo": "3.4 memória", "regra": "mínimo teórico (pesos + KV) acima do orçamento = sai; folga menor que 20% = 'sem folga'; orçamento desconhecido não exclui", "fonte": "fichas.json, fichas_kv.py", "tag": "B (a folga de 20% é C)"},
     {"passo": "3.5 preferência", "regra": "só marca as técnicas que favorecem; nunca exclui", "fonte": "regras.py:FAVORECE", "tag": "C"},
     {"passo": "3.6 não medidas", "regra": "técnicas aplicáveis sem medida na v1: só a direção do efeito, fora do Pareto", "fonte": "tecnicas.yaml:efeito_esperado", "tag": "C"},
