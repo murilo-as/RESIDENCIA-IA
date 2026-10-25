@@ -31,6 +31,8 @@ def linha(f):
 def ler_medicoes(caminho, F):
     M = {}
     for r in csv.DictReader(open(caminho, encoding="utf-8")):
+        if r["benchmark"].endswith("_strict"):
+            continue
         i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
         M[(i, NIVEL_BITS[r["nivel"]], r["benchmark"])] = {"valor": float(r["acuracia"]), "n": int(r["n"]),
                                                           "ep": float(r["erro_padrao"]) if r["erro_padrao"] else None}
@@ -160,14 +162,13 @@ def imprimir_loo(alvo, linhas):
     for r in linhas:
         print(f'{r["bits"]:>4} {r["benchmark"]:<14} {r["real"]*100:5.1f} {f(None if r["est"] is None else r["est"]*100):>5}  {f(r["erro_pts"]):>9}  '
               f'{f(None if r["base"] is None else r["base"]*100):>4}  {f(r["erro_base_pts"]):>14}  {f(r["ep_pts"]):>10}  {r["metodo"]}')
-    for nome, filtro in (("16 bits", lambda r: r["bits"] == 16), ("<16 bits", lambda r: r["bits"] < 16)):
-        c = [r for r in linhas if filtro(r) and r["erro_pts"] is not None]
-        if c:
-            mae = sum(abs(r["erro_pts"]) for r in c) / len(c)
-            cb = [r for r in c if r["erro_base_pts"] is not None]
-            mb = sum(abs(r["erro_base_pts"]) for r in cb) / len(cb) if cb else None
-            print(f"{nome}: erro absoluto medio {mae:.2f} pts (n={len(c)}); linha de base {f(mb, 2)} pts; sem estimativa: {sum(filtro(r) for r in linhas) - len(c)}")
-
+    for b in sorted({r["benchmark"] for r in linhas}):
+        for nome, filtro in (("16 bits", lambda r: r["bits"] == 16), ("<16 bits", lambda r: r["bits"] < 16)):
+            c = [r for r in linhas if r["benchmark"] == b and filtro(r) and r["erro_pts"] is not None]
+            if c:
+                cb = [r for r in c if r["erro_base_pts"] is not None]
+                mb = sum(abs(r["erro_base_pts"]) for r in cb) / len(cb) if cb else None
+                print(f"{b} {nome}: erro absoluto medio {sum(abs(r['erro_pts']) for r in c) / len(c):.2f} pts (n={len(c)}); linha de base {f(mb, 2)} pts")
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
