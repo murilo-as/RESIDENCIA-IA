@@ -25,14 +25,21 @@ def etapa2_diagnostico(ctx):
     return diagnosticar(ctx["pedido"], L["memoria_gb"], L["banda_gb_s"], L["min_tok_s"])
 
 
+def _fichas(ctx):
+    from regras import carregar
+    F, T = carregar()
+    fam = ctx["config"].get("familias")
+    return ({i: f for i, f in F.items() if f["familia"] in fam} if fam else F), T
+
+
 def etapa3_candidatura(ctx):
     from candidatar import candidatar
-    return candidatar(ctx["diagnostico"])
+    return candidatar(ctx["diagnostico"], *_fichas(ctx))
 
 
 def etapa4_estimativa(ctx):
     from estimar import estimar
-    return estimar(ctx["candidatos"], ctx["diagnostico"])
+    return estimar(ctx["candidatos"], ctx["diagnostico"], _fichas(ctx)[0])
 
 
 # (arquivo de saída, função). Etapa nova = uma função no fim da lista.

@@ -21,6 +21,7 @@ carregar_env()
 
 PADRAO = {"llm": {"backend": "gemini", "modelo": "gemini-2.5-flash", "url": None},
           "limites": {"memoria_gb": None, "banda_gb_s": 89.6, "min_tok_s": None},
+          "familias": None,
           "saida": "saidas"}
 
 

@@ -10,4 +10,6 @@ limites:
   banda_gb_s:          # máquina simulada (padrão do projeto: 89.6 = PC médio; Spark = 273)
   min_tok_s:            # meta de tokens/s
 
+familias: [Qwen]     # so estas familias entram (null = todas). Gemma saiu em 21/10/2026
+
 saida: saidas
