@@ -7,6 +7,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [AQUI, os.path.join(AQUI, "..", "etapa3_candidatura")]
 from regras import carregar, _achar
 from fichas_kv import kv_bytes
+import estimar_qualidade as EQ
 
 GIB = 2 ** 30
 ORDEM_ORIGEM = {"propria": 0, "paper": 1, "card": 2}
@@ -42,7 +43,22 @@ def nivel(c, tecnica, padrao):
     return next((t["nivel"] for t in c["tecnicas"] if t["tecnica"] == tecnica), padrao)
 
 
-def estimar_config(c, f, d, efeitos, benchmarks):
+def nota_propria(c, F, b, qual):
+    """Nota estimada por estimar_qualidade. Só cobre quantização de pesos (16/8/4), com raciocínio desligado e sem outras técnicas."""
+    if not qual:
+        return None
+    M, formas = qual
+    racio = [t["nivel"] for t in c["tecnicas"] if t["tecnica"] == "modo_raciocinio"]
+    if nivel(c, "quantizacao_kv", 16) != 16 or (racio and racio[0] != "desligado") or any(t["tecnica"] not in ("quantizacao_pesos", "modo_raciocinio", "decoding_especulativo") for t in c["tecnicas"]):
+        return None
+    k = EQ.chave(b, M)
+    e = EQ.estimar(F, M, c["modelo"], nivel(c, "quantizacao_pesos", 16), k, formas) if k else None
+    if not e or e["valor"] is None:
+        return None
+    return {"valor": round(e["valor"], 4), "tipo": "nota_absoluta", "origem": "propria", "tag": e["tag"], "fonte": "estimar_qualidade: " + e["metodo"], "ic": None}
+
+
+def estimar_config(c, f, d, efeitos, benchmarks, F=None, qual=None):
     ctx, lat = d["memoria"]["ctx_alvo"]["valor"], d["latencia"]
     bp, bk = nivel(c, "quantizacao_pesos", 16), nivel(c, "quantizacao_kv", 16)
     pesos = bytes_pesos_ativos(f, bp)
@@ -69,7 +85,7 @@ def estimar_config(c, f, d, efeitos, benchmarks):
     q = {}
     for b in benchmarks:
         r = melhor([x for x in efeitos.get((c["id"], "qualidade"), []) if x["benchmark"] == b])
-        q[b] = efeito(r) if r else None
+        q[b] = efeito(r) if r else nota_propria(c, F, b, qual)
     return {"id": c["id"], "modelo": c["modelo"], "memoria": {"min_gib": c["memoria_min_gib"], "cabe": c["cabe"], "tag": "B", "falta": "overhead do motor (medir no Spark)"},
             "latencia_decodificacao": l, "atende_meta": atende, "qualidade": q, "talvez_por": c["talvez_por"]}
 
@@ -77,7 +93,8 @@ def estimar_config(c, f, d, efeitos, benchmarks):
 def estimar(cand, d, F=None):
     F = F or carregar()[0]
     efeitos, benchmarks = ler_efeitos(), d["qualidade"].get("benchmarks", [])
-    est = [estimar_config(c, F[c["modelo"]], d, efeitos, benchmarks) for c in cand["configuracoes"]]
+    qual = (EQ.ler_medicoes(EQ.CSVS, F), EQ.ler_forma(F)) if EQ.CSVS else None
+    est = [estimar_config(c, F[c["modelo"]], d, efeitos, benchmarks, F, qual) for c in cand["configuracoes"]]
     com_q = sum(any(v for v in e["qualidade"].values()) for e in est)
     return {"entrada": {"banda_gb_s": d["latencia"]["banda_gb_s"], "meta_tok_s": d["latencia"]["meta"]["min_tok_s"], "benchmarks": benchmarks,
                         "ctx_alvo": d["memoria"]["ctx_alvo"]["valor"]},

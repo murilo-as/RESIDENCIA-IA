@@ -2,14 +2,17 @@
 Cascata: medido (A) > irmão, razão da âncora (C) > curva em log do tamanho (C) > sem dado. Nota em 16 bits publicada (B): só MMLU do Qwen3.
 A forma da queda em 4 bits vem do artigo 2505.02214 (data/curva_forma_qwen3.csv); o valor, da nossa âncora.
 resultados.csv: modelo,nivel(f16|q8_0|q4_k_m),benchmark,n,acuracia(0-1),erro_padrao
-  python estimar_qualidade.py ID BITS BENCHMARK [-r resultados.csv]
-  python estimar_qualidade.py --loo ID [-r resultados.csv]"""
-import argparse, bisect, csv, json, math, os
+  python estimar_qualidade.py ID BITS BENCHMARK [-r resultados.csv ...]
+  python estimar_qualidade.py --loo ID [-r resultados.csv ...]   (padrao: medicao/resultados*.csv, um por maquina)"""
+import argparse, bisect, csv, glob, json, math, os
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 DADOS = os.path.join(AQUI, "..", "data")
-RESULTADOS = os.path.join(AQUI, "medicao", "resultados.csv")
+CSVS = sorted(glob.glob(os.path.join(AQUI, "medicao", "resultados*.csv")))
 NIVEL_BITS = {"f16": 16, "q8_0": 8, "q4_k_m": 4}
+CHAVES = {"MMLU": ["mmlu"], "MedQA": ["medqa", "medqa_4options"], "PubMedQA": ["pubmedqa"], "GPQA Diamond": ["gpqa", "gpqa_diamond"], "GSM8K": ["gsm8k"],
+          "MATH-500": ["math500", "math_500", "minerva_math500"], "OAB-Exams 1a fase": ["oab", "oab_exams"],
+          "HumanEval+": ["humaneval_plus", "humanevalplus", "humaneval"], "MBPP": ["mbpp_plus", "mbppplus", "mbpp"], "WMT24++": ["wmt24pp", "wmt24"]}
 
 
 def fichas():
@@ -28,12 +31,14 @@ def linha(f):
     return (f["familia"], f["geracao"], f["especialidade"], grupo(f))
 
 
-def ler_medicoes(caminho, F):
+def ler_medicoes(caminhos, F):
     M = {}
-    for r in csv.DictReader(open(caminho, encoding="utf-8")):
+    for r in (row for c in ([caminhos] if isinstance(caminhos, str) else caminhos) for row in csv.DictReader(open(c, encoding="utf-8"))):
         if r["benchmark"].endswith("_strict"):
             continue
         i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
+        if i not in F:
+            continue
         M[(i, NIVEL_BITS[r["nivel"]], r["benchmark"])] = {"valor": float(r["acuracia"]), "n": int(r["n"]),
                                                           "ep": float(r["erro_padrao"]) if r["erro_padrao"] else None}
     return M
@@ -42,6 +47,8 @@ def ler_medicoes(caminho, F):
 def ler_forma(F):
     c = {"base": [], "pos": []}
     for r in csv.DictReader(open(os.path.join(DADOS, "curva_forma_qwen3.csv"), encoding="utf-8")):
+        if r["id"] not in F:
+            continue
         f = F[r["id"]]
         c[grupo(f)].append((tam(f), 1 - float(r["mmlu_gptq4"]) / float(r["mmlu_16"]), float(r["mmlu_16"]) / 100, r["id"]))
     return {g: sorted(v) for g, v in c.items()}
@@ -77,6 +84,12 @@ def irmaos(F, i):
 def razao_medida(M, i, bits, b):
     x, y = M.get((i, bits, b)), M.get((i, 16, b))
     return x["valor"] / y["valor"] if x and y and y["valor"] else None
+
+
+def chave(b, M):
+    """Nome do benchmark da grade no resultados.csv (o primeiro que tem medida)."""
+    ks = {k[2] for k in M}
+    return next((c for c in CHAVES.get(b, [b.lower()]) if c in ks), None)
 
 
 def publicado(i, b, formas):
@@ -173,7 +186,7 @@ def imprimir_loo(alvo, linhas):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("id", nargs="?"); ap.add_argument("bits", nargs="?", type=int); ap.add_argument("benchmark", nargs="?")
-    ap.add_argument("--loo", metavar="ID"); ap.add_argument("-r", "--resultados", default=RESULTADOS)
+    ap.add_argument("--loo", metavar="ID"); ap.add_argument("-r", "--resultados", nargs="+", default=CSVS)
     a = ap.parse_args()
     F = fichas()
     M, formas = ler_medicoes(a.resultados, F), ler_forma(F)
