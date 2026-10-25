@@ -1,0 +1,12 @@
+id,mmlu_16,mmlu_gptq8,mmlu_gptq4,fonte
+Qwen/Qwen3-0.6B,47.1,47.0,44.0,arXiv 2505.02214 Tab.4 (g128; MMLU 5-shot)
+Qwen/Qwen3-1.7B,60.0,59.9,55.7,arXiv 2505.02214 Tab.4
+Qwen/Qwen3-4B,69.7,69.7,67.6,arXiv 2505.02214 Tab.4
+Qwen/Qwen3-8B,74.7,74.7,73.4,arXiv 2505.02214 Tab.4
+Qwen/Qwen3-14B,78.5,78.4,77.4,arXiv 2505.02214 Tab.4
+Qwen/Qwen3-32B,81.2,81.4,80.6,arXiv 2505.02214 Tab.4
+Qwen/Qwen3-0.6B-Base,52.3,52.4,47.2,arXiv 2505.02214 Tab.3 (g128; MMLU 5-shot)
+Qwen/Qwen3-1.7B-Base,61.0,60.6,56.7,arXiv 2505.02214 Tab.3
+Qwen/Qwen3-4B-Base,73.0,72.9,70.9,arXiv 2505.02214 Tab.3
+Qwen/Qwen3-8B-Base,76.7,76.7,75.4,arXiv 2505.02214 Tab.3
+Qwen/Qwen3-14B-Base,80.7,80.7,79.8,arXiv 2505.02214 Tab.3
