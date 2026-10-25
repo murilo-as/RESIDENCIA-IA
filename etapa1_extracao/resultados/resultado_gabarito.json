@@ -1,7 +1,7 @@
 {
  "backend": "gabarito",
  "modelo": null,
- "tempo_s": 0.1,
+ "tempo_s": 0.5,
  "contagem": {
   "modelo": {
    "acerto": 10,
@@ -141,9 +141,7 @@
     "hardware": {
      "valor": "notebook",
      "evidencia": "notebook",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -212,9 +210,7 @@
     "hardware": {
      "valor": "RTX 4090",
      "evidencia": "RTX 4090",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -289,9 +285,7 @@
     "hardware": {
      "valor": "PC",
      "evidencia": "PC",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -360,9 +354,7 @@
     "hardware": {
      "valor": "Mac",
      "evidencia": "Mac",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -431,9 +423,7 @@
     "hardware": {
      "valor": "GPU",
      "evidencia": "GPU",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -502,9 +492,7 @@
     "hardware": {
      "valor": "computador",
      "evidencia": "computador",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -717,9 +705,7 @@
     "hardware": {
      "valor": "laptop",
      "evidencia": "laptop",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -788,9 +774,7 @@
     "hardware": {
      "valor": "DGX Spark",
      "evidencia": "DGX Spark",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }

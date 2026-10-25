@@ -1,0 +1,11 @@
+{
+ "task": "medqa_4options",
+ "n": 20,
+ "montar_tarefas_s": 0.32219609431922436,
+ "avaliacao_s": 5.738724268041551,
+ "s_por_exemplo": 0.28693621340207753,
+ "tokens_contexto_media": 200.55,
+ "tokens_contexto_max": 328,
+ "acc": 0.6,
+ "stderr": 0.11239029738980327
+}

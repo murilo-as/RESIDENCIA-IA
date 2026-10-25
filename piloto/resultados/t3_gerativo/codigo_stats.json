@@ -1,0 +1,260 @@
+{
+ "humaneval": {
+  "n": 20,
+  "s_por_exemplo": 3.5976190046872945,
+  "tokens_media": 160.85,
+  "tokens_max": 322,
+  "cortadas": 0,
+  "medidas": [
+   {
+    "task_id": "HumanEval/0",
+    "segundos": 3.7676259530708194,
+    "tokens": 166,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/1",
+    "segundos": 5.011344075668603,
+    "tokens": 224,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/2",
+    "segundos": 2.363011204171926,
+    "tokens": 105,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/3",
+    "segundos": 3.558731878641993,
+    "tokens": 159,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/4",
+    "segundos": 4.466061322949827,
+    "tokens": 199,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/5",
+    "segundos": 2.8796236608177423,
+    "tokens": 128,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/6",
+    "segundos": 4.713993465062231,
+    "tokens": 211,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/7",
+    "segundos": 2.373874134849757,
+    "tokens": 105,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/8",
+    "segundos": 3.358699392993003,
+    "tokens": 151,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/9",
+    "segundos": 3.646596572827548,
+    "tokens": 163,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/10",
+    "segundos": 5.099025167059153,
+    "tokens": 230,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/11",
+    "segundos": 3.33810683619231,
+    "tokens": 151,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/12",
+    "segundos": 3.627847329247743,
+    "tokens": 164,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/13",
+    "segundos": 2.0281758341006935,
+    "tokens": 90,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/14",
+    "segundos": 1.7815680881030858,
+    "tokens": 79,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/15",
+    "segundos": 1.8512534778565168,
+    "tokens": 81,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/16",
+    "segundos": 2.520812585018575,
+    "tokens": 111,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/17",
+    "segundos": 5.219692863989621,
+    "tokens": 232,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/18",
+    "segundos": 3.261098274961114,
+    "tokens": 146,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "HumanEval/19",
+    "segundos": 7.085237976163626,
+    "tokens": 322,
+    "finish_reason": "stop"
+   }
+  ]
+ },
+ "mbpp": {
+  "n": 20,
+  "s_por_exemplo": 4.116570080351084,
+  "tokens_media": 182.65,
+  "tokens_max": 285,
+  "cortadas": 0,
+  "medidas": [
+   {
+    "task_id": "Mbpp/2",
+    "segundos": 4.899822302162647,
+    "tokens": 222,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/3",
+    "segundos": 4.2459457237273455,
+    "tokens": 193,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/4",
+    "segundos": 6.223766295239329,
+    "tokens": 274,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/6",
+    "segundos": 4.646732175722718,
+    "tokens": 205,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/7",
+    "segundos": 4.616336762905121,
+    "tokens": 203,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/8",
+    "segundos": 3.737180312629789,
+    "tokens": 165,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/9",
+    "segundos": 6.001676518004388,
+    "tokens": 265,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/11",
+    "segundos": 2.844766637776047,
+    "tokens": 126,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/12",
+    "segundos": 6.482707531191409,
+    "tokens": 285,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/14",
+    "segundos": 2.6558890365995467,
+    "tokens": 117,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/16",
+    "segundos": 3.529675852973014,
+    "tokens": 157,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/17",
+    "segundos": 1.580033890902996,
+    "tokens": 70,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/18",
+    "segundos": 4.8505979790352285,
+    "tokens": 216,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/19",
+    "segundos": 3.216846684925258,
+    "tokens": 143,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/20",
+    "segundos": 5.688124720007181,
+    "tokens": 252,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/56",
+    "segundos": 3.8790313079953194,
+    "tokens": 173,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/57",
+    "segundos": 2.6760682300664485,
+    "tokens": 119,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/58",
+    "segundos": 2.048226130194962,
+    "tokens": 91,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/59",
+    "segundos": 2.973653146997094,
+    "tokens": 133,
+    "finish_reason": "stop"
+   },
+   {
+    "task_id": "Mbpp/61",
+    "segundos": 5.534320367965847,
+    "tokens": 244,
+    "finish_reason": "stop"
+   }
+  ]
+ }
+}

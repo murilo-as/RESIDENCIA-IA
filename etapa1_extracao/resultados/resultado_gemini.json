@@ -1,7 +1,7 @@
 {
  "backend": "gemini",
  "modelo": "gemini-2.5-flash",
- "tempo_s": 44.2,
+ "tempo_s": 39.1,
  "contagem": {
   "modelo": {
    "acerto": 10,
@@ -16,8 +16,8 @@
    "errado": 0
   },
   "dominio": {
-   "acerto": 8,
-   "errado": 1,
+   "acerto": 7,
+   "errado": 2,
    "omissao": 1,
    "alucinacao": 0
   },
@@ -46,8 +46,8 @@
    "errado": 0
   },
   "recursos.treino": {
-   "alucinacao": 1,
-   "acerto": 9,
+   "acerto": 10,
+   "alucinacao": 0,
    "omissao": 0,
    "errado": 0
   },
@@ -118,9 +118,9 @@
       "origem": "texto"
      },
      "treino": {
-      "valor": false,
-      "evidencia": "para treinar",
-      "origem": "texto"
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
      },
      "gpu": {
       "valor": null,
@@ -141,9 +141,7 @@
     "hardware": {
      "valor": "notebook",
      "evidencia": "meu notebook",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -212,9 +210,7 @@
     "hardware": {
      "valor": "RTX 4090",
      "evidencia": "RTX 4090",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -289,9 +285,7 @@
     "hardware": {
      "valor": "PC",
      "evidencia": "PC",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": [
      "dominio: valor 'geral' descartado (evidencia None nao esta no texto)"
@@ -362,9 +356,7 @@
     "hardware": {
      "valor": "Mac",
      "evidencia": "Mac",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -433,9 +425,7 @@
     "hardware": {
      "valor": "GPU",
      "evidencia": "GPU",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -504,9 +494,7 @@
     "hardware": {
      "valor": "computador",
      "evidencia": "computador",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -719,9 +707,7 @@
     "hardware": {
      "valor": "laptop",
      "evidencia": "laptop",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }
@@ -736,7 +722,7 @@
      "origem": "texto"
     },
     "dominio": {
-     "valor": "ciência",
+     "valor": "outro",
      "evidencia": "física",
      "origem": "texto"
     },
@@ -790,9 +776,7 @@
     "hardware": {
      "valor": "DGX Spark",
      "evidencia": "DGX Spark",
-     "origem": "texto",
-     "id": null,
-     "regra": "hardware.json ainda nao existe"
+     "origem": "texto"
     },
     "avisos": []
    }

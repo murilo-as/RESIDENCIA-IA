@@ -3,3 +3,8 @@ llama.cpp/
 hf_cache/
 server*.log
 __pycache__/
+# amostras por questao do GPQA nao podem ir para o git
+resultados/*gpqa*/
+resultados_gpqa*/
+**/*gpqa*samples*
+**/samples_gpqa*

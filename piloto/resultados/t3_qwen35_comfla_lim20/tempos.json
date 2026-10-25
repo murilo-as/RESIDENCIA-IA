@@ -1,0 +1,12 @@
+{
+ "tag": "qwen35_comfla",
+ "limit": 20,
+ "n_questoes": 1140,
+ "n_pedidos_loglik": 4560,
+ "carga_s": 64.25734870228916,
+ "montar_tarefas_s": 378.54152490664274,
+ "avaliacao_s": 462.4445081339218,
+ "mmlu_acc": 0.7175438596491228,
+ "mmlu_stderr": 0.013054378897928659,
+ "s_por_questao_aval": 0.4056530773104577
+}

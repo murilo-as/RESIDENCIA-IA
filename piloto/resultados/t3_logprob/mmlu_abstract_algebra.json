@@ -1,0 +1,11 @@
+{
+ "task": "mmlu_abstract_algebra",
+ "n": 20,
+ "montar_tarefas_s": 0.8511060317978263,
+ "avaliacao_s": 6.664172910153866,
+ "s_por_exemplo": 0.3332086455076933,
+ "tokens_contexto_media": 360.05,
+ "tokens_contexto_max": 405,
+ "acc": 0.6,
+ "stderr": 0.11239029738980327
+}

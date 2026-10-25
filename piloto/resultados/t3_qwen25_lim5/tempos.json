@@ -1,0 +1,12 @@
+{
+ "tag": "qwen25",
+ "limit": 5,
+ "n_questoes": 285,
+ "n_pedidos_loglik": 1140,
+ "carga_s": 41.9504580241628,
+ "montar_tarefas_s": 363.3464355370961,
+ "avaliacao_s": 50.87637698883191,
+ "mmlu_acc": 0.7929824561403509,
+ "mmlu_stderr": 0.023926634556115538,
+ "s_por_questao_aval": 0.17851360346958564
+}

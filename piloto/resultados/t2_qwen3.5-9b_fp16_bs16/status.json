@@ -1,0 +1,17 @@
+{
+ "modelo": "qwen3.5-9b",
+ "gguf": "qwen3.5-9b-q4_k_m.gguf",
+ "carga_s": 46.22273011878133,
+ "params_gib": 16.67775821685791,
+ "gguf_gib": 5.3831290900707245,
+ "classe": "Qwen3_5ForCausalLM",
+ "model_type": "qwen3_5_text",
+ "architectures": [
+  "Qwen3_5ForCausalLM"
+ ],
+ "carregou": true,
+ "carga_hflm_s": 2.4414736083708704,
+ "avaliacao_s": 423.24889796134084,
+ "mmlu_acc": 0.7543859649122807,
+ "mmlu_stderr": 0.0392292627631542
+}

@@ -5,3 +5,4 @@ __pycache__/
 
 saidas/
 etapa1_extracao/resultados/
+slurm/

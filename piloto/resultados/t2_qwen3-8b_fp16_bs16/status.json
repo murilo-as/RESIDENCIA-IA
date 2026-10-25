@@ -1,0 +1,15 @@
+{
+ "modelo": "qwen3-8b",
+ "gguf": "qwen3-8b-q4_k_m.gguf",
+ "carga_s": 73.49382424075156,
+ "params_gib": 15.256433486938477,
+ "gguf_gib": 4.682488888502121,
+ "classe": "Qwen3ForCausalLM",
+ "model_type": "qwen3",
+ "architectures": null,
+ "carregou": true,
+ "carga_hflm_s": 36.650386922992766,
+ "avaliacao_s": 446.42649702494964,
+ "mmlu_acc": 0.8070175438596491,
+ "mmlu_stderr": 0.0392292627631542
+}

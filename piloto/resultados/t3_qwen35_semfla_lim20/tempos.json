@@ -1,0 +1,12 @@
+{
+ "tag": "qwen35_semfla",
+ "limit": 20,
+ "n_questoes": 1140,
+ "n_pedidos_loglik": 4560,
+ "carga_s": 8.91847076965496,
+ "montar_tarefas_s": 368.0209073680453,
+ "avaliacao_s": 391.0009390548803,
+ "mmlu_acc": 0.7166666666666667,
+ "mmlu_stderr": 0.013074528144194061,
+ "s_por_questao_aval": 0.342983279872702
+}

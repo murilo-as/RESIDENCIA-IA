@@ -1,0 +1,11 @@
+{
+ "task": "oab_exams",
+ "n": 20,
+ "montar_tarefas_s": 0.21084492234513164,
+ "avaliacao_s": 5.876651267055422,
+ "s_por_exemplo": 0.2938325633527711,
+ "tokens_contexto_media": 223.45,
+ "tokens_contexto_max": 330,
+ "acc": 0.3,
+ "stderr": 0.10513149660756935
+}
