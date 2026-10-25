@@ -1,0 +1,17 @@
+2026-10-25T01:07:41Z inicio fumaca (limite 2h)
+2026-10-25T01:23:01Z fim fumaca rc=0
+2026-10-25T01:23:01Z inicio 3b (limite 4h)
+2026-10-25T02:47:29Z fim 3b rc=0
+2026-10-25T02:47:29Z inicio 7b (limite 8h)
+2026-10-25T05:09:26Z fim 7b rc=0
+2026-10-25T05:09:26Z inicio 14b-mmlu (limite 4h)
+2026-10-25T06:02:35Z fim 14b-mmlu rc=0
+2026-10-25T06:02:35Z inicio 14b-gsm-q4 (limite 3h)
+2026-10-25T06:58:29Z fim 14b-gsm-q4 rc=0
+2026-10-25T06:58:29Z inicio 14b-gsm-f16 (limite 6h)
+2026-10-25T08:37:28Z fim 14b-gsm-f16 rc=0
+2026-10-25T08:37:28Z inicio 14b-gsm-q8 (limite 4h)
+2026-10-25T09:49:13Z fim 14b-gsm-q8 rc=0
+2026-10-25T09:49:13Z inicio resumo (limite 20m)
+2026-10-25T09:49:19Z fim resumo rc=0
+2026-10-25T09:49:19Z noite.sh terminou
