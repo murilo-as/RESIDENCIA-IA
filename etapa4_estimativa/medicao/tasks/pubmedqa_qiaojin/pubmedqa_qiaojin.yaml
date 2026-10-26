@@ -1,0 +1,15 @@
+task: pubmedqa_qiaojin
+dataset_path: qiaojin/PubMedQA
+dataset_name: pqa_labeled
+test_split: train
+output_type: multiple_choice
+doc_to_text: !function utils.doc_to_text
+doc_to_choice: ["yes", "no", "maybe"]
+doc_to_target: !function utils.doc_to_target
+num_fewshot: 0
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0

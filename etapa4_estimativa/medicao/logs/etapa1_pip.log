@@ -1,0 +1,21 @@
+Collecting math_verify
+  Downloading math_verify-0.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting antlr4-python3-runtime==4.11
+  Downloading antlr4_python3_runtime-4.11.0-py3-none-any.whl.metadata (291 bytes)
+Requirement already satisfied: sympy in /usr/local/lib/python3.12/dist-packages (1.14.0)
+Collecting latex2sympy2_extended==1.11.0 (from math_verify)
+  Downloading latex2sympy2_extended-1.11.0-py3-none-any.whl.metadata (5.3 kB)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy) (1.3.0)
+Downloading antlr4_python3_runtime-4.11.0-py3-none-any.whl (144 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 144.2/144.2 kB 1.1 MB/s eta 0:00:00
+Downloading math_verify-0.9.0-py3-none-any.whl (29 kB)
+Downloading latex2sympy2_extended-1.11.0-py3-none-any.whl (209 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 209.1/209.1 kB 2.4 MB/s eta 0:00:00
+Installing collected packages: antlr4-python3-runtime, latex2sympy2_extended, math_verify
+  Attempting uninstall: antlr4-python3-runtime
+    Found existing installation: antlr4-python3-runtime 4.9.3
+    Not uninstalling antlr4-python3-runtime at /usr/local/lib/python3.12/dist-packages, outside environment /beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv
+    Can't uninstall 'antlr4-python3-runtime'. No files were found to uninstall.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+omegaconf 2.3.1 requires antlr4-python3-runtime==4.9.*, but you have antlr4-python3-runtime 4.11.0 which is incompatible.
+Successfully installed antlr4-python3-runtime-4.11.0 latex2sympy2_extended-1.11.0 math_verify-0.9.0

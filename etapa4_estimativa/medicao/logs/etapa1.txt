@@ -1,0 +1,17 @@
+2026-10-25T16:22:31Z inicio pip
+2026-10-25T16:22:44Z fim pip rc=0
+2026-10-25T16:22:44Z inicio dados
+2026-10-25T16:22:55Z fim dados rc=0
+2026-10-25T16:22:55Z inicio oab-3b
+2026-10-25T16:30:22Z fim oab-3b rc=0
+2026-10-25T16:30:22Z inicio oab-7b
+2026-10-25T16:39:03Z fim oab-7b rc=0
+2026-10-25T16:39:03Z inicio oab-14b
+2026-10-25T16:39:03Z fim oab-14b rc=125
+2026-10-25T16:39:03Z inicio 7b-q4
+2026-10-25T16:48:07Z fim 7b-q4 rc=0
+2026-10-25T16:48:07Z inicio evalplus
+2026-10-25T16:54:46Z fim evalplus rc=0
+2026-10-25T16:54:46Z inicio avaliar
+2026-10-25T16:54:46Z fim avaliar rc=0
+2026-10-25T16:54:46Z etapa1 terminou

@@ -1,0 +1,19 @@
+task: oab_exams_5shot
+dataset_path: eduagarcia/oab_exams
+test_split: train
+output_type: multiple_choice
+process_docs: !function utils.process_docs
+description: "As questões a seguir são do Exame de Ordem da OAB (primeira fase). Escolha a alternativa correta e responda apenas com a letra (A, B, C ou D).\n\n"
+doc_to_text: !function utils.doc_to_text
+doc_to_choice: ["A", "B", "C", "D"]
+doc_to_target: !function utils.doc_to_target
+num_fewshot: 5
+fewshot_config:
+  sampler: first_n
+  samples: !function utils.list_fewshot_samples
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 0.2

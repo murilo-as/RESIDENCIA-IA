@@ -1,0 +1,21 @@
+fb-oab-ajuste|rodar.sbatch|04:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash oab_ajuste.sh
+fb-pontuar-teste|pontuar_codigo.sbatch|00:30:00||--teste
+fb-ingerir-teste|rodar.sbatch|00:15:00||/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --ingerir-codigo --dir /beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/etapa1
+fb-7b|rodar.sbatch|12:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen2.5-7B-Instruct --benchmarks medqa pubmedqa humaneval mbpp wmt24 math500 --respeitar-etapa1
+fb-3b|rodar.sbatch|07:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen2.5-3B-Instruct --benchmarks medqa pubmedqa humaneval mbpp wmt24 math500 --respeitar-etapa1
+fb-14b|rodar.sbatch|20:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen2.5-14B-Instruct --benchmarks medqa pubmedqa humaneval mbpp wmt24 math500 --respeitar-etapa1
+fb-oab-completo|rodar.sbatch|14:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash oab_completo.sh
+fb-pontuar|pontuar_codigo.sbatch|02:00:00||
+fb-final-a|rodar.sbatch|00:30:00||bash finalizar.sh
+fb-baixar-b|rodar.sbatch|04:00:00||/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python baixar_modelos.py Qwen/Qwen3-1.7B Qwen/Qwen3-8B Qwen/Qwen3.5-2B Qwen/Qwen3.5-4B Qwen/Qwen3.5-9B
+fb-qwen3-1.7b|rodar.sbatch|04:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen3-1.7B --benchmarks mmlu medqa gsm8k --sem-raciocinio
+fb-qwen3-8b|rodar.sbatch|08:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen3-8B --benchmarks mmlu medqa gsm8k --sem-raciocinio
+fb-qwen3.5-2b|rodar.sbatch|05:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen3.5-2B --benchmarks mmlu medqa gsm8k --sem-raciocinio
+fb-qwen3.5-4b|rodar.sbatch|06:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen3.5-4B --benchmarks mmlu medqa gsm8k --sem-raciocinio
+fb-qwen3.5-9b|rodar.sbatch|10:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen3.5-9B --benchmarks mmlu medqa gsm8k --sem-raciocinio
+fb-qwen3-8b-mmlu|rodar.sbatch|08:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen3-8B --benchmarks mmlu_completo --sem-raciocinio
+fb-baixar-32b|rodar.sbatch|04:00:00||/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python baixar_modelos.py Qwen/Qwen2.5-32B-Instruct
+fb-qwen2.5-32b|rodar.sbatch|16:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=80G|/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python medir.py --modelo Qwen2.5-32B-Instruct --niveis f16 --benchmarks mmlu medqa gsm8k
+fb-final-b|rodar.sbatch|00:30:00||bash finalizar.sh
+fb-repetir|rodar.sbatch|08:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash repetir.sh
+fb-final-c|rodar.sbatch|00:30:00||bash finalizar.sh

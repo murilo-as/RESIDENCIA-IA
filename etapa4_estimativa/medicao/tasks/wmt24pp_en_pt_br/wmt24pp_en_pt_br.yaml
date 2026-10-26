@@ -1,0 +1,20 @@
+task: wmt24pp_en_pt_br
+dataset_path: google/wmt24pp
+dataset_name: en-pt_BR
+test_split: train
+output_type: generate_until
+process_docs: !function utils.process_docs
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "{{target}}"
+num_fewshot: 0
+generation_kwargs:
+  until:
+    - "<|im_end|>"
+    - "<|endoftext|>"
+  do_sample: false
+  temperature: 0.0
+metric_list:
+  - metric: chrf
+repeats: 1
+metadata:
+  version: 1.0

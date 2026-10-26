@@ -1,0 +1,96 @@
+# Resumo da medição (fase A)
+
+## resultados.csv
+
+| modelo | nivel | benchmark | n | acuracia | erro_padrao | tempo_s | tokens_por_resposta | cortadas | commit_llama_cpp | data |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Qwen2.5-3B-Instruct | f16 | mmlu | 1425 | 0.697544 | 0.011483 | 128.9 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T01:32:18Z |
+| Qwen2.5-3B-Instruct | f16 | gsm8k | 1319 | 0.761183 | 0.011744 | 1751.5 | 236.5 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:01:56Z |
+| Qwen2.5-3B-Instruct | f16 | gsm8k_strict | 1319 | 0.015921 | 0.003448 | 1751.5 | 236.5 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:01:56Z |
+| Qwen2.5-3B-Instruct | q8_0 | mmlu | 1425 | 0.69614 | 0.011501 | 130.3 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:04:57Z |
+| Qwen2.5-3B-Instruct | q8_0 | gsm8k | 1319 | 0.752843 | 0.011882 | 1276.5 | 235.9 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:26:27Z |
+| Qwen2.5-3B-Instruct | q8_0 | gsm8k_strict | 1319 | 0.012889 | 0.003107 | 1276.5 | 235.9 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:26:27Z |
+| Qwen2.5-3B-Instruct | q4_k_m | mmlu | 1425 | 0.670877 | 0.011852 | 131.2 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:29:29Z |
+| Qwen2.5-3B-Instruct | q4_k_m | gsm8k | 1319 | 0.728582 | 0.012249 | 1065.2 | 243.5 | 3 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:47:28Z |
+| Qwen2.5-3B-Instruct | q4_k_m | gsm8k_strict | 1319 | 0.009098 | 0.002615 | 1065.2 | 243.5 | 3 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T02:47:28Z |
+| Qwen2.5-7B-Instruct | f16 | mmlu | 1425 | 0.757193 | 0.010945 | 219.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T03:01:01Z |
+| Qwen2.5-7B-Instruct | f16 | gsm8k | 1319 | 0.850644 | 0.009818 | 3198.1 | 212.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T03:54:55Z |
+| Qwen2.5-7B-Instruct | f16 | gsm8k_strict | 1319 | 0.222896 | 0.011464 | 3198.1 | 212.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T03:54:55Z |
+| Qwen2.5-7B-Instruct | q8_0 | mmlu | 1425 | 0.754386 | 0.010986 | 218.9 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T04:00:21Z |
+| Qwen2.5-7B-Instruct | q8_0 | gsm8k | 1319 | 0.853677 | 0.009735 | 2179.7 | 211.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T04:37:04Z |
+| Qwen2.5-7B-Instruct | q8_0 | gsm8k_strict | 1319 | 0.22138 | 0.011436 | 2179.7 | 211.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T04:37:04Z |
+| Qwen2.5-7B-Instruct | q4_k_m | mmlu | 1425 | 0.752982 | 0.011014 | 218.9 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T04:41:53Z |
+| Qwen2.5-7B-Instruct | q4_k_m | gsm8k | 1319 | 0.857468 | 0.00963 | 1630.2 | 203.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T05:09:23Z |
+| Qwen2.5-7B-Instruct | q4_k_m | gsm8k_strict | 1319 | 0.382866 | 0.013389 | 1630.2 | 203.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T05:09:23Z |
+| Qwen2.5-14B-Instruct | f16 | mmlu | 1425 | 0.805614 | 0.010013 | 457.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T05:32:02Z |
+| Qwen2.5-14B-Instruct | q8_0 | mmlu | 1425 | 0.805614 | 0.010023 | 450.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T05:48:14Z |
+| Qwen2.5-14B-Instruct | q4_k_m | mmlu | 1425 | 0.804211 | 0.010056 | 437.8 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T06:02:17Z |
+| Qwen2.5-14B-Instruct | q4_k_m | gsm8k | 1319 | 0.867324 | 0.009344 | 2973.3 | 182.5 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T06:58:28Z |
+| Qwen2.5-14B-Instruct | q4_k_m | gsm8k_strict | 1319 | 0.307809 | 0.012714 | 2973.3 | 182.5 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T06:58:29Z |
+| Qwen2.5-14B-Instruct | f16 | gsm8k | 1319 | 0.855193 | 0.009693 | 5565.4 | 184.1 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T08:37:28Z |
+| Qwen2.5-14B-Instruct | f16 | gsm8k_strict | 1319 | 0.272176 | 0.01226 | 5565.4 | 184.1 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T08:37:28Z |
+| Qwen2.5-14B-Instruct | q8_0 | gsm8k | 1319 | 0.857468 | 0.00963 | 3936.8 | 184.0 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T09:49:13Z |
+| Qwen2.5-14B-Instruct | q8_0 | gsm8k_strict | 1319 | 0.260804 | 0.012094 | 3936.8 | 184.0 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-25T09:49:13Z |
+
+## erros.log
+
+```
+(vazio)
+```
+
+## Pareado f16 x q4_k_m
+
+```
+Qwen2.5-3B-Instruct mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.6975; acc q4_k_m = 0.6709; diferenca (A-B) = +0.0267
+  so f16 acertou: 82; so q4_k_m acertou: 44
+  erro padrao da diferenca pareada: 0.0078
+```
+```
+Qwen2.5-3B-Instruct gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.7612; acc q4_k_m = 0.7286; diferenca (A-B) = +0.0326
+  so f16 acertou: 109; so q4_k_m acertou: 66
+  erro padrao da diferenca pareada: 0.0100
+```
+```
+Qwen2.5-3B-Instruct gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.0159; acc q4_k_m = 0.0091; diferenca (A-B) = +0.0068
+  so f16 acertou: 19; so q4_k_m acertou: 10
+  erro padrao da diferenca pareada: 0.0041
+```
+```
+Qwen2.5-7B-Instruct mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.7572; acc q4_k_m = 0.7530; diferenca (A-B) = +0.0042
+  so f16 acertou: 34; so q4_k_m acertou: 28
+  erro padrao da diferenca pareada: 0.0055
+```
+```
+Qwen2.5-7B-Instruct gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.8506; acc q4_k_m = 0.8575; diferenca (A-B) = -0.0068
+  so f16 acertou: 55; so q4_k_m acertou: 64
+  erro padrao da diferenca pareada: 0.0083
+```
+```
+Qwen2.5-7B-Instruct gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.2229; acc q4_k_m = 0.3829; diferenca (A-B) = -0.1600
+  so f16 acertou: 54; so q4_k_m acertou: 265
+  erro padrao da diferenca pareada: 0.0128
+```
+```
+Qwen2.5-14B-Instruct mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.8056; acc q4_k_m = 0.8042; diferenca (A-B) = +0.0014
+  so f16 acertou: 24; so q4_k_m acertou: 22
+  erro padrao da diferenca pareada: 0.0048
+```
+```
+Qwen2.5-14B-Instruct gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.8552; acc q4_k_m = 0.8673; diferenca (A-B) = -0.0121
+  so f16 acertou: 42; so q4_k_m acertou: 58
+  erro padrao da diferenca pareada: 0.0076
+```
+```
+Qwen2.5-14B-Instruct gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.2722; acc q4_k_m = 0.3078; diferenca (A-B) = -0.0356
+  so f16 acertou: 131; so q4_k_m acertou: 178
+  erro padrao da diferenca pareada: 0.0133
+```

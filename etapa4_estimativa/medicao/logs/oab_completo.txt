@@ -1,0 +1,6 @@
+2026-10-26T02:42:38Z inicio oab Qwen2.5-7B-Instruct
+2026-10-26T03:44:26Z fim oab Qwen2.5-7B-Instruct rc=0
+2026-10-26T03:44:26Z inicio oab Qwen2.5-3B-Instruct
+2026-10-26T04:21:13Z fim oab Qwen2.5-3B-Instruct rc=0
+2026-10-26T04:21:13Z inicio oab Qwen2.5-14B-Instruct
+2026-10-26T06:14:23Z fim oab Qwen2.5-14B-Instruct rc=0

@@ -1,0 +1,15 @@
+task: oab_exams
+dataset_path: eduagarcia/oab_exams
+test_split: train
+output_type: multiple_choice
+process_docs: !function utils.process_docs
+doc_to_text: !function utils.doc_to_text
+doc_to_choice: ["A", "B", "C", "D"]
+doc_to_target: !function utils.doc_to_target
+num_fewshot: 0
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 0.1

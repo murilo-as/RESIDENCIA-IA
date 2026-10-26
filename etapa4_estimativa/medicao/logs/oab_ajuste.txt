@@ -1,0 +1,9 @@
+2026-10-25T16:54:50Z inicio Qwen2.53B (limite 90m)
+2026-10-25T17:01:29Z fim Qwen2.53B rc=0
+2026-10-25T17:01:29Z inicio Qwen2.57B (limite 90m)
+2026-10-25T17:08:46Z fim Qwen2.57B rc=0
+2026-10-25T17:08:46Z inicio Qwen2.514B (limite 90m)
+2026-10-25T17:23:40Z fim Qwen2.514B rc=0
+2026-10-25T17:23:40Z inicio avaliar (limite 10m)
+2026-10-25T17:23:40Z fim avaliar rc=0
+2026-10-25T17:23:40Z oab_ajuste terminou

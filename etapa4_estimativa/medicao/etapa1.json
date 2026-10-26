@@ -1,0 +1,55 @@
+{
+ "oab": {
+  "status": "ok",
+  "acuracias_5shot": {
+   "Qwen2.5-3B-Instruct": 0.57,
+   "Qwen2.5-7B-Instruct": 0.47,
+   "Qwen2.5-14B-Instruct": 0.61
+  },
+  "regra": "7B >= 0,35 e 14B > 3B (100 questoes sorteadas, seed 42, f16, instrucao + 5-shot)",
+  "antes_0shot": {
+   "Qwen2.5-3B-Instruct": 0.25,
+   "Qwen2.5-7B-Instruct": 0.25
+  }
+ },
+ "math500": {
+  "status": "ok",
+  "math_verify": 0.8,
+  "regra": ">= 0,3 em 20 exemplos"
+ },
+ "pubmedqa": {
+  "status": "ok",
+  "n": 20,
+  "valor": 0.8
+ },
+ "wmt24pp": {
+  "status": "ok",
+  "n": 20,
+  "valor": 60.734365
+ },
+ "codigo": {
+  "status": "ok",
+  "isolamento": "home nao visivel",
+  "geracao_teste": {
+   "humaneval": true,
+   "mbpp": true
+  }
+ },
+ "humaneval": {
+  "status": "ok",
+  "motivo": ""
+ },
+ "mbpp": {
+  "status": "ok",
+  "motivo": ""
+ },
+ "gpqa": {
+  "status": "pulado",
+  "motivo": "HF_TOKEN ausente no ambiente do job"
+ },
+ "wmt24": {
+  "status": "ok",
+  "n": 20,
+  "valor": 60.734365
+ }
+}

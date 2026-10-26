@@ -1,0 +1,4 @@
+modelo,nivel,benchmark,n,acuracia,erro_padrao,tempo_s,tokens_por_resposta,cortadas,commit_llama_cpp,data
+Qwen2.5-3B-Instruct,f16,oab,100,0.57,0.049757,35.3,,,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-25T17:01:27Z
+Qwen2.5-7B-Instruct,f16,oab,100,0.47,0.050161,53.8,,,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-25T17:08:44Z
+Qwen2.5-14B-Instruct,f16,oab,100,0.61,0.049021,107.4,,,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-25T17:23:30Z

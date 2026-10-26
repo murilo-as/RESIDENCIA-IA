@@ -1,0 +1,16 @@
+2026-10-25T16:54:33Z submetido pelo usuario/assistente: job 893 fb-oab-ajuste (linha 1 do plano), dependencia afterany:892
+2026-10-25T16:54:48Z job 893 (linha 1) submeteu linha 2 (fb-pontuar-teste): 894
+2026-10-25T17:23:42Z job 894 (linha 2) submeteu linha 3 (fb-ingerir-teste): 895
+2026-10-25T17:27:31Z job 895 (linha 3) submeteu linha 4 (fb-7b): 896
+2026-10-25T17:27:34Z job 896 (linha 4) submeteu linha 5 (fb-3b): 897
+2026-10-25T20:12:11Z job 897 (linha 5) submeteu linha 6 (fb-14b): 898
+2026-10-25T21:53:54Z job 898 (linha 6) submeteu linha 7 (fb-oab-completo): 899
+2026-10-26T02:42:37Z job 899 (linha 7) submeteu linha 8 (fb-pontuar): 900
+2026-10-26T06:14:24Z job 900 (linha 8) submeteu linha 9 (fb-final-a): 901
+2026-10-26T06:28:00Z job 901 (linha 9) submeteu linha 10 (fb-baixar-b): 902
+2026-10-26T06:28:17Z job 902 (linha 10) submeteu linha 11 (fb-qwen3-1.7b): 903
+2026-10-26T06:43:16Z job 903 (linha 11) submeteu linha 12 (fb-qwen3-8b): 904
+2026-10-26T07:38:16Z job 904 (linha 12) submeteu linha 13 (fb-qwen3.5-2b): 905
+2026-10-26T09:54:07Z job 905 (linha 13) submeteu linha 14 (fb-qwen3.5-4b): 906
+2026-10-26T10:51:07Z job 906 (linha 14) submeteu linha 15 (fb-qwen3.5-9b): 907
+2026-10-26T13:11:25Z job 907 (linha 15) submeteu linha 16 (fb-qwen3-8b-mmlu): 915

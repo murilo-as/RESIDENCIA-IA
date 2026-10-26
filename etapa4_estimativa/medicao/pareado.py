@@ -1,18 +1,29 @@
-"""Compara dois niveis questao a questao. Uso: pareado.py <modelo> <nivelA> <nivelB> <mmlu|gsm8k|gsm8k_strict> [--dir DIR]"""
+"""Compara dois niveis questao a questao. Uso: pareado.py <modelo> <nivelA> <nivelB> <benchmark> [--dir DIR]
+Benchmarks: mmlu, mmlu_completo, medqa, oab, pubmedqa, gpqa, gsm8k, gsm8k_strict, math500, math500_strict, humaneval_plus/base, mbpp_plus/base."""
 import argparse, glob, json, math, os, re
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+# benchmark -> (pasta em amostras/, metrica por questao, filtro do lm-eval)
+LM_EVAL = {"mmlu": ("mmlu", "acc", None), "mmlu_completo": ("mmlu_completo", "acc", None), "medqa": ("medqa", "acc", None), "oab": ("oab", "acc", None),
+           "pubmedqa": ("pubmedqa", "acc", None), "gpqa": ("gpqa", "acc", None), "gsm8k": ("gsm8k", "exact_match", "flexible-extract"),
+           "gsm8k_strict": ("gsm8k", "exact_match", "strict-match"), "math500": ("math500", "math_verify", None), "math500_strict": ("math500", "exact_match", None)}
+CODIGO = {"humaneval_plus": ("humaneval", 1), "humaneval_base": ("humaneval", 0), "mbpp_plus": ("mbpp", 1), "mbpp_base": ("mbpp", 0)}
 
 
 def carregar(pasta, modelo, nivel, bench):
-    raiz = os.path.join(pasta, "amostras", modelo, nivel, "mmlu" if bench == "mmlu" else "gsm8k")
+    if bench in CODIGO:
+        d, i = CODIGO[bench]
+        arq = os.path.join(pasta, "amostras", modelo, nivel, d, "pontuacao.json")
+        if not os.path.exists(arq): raise FileNotFoundError(f"sem {arq}")
+        return {("", t): float(v[i]) for t, v in json.load(open(arq))["tarefas"].items()}
+    if bench not in LM_EVAL: raise KeyError(f"sem comparacao pareada para '{bench}' (metrica de corpus ou nao suportada)")
+    sub, metrica, filtro = LM_EVAL[bench]
+    raiz = os.path.join(pasta, "amostras", modelo, nivel, sub)
     ultimo = {}
     for f in glob.glob(os.path.join(raiz, "**", "samples_*.jsonl"), recursive=True):
         task, ts = re.match(r"samples_(.+?)_(\d{4}-.*)\.jsonl$", os.path.basename(f)).groups()
         if task not in ultimo or ts > ultimo[task][0]: ultimo[task] = (ts, f)
     if not ultimo: raise FileNotFoundError(f"sem amostras em {raiz}")
-    metrica = "acc" if bench == "mmlu" else "exact_match"
-    filtro = {"gsm8k": "flexible-extract", "gsm8k_strict": "strict-match"}.get(bench)
     res = {}
     for task, (_, f) in ultimo.items():
         for linha in open(f):
@@ -46,8 +57,7 @@ def texto(r):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("modelo"); ap.add_argument("nivel_a"); ap.add_argument("nivel_b")
-    ap.add_argument("benchmark", choices=["mmlu", "gsm8k", "gsm8k_strict"])
+    ap.add_argument("modelo"); ap.add_argument("nivel_a"); ap.add_argument("nivel_b"); ap.add_argument("benchmark")
     ap.add_argument("--dir", default=AQUI)
     a = ap.parse_args()
     print(texto(comparar(a.dir, a.modelo, a.nivel_a, a.nivel_b, a.benchmark)))

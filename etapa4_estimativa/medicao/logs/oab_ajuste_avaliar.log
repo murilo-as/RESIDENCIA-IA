@@ -1,0 +1,13 @@
+{
+ "status": "ok",
+ "acuracias_5shot": {
+  "Qwen2.5-3B-Instruct": 0.57,
+  "Qwen2.5-7B-Instruct": 0.47,
+  "Qwen2.5-14B-Instruct": 0.61
+ },
+ "regra": "7B >= 0,35 e 14B > 3B (100 questoes sorteadas, seed 42, f16, instrucao + 5-shot)",
+ "antes_0shot": {
+  "Qwen2.5-3B-Instruct": 0.25,
+  "Qwen2.5-7B-Instruct": 0.25
+ }
+}
