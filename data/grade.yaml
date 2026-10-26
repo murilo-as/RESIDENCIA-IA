@@ -9,7 +9,7 @@ fallback:   # ordem do plano, seção Etapa 2
   - mesma tarefa no domínio geral
   - falta medir
 celulas:
-  - {tarefa: QA,        dominio: geral,      benchmarks: [MMLU-Pro],           medida: direta}
+  - {tarefa: QA,        dominio: geral,      benchmarks: [MMLU],               medida: direta}   # MMLU no lugar do MMLU-Pro (23/10/2026): barato (log-prob) e com dado publico
   - {tarefa: QA,        dominio: saude,      benchmarks: [MedQA, PubMedQA],    medida: direta}
   - {tarefa: QA,        dominio: ciencia,    benchmarks: [GPQA Diamond],       medida: direta}
   - {tarefa: QA,        dominio: matematica, benchmarks: [GSM8K, MATH-500],    medida: direta}
