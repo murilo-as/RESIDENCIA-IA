@@ -92,19 +92,21 @@ def chave(b, M):
     return next((c for c in CHAVES.get(b, [b.lower()]) if c in ks), None)
 
 
-def publicado(i, b, formas):
-    if b == "mmlu":
-        for g in formas.values():
-            for _, _, n16, j in g:
-                if j == i:
-                    return {"valor": n16, "tag": "B", "metodo": "publicado", "fonte": "arXiv 2505.02214, MMLU 5-shot, 16 bits"}
+def publicado(i, b, formas, M):
+    """MMLU 16 bits do artigo + deslocamento da nossa amostra (media de nossa medida menos o publicado, nas outras ancoras Qwen3)."""
+    if b != "mmlu":
+        return None
+    pub = {j: n16 for g in formas.values() for _, _, n16, j in g}
+    d = [M[(j, 16, b)]["valor"] - pub[j] for j in pub if j != i and (j, 16, b) in M]
+    if i in pub and d:
+        return {"valor": pub[i] + sum(d) / len(d), "tag": "C", "metodo": "publicado+desloc", "fonte": "arXiv 2505.02214 (MMLU 5-shot, 16 bits) + deslocamento da amostra"}
 
 
 def nota16(F, M, i, b, formas):
     m = M.get((i, 16, b))
     if m:
         return {"valor": m["valor"], "tag": "A", "metodo": "medido"}
-    p = publicado(i, b, formas)
+    p = publicado(i, b, formas, M)
     if p:
         return p
     L = linha(F[i])
