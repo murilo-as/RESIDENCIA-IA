@@ -1,0 +1,16 @@
+2026-10-26T20:08:02Z inicio Qwen2.5-7B-Instruct
+2026-10-26T20:08:03Z fim Qwen2.5-7B-Instruct rc=0
+2026-10-26T20:08:03Z inicio Qwen2.5-3B-Instruct
+2026-10-26T20:08:04Z fim Qwen2.5-3B-Instruct rc=0
+2026-10-26T20:08:04Z inicio Qwen2.5-14B-Instruct
+2026-10-26T20:49:07Z fim Qwen2.5-14B-Instruct rc=0
+2026-10-26T20:49:07Z inicio Qwen3-1.7B
+2026-10-26T20:49:08Z fim Qwen3-1.7B rc=0
+2026-10-26T20:49:08Z inicio Qwen3-8B
+2026-10-26T20:49:09Z fim Qwen3-8B rc=0
+2026-10-26T20:49:09Z inicio Qwen3.5-2B
+2026-10-26T21:09:44Z fim Qwen3.5-2B rc=0
+2026-10-26T21:09:44Z inicio Qwen3.5-4B
+2026-10-26T21:09:45Z fim Qwen3.5-4B rc=0
+2026-10-26T21:09:45Z inicio Qwen3.5-9B
+2026-10-26T21:09:46Z fim Qwen3.5-9B rc=0

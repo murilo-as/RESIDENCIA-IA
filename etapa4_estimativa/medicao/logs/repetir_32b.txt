@@ -1,0 +1,4 @@
+2026-10-26T21:10:16Z inicio 32b gsm8k
+2026-10-27T00:34:26Z fim 32b gsm8k rc=0
+2026-10-27T00:34:26Z inicio 32b mmlu medqa (batch-hf 2)
+2026-10-27T01:19:08Z fim 32b mmlu medqa rc=0

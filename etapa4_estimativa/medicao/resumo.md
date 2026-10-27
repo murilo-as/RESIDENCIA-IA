@@ -119,6 +119,75 @@
 | Qwen2.5-7B-Instruct | q8_0 | humaneval_base | 164 | 0.810976 | 0.030573 | 213.4 | 205.1 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T06:28:04Z |
 | Qwen2.5-7B-Instruct | q8_0 | mbpp_plus | 378 | 0.695767 | 0.023664 | 368.1 | 160.0 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T06:28:04Z |
 | Qwen2.5-7B-Instruct | q8_0 | mbpp_base | 378 | 0.812169 | 0.020089 | 368.1 | 160.0 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T06:28:04Z |
+| Qwen3-1.7B | f16 | mmlu | 1425 | 0.635789 | 0.012324 | 101.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T06:54:24Z |
+| Qwen3-1.7B | f16 | medqa | 1273 | 0.423409 | 0.013854 | 34.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T06:54:59Z |
+| Qwen3-1.7B | f16 | gsm8k | 1319 | 0.734647 | 0.012162 | 864.2 | 149.4 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:09:36Z |
+| Qwen3-1.7B | f16 | gsm8k_strict | 1319 | 0.438211 | 0.013667 | 864.2 | 149.4 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:09:36Z |
+| Qwen3-1.7B | q8_0 | mmlu | 1425 | 0.632982 | 0.012342 | 101.2 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:12:38Z |
+| Qwen3-1.7B | q8_0 | medqa | 1273 | 0.419482 | 0.013836 | 33.7 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:13:12Z |
+| Qwen3-1.7B | q8_0 | gsm8k | 1319 | 0.74602 | 0.01199 | 666.2 | 150.9 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:24:28Z |
+| Qwen3-1.7B | q8_0 | gsm8k_strict | 1319 | 0.450341 | 0.013704 | 666.2 | 150.9 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:24:28Z |
+| Qwen3-1.7B | q4_k_m | mmlu | 1425 | 0.626667 | 0.012425 | 101.7 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:27:38Z |
+| Qwen3-1.7B | q4_k_m | medqa | 1273 | 0.434407 | 0.013898 | 34.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:28:13Z |
+| Qwen3-1.7B | q4_k_m | gsm8k | 1319 | 0.670205 | 0.01295 | 589.1 | 142.6 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:38:12Z |
+| Qwen3-1.7B | q4_k_m | gsm8k_strict | 1319 | 0.457165 | 0.013722 | 589.1 | 142.6 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:38:12Z |
+| Qwen3-8B | f16 | mmlu | 1425 | 0.778246 | 0.010633 | 270.3 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:52:42Z |
+| Qwen3-8B | f16 | medqa | 1273 | 0.641005 | 0.01345 | 91.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T07:54:13Z |
+| Qwen3-8B | f16 | gsm8k | 1319 | 0.845337 | 0.00996 | 2681.4 | 153.7 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T08:39:33Z |
+| Qwen3-8B | f16 | gsm8k_strict | 1319 | 0.785444 | 0.011308 | 2681.4 | 153.7 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T08:39:33Z |
+| Qwen3-8B | q8_0 | mmlu | 1425 | 0.780351 | 0.010573 | 280.3 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T08:47:52Z |
+| Qwen3-8B | q8_0 | medqa | 1273 | 0.644148 | 0.013424 | 91.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T08:49:23Z |
+| Qwen3-8B | q8_0 | gsm8k | 1319 | 0.852919 | 0.009756 | 1928.5 | 153.1 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T09:22:00Z |
+| Qwen3-8B | q8_0 | gsm8k_strict | 1319 | 0.792267 | 0.011175 | 1928.5 | 153.1 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T09:22:00Z |
+| Qwen3-8B | q4_k_m | mmlu | 1425 | 0.772632 | 0.010687 | 272.4 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T09:27:59Z |
+| Qwen3-8B | q4_k_m | medqa | 1273 | 0.641005 | 0.01345 | 91.6 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T09:29:31Z |
+| Qwen3-8B | q4_k_m | gsm8k | 1319 | 0.867324 | 0.009344 | 1446.5 | 148.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T09:53:59Z |
+| Qwen3-8B | q4_k_m | gsm8k_strict | 1319 | 0.806672 | 0.010878 | 1446.5 | 148.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T09:53:59Z |
+| Qwen3.5-2B | f16 | mmlu | 1425 | 0.594386 | 0.012571 | 170.9 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:06:01Z |
+| Qwen3.5-2B | f16 | medqa | 1273 | 0.476041 | 0.014003 | 57.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:06:58Z |
+| Qwen3.5-2B | f16 | gsm8k | 1319 | 0.703563 | 0.012579 | 1236.7 | 217.9 | 14 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:27:52Z |
+| Qwen3.5-2B | f16 | gsm8k_strict | 1319 | 0.575436 | 0.013615 | 1236.7 | 217.9 | 14 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:27:52Z |
+| Qwen3.5-2B | q8_0 | mmlu | 1425 | 0.592281 | 0.012635 | 171.3 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:31:44Z |
+| Qwen3.5-2B | q8_0 | medqa | 1273 | 0.483111 | 0.014011 | 56.4 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:32:41Z |
+| Qwen3.5-2B | q4_k_m | mmlu | 1425 | 0.57614 | 0.012769 | 171.8 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:36:39Z |
+| Qwen3.5-2B | q4_k_m | medqa | 1273 | 0.471328 | 0.013996 | 57.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:37:37Z |
+| Qwen3.5-2B | q4_k_m | gsm8k | 1319 | 0.689158 | 0.012749 | 795.8 | 242.3 | 15 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:51:03Z |
+| Qwen3.5-2B | q4_k_m | gsm8k_strict | 1319 | 0.440485 | 0.013675 | 795.8 | 242.3 | 15 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T10:51:03Z |
+| Qwen3.5-4B | f16 | mmlu | 1425 | 0.712281 | 0.011634 | 368.6 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T11:06:42Z |
+| Qwen3.5-4B | f16 | medqa | 1273 | 0.706991 | 0.012762 | 133.4 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T11:08:56Z |
+| Qwen3.5-4B | f16 | gsm8k | 1319 | 0.909022 | 0.007921 | 2576.6 | 185.4 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T11:52:22Z |
+| Qwen3.5-4B | f16 | gsm8k_strict | 1319 | 0.909022 | 0.007921 | 2576.6 | 185.4 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T11:52:22Z |
+| Qwen3.5-4B | q8_0 | mmlu | 1425 | 0.708772 | 0.011644 | 378.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T12:00:27Z |
+| Qwen3.5-4B | q8_0 | medqa | 1273 | 0.70542 | 0.012782 | 126.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T12:02:34Z |
+| Qwen3.5-4B | q8_0 | gsm8k | 1319 | 0.905231 | 0.008068 | 1894.8 | 187.7 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T12:34:25Z |
+| Qwen3.5-4B | q8_0 | gsm8k_strict | 1319 | 0.904473 | 0.008097 | 1894.8 | 187.7 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T12:34:25Z |
+| Qwen3.5-4B | q4_k_m | mmlu | 1425 | 0.709474 | 0.011732 | 380.4 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T12:42:38Z |
+| Qwen3.5-4B | q4_k_m | medqa | 1273 | 0.688924 | 0.01298 | 126.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T12:44:44Z |
+| Qwen3.5-4B | q4_k_m | gsm8k | 1319 | 0.89765 | 0.008349 | 1576.7 | 176.1 | 6 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T13:11:18Z |
+| Qwen3.5-4B | q4_k_m | gsm8k_strict | 1319 | 0.896133 | 0.008404 | 1576.7 | 176.1 | 6 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T13:11:18Z |
+| Qwen3.5-9B | f16 | mmlu | 1425 | 0.687018 | 0.011957 | 473.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T13:26:29Z |
+| Qwen3.5-9B | f16 | medqa | 1273 | 0.751767 | 0.012112 | 166.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T13:29:16Z |
+| Qwen3.5-9B | f16 | gsm8k | 1319 | 0.941622 | 0.006458 | 4005.0 | 173.8 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T14:36:44Z |
+| Qwen3.5-9B | f16 | gsm8k_strict | 1319 | 0.935557 | 0.006763 | 4005.0 | 173.8 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T14:36:44Z |
+| Qwen3.5-9B | q8_0 | mmlu | 1425 | 0.689825 | 0.011921 | 463.2 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T14:47:33Z |
+| Qwen3.5-9B | q8_0 | medqa | 1273 | 0.748625 | 0.012163 | 154.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T14:50:08Z |
+| Qwen3.5-9B | q8_0 | gsm8k | 1319 | 0.942381 | 0.006419 | 2858.2 | 176.6 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T15:38:09Z |
+| Qwen3.5-9B | q8_0 | gsm8k_strict | 1319 | 0.93859 | 0.006613 | 2858.2 | 176.6 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T15:38:09Z |
+| Qwen3.5-9B | q4_k_m | mmlu | 1425 | 0.718596 | 0.011632 | 467.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T15:46:53Z |
+| Qwen3.5-9B | q4_k_m | medqa | 1273 | 0.739984 | 0.012299 | 157.8 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T15:49:31Z |
+| Qwen3.5-9B | q4_k_m | gsm8k | 1319 | 0.934041 | 0.006837 | 2265.3 | 184.0 | 5 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T16:27:36Z |
+| Qwen3.5-9B | q4_k_m | gsm8k_strict | 1319 | 0.935557 | 0.006763 | 2265.3 | 184.0 | 5 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T16:27:36Z |
+| Qwen3-8B | f16 | mmlu_completo | 14042 | 0.749181 | 0.003476 | 3016.7 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T17:28:14Z |
+| Qwen3-8B | q8_0 | mmlu_completo | 14042 | 0.749893 | 0.00347 | 3024.2 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T18:20:49Z |
+| Qwen3-8B | q4_k_m | mmlu_completo | 14042 | 0.743911 | 0.003498 | 3107.2 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T19:14:04Z |
+| Qwen2.5-14B-Instruct | f16 | wmt24 | 960 | 0.615945 | 0.005919 | 1453.5 | 63.9 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T20:38:38Z |
+| Qwen2.5-14B-Instruct | q4_k_m | wmt24 | 960 | 0.619875 | 0.004732 | 587.9 | 61.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T20:49:05Z |
+| Qwen3.5-2B | q8_0 | gsm8k | 1319 | 0.716452 | 0.012415 | 921.8 | 218.4 | 18 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T21:09:42Z |
+| Qwen3.5-2B | q8_0 | gsm8k_strict | 1319 | 0.584534 | 0.013574 | 921.8 | 218.4 | 18 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-26T21:09:42Z |
+| Qwen2.5-32B-Instruct | f16 | gsm8k | 1319 | 0.845337 | 0.00996 | 11799.4 | 184.0 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-27T00:34:23Z |
+| Qwen2.5-32B-Instruct | f16 | gsm8k_strict | 1319 | 0.095527 | 0.008097 | 11799.4 | 184.0 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-27T00:34:23Z |
+| Qwen2.5-32B-Instruct | f16 | mmlu | 1425 | 0.839298 | 0.00933 | 926.9 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-27T01:12:48Z |
+| Qwen2.5-32B-Instruct | f16 | medqa | 1273 | 0.725844 | 0.012508 | 363.4 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-10-27T01:18:52Z |
 
 ## Pulado na etapa 1
 
@@ -338,6 +407,122 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1324, in _wrap_create_connection
     raise client_error(req.connection_key, exc) from exc
 aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host 127.0.0.1:8081 ssl:default [Connect call failed ('127.0.0.1', 8081)]
+
+2026-10-26T10:33:03Z Qwen3.5-2B q8_0 gsm8k: Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1301, in _wrap_create_connection
+    sock = await aiohappyeyeballs.start_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohappyeyeballs/impl.py", line 124, in start_connection
+    raise first_exception
+  File "/usr/local/lib/python3.12/dist-packages/aiohappyeyeballs/impl.py", line 75, in start_connection
+    sock = await _connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohappyeyeballs/impl.py", line 210, in _connect_sock
+    await loop.sock_connect(sock, address)
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 651, in sock_connect
+    return await fut
+           ^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 691, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 111] Connect call failed ('127.0.0.1', 8081)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 377, in main
+    elif bench in GERATIVO: rodar_gerativo(m, s, bench, limite)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 262, in rodar_gerativo
+    res = m.avaliar(task, model="local-chat-completions",
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 109, in avaliar
+    return simple_evaluate(tasks=[nome], task_manager=Pronto(self._carregado[nome]), **SEMENTES, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/evaluator.py", line 363, in simple_evaluate
+    results = evaluate(
+              ^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/evaluator.py", line 600, in evaluate
+    resps = getattr(lm, reqtype)(cloned_reqs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/models/api_models.py", line 831, in generate_until
+    asyncio.run(
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/models/api_models.py", line 632, in get_batched_requests
+    return await tqdm_asyncio.gather(*tasks, desc="Requesting API")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/tqdm/asyncio.py", line 89, in gather
+    res = [await f for f in cls.as_completed(ifs, loop=loop, timeout=timeout,
+           ^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 631, in _wait_for_one
+    return f.result()  # May raise f.exception().
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/tqdm/asyncio.py", line 82, in wrap_awaitable
+    return i, await f
+              ^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 232, in async_wrapped
+    return await copy(fn, *args, **kwargs)  # type: ignore[type-var]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 126, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 171, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/tenacity/_utils.py", line 130, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/tenacity/__init__.py", line 482, in exc_check
+    retry_exc.reraise()
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/tenacity/__init__.py", line 216, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 130, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/models/api_models.py", line 514, in amodel_call
+    async with session.post(
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 1693, in __aenter__
+    self._resp: _RetType_co = await self._coro
+                              ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 858, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/client.py", line 812, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 657, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1242, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1620, in _create_direct_connection
+    raise last_exc
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1589, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/aiohttp/connector.py", line 1324, in _wrap_create_connection
+    raise client_error(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host 127.0.0.1:8081 ssl:default [Connect call failed ('127.0.0.1', 8081)]
 ```
 
 ## Pareado f16 x q4_k_m
@@ -413,6 +598,9 @@ Qwen2.5-14B-Instruct pubmedqa: n=1000 (amostras A/B: 1000/1000)
   acc f16 = 0.7840; acc q4_k_m = 0.7800; diferenca (A-B) = +0.0040
   so f16 acertou: 11; so q4_k_m acertou: 7
   erro padrao da diferenca pareada: 0.0042
+```
+```
+Qwen2.5-14B-Instruct wmt24: sem comparacao pareada (KeyError: "sem comparacao pareada para 'wmt24' (metrica de corpus ou nao suportada)")
 ```
 ```
 Qwen2.5-3B-Instruct gsm8k: n=1319 (amostras A/B: 1319/1319)
@@ -563,4 +751,130 @@ Qwen2.5-7B-Instruct pubmedqa: n=1000 (amostras A/B: 1000/1000)
 ```
 ```
 Qwen2.5-7B-Instruct wmt24: sem comparacao pareada (KeyError: "sem comparacao pareada para 'wmt24' (metrica de corpus ou nao suportada)")
+```
+```
+Qwen3-1.7B gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.7346; acc q4_k_m = 0.6702; diferenca (A-B) = +0.0644
+  so f16 acertou: 184; so q4_k_m acertou: 99
+  erro padrao da diferenca pareada: 0.0126
+```
+```
+Qwen3-1.7B gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.4382; acc q4_k_m = 0.4572; diferenca (A-B) = -0.0190
+  so f16 acertou: 152; so q4_k_m acertou: 177
+  erro padrao da diferenca pareada: 0.0137
+```
+```
+Qwen3-1.7B medqa: n=1273 (amostras A/B: 1273/1273)
+  acc f16 = 0.4234; acc q4_k_m = 0.4344; diferenca (A-B) = -0.0110
+  so f16 acertou: 97; so q4_k_m acertou: 111
+  erro padrao da diferenca pareada: 0.0113
+```
+```
+Qwen3-1.7B mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.6358; acc q4_k_m = 0.6267; diferenca (A-B) = +0.0091
+  so f16 acertou: 87; so q4_k_m acertou: 74
+  erro padrao da diferenca pareada: 0.0089
+```
+```
+Qwen3-8B gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.8453; acc q4_k_m = 0.8673; diferenca (A-B) = -0.0220
+  so f16 acertou: 55; so q4_k_m acertou: 84
+  erro padrao da diferenca pareada: 0.0089
+```
+```
+Qwen3-8B gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.7854; acc q4_k_m = 0.8067; diferenca (A-B) = -0.0212
+  so f16 acertou: 79; so q4_k_m acertou: 107
+  erro padrao da diferenca pareada: 0.0103
+```
+```
+Qwen3-8B medqa: n=1273 (amostras A/B: 1273/1273)
+  acc f16 = 0.6410; acc q4_k_m = 0.6410; diferenca (A-B) = +0.0000
+  so f16 acertou: 56; so q4_k_m acertou: 56
+  erro padrao da diferenca pareada: 0.0083
+```
+```
+Qwen3-8B mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.7782; acc q4_k_m = 0.7726; diferenca (A-B) = +0.0056
+  so f16 acertou: 43; so q4_k_m acertou: 35
+  erro padrao da diferenca pareada: 0.0062
+```
+```
+Qwen3-8B mmlu_completo: n=14042 (amostras A/B: 14042/14042)
+  acc f16 = 0.7492; acc q4_k_m = 0.7439; diferenca (A-B) = +0.0053
+  so f16 acertou: 477; so q4_k_m acertou: 403
+  erro padrao da diferenca pareada: 0.0021
+```
+```
+Qwen3.5-2B gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.7036; acc q4_k_m = 0.6892; diferenca (A-B) = +0.0144
+  so f16 acertou: 151; so q4_k_m acertou: 132
+  erro padrao da diferenca pareada: 0.0127
+```
+```
+Qwen3.5-2B gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.5754; acc q4_k_m = 0.4405; diferenca (A-B) = +0.1350
+  so f16 acertou: 288; so q4_k_m acertou: 110
+  erro padrao da diferenca pareada: 0.0147
+```
+```
+Qwen3.5-2B medqa: n=1273 (amostras A/B: 1273/1273)
+  acc f16 = 0.4760; acc q4_k_m = 0.4713; diferenca (A-B) = +0.0047
+  so f16 acertou: 82; so q4_k_m acertou: 76
+  erro padrao da diferenca pareada: 0.0099
+```
+```
+Qwen3.5-2B mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.5944; acc q4_k_m = 0.5761; diferenca (A-B) = +0.0182
+  so f16 acertou: 80; so q4_k_m acertou: 54
+  erro padrao da diferenca pareada: 0.0081
+```
+```
+Qwen3.5-4B gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.9090; acc q4_k_m = 0.8976; diferenca (A-B) = +0.0114
+  so f16 acertou: 55; so q4_k_m acertou: 40
+  erro padrao da diferenca pareada: 0.0074
+```
+```
+Qwen3.5-4B gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.9090; acc q4_k_m = 0.8961; diferenca (A-B) = +0.0129
+  so f16 acertou: 56; so q4_k_m acertou: 39
+  erro padrao da diferenca pareada: 0.0074
+```
+```
+Qwen3.5-4B medqa: n=1273 (amostras A/B: 1273/1273)
+  acc f16 = 0.7070; acc q4_k_m = 0.6889; diferenca (A-B) = +0.0181
+  so f16 acertou: 65; so q4_k_m acertou: 42
+  erro padrao da diferenca pareada: 0.0081
+```
+```
+Qwen3.5-4B mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.7123; acc q4_k_m = 0.7095; diferenca (A-B) = +0.0028
+  so f16 acertou: 53; so q4_k_m acertou: 49
+  erro padrao da diferenca pareada: 0.0071
+```
+```
+Qwen3.5-9B gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.9416; acc q4_k_m = 0.9340; diferenca (A-B) = +0.0076
+  so f16 acertou: 38; so q4_k_m acertou: 28
+  erro padrao da diferenca pareada: 0.0062
+```
+```
+Qwen3.5-9B gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.9356; acc q4_k_m = 0.9356; diferenca (A-B) = +0.0000
+  so f16 acertou: 38; so q4_k_m acertou: 38
+  erro padrao da diferenca pareada: 0.0066
+```
+```
+Qwen3.5-9B medqa: n=1273 (amostras A/B: 1273/1273)
+  acc f16 = 0.7518; acc q4_k_m = 0.7400; diferenca (A-B) = +0.0118
+  so f16 acertou: 57; so q4_k_m acertou: 42
+  erro padrao da diferenca pareada: 0.0078
+```
+```
+Qwen3.5-9B mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.6870; acc q4_k_m = 0.7186; diferenca (A-B) = -0.0316
+  so f16 acertou: 31; so q4_k_m acertou: 76
+  erro padrao da diferenca pareada: 0.0072
 ```

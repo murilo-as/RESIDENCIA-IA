@@ -14,3 +14,11 @@
 2026-10-26T09:54:07Z job 905 (linha 13) submeteu linha 14 (fb-qwen3.5-4b): 906
 2026-10-26T10:51:07Z job 906 (linha 14) submeteu linha 15 (fb-qwen3.5-9b): 907
 2026-10-26T13:11:25Z job 907 (linha 15) submeteu linha 16 (fb-qwen3-8b-mmlu): 915
+2026-10-26T16:27:47Z job 915 (linha 16) submeteu linha 17 (fb-baixar-32b): 919
+2026-10-26T19:14:10Z job 919 (linha 17) submeteu linha 18 (fb-qwen2.5-32b): 924
+2026-10-26T19:31:41Z job 924 (linha 18) submeteu linha 19 (fb-final-b): 925
+2026-10-26T20:07:26Z job 925 (linha 19) submeteu linha 20 (fb-repetir): 927
+2026-10-26T20:08:00Z job 927 (linha 20) submeteu linha 21 (fb-final-c): 929
+2026-10-26T21:09:47Z job 929 (linha 21) submeteu linha 22 (fb-repetir-32b): 930
+2026-10-26T21:10:14Z job 930 (linha 22) submeteu linha 23 (fb-final-d): 931
+2026-10-27T01:19:09Z job 931 (linha 23): fim da cadeia

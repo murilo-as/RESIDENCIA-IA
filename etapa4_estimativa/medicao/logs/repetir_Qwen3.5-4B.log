@@ -1,0 +1,9 @@
+pula Qwen3.5-4B f16 mmlu: ja no CSV
+pula Qwen3.5-4B f16 medqa: ja no CSV
+pula Qwen3.5-4B f16 gsm8k: ja no CSV
+pula Qwen3.5-4B q8_0 mmlu: ja no CSV
+pula Qwen3.5-4B q8_0 medqa: ja no CSV
+pula Qwen3.5-4B q8_0 gsm8k: ja no CSV
+pula Qwen3.5-4B q4_k_m mmlu: ja no CSV
+pula Qwen3.5-4B q4_k_m medqa: ja no CSV
+pula Qwen3.5-4B q4_k_m gsm8k: ja no CSV

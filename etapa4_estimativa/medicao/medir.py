@@ -177,8 +177,8 @@ def matar(proc):
 
 class Sessao:
     """Um (modelo, nivel): carrega o hf ou sobe o llama-server so quando um benchmark precisa, e libera o outro."""
-    def __init__(self, m, modelo, nivel, raciocinio):
-        self.m, self.modelo, self.nivel, self.raciocinio = m, modelo, nivel, raciocinio
+    def __init__(self, m, modelo, nivel, raciocinio, batch_hf=16):
+        self.m, self.modelo, self.nivel, self.raciocinio, self.batch_hf = m, modelo, nivel, raciocinio, batch_hf
         self._lm = self._srv = self._path = None
 
     def path(self):
@@ -190,7 +190,7 @@ class Sessao:
         if self._lm is None:
             import torch
             from lm_eval.models.huggingface import HFLM
-            self._lm = HFLM(pretrained=MODELOS, gguf_file=os.path.basename(self.path()), tokenizer=os.path.join(MODELOS, self.modelo), dtype="float16", batch_size=16, device="cuda")
+            self._lm = HFLM(pretrained=MODELOS, gguf_file=os.path.basename(self.path()), tokenizer=os.path.join(MODELOS, self.modelo), dtype="float16", batch_size=self.batch_hf, device="cuda")
             torch.cuda.synchronize()
         return self._lm
 
@@ -353,6 +353,7 @@ def main():
     ap.add_argument("--benchmarks", nargs="+", default=[b for b in ORDEM if b != "mmlu_completo"], choices=ORDEM)
     ap.add_argument("--limites", nargs="*", default=[], help="nome=N (0 = completo); padrao: mmlu=25, o resto completo")
     ap.add_argument("--sem-raciocinio", action="store_true", help="desliga o raciocinio (enable_thinking=false) nos gerativos")
+    ap.add_argument("--batch-hf", type=int, default=16, help="batch_size do HFLM (log-prob); reduzir para modelos muito grandes")
     ap.add_argument("--respeitar-etapa1", action="store_true", help="pula os benchmarks marcados como pulados em etapa1.json")
     ap.add_argument("--ingerir-codigo", action="store_true")
     ap.add_argument("--dir", default=AQUI)
@@ -376,7 +377,7 @@ def main():
                 ativos.remove(b)
     falhou = False
     for nivel in a.niveis:
-        s = Sessao(m, a.modelo, nivel, not a.sem_raciocinio)
+        s = Sessao(m, a.modelo, nivel, not a.sem_raciocinio, a.batch_hf)
         try:
             for bench in ativos:
                 if (a.modelo, nivel, nome_csv(bench)) in m.feitos():

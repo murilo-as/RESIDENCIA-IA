@@ -19,3 +19,5 @@ fb-qwen2.5-32b|rodar.sbatch|16:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=80G|/b
 fb-final-b|rodar.sbatch|00:30:00||bash finalizar.sh
 fb-repetir|rodar.sbatch|08:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash repetir.sh
 fb-final-c|rodar.sbatch|00:30:00||bash finalizar.sh
+fb-repetir-32b|rodar.sbatch|11:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=80G|bash repetir_32b.sh
+fb-final-d|rodar.sbatch|00:30:00||bash finalizar.sh
