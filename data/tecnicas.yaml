@@ -178,20 +178,20 @@ tecnicas:
     nome: Data augmentation
     area: Aprendizado
     movimento: Improve
-    etapa: treino
-    custo_adaptacao: alto
+    etapa: fine-tuning
+    custo_adaptacao: leve
     alvo: [dados]
-    aplica_em: exige_treino_do_zero
+    aplica_em: modelo_pronto
     exige: {dados: sim, treino: sim, gpu_para_aplicar: sim}
     requer_modelo: []
     efeito_esperado: {qualidade: melhora, memoria: neutro, latencia_decodificacao: neutro, latencia_prefill: neutro}
     niveis: {parametro: null, valores: a_definir}
-    combina_com: []
+    combina_com: [peft_lora]
     conflita_com: []
     ferramenta: []
     medida_na_v1: nao
-    tag_efeitos: B
-    notas: "Exemplos da fonte sao de imagem (Menghani)."
+    tag_efeitos: C
+    notas: "Complemento do fine-tuning (decisao de 27/10/2026): amplia os dados do usuario (variacoes, parafrase, dados sinteticos) para o LoRA; so faz sentido junto de peft_lora. Exemplos da fonte sao de imagem (Menghani); sem base publicada para texto (C)."
 
   self_supervised:
     nome: Self-supervised learning

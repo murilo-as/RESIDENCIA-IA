@@ -1,5 +1,5 @@
 """Etapa 4 - Análise: leave-one-out de cada modelo medido, por benchmark, com erro por tipo (interpolação ou extrapolação) e linha de base ingênua.
-  python analise.py [-r resultados.csv ...] [-o analise.md]"""
+  python analise.py [-r resultados.csv ...] [-a texto_do_id] [-o analise.md]"""
 import argparse, os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -18,13 +18,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("-r", "--resultados", nargs="+", default=Q.CSVS)
     ap.add_argument("-o", "--saida")
+    ap.add_argument("-a", "--alvos", help="so alvos cujo id contem este texto, ex.: Qwen2.5-")
     a = ap.parse_args()
     F = Q.fichas()
     M, formas = Q.ler_medicoes(a.resultados, F), Q.ler_forma(F)
     L, todas = [f"# Leave-one-out ({len(M)} medidas; arquivos: {', '.join(os.path.basename(c) for c in a.resultados)})\n"], []
     for i in sorted({k[0] for k in M}):
         rows = Q.loo(F, M, i, formas)
-        if not any(r["est"] is not None for r in rows):
+        if (a.alvos and a.alvos not in i) or not any(r["est"] is not None for r in rows):
             continue
         L += [f"## {i}\n", "| bits | benchmark | real | estimado | erro (pts) | base | erro base (pts) | ruido (pts) | metodo |", "|---:|---|---:|---:|---:|---:|---:|---:|---|"]
         for r in rows:
