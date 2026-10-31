@@ -1,0 +1,6 @@
+modelo,nivel,benchmark,n,acuracia,erro_padrao,tempo_s,tokens_por_resposta,cortadas,commit_llama_cpp,data
+Qwen3-30B-A3B,q4_k_m,gsm8k,20,0.95,0.05,98.2,156.7,0,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-30T23:46:45Z
+Qwen3-30B-A3B,q4_k_m,gsm8k_strict,20,0.95,0.05,98.2,156.7,0,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-30T23:46:45Z
+Qwen3.5-35B-A3B,q4_k_m,gsm8k,20,0.95,0.05,92.0,152.6,0,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-31T00:46:28Z
+Qwen3.5-35B-A3B,q4_k_m,gsm8k_strict,20,0.95,0.05,92.0,152.6,0,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-31T00:46:28Z
+Qwen3.5-35B-A3B,q4_k_m,mmlu,114,0.885965,0.029093,75.6,,,36e36e63a54fc8f85b95e9c499a022b597e478dd,2026-10-31T00:50:55Z
