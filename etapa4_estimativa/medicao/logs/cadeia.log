@@ -22,3 +22,22 @@
 2026-10-26T21:09:47Z job 929 (linha 21) submeteu linha 22 (fb-repetir-32b): 930
 2026-10-26T21:10:14Z job 930 (linha 22) submeteu linha 23 (fb-final-d): 931
 2026-10-27T01:19:09Z job 931 (linha 23): fim da cadeia
+2026-10-27T21:58:56Z job 944 (linha 1) submeteu linha 2 (p1-2-kv): 945
+2026-10-27T22:09:44Z job 945 (linha 2) submeteu linha 3 (p1-3-ancoras): 946
+2026-10-28T13:11:28Z job 946 (linha 3) submeteu linha 4 (p1-pontuar): 974
+2026-10-29T07:29:19Z job 974 (linha 4) submeteu linha 5 (p1-ingerir): 995
+2026-10-29T08:13:55Z job 995 (linha 5) submeteu linha 6 (p1-4-diag): 996
+2026-10-29T08:14:33Z job 996 (linha 6) submeteu linha 7 (p1-resumo): 997
+2026-10-29T08:57:41Z job 997 (linha 7) submeteu linha 8 (p2-1-32b): 1000
+2026-10-29T14:01:00Z job 1009 (linha 8) submeteu linha 9 (p2-1-32b): 1010
+2026-10-29T14:48:27Z job 1010 (linha 9) submeteu linha 10 (p2-2-coders): 1011
+2026-10-30T01:23:42Z job 1011 (linha 10) submeteu linha 11 (p2-2-math): 1037
+2026-10-30T04:16:10Z job 1037 (linha 11) submeteu linha 12 (p2-pontuar): 1038
+2026-10-30T08:17:28Z job 1038 (linha 12): fim da cadeia
+2026-10-30T12:42:29Z job 1040 (linha 13) submeteu linha 14 (p2-3-raciocinio): 1041
+2026-10-30T12:43:29Z job 1041 (linha 14) submeteu linha 15 (p2-resumo): 1042
+2026-10-30T22:56:53Z job 1042 (linha 15) submeteu linha 16 (p3-1-gpqa): 1062
+2026-10-30T22:58:30Z job 1062 (linha 16) submeteu linha 17 (p3-2-moe): 1063
+2026-10-30T22:58:43Z job 1063 (linha 17) submeteu linha 18 (p3-3-bases): 1064
+2026-10-31T00:51:21Z job 1064 (linha 18) submeteu linha 19 (p3-resumo): 1070
+2026-10-31T09:26:22Z job 1070 (linha 19): fim da cadeia

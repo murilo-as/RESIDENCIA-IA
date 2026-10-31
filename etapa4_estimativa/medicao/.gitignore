@@ -3,3 +3,4 @@ fumaca/amostras/
 logs/servidor/
 PARAR
 __pycache__/
+logs/blocos/*.log

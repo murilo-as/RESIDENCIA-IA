@@ -1,0 +1,18 @@
+2026-10-27T22:09:46Z inicio medir.py --modelo Qwen2.5-7B-Instruct --niveis q8_0 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-27T22:19:38Z fim rc=0
+2026-10-27T22:19:43Z inicio medir.py --modelo Qwen2.5-7B-Instruct --niveis q8_0 --kv 8 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-27T23:36:11Z fim rc=0
+2026-10-27T23:36:16Z inicio medir.py --modelo Qwen2.5-7B-Instruct --niveis q8_0 --kv 4 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-28T04:43:59Z fim rc=0
+2026-10-28T04:44:04Z inicio medir.py --modelo Qwen2.5-14B-Instruct --niveis q8_0 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-28T05:06:43Z fim rc=0
+2026-10-28T05:06:48Z inicio medir.py --modelo Qwen2.5-14B-Instruct --niveis q8_0 --kv 8 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-28T07:19:31Z fim rc=0
+2026-10-28T07:19:36Z inicio medir.py --modelo Qwen2.5-14B-Instruct --niveis q8_0 --kv 4 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-28T09:29:50Z fim rc=0
+2026-10-28T09:29:55Z inicio medir.py --modelo Qwen3-8B --niveis q8_0 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-28T10:27:26Z fim rc=0
+2026-10-28T10:27:31Z inicio medir.py --modelo Qwen3-8B --niveis q8_0 --kv 8 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-28T11:51:22Z fim rc=0
+2026-10-28T11:51:27Z inicio medir.py --modelo Qwen3-8B --niveis q8_0 --kv 4 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-10-28T13:11:21Z fim rc=0

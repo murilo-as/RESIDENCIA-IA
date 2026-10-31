@@ -1,0 +1,5 @@
+{"t0": 1793379043.25307, "t1": 1793379090.9220707, "status": 200, "completion_tokens": 1367, "prompt_tokens": 962, "finish_reason": "stop"}
+{"t0": 1793379043.2557309, "t1": 1793379113.921892, "status": 200, "completion_tokens": 2063, "prompt_tokens": 743, "finish_reason": "stop"}
+{"t0": 1793379043.2562463, "t1": 1793379164.052719, "status": 200, "completion_tokens": 2940, "prompt_tokens": 1069, "finish_reason": "stop"}
+{"t0": 1793379043.254245, "t1": 1793379179.566074, "status": 200, "completion_tokens": 3229, "prompt_tokens": 1516, "finish_reason": "stop"}
+{"t0": 1793379043.254986, "t1": 1793379202.4696937, "status": 200, "completion_tokens": 4096, "prompt_tokens": 708, "finish_reason": "length"}

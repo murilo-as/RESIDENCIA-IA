@@ -1,0 +1,674 @@
+{
+ "Qwen3-8B|math500": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q8_0",
+  "motivo": "",
+  "data": "2026-10-28T09:34:59Z"
+ },
+ "Qwen3-1.7B|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T13:18:34Z"
+ },
+ "Qwen3-1.7B|pubmedqa": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T13:26:01Z"
+ },
+ "Qwen3-1.7B|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T13:27:01Z"
+ },
+ "Qwen3-1.7B|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T13:28:50Z"
+ },
+ "Qwen3-1.7B|wmt24": {
+  "ok": true,
+  "valor": 63.24593971239919,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T13:33:14Z"
+ },
+ "Qwen3-1.7B|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T13:37:47Z"
+ },
+ "Qwen3.5-2B|oab": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T14:57:25Z"
+ },
+ "Qwen3.5-2B|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T15:08:14Z"
+ },
+ "Qwen3.5-2B|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T15:09:40Z"
+ },
+ "Qwen3.5-2B|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T15:12:10Z"
+ },
+ "Qwen3.5-2B|wmt24": {
+  "ok": true,
+  "valor": 60.041250693133996,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T15:16:45Z"
+ },
+ "Qwen3.5-2B|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T15:21:34Z"
+ },
+ "Qwen3.5-4B|oab": {
+  "ok": true,
+  "valor": 0.2,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T17:06:01Z"
+ },
+ "Qwen3.5-4B|pubmedqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T17:29:17Z"
+ },
+ "Qwen3.5-4B|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T17:32:23Z"
+ },
+ "Qwen3.5-4B|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T17:37:51Z"
+ },
+ "Qwen3.5-4B|wmt24": {
+  "ok": true,
+  "valor": 61.02609143860598,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T17:49:09Z"
+ },
+ "Qwen3.5-4B|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T17:59:49Z"
+ },
+ "Qwen3-8B|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T21:23:45Z"
+ },
+ "Qwen3-8B|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T21:44:10Z"
+ },
+ "Qwen3-8B|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T21:46:53Z"
+ },
+ "Qwen3-8B|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T21:53:18Z"
+ },
+ "Qwen3-8B|wmt24": {
+  "ok": true,
+  "valor": 65.4066714750709,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-28T21:59:56Z"
+ },
+ "Qwen3.5-9B|oab": {
+  "ok": true,
+  "valor": 0.2,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T01:36:05Z"
+ },
+ "Qwen3.5-9B|pubmedqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T02:05:00Z"
+ },
+ "Qwen3.5-9B|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T02:09:11Z"
+ },
+ "Qwen3.5-9B|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T02:19:08Z"
+ },
+ "Qwen3.5-9B|wmt24": {
+  "ok": true,
+  "valor": 64.54327569134473,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T02:37:09Z"
+ },
+ "Qwen3.5-9B|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T02:54:18Z"
+ },
+ "Qwen3.5-9B|mmlu_logprob_bf16": {
+  "ok": true,
+  "valor": 0.7052631578947368,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T08:23:18Z"
+ },
+ "Qwen2.5-32B-Instruct|oab": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T15:16:06Z"
+ },
+ "Qwen2.5-32B-Instruct|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-29T16:30:05Z"
+ },
+ "Qwen2.5-Coder-3B-Instruct|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T01:28:51Z"
+ },
+ "Qwen2.5-Coder-3B-Instruct|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T01:31:57Z"
+ },
+ "Qwen2.5-Coder-7B-Instruct|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T01:59:05Z"
+ },
+ "Qwen2.5-Coder-7B-Instruct|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T02:05:02Z"
+ },
+ "Qwen2.5-Coder-14B-Instruct|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T02:51:29Z"
+ },
+ "Qwen2.5-Coder-14B-Instruct|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T03:05:13Z"
+ },
+ "Qwen2.5-Math-1.5B-Instruct|gsm8k": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T04:29:11Z"
+ },
+ "Qwen2.5-Math-1.5B-Instruct|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T04:40:19Z"
+ },
+ "Qwen2.5-Math-7B-Instruct|gsm8k": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T05:28:16Z"
+ },
+ "Qwen2.5-Math-7B-Instruct|math500": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-30T06:05:30Z"
+ },
+ "Qwen3-8B|gsm8k|raciocinio": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-10-30T12:49:54Z"
+ },
+ "Qwen3-8B|math500|raciocinio": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-10-30T14:38:25Z"
+ },
+ "Qwen3.5-9B|gsm8k|raciocinio": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-10-30T16:53:54Z"
+ },
+ "Qwen3.5-9B|math500|raciocinio": {
+  "ok": true,
+  "valor": 0.2,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-10-30T21:16:45Z"
+ },
+ "Qwen2.5-3B|mmlu": {
+  "ok": true,
+  "valor": 0.7017543859649122,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T01:04:45Z"
+ },
+ "Qwen2.5-3B|medqa": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T01:07:13Z"
+ },
+ "Qwen2.5-3B|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T01:08:05Z"
+ },
+ "Qwen2.5-3B|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T01:17:55Z"
+ },
+ "Qwen2.5-7B|mmlu": {
+  "ok": true,
+  "valor": 0.7929824561403509,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T01:38:12Z"
+ },
+ "Qwen2.5-7B|medqa": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T01:42:28Z"
+ },
+ "Qwen2.5-7B|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T01:44:02Z"
+ },
+ "Qwen2.5-7B|pubmedqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:01:18Z"
+ },
+ "Qwen3-1.7B-Base|mmlu": {
+  "ok": true,
+  "valor": 0.6491228070175439,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:16:54Z"
+ },
+ "Qwen3-1.7B-Base|medqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:18:39Z"
+ },
+ "Qwen3-1.7B-Base|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:19:37Z"
+ },
+ "Qwen3-1.7B-Base|pubmedqa": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:27:47Z"
+ },
+ "Qwen3.5-2B-Base|mmlu": {
+  "ok": true,
+  "valor": 0.5473684210526316,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:41:40Z"
+ },
+ "Qwen3.5-2B-Base|medqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:44:23Z"
+ },
+ "Qwen3.5-2B-Base|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:45:39Z"
+ },
+ "Qwen3.5-2B-Base|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T02:56:12Z"
+ },
+ "Qwen3.5-4B-Base|mmlu": {
+  "ok": true,
+  "valor": 0.7719298245614035,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T03:13:17Z"
+ },
+ "Qwen3.5-4B-Base|medqa": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T03:19:32Z"
+ },
+ "Qwen3.5-4B-Base|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T03:21:41Z"
+ },
+ "Qwen3.5-4B-Base|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T03:44:17Z"
+ },
+ "Qwen3-8B-Base|mmlu": {
+  "ok": true,
+  "valor": 0.8175438596491228,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T04:05:45Z"
+ },
+ "Qwen3-8B-Base|medqa": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T04:11:19Z"
+ },
+ "Qwen3-8B-Base|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T04:13:09Z"
+ },
+ "Qwen3-8B-Base|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T04:35:05Z"
+ },
+ "Qwen3.5-9B-Base|mmlu": {
+  "ok": true,
+  "valor": 0.7228070175438597,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T04:56:48Z"
+ },
+ "Qwen3.5-9B-Base|medqa": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T05:04:55Z"
+ },
+ "Qwen3.5-9B-Base|oab": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T05:07:32Z"
+ },
+ "Qwen3.5-9B-Base|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T05:36:37Z"
+ },
+ "Qwen2.5-14B|mmlu": {
+  "ok": true,
+  "valor": 0.8491228070175438,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T06:09:30Z"
+ },
+ "Qwen2.5-14B|medqa": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T06:17:22Z"
+ },
+ "Qwen2.5-14B|oab": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T06:20:09Z"
+ },
+ "Qwen2.5-14B|pubmedqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T06:55:51Z"
+ },
+ "Qwen3-30B-A3B-Base|mmlu": {
+  "ok": false,
+  "valor": null,
+  "n": null,
+  "nivel": "f16",
+  "motivo": "erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 4353, in from_pretrained\n    loading_info, disk_offload_index = cls._load_pretrained_model(\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 4435, in _load_pretrained_model\n    caching_allocator_warmup(model, expanded_device_map, load_config.hf_quantizer)\n  File \"/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 5118, in caching_allocator_warmup\n    _ = torch.empty(int(byte_count // 2), dtype=torch.float16, device=device, requires_grad=False)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 has a total capacity of 121.69 GiB of which 22.17 GiB is free. Including non-PyTorch memory, this process has 170.48 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)\n",
+  "data": "2026-10-31T07:41:11Z"
+ },
+ "Qwen3.6-35B-A3B|mmlu": {
+  "ok": true,
+  "valor": 0.856140350877193,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T08:36:32Z"
+ },
+ "Qwen3.6-35B-A3B|medqa": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T08:46:08Z"
+ },
+ "Qwen3.6-35B-A3B|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T08:50:28Z"
+ },
+ "Qwen3.6-35B-A3B|pubmedqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-10-31T09:21:38Z"
+ }
+}

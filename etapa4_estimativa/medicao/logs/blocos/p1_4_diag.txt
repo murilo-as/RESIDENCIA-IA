@@ -1,0 +1,6 @@
+2026-10-29T08:14:35Z inicio medir.py --modelo Qwen3.5-9B --niveis f16 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks mmlu_logprob_fp16 mmlu_logprob_bf16 mmlu_letra
+2026-10-29T08:43:23Z fim rc=0
+2026-10-29T08:43:28Z inicio medir.py --modelo Qwen3.5-9B --niveis q4_k_m --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks mmlu_logprob_fp16 mmlu_letra
+2026-10-29T08:51:24Z fim rc=0
+2026-10-29T08:51:29Z inicio medir.py --modelo Qwen3-8B --niveis f16 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks mmlu_logprob_fp16 mmlu_letra
+2026-10-29T08:57:34Z fim rc=0

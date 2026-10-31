@@ -1,0 +1,4 @@
+2026-10-30T12:43:31Z inicio medir.py --modelo Qwen3-8B --niveis q4_k_m --raciocinio-ligado --saida raciocinio.csv --benchmarks gsm8k math500
+2026-10-30T16:44:57Z fim rc=0
+2026-10-30T16:45:02Z inicio medir.py --modelo Qwen3.5-9B --niveis q4_k_m --raciocinio-ligado --saida raciocinio.csv --benchmarks gsm8k math500
+2026-10-30T22:56:46Z fim rc=0

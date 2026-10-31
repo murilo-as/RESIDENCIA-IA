@@ -1,0 +1,50 @@
+2026-10-31T00:51:23Z baixar Qwen/Qwen2.5-3B
+2026-10-31T00:53:27Z baixar rc=0
+2026-10-31T00:53:27Z inicio medir.py --modelo Qwen2.5-3B --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T01:18:47Z fim rc=0
+limpar Qwen2.5-3B: todas as medidas registradas; apagados pesos e GGUFs (12.4 GB)
+2026-10-31T01:19:04Z baixar Qwen/Qwen2.5-7B
+2026-10-31T01:23:26Z baixar rc=0
+2026-10-31T01:23:26Z inicio medir.py --modelo Qwen2.5-7B --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T02:02:50Z fim rc=0
+limpar Qwen2.5-7B: todas as medidas registradas; apagados pesos e GGUFs (30.5 GB)
+2026-10-31T02:03:18Z baixar Qwen/Qwen3-1.7B-Base
+2026-10-31T02:04:31Z baixar rc=0
+2026-10-31T02:04:31Z inicio medir.py --modelo Qwen3-1.7B-Base --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T02:28:27Z fim rc=0
+limpar Qwen3-1.7B-Base: todas as medidas registradas; apagados pesos e GGUFs (6.9 GB)
+2026-10-31T02:28:54Z baixar Qwen/Qwen3.5-2B-Base
+2026-10-31T02:30:55Z baixar rc=0
+2026-10-31T02:30:55Z inicio medir.py --modelo Qwen3.5-2B-Base --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T02:57:14Z fim rc=0
+limpar Qwen3.5-2B-Base: todas as medidas registradas; apagados pesos e GGUFs (8.5 GB)
+2026-10-31T02:57:30Z baixar Qwen/Qwen3.5-4B-Base
+2026-10-31T03:00:00Z baixar rc=0
+2026-10-31T03:00:00Z inicio medir.py --modelo Qwen3.5-4B-Base --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T03:46:35Z fim rc=0
+limpar Qwen3.5-4B-Base: todas as medidas registradas; apagados pesos e GGUFs (18.0 GB)
+2026-10-31T03:46:52Z baixar Qwen/Qwen3-8B-Base
+2026-10-31T03:51:26Z baixar rc=0
+2026-10-31T03:51:26Z inicio medir.py --modelo Qwen3-8B-Base --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T04:37:06Z fim rc=0
+limpar Qwen3-8B-Base: todas as medidas registradas; apagados pesos e GGUFs (32.8 GB)
+2026-10-31T04:37:23Z baixar Qwen/Qwen3.5-9B-Base
+2026-10-31T04:42:30Z baixar rc=0
+2026-10-31T04:42:30Z inicio medir.py --modelo Qwen3.5-9B-Base --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T05:40:00Z fim rc=0
+limpar Qwen3.5-9B-Base: todas as medidas registradas; apagados pesos e GGUFs (37.7 GB)
+2026-10-31T05:40:19Z baixar Qwen/Qwen2.5-14B
+2026-10-31T05:48:17Z baixar rc=0
+2026-10-31T05:48:17Z inicio medir.py --modelo Qwen2.5-14B --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T06:59:35Z fim rc=0
+limpar Qwen2.5-14B: todas as medidas registradas; apagados pesos e GGUFs (59.1 GB)
+2026-10-31T06:59:54Z baixar Qwen/Qwen3-30B-A3B-Base
+2026-10-31T07:15:50Z baixar rc=0
+2026-10-31T07:15:50Z inicio medir.py --modelo Qwen3-30B-A3B-Base --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T07:55:27Z fim rc=137
+limpar Qwen3-30B-A3B-Base: NAO apagado, faltam 4 medidas: [('f16', 'mmlu'), ('f16', 'medqa'), ('f16', 'oab'), ('f16', 'pubmedqa')]
+2026-10-31T07:55:53Z baixar Qwen/Qwen3.6-35B-A3B
+2026-10-31T08:14:11Z baixar rc=0
+2026-10-31T08:14:11Z inicio medir.py --modelo Qwen3.6-35B-A3B --niveis f16 --batch-hf 4 --benchmarks mmlu medqa oab pubmedqa
+2026-10-31T09:25:51Z fim rc=0
+limpar Qwen3.6-35B-A3B: todas as medidas registradas; apagados pesos e GGUFs (143.0 GB)

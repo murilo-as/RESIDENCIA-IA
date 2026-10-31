@@ -1,0 +1,10 @@
+2026-10-30T04:16:11Z baixar Qwen/Qwen2.5-Math-1.5B-Instruct
+2026-10-30T04:17:40Z baixar rc=0
+2026-10-30T04:17:40Z inicio medir.py --modelo Qwen2.5-Math-1.5B-Instruct --benchmarks gsm8k math500 --sistema Please reason step by step, and put your final answer within \boxed{}.
+2026-10-30T05:10:51Z fim rc=0
+limpar Qwen2.5-Math-1.5B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (8.8 GB)
+2026-10-30T05:10:57Z baixar Qwen/Qwen2.5-Math-7B-Instruct
+2026-10-30T05:15:49Z baixar rc=0
+2026-10-30T05:15:49Z inicio medir.py --modelo Qwen2.5-Math-7B-Instruct --benchmarks gsm8k math500 --sistema Please reason step by step, and put your final answer within \boxed{}.
+2026-10-30T08:17:09Z fim rc=0
+limpar Qwen2.5-Math-7B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (43.3 GB)

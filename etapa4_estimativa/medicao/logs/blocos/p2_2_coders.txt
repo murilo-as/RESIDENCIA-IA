@@ -1,0 +1,15 @@
+2026-10-30T01:23:44Z baixar Qwen/Qwen2.5-Coder-3B-Instruct
+2026-10-30T01:25:41Z baixar rc=0
+2026-10-30T01:25:41Z inicio medir.py --modelo Qwen2.5-Coder-3B-Instruct --benchmarks humaneval mbpp
+2026-10-30T01:50:15Z fim rc=0
+limpar Qwen2.5-Coder-3B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (17.6 GB)
+2026-10-30T01:50:41Z baixar Qwen/Qwen2.5-Coder-7B-Instruct
+2026-10-30T01:55:10Z baixar rc=0
+2026-10-30T01:55:11Z inicio medir.py --modelo Qwen2.5-Coder-7B-Instruct --benchmarks humaneval mbpp
+2026-10-30T02:37:24Z fim rc=0
+limpar Qwen2.5-Coder-7B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (43.3 GB)
+2026-10-30T02:37:52Z baixar Qwen/Qwen2.5-Coder-14B-Instruct
+2026-10-30T02:45:32Z baixar rc=0
+2026-10-30T02:45:32Z inicio medir.py --modelo Qwen2.5-Coder-14B-Instruct --benchmarks humaneval mbpp
+2026-10-30T04:11:52Z fim rc=0
+limpar Qwen2.5-Coder-14B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (83.8 GB)

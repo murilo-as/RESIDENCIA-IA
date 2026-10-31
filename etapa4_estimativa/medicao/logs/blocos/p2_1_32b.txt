@@ -1,0 +1,7 @@
+2026-10-29T14:48:29Z inicio medir.py --modelo Qwen2.5-32B-Instruct --niveis f16 --batch-hf 2 --benchmarks oab pubmedqa
+2026-10-29T16:36:47Z fim rc=0
+2026-10-29T16:36:52Z inicio medir.py --modelo Qwen2.5-32B-Instruct --niveis q8_0 --batch-hf 2 --benchmarks mmlu medqa oab pubmedqa gsm8k
+2026-10-29T21:15:43Z fim rc=0
+2026-10-29T21:15:48Z inicio medir.py --modelo Qwen2.5-32B-Instruct --niveis q4_k_m --batch-hf 2 --benchmarks mmlu medqa oab pubmedqa gsm8k
+2026-10-30T01:23:14Z fim rc=0
+limpar Qwen2.5-32B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (185.7 GB)
