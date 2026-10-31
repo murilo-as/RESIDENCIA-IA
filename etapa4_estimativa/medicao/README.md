@@ -31,3 +31,40 @@ Um passo avulso, por exemplo só o MMLU do 14B: `sbatch --gres=gpu:1 --cpus-per-
 - Espaço livre abaixo de 80 GB: o script cria `PARAR`, registra em `erros.log` e os passos seguintes saem na hora.
 - No 3B, o `gsm8k_strict` fica perto de 0 (o modelo não escreve `#### número`); use a flexible.
 - O MMLU dos GGUF passa pelo `transformers` (desquantiza para fp16), não pelo motor do llama.cpp; só o GSM8K usa o llama.cpp.
+
+---
+
+# Campanha de outubro (prioridades 1 a 3)
+
+Plano, ordem e estimativas em [plano_medicao.md](plano_medicao.md); resultados por prioridade em `resumo_prioridade_1.md`, `_2.md` e `_3.md`.
+
+## Arquivos de resultado
+
+| Arquivo | Conteúdo |
+|---|---|
+| `resultados.csv` | medidas normais (raciocínio desligado, KV padrão) |
+| `kv.csv` | KV quantizado, geração de letra e diagnóstico do MMLU: colunas `modelo,nivel,kv,raciocinio,benchmark,...`; `kv` = 16 (f16), 8 (q8_0), 4 (q4_0) ou k4v8 (K q4_0, V q8_0) |
+| `raciocinio.csv` | raciocínio ligado (4096 tokens por resposta); mesmas colunas de `kv.csv` |
+| `kv_memoria.csv` | por servidor com KV configurado: KV pela fórmula da etapa 3, memória usada da máquina, RSS do servidor, `nvidia-smi` |
+| `vazao_moe.csv` / `vazao_moe.md` | teste de vazão dos MoE (3.2) |
+| `logs/teste5.json` | resultado do teste de 5 exemplos de cada modelo e prova novos |
+
+Nas provas `mmlu_letra` e `oab_letra` a coluna `cortadas` guarda quantas respostas vieram sem letra A–D (não há corte por tamanho). `wmt24` é chrF/100.
+
+## Código
+
+Núcleo na raiz de `medicao/`: `medir.py` (todas as medidas, retomável), `letra.py` (múltipla escolha por letra), `codigo.py` + `pontuar_codigo.py` (HumanEval+/MBPP+), `limpar.py` (apaga modelo só se todas as medidas estiverem registradas), `resumo.py`, `resumo_prioridade.py`, `validar_letra.py`, `pareado.py`.
+`experimentos/` tem um script por bloco (`p1_1_letra.sh` … `p3_3_bases.sh`), `comum.sh` (funções), `plano.txt` (a cadeia de jobs) e `p0_fumaca.sh` (teste rápido dos caminhos novos).
+
+## Como rodar a cadeia
+
+O QOS aceita 2 jobs por usuário, então cada job submete o próximo ao começar (`slurm/proximo.sh`, que lê a linha seguinte de `experimentos/plano.txt`). Para iniciar:
+```
+sbatch --job-name=p1-1-letra --time=03:00:00 --gres=gpu:1 --cpus-per-task=8 --mem=72G \
+  --export=ALL,PLANO=$PWD/experimentos/plano.txt,LINHA=1 slurm/rodar.sbatch bash experimentos/p1_1_letra.sh
+```
+Cada medição é retomável: se um job morrer, submeta o bloco de novo. O que falha vai para `erros.log` e a fila segue.
+
+## Antigo
+
+Scripts da fase A e da etapa 1 (`campanha.sh`, `etapa1*`, `oab_*`, `repetir*.sh`, `plano.txt`, `fumaca/`) ficam onde estavam; já cumpriram o papel.
