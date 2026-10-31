@@ -1,0 +1,19 @@
+p1-1-letra|rodar.sbatch|03:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p1_1_letra.sh
+p1-2-kv|rodar.sbatch|1-02:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p1_2_kv.sh
+p1-3-ancoras|rodar.sbatch|1-12:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p1_3_ancoras.sh
+p1-pontuar|pontuar_codigo.sbatch|03:00:00||
+p1-ingerir|rodar.sbatch|00:30:00||bash finalizar.sh
+p1-4-diag|rodar.sbatch|06:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p1_4_diag_qwen35.sh
+p1-resumo|rodar.sbatch|00:20:00||bash experimentos/resumo_prioridade.sh 1
+p1-5-completar|rodar.sbatch|05:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p1_5_completar.sh
+p2-1-32b|rodar.sbatch|1-00:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G|bash experimentos/p2_1_32b.sh
+p2-2-coders|rodar.sbatch|20:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p2_2_coders.sh
+p2-2-math|rodar.sbatch|16:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p2_2_math.sh
+p2-pontuar|pontuar_codigo.sbatch|03:00:00||
+p2-ingerir|rodar.sbatch|00:30:00||bash finalizar.sh
+p2-3-raciocinio|rodar.sbatch|1-02:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p2_3_raciocinio.sh
+p2-resumo|rodar.sbatch|00:20:00||bash experimentos/resumo_prioridade.sh 2
+p3-1-gpqa|rodar.sbatch|16:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p3_1_gpqa.sh
+p3-2-moe|rodar.sbatch|08:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G|bash experimentos/p3_2_moe.sh
+p3-3-bases|rodar.sbatch|1-06:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G|bash experimentos/p3_3_bases.sh
+p3-resumo|rodar.sbatch|00:20:00||bash experimentos/resumo_prioridade.sh 3
