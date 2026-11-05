@@ -2,7 +2,7 @@
  "data": "2026-10-23",
  "motivo": "Não cabem em 128 GB (DGX Spark) nem em 4 bits: não há como medir nem verificar (etapa 8). Decisão de escopo.",
  "criterio": "tamanho em 4 bits estimado com ~4,9 bits/peso (média medida do Q4_K_M, tag C), sem cache de contexto",
- "n": 6,
+ "n": 9,
  "fichas": {
   "Qwen/Qwen3-235B-A22B": {
    "tamanho_gib": {
@@ -462,6 +462,249 @@
      "revisao": "207bd685a7e3696cfaff12ded7c6a7ea0f88c996",
      "criado": "2026-08-08T01:50:52.000Z",
      "modificado": "2026-08-12T10:24:04.000Z"
+    },
+    "fontes": {
+     "tokenizer": "familia-geracao (B, a verificar no tokenizer.json)",
+     "arquitetura": "config.json (A)",
+     "params_acesso": "API HF (A)",
+     "tipo_especialidade_ativos": "regra de nome (B)",
+     "kv": "teorico (B); estado linear e k_eq_v (C)"
+    },
+    "defaults_usados": [],
+    "avisos": [
+     "tem camada MTP (decodificacao especulativa), ignorada no KV"
+    ]
+   }
+  },
+  "Qwen/Qwen3-32B": {
+   "data": "2026-11-05",
+   "motivo": "Sem irmão possível (sem base no catálogo e sem outro modelo de mesma arquitetura): a razão da quantização só viria da própria medida.",
+   "ficha": {
+    "id": "Qwen/Qwen3-32B",
+    "familia": "Qwen",
+    "geracao": "3",
+    "tokenizer": "Qwen-3",
+    "tipo": "hibrido",
+    "especialidade": "geral",
+    "base_de": null,
+    "modalidade": [
+     "texto"
+    ],
+    "params": {
+     "total": 32762123264,
+     "texto": 32762123264,
+     "visual_audio": 0,
+     "mtp": 0,
+     "texto_fonte": "= total (modelo so texto, sem MTP) (B)",
+     "ativos": null,
+     "efetivos": null,
+     "por_dtype": {
+      "BF16": 32762123264
+     },
+     "disco_bytes": 65524328560,
+     "moe": false,
+     "experts": null,
+     "experts_por_token": null
+    },
+    "arquitetura": {
+     "arch": "Qwen3ForCausalLM",
+     "camadas": 64,
+     "camadas_por_tipo": {
+      "full_attention": 64
+     },
+     "camadas_proprias": {
+      "full_attention": 64
+     },
+     "kv_compartilhado": 0,
+     "hidden": 5120,
+     "q_heads": 64,
+     "kv_heads": 8,
+     "head_dim": 128,
+     "global_kv_heads": null,
+     "global_head_dim": null,
+     "k_eq_v": null,
+     "janela": null,
+     "linear": null,
+     "contexto_max": 40960,
+     "vocab": 151936,
+     "dtype": "bfloat16"
+    },
+    "acesso": {
+     "licenca": [
+      "apache-2.0"
+     ],
+     "gated": false,
+     "revisao": "9216db5781bf21249d130ec9da846c4624c16137",
+     "criado": "2025-04-27T03:52:59.000Z",
+     "modificado": "2025-07-26T03:45:22.000Z"
+    },
+    "fontes": {
+     "tokenizer": "familia-geracao (B, a verificar no tokenizer.json)",
+     "arquitetura": "config.json (A)",
+     "params_acesso": "API HF (A)",
+     "tipo_especialidade_ativos": "regra de nome (B)",
+     "kv": "teorico (B); estado linear e k_eq_v (C)"
+    },
+    "defaults_usados": [],
+    "avisos": []
+   }
+  },
+  "Qwen/Qwen3.5-122B-A10B": {
+   "data": "2026-11-05",
+   "motivo": "Não cabe em 16 bits nem em 8 bits no Spark (122B), sem irmão de mesma arquitetura.",
+   "ficha": {
+    "id": "Qwen/Qwen3.5-122B-A10B",
+    "familia": "Qwen",
+    "geracao": "3.5",
+    "tokenizer": "Qwen-3.5",
+    "tipo": "hibrido",
+    "especialidade": "geral",
+    "base_de": null,
+    "modalidade": [
+     "texto",
+     "imagem"
+    ],
+    "params": {
+     "total": 125086497008,
+     "texto": 122111526912,
+     "visual_audio": 451290864,
+     "mtp": 2523679232,
+     "texto_fonte": "cabecalho safetensors (A)",
+     "ativos": 10000000000.0,
+     "efetivos": null,
+     "por_dtype": {
+      "BF16": 125086490096,
+      "F32": 6912
+     },
+     "disco_bytes": 250173250864,
+     "moe": true,
+     "experts": 256,
+     "experts_por_token": 8
+    },
+    "arquitetura": {
+     "arch": "Qwen3_5MoeForConditionalGeneration",
+     "camadas": 48,
+     "camadas_por_tipo": {
+      "linear_attention": 36,
+      "full_attention": 12
+     },
+     "camadas_proprias": {
+      "linear_attention": 36,
+      "full_attention": 12
+     },
+     "kv_compartilhado": 0,
+     "hidden": 3072,
+     "q_heads": 32,
+     "kv_heads": 2,
+     "head_dim": 256,
+     "global_kv_heads": null,
+     "global_head_dim": null,
+     "k_eq_v": null,
+     "janela": null,
+     "linear": {
+      "k_heads": 16,
+      "v_heads": 64,
+      "k_dim": 128,
+      "v_dim": 128,
+      "conv_kernel": 4
+     },
+     "contexto_max": 262144,
+     "vocab": 248320,
+     "dtype": "bfloat16"
+    },
+    "acesso": {
+     "licenca": [
+      "apache-2.0"
+     ],
+     "gated": false,
+     "revisao": "dc4d348443bc740c68e2d77492492c11606384d5",
+     "criado": "2026-02-24T09:43:37.000Z",
+     "modificado": "2026-04-24T03:55:23.000Z"
+    },
+    "fontes": {
+     "tokenizer": "familia-geracao (B, a verificar no tokenizer.json)",
+     "arquitetura": "config.json (A)",
+     "params_acesso": "API HF (A)",
+     "tipo_especialidade_ativos": "regra de nome (B)",
+     "kv": "teorico (B); estado linear e k_eq_v (C)"
+    },
+    "defaults_usados": [],
+    "avisos": [
+     "tem camada MTP (decodificacao especulativa), ignorada no KV"
+    ]
+   }
+  },
+  "Qwen/Qwen3.8-Flash-Next": {
+   "data": "2026-11-05",
+   "motivo": "Não cabe em 16 bits no Spark, sem irmão de mesma arquitetura.",
+   "ficha": {
+    "id": "Qwen/Qwen3.8-Flash-Next",
+    "familia": "Qwen",
+    "geracao": "3.8",
+    "tokenizer": "Qwen-3.8",
+    "tipo": "hibrido",
+    "especialidade": "geral",
+    "base_de": null,
+    "modalidade": [
+     "texto",
+     "imagem"
+    ],
+    "params": {
+     "total": 179999981459,
+     "texto": 176943899555,
+     "visual_audio": 448931056,
+     "mtp": 2607150848,
+     "texto_fonte": "cabecalho safetensors (A)",
+     "ativos": null,
+     "efetivos": null,
+     "por_dtype": {
+      "BF16": 179999981424,
+      "I64": 35
+     },
+     "disco_bytes": 360000192888,
+     "moe": true,
+     "experts": 512,
+     "experts_por_token": 10
+    },
+    "arquitetura": {
+     "arch": "Qwen4ExpForConditionalGeneration",
+     "camadas": 48,
+     "camadas_por_tipo": {
+      "linear_attention": 36,
+      "full_attention": 12
+     },
+     "camadas_proprias": {
+      "linear_attention": 36,
+      "full_attention": 12
+     },
+     "kv_compartilhado": 0,
+     "hidden": 2560,
+     "q_heads": 24,
+     "kv_heads": 2,
+     "head_dim": 256,
+     "global_kv_heads": null,
+     "global_head_dim": null,
+     "k_eq_v": null,
+     "janela": null,
+     "linear": {
+      "k_heads": 16,
+      "v_heads": 48,
+      "k_dim": 128,
+      "v_dim": 128,
+      "conv_kernel": 4
+     },
+     "contexto_max": 262144,
+     "vocab": 248320,
+     "dtype": "bfloat16"
+    },
+    "acesso": {
+     "licenca": [
+      "other"
+     ],
+     "gated": false,
+     "revisao": "de4b8e4d43b917e7706784d8bb445c9af86a3540",
+     "criado": "2026-08-24T08:24:59.000Z",
+     "modificado": "2026-08-27T05:03:36.000Z"
     },
     "fontes": {
      "tokenizer": "familia-geracao (B, a verificar no tokenizer.json)",
