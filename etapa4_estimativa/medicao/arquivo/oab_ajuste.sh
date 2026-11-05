@@ -2,7 +2,7 @@
 # Roda DENTRO do container. Conserta o OAB: instrucao em portugues + 5-shot, 100 questoes sorteadas (seed 42), f16, nos 3 modelos.
 # Aceite: >= 0,35 no 7B e 14B acima do 3B. O veredito atualiza etapa1.json (chave oab).
 D=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao
-PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python
+PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv/bin/python
 cd $D; mkdir -p logs
 estado() { echo "$(date -u +%FT%TZ) $*" | tee -a logs/oab_ajuste.txt; }
 passo() {  # nome limite comando...

@@ -19,7 +19,7 @@ Pastas: `amostras/` (respostas por questão, fora do git), `fumaca/` (CSV e amos
 
 O QOS aceita só 2 jobs na fila e 1 em execução por usuário, então a campanha é um único job:
 ```
-P=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python
+P=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv/bin/python
 S=slurm/rodar.sbatch      # a partir de etapa4_estimativa/medicao/
 sbatch --job-name=baixar --time=04:00:00 $S $P baixar_modelos.py Qwen/Qwen2.5-3B-Instruct Qwen/Qwen2.5-14B-Instruct
 sbatch --job-name=campanha --time=1-10:00:00 --gres=gpu:1 --cpus-per-task=8 --mem=72G --dependency=afterany:<id do baixar> $S bash campanha.sh
@@ -65,6 +65,8 @@ sbatch --job-name=p1-1-letra --time=03:00:00 --gres=gpu:1 --cpus-per-task=8 --me
 ```
 Cada medição é retomável: se um job morrer, submeta o bloco de novo. O que falha vai para `erros.log` e a fila segue.
 
-## Antigo
+## Arquivo
 
-Scripts da fase A e da etapa 1 (`campanha.sh`, `etapa1*`, `oab_*`, `repetir*.sh`, `plano.txt`, `fumaca/`) ficam onde estavam; já cumpriram o papel.
+`arquivo/` guarda os scripts da primeira campanha e dos testes de aceite: `campanha.sh`, `repetir.sh`, `repetir_32b.sh`, `plano.txt`, `etapa1.sh`, `etapa1_avaliar.py`, `etapa1_baixar.py`, `oab_ajuste.sh`, `oab_avaliar.py`, `oab_completo.sh`, e os CSVs `etapa1/` e `etapa1_oab/`. Já cumpriram o papel e não são chamados pelo restante. O `etapa1.json` fica na raiz de `medicao/` porque `medir.py --respeitar-etapa1` e `resumo.py` o leem. `fumaca/` fica na raiz porque `experimentos/p0_fumaca.sh` grava nela.
+
+O ambiente Python (`venv`) é procurado na raiz do projeto; se não existir, em `piloto/venv`. Os scripts e os exemplos chamam `venv/bin/python` da raiz pelo caminho completo.

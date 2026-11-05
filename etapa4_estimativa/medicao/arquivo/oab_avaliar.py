@@ -7,7 +7,7 @@ S3, S7, S14 = "Qwen2.5-3B-Instruct", "Qwen2.5-7B-Instruct", "Qwen2.5-14B-Instruc
 arq = os.path.join(DIR, "resultados.csv")
 linhas = list(csv.DictReader(open(arq))) if os.path.exists(arq) else []
 acc = {r["modelo"]: float(r["acuracia"]) for r in linhas if r["benchmark"] == "oab" and r["nivel"] == "f16"}
-e1_arq = os.path.join(AQUI, "etapa1.json")
+e1_arq = os.path.join(os.path.dirname(AQUI), "etapa1.json")
 e1 = json.load(open(e1_arq)) if os.path.exists(e1_arq) else {}
 antes = e1.get("oab", {})
 if len(acc) == 3:

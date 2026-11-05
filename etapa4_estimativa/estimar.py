@@ -44,18 +44,18 @@ def nivel(c, tecnica, padrao):
 
 
 def nota_propria(c, F, b, qual):
-    """Nota estimada por estimar_qualidade. Só cobre quantização de pesos (16/8/4), com raciocínio desligado e sem outras técnicas."""
+    """Nota estimada por estimar_qualidade.estimar_total: toda configuração não medida recebe nota, faixa (± pts), tag e método."""
     if not qual:
         return None
     M, formas = qual
     racio = [t["nivel"] for t in c["tecnicas"] if t["tecnica"] == "modo_raciocinio"]
-    if nivel(c, "quantizacao_kv", 16) != 16 or (racio and racio[0] != "desligado") or any(t["tecnica"] not in ("quantizacao_pesos", "modo_raciocinio", "decoding_especulativo") for t in c["tecnicas"]):
-        return None
     k = EQ.chave(b, M)
-    e = EQ.estimar(F, M, c["modelo"], nivel(c, "quantizacao_pesos", 16), k, formas) if k else None
-    if not e or e["valor"] is None:
+    e = EQ.estimar_total(F, M, c["modelo"], k, nivel(c, "quantizacao_pesos", 16), nivel(c, "quantizacao_kv", 16), racio[0] if racio else None, formas) if k else None
+    if not e:
         return None
-    return {"valor": round(e["valor"], 4), "tipo": "nota_absoluta", "origem": "propria", "tag": e["tag"], "fonte": "estimar_qualidade: " + e["metodo"], "ic": None}
+    v = e["valor"] * 100
+    return {"valor": round(e["valor"], 4), "meio_pts": round(e["meio"], 1), "ic": [round(max(v - e["meio"], 0), 1), round(min(v + e["meio"], 100), 1)],
+            "tipo": "nota_absoluta", "origem": "propria", "tag": e["tag"], "nivel_evidencia": e["nivel"], "fonte": "estimar_qualidade: " + e["metodo"]}
 
 
 def estimar_config(c, f, d, efeitos, benchmarks, F=None, qual=None):

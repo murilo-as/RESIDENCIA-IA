@@ -2,7 +2,7 @@
 # Roda DENTRO do container. Repete o que ficou faltando na fila: medir.py e retomavel e pula o que ja esta no CSV,
 # entao basta chamar de novo para todos os modelos (so paga o TaskManager se houver trabalho pendente).
 D=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao
-PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python
+PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv/bin/python
 cd $D; mkdir -p logs
 rodar() {  # modelo, benchmarks e flags...
   local m=$1; shift

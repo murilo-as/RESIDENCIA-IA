@@ -2,7 +2,7 @@
 # Roda DENTRO do container (via slurm/rodar.sbatch). Etapa 1: testes de aceite dos benchmarks novos; o veredito sai em etapa1.json.
 # Uso: etapa1.sh <log do t3_verificar_isolamento.sbatch>
 D=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao
-PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python
+PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv/bin/python
 TMP=/beegfs/home/user_muriloalves/work/tmp_codigo
 ISO=$1
 cd $D; mkdir -p logs etapa1

@@ -2,7 +2,7 @@
 # Roda DENTRO do container (via slurm/rodar.sbatch). Passos em sequencia; um passo que falha nao impede o proximo, salvo as regras abaixo:
 # a fumaca (3B, MMLU limit 2 + GSM8K 20, 3 niveis) precisa passar para os passos completos rodarem; 14B so roda se o modelo foi baixado.
 D=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao
-PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/bin/python
+PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv/bin/python
 MODELOS=/beegfs/home/user_muriloalves/work/models
 cd $D; mkdir -p logs
 estado() { echo "$(date -u +%FT%TZ) $*" | tee -a logs/estado.txt; }

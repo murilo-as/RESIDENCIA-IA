@@ -12,7 +12,7 @@ CSVS = sorted(glob.glob(os.path.join(AQUI, "medicao", "resultados*.csv")))
 NIVEL_BITS = {"f16": 16, "q8_0": 8, "q4_k_m": 4}
 CHAVES = {"MMLU": ["mmlu"], "MedQA": ["medqa", "medqa_4options"], "PubMedQA": ["pubmedqa"], "GPQA Diamond": ["gpqa", "gpqa_diamond"], "GSM8K": ["gsm8k"],
           "MATH-500": ["math500", "math_500", "minerva_math500"], "OAB-Exams 1a fase": ["oab", "oab_exams"],
-          "HumanEval+": ["humaneval_plus", "humanevalplus", "humaneval"], "MBPP": ["mbpp_plus", "mbppplus", "mbpp"], "WMT24++": ["wmt24pp", "wmt24"]}
+          "HumanEval+": ["humaneval_plus", "humanevalplus", "humaneval"], "MBPP+": ["mbpp_plus", "mbppplus", "mbpp"], "WMT24++": ["wmt24pp", "wmt24"]}
 
 
 def fichas():
@@ -72,12 +72,17 @@ def forma(f, formas):
     return curva(tam(f), [(a, q) for a, q, _, _ in formas[grupo(f)]], plano=True)[0]
 
 
+def forma_arq(f):
+    """Dimensões que definem a arquitetura (a contagem de parâmetros não entra: o Base do Qwen3-1.7B tem 1,72B e o pós-treino, 2,03B, na mesma arquitetura)."""
+    a, p = f["arquitetura"], f["params"]
+    return (a["arch"], a["camadas"], json.dumps(a["camadas_por_tipo"], sort_keys=True), a["hidden"], a["q_heads"], a["kv_heads"], a["head_dim"],
+            p.get("moe"), p.get("experts"), p.get("experts_por_token"))
+
+
 def irmaos(F, i):
-    """Mesma arquitetura e tamanho (outro tipo, geração ou especialidade). Mais parecidos primeiro."""
+    """Mesma família e mesma arquitetura (outro tipo, geração ou especialidade). Mais parecidos primeiro."""
     f = F[i]
-    a = f["arquitetura"]
-    out = [j for j, g in F.items() if j != i and g["familia"] == f["familia"] and g["arquitetura"]["arch"] == a["arch"]
-           and g["arquitetura"]["camadas_por_tipo"] == a["camadas_por_tipo"] and abs(tam(g) / tam(f) - 1) < 0.01]
+    out = [j for j, g in F.items() if j != i and g["familia"] == f["familia"] and forma_arq(g) == forma_arq(f)]
     return sorted(out, key=lambda j: (F[j]["especialidade"] != f["especialidade"], F[j]["geracao"] != f["geracao"], F[j]["tipo"] != f["tipo"]))
 
 
@@ -154,6 +159,100 @@ def estimar(F, M, i, bits, b, formas):
     tags = {n["tag"], r["tag"]}
     return {"valor": n["valor"] * r["valor"], "tag": "C" if "C" in tags else "B" if "B" in tags else "A",
             "metodo": f'{n["metodo"]}+{r["metodo"]}', "nota16": n, "razao": r}
+
+
+# ---- estimativa total: toda configuracao nao medida recebe nota, faixa (meio, em pts), tag e metodo. nivel: 0 medido, 1 curva do tamanho, 2 irmao (razao),
+# 3 irmao (nota), 4 ponte entre provas, 5 prior global, 6 prior nao medido (KV, raciocinio). Faixas provisorias: 1,5x o erro medio do leave-one-out (Qwen2.5).
+GERATIVOS = {"gsm8k", "math500", "humaneval_plus", "humaneval_base", "mbpp_plus", "mbpp_base", "wmt24"}
+CURVA_MEIO = {"conhecimento": (1.5, 3.5), "oab": (5.0, 11.0), "gerativo": (9.0, 17.0)}
+KV_PRIOR = {16: (0.0, 0.0), 8: (-0.3, 1.0), 4: (-1.5, 3.0)}          # (delta, meio) em pts: prior provisorio, nao medido
+
+
+def classe(b):
+    return "gerativo" if b in GERATIVOS else "oab" if b == "oab" else "conhecimento"
+
+
+def tam_eff(f):
+    p = f["params"]
+    return math.sqrt(tam(f) * p["ativos"]) if p.get("moe") and p.get("ativos") else tam(f)
+
+
+def _fit(xs, ys):
+    n = len(xs); mx, my = sum(xs) / n, sum(ys) / n
+    sxx = sum((x - mx) ** 2 for x in xs)
+    if sxx == 0:
+        return my, 0.0, 0.0
+    b = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
+    a = my - b * mx
+    return a, b, (sum((y - a - b * x) ** 2 for x, y in zip(xs, ys)) / max(n - 2, 1)) ** 0.5
+
+
+def _cl(v):
+    return min(max(v, 0.0), 1.0)
+
+
+def nota_base(F, M, i, b, formas):
+    n = nota16(F, M, i, b, formas)
+    if n:
+        m = n["metodo"]
+        meio = 200 * (M[(i, 16, b)]["ep"] or 0.01) if m == "medido" else 2.5 if m.startswith("publicado") else CURVA_MEIO[classe(b)][0 if m == "interp" else 1]
+        return {**n, "meio": meio, "nivel": 0 if m == "medido" else 1}
+    for j in irmaos(F, i):
+        if (j, 16, b) in M:
+            meio = 15.0 if F[j]["especialidade"] != F[i]["especialidade"] else 8.0 if classe(b) == "conhecimento" else 12.0
+            return {"valor": M[(j, 16, b)]["valor"], "meio": meio, "metodo": "irmao_nota", "nivel": 3}
+    best = None
+    for b2 in {bb for (j, bt, bb) in M if j == i and bt == 16 and bb != b}:
+        pares = [(M[(j, 16, b2)]["valor"], M[(j, 16, b)]["valor"]) for j in F if j != i and (j, 16, b2) in M and (j, 16, b) in M]
+        if len(pares) >= 5:
+            a, c, sd = _fit(*zip(*pares))
+            if best is None or sd < best[1]:
+                best = (a + c * M[(i, 16, b2)]["valor"], sd, b2)
+    if best:
+        return {"valor": _cl(best[0]), "meio": max(4.0, 150 * best[1]), "metodo": "ponte:" + best[2], "nivel": 4}
+    pts = [(math.log(tam_eff(F[j])), v["valor"]) for (j, bt, bb), v in M.items() if bt == 16 and bb == b]
+    if not pts:
+        return None
+    if len(pts) == 1:
+        return {"valor": pts[0][1], "meio": 15.0, "metodo": "prior_global", "nivel": 5}
+    a, c, sd = _fit(*zip(*pts))
+    return {"valor": _cl(a + c * math.log(tam_eff(F[i]))), "meio": max(10.0, 150 * sd), "metodo": "prior_global", "nivel": 5}
+
+
+def razao_total(F, M, i, bits, b, formas):
+    if bits == 16:
+        return {"valor": 1.0, "meio": 0.0, "metodo": "definicao", "nivel": 0}
+    r = razao(F, M, i, bits, b, formas)
+    if r:
+        m = r["metodo"]
+        return {**r, "meio": 0.01 if m == "medido" else 0.02 if m == "irmao" else 0.04 if m == "outra_geracao" else 0.025,
+                "nivel": 0 if m == "medido" else 2 if m == "irmao" else 1}
+    if bits == 8:
+        return {"valor": 1.0, "meio": 0.02, "metodo": "prior_8bits", "nivel": 5}
+    ref = [(1 - v["valor"] / M[(j, 16, bb)]["valor"]) / forma(F[j], formas) for (j, bt, bb), v in M.items() if bt == 4 and (j, 16, bb) in M and M[(j, 16, bb)]["valor"]]
+    return {"valor": 1 - (sum(ref) / len(ref) if ref else 0.02) * forma(F[i], formas), "meio": 0.04, "metodo": "prior_global_4bits", "nivel": 5}
+
+
+def estimar_total(F, M, i, b, bits=16, kv=16, racio=None, formas=None):
+    f = F[i]; m = M.get((i, bits, b))
+    puro = kv == 16 and racio != "ligado" and f["tipo"] != "thinking"
+    ep = 200 * (m["ep"] or 0.01) if m else None
+    if m and puro:
+        return {"valor": m["valor"], "meio": ep, "tag": "A", "metodo": "medido", "nivel": 0}
+    if m:
+        pesos = {"valor": m["valor"], "meio": ep, "metodo": "medido", "nivel": 0}
+    else:
+        base = nota_base(F, M, i, b, formas)
+        if base is None:
+            return None
+        rz = razao_total(F, M, i, bits, b, formas)
+        pesos = {"valor": base["valor"] * rz["valor"], "meio": (base["meio"] ** 2 + (100 * base["valor"] * rz["meio"]) ** 2) ** 0.5,
+                 "metodo": base["metodo"] + "+" + rz["metodo"], "nivel": max(base["nivel"], rz["nivel"])}
+    dk, mk = KV_PRIOR[kv]
+    dr, mr = ((4.0, 8.0) if classe(b) == "gerativo" else (0.0, 3.0)) if (racio == "ligado" or f["tipo"] == "thinking") else (0.0, 0.0)
+    prior = kv != 16 or dr or mr
+    return {"valor": _cl(pesos["valor"] + (dk + dr) / 100), "meio": (pesos["meio"] ** 2 + mk ** 2 + mr ** 2) ** 0.5, "tag": "C",
+            "metodo": pesos["metodo"] + ("+kv_prior" if kv != 16 else "") + ("+racio_prior" if dr or mr else ""), "nivel": max(pesos["nivel"], 6 if prior else 0)}
 
 
 def loo(F, M, alvo, formas):

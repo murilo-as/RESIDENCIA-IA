@@ -87,6 +87,6 @@ elif not os.environ.get("HF_TOKEN"): out["gpqa"] = {"status": "pulado", "motivo"
 else: out["gpqa"] = {"status": "pulado", "motivo": motivo_erro(S7, "gpqa")}
 
 out["wmt24"] = out["wmt24pp"]  # nome do benchmark no medir.py
-json.dump(out, open(os.path.join(AQUI, "etapa1.json"), "w"), indent=1, ensure_ascii=False)
+json.dump(out, open(os.path.join(os.path.dirname(AQUI), "etapa1.json"), "w"), indent=1, ensure_ascii=False)
 print(json.dumps(out, indent=1, ensure_ascii=False))
 print("\n".join(relatorio))
