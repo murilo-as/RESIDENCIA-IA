@@ -1,0 +1,20 @@
+p4-9-14b|rodar.sbatch|1-00:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p4_9_retomar_14b.sh
+p4-pontuar-c|pontuar_codigo.sbatch|03:00:00||
+p4-ingerir-c|rodar.sbatch|00:30:00||bash finalizar.sh
+p4-10-letra08b|rodar.sbatch|03:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p4_10_letra_08b.sh
+p4-gpqa|rodar.sbatch|08:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p3_1_gpqa.sh
+p4-5-limpar|rodar.sbatch|00:20:00||bash experimentos/p4_5_limpar.sh
+p4-6-kv-q4|rodar.sbatch|12:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=72G|bash experimentos/p4_6_kv_q4_pequenos.sh
+p4-7-32b|rodar.sbatch|1-12:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G|bash experimentos/p4_7_32b_completar.sh
+p4-pontuar-d|pontuar_codigo.sbatch|03:00:00||
+p4-ingerir-d|rodar.sbatch|00:30:00||bash finalizar.sh
+p4-8a-30b|rodar.sbatch|1-12:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G|bash experimentos/p4_8_ancoras_grandes.sh Qwen3-30B-A3B
+p4-pontuar-e|pontuar_codigo.sbatch|03:00:00||
+p4-ingerir-e|rodar.sbatch|00:30:00||bash finalizar.sh
+p4-8b-35b|rodar.sbatch|1-12:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G|bash experimentos/p4_8_ancoras_grandes.sh Qwen3.5-35B-A3B
+p4-pontuar-f|pontuar_codigo.sbatch|03:00:00||
+p4-ingerir-f|rodar.sbatch|00:30:00||bash finalizar.sh
+p4-8c-27b|rodar.sbatch|2-00:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G|bash experimentos/p4_8_ancoras_grandes.sh Qwen3.5-27B
+p4-pontuar-g|pontuar_codigo.sbatch|03:00:00||
+p4-ingerir-g|rodar.sbatch|00:30:00||bash finalizar.sh
+p4-resumo-c|rodar.sbatch|00:20:00||bash experimentos/resumo_prioridade.sh 4

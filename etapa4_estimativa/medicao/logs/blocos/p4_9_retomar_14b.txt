@@ -1,0 +1,4 @@
+limpar Qwen3.5-2B: todas as medidas registradas; apagados pesos e GGUFs (11.9 GB)
+limpar Qwen3.5-4B: todas as medidas registradas; apagados pesos e GGUFs (25.4 GB)
+397G	/beegfs/home/user_muriloalves/work/models
+2026-11-09T12:29:10Z inicio medir.py --modelo Qwen3-14B --sem-raciocinio --niveis q8_0 q4_k_m --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
