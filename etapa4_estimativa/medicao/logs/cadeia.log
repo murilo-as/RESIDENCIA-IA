@@ -41,3 +41,20 @@
 2026-10-30T22:58:43Z job 1063 (linha 17) submeteu linha 18 (p3-3-bases): 1064
 2026-10-31T00:51:21Z job 1064 (linha 18) submeteu linha 19 (p3-resumo): 1070
 2026-10-31T09:26:22Z job 1070 (linha 19): fim da cadeia
+2026-11-05T21:38:42Z job 1214 (linha 1) submeteu linha 2 (p4-1-letra): 1215
+2026-11-05T21:38:45Z job 1215 (linha 2) submeteu linha 3 (p4-gpqa): 1216
+2026-11-05T21:38:48Z job 1216 (linha 3) submeteu linha 4 (p4-5-limpar): 1217
+2026-11-05T21:38:51Z job 1217 (linha 4) submeteu linha 5 (p4-3a-ancoras): 1218
+2026-11-05T21:38:54Z job 1218 (linha 5) submeteu linha 6 (p4-pontuar-a): 1219
+2026-11-05T21:38:57Z job 1219 (linha 6): fim da cadeia
+2026-11-05T21:41:24Z job 1220 (linha 1) submeteu linha 2 (p4-1-letra): 1221
+2026-11-05T21:42:04Z job 1221 (linha 2) submeteu linha 3 (p4-gpqa): 1222
+2026-11-05T22:47:50Z job 1222 (linha 3) submeteu linha 4 (p4-5-limpar): 1227
+2026-11-05T22:47:58Z job 1227 (linha 4) submeteu linha 5 (p4-3a-ancoras): 1228
+2026-11-05T22:48:01Z job 1228 (linha 5) submeteu linha 6 (p4-pontuar-a): 1229
+2026-11-06T10:18:54Z job 1229 (linha 6) submeteu linha 7 (p4-ingerir-a): 1239
+2026-11-06T10:43:13Z job 1239 (linha 7) submeteu linha 8 (p4-3b-ancora14): 1240
+2026-11-06T10:44:18Z job 1240 (linha 8) submeteu linha 9 (p4-pontuar-b): 1241
+2026-11-06T15:47:34Z job 1241 (linha 9) submeteu linha 10 (p4-ingerir-b): 1248
+2026-11-06T15:50:46Z job 1248 (linha 10) submeteu linha 11 (p4-resumo): 1249
+2026-11-06T15:51:46Z job 1249 (linha 11): fim da cadeia

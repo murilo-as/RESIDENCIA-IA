@@ -336,3 +336,22 @@ aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host 127.0.0.1
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 has a total capacity of 121.69 GiB of which 22.17 GiB is free. Including non-PyTorch memory, this process has 170.48 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
 
+2026-11-06T15:47:04Z Qwen3-14B - -: pasta de modelos com 463 GB (limite 450 GB): parando (criado /beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/PARAR)
+2026-11-06T15:47:04Z Qwen3-14B q8_0 mmlu: Traceback (most recent call last):
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 568, in main
+    if bench in LOGLIK: rodar_loglik(m, s, bench, limite)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 343, in rodar_loglik
+    lm = s.hf(cfg.get("dtype", "float16"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 277, in hf
+    self._lm = HFLM(pretrained=MODELOS, gguf_file=os.path.basename(self.path()), tokenizer=os.path.join(MODELOS, self.modelo), dtype=dtype, batch_size=self.batch_hf, device="cuda")
+                                                                   ^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 268, in path
+    if self._path is None: self._path = garantir_gguf(self.m, self.modelo, self.nivel)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 183, in garantir_gguf
+    if not m.espaco_ok(modelo): raise RuntimeError("sem espaco livre")
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: sem espaco livre
+

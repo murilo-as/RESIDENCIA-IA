@@ -1,7 +1,7 @@
 #!/bin/bash
 # Funcoes comuns dos blocos da campanha. Roda DENTRO do container (slurm/rodar.sbatch). Uso nos blocos:  BLOCO=p1_1_letra; source experimentos/comum.sh
 D=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao
-PY=/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv/bin/python
+PY=$(for v in /beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv /beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv; do [ -x $v/bin/python ] && echo $v/bin/python && break; done)  # venv na raiz se existir; neste cluster fica em piloto/venv
 cd $D; mkdir -p logs/blocos
 LOG=logs/blocos/$BLOCO.txt   # marcas de inicio/fim; a saida completa dos programas vai para logs/blocos/$BLOCO.log
 

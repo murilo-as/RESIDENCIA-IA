@@ -1,0 +1,21 @@
+2026-11-05T21:38:47Z baixar Qwen/Qwen3.5-2B
+2026-11-05T21:38:47Z baixar rc=127
+Qwen3.5-2B: download falhou, pulado
+2026-11-05T21:38:47Z baixar Qwen/Qwen3.5-4B
+2026-11-05T21:38:47Z baixar rc=127
+Qwen3.5-4B: download falhou, pulado
+2026-11-05T21:38:47Z baixar Qwen/Qwen3.5-9B
+2026-11-05T21:38:47Z baixar rc=127
+Qwen3.5-9B: download falhou, pulado
+2026-11-05T21:42:06Z baixar Qwen/Qwen3.5-2B
+2026-11-05T21:48:01Z baixar rc=0
+2026-11-05T21:48:01Z inicio medir.py --modelo Qwen3.5-2B --kv 16 --saida kv.csv --benchmarks mmlu_letra
+2026-11-05T21:57:47Z fim rc=0
+2026-11-05T21:57:52Z baixar Qwen/Qwen3.5-4B
+2026-11-05T22:11:38Z baixar rc=0
+2026-11-05T22:11:38Z inicio medir.py --modelo Qwen3.5-4B --kv 16 --saida kv.csv --benchmarks mmlu_letra
+2026-11-05T22:38:07Z fim rc=0
+2026-11-05T22:38:12Z baixar Qwen/Qwen3.5-9B
+2026-11-05T22:38:24Z baixar rc=0
+2026-11-05T22:38:24Z inicio medir.py --modelo Qwen3.5-9B --kv 16 --saida kv.csv --benchmarks mmlu_letra
+2026-11-05T22:47:43Z fim rc=0

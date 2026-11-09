@@ -38,3 +38,25 @@ Registro cronológico (UTC) de tudo que eu (Claude) faço ou altero nesta pasta 
 **11:01 – 31/10 – Cadeia terminou.** Jobs 1040 a 1070 concluídos com código 0 (ingestão, 2.3, resumo 2, 3.1, 3.2, 3.3, resumo 3). Resumos em `resumo_prioridade_{1,2,3}.md`. Pendentes: GPQA (`DatasetNotFoundError`), Qwen3-30B-A3B-Base (OOM de CUDA ao carregar em f16 no teste de 5 exemplos, registrado em `erros.log`). Nenhum arquivo alterado por mim nesta etapa. Deslize: rodei `python3 -` (sem script) no nó de login por engano; saiu sem fazer nada, mas é a 3ª vez contra a regra.
 
 **19:57 – 31/10 – Commits criados e desfeitos.** Entendi mal o pedido e criei 6 commits locais (sem push); o usuário disse que queria só a separação em grupos. Desfiz com `git reset 471ac8f` (misto): nenhum arquivo foi alterado, o HEAD voltou ao merge 471ac8f e nada ficou em stage. Única alteração mantida: `logs/blocos/*.log` no `.gitignore` desta pasta (9,9 MB de saída bruta). Os grupos propostos estão na conversa; nenhum commit será feito sem pedido explícito.
+
+## Semana de 05/11/2026 (etapa 4: irmãos para o estimador)
+
+**21:38 – 05/11 – Início.** `git pull`: repositório já atualizado (HEAD `5fea870`). `data/fichas.json` tem 102 fichas e `estimar_qualidade.py` tem `forma_arq` e `irmaos`. O pull trouxe `experimentos/p4_1..p4_4`; usei esses scripts em vez de criar duplicados (apaguei os meus `p0_1_ruido.sh`, `p0_2_mmlu_letra.sh` e `p1n_ancoras.sh`, que ainda não tinham rodado). O limite da partição `hpc-spark-45` agora é **2 dias** (era 7).
+
+Alterações:
+- `ruido_pareado.py` (novo): tabela f16 × q4_k_m por modelo e prova (EP da nota, EP da diferença pareada, dif/EP), resumo por prova e diagnóstico do MBPP+ do Qwen2.5-3B-Instruct. Só lê `amostras/`.
+- `experimentos/p4_2_ruido.sh`: troquei o laço de `pareado.py` por uma chamada a `ruido_pareado.py` (saída em `logs/ruido_pareado.md`).
+- `experimentos/p4_3_ancoras_novas.sh`: timeout por modelo de 8 h para 14 h (o 14B é ~10 h) e aceita lista de modelos como argumentos (sem argumentos roda os seis), para dividir em dois jobs.
+- `experimentos/p4_5_limpar.sh` (novo): depois do GPQA, apaga pesos/GGUF de Qwen2.5-7B/14B-Instruct, Qwen3-8B e Qwen3.5-9B só se todas as medidas, GPQA incluído, estiverem no CSV (`limpar.py` recusa se faltar). O Qwen2.5-3B-Instruct fica para o P2-b.
+- `experimentos/plano_nov.txt` (novo; o `plano.txt` da campanha de outubro fica intacto): ruído → letra Qwen3.5 → GPQA → limpeza → âncoras (0.5B, 0.6B, 0.8B, 1.5B, 4B) → pontuar/ingerir → âncora 14B → pontuar/ingerir → resumo 4.
+
+**21:38 – 05/11 – Cadeia submetida:** job 1214 (`p4-2-ruido`, CPU, `PLANO=experimentos/plano_nov.txt LINHA=1`); cada job submete o próximo. Nenhuma linha existente dos CSVs é alterada (o `medir.py` só acrescenta).
+
+**21:40 – 05/11 – P2-a (só leitura, sem GPU).** Criei `logs/diag_raciocinio_qwen35.md`. Achado: no Qwen3.5-9B com raciocínio ligado, 640 das 1319 respostas do GSM8K (48,5%) e 327 das 500 do MATH-500 (65%) vieram com `content` vazio; só 197 e 148 batem no limite de 4096 tokens. Nas respostas preenchidas o acerto é 95,6% e 93,6%. Os 49,2% e 32,4% de `raciocinio.csv` são artefato de resposta vazia, não de raciocínio. Nada foi alterado em `raciocinio.csv`. No Qwen3-8B as vazias são quase só as cortadas.
+
+**21:41 – 05/11 – Cadeia de 21:38 falhou em segundos (jobs 1214 a 1219).** Os jobs 1214 a 1218 terminaram em 3 a 4 s, sem medir nada, e o 1219 (`p4-pontuar-a`) rodou o evalplus sobre nada novo; dois defeitos:
+1. O commit `5fea870` do Murilo trocou `PY` em `experimentos/comum.sh` e `finalizar.sh` para `RESIDENCIA-IA/venv/bin/python`, que não existe neste cluster (o venv está em `piloto/venv`). Troquei por um fallback (`venv` na raiz se existir, senão `piloto/venv`), no mesmo critério do `medir.py`.
+2. `PLANO` relativo (`experimentos/plano_nov.txt`) não é achado pelo job de pontuação, que roda em `tmp_codigo/`: ele leu linha vazia e registrou "fim da cadeia". Era a causa do travamento de 30/10 (job 1038). Em `slurm/proximo.sh`, um `PLANO` relativo passa a valer a partir de `medicao/`; nesta submissão usei caminho absoluto.
+Nada foi medido nem alterado nos CSVs. Cadeia resubmetida do início: job 1220 (`p4-2-ruido`, depende do 1219).
+
+**21:42 – 05/11 – P0-1 pronto (job 1220, 40 s).** `logs/ruido_pareado.md`: 79 comparações (33 sem amostras, sobretudo 32B e Coders; lista no arquivo). Razão EP pareado / EP da nota (mediana por prova): mmlu 0,59, medqa 0,60, oab 0,65, pubmedqa 0,42, humaneval+ 0,73, mbpp+ 0,69, gsm8k 1,00, math500 0,96. Diagnóstico do MBPP+ do Qwen2.5-3B-Instruct no próprio arquivo (seção "Leitura"): não monotônico (q8_0 47,9 < f16 54,5 < q4_k_m 61,4), 33% das questões divergem entre níveis; código gerado não é guardado, então extração × erro real não se separa. Corrigi o formato de `base`/`plus` em `ruido_pareado.py` e no .md. A cadeia seguiu: 1221 (`p4-1-letra`) rodando, 1222 (`p4-gpqa`) pendente.

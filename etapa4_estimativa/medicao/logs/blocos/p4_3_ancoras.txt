@@ -1,0 +1,45 @@
+2026-11-05T21:38:55Z baixar Qwen/Qwen2.5-0.5B-Instruct
+2026-11-05T21:38:56Z baixar rc=127
+Qwen2.5-0.5B-Instruct: download falhou, pulado
+2026-11-05T21:38:56Z baixar Qwen/Qwen3-0.6B
+2026-11-05T21:38:56Z baixar rc=127
+Qwen3-0.6B: download falhou, pulado
+2026-11-05T21:38:56Z baixar Qwen/Qwen3.5-0.8B
+2026-11-05T21:38:56Z baixar rc=127
+Qwen3.5-0.8B: download falhou, pulado
+2026-11-05T21:38:56Z baixar Qwen/Qwen2.5-1.5B-Instruct
+2026-11-05T21:38:56Z baixar rc=127
+Qwen2.5-1.5B-Instruct: download falhou, pulado
+2026-11-05T21:38:56Z baixar Qwen/Qwen3-4B
+2026-11-05T21:38:56Z baixar rc=127
+Qwen3-4B: download falhou, pulado
+2026-11-05T22:48:03Z baixar Qwen/Qwen2.5-0.5B-Instruct
+2026-11-05T22:48:49Z baixar rc=0
+2026-11-05T22:48:49Z inicio medir.py --modelo Qwen2.5-0.5B-Instruct --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-06T00:09:28Z fim rc=0
+limpar Qwen2.5-0.5B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (2.9 GB)
+2026-11-06T00:09:34Z baixar Qwen/Qwen3-0.6B
+2026-11-06T00:10:28Z baixar rc=0
+2026-11-06T00:10:28Z inicio medir.py --modelo Qwen3-0.6B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-06T01:42:45Z fim rc=0
+limpar Qwen3-0.6B: todas as medidas registradas; apagados pesos e GGUFs (4.3 GB)
+2026-11-06T01:42:51Z baixar Qwen/Qwen3.5-0.8B
+2026-11-06T01:43:28Z baixar rc=0
+2026-11-06T01:43:28Z inicio medir.py --modelo Qwen3.5-0.8B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-06T04:08:30Z fim rc=0
+limpar Qwen3.5-0.8B: todas as medidas registradas; apagados pesos e GGUFs (4.7 GB)
+2026-11-06T04:08:35Z baixar Qwen/Qwen2.5-1.5B-Instruct
+2026-11-06T04:09:37Z baixar rc=0
+2026-11-06T04:09:37Z inicio medir.py --modelo Qwen2.5-1.5B-Instruct --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-06T06:08:42Z fim rc=0
+limpar Qwen2.5-1.5B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (8.8 GB)
+2026-11-06T06:08:58Z baixar Qwen/Qwen3-4B
+2026-11-06T06:11:17Z baixar rc=0
+2026-11-06T06:11:17Z inicio medir.py --modelo Qwen3-4B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-06T10:18:36Z fim rc=0
+limpar Qwen3-4B: todas as medidas registradas; apagados pesos e GGUFs (22.9 GB)
+2026-11-06T10:44:20Z baixar Qwen/Qwen3-14B
+2026-11-06T10:52:05Z baixar rc=0
+2026-11-06T10:52:05Z inicio medir.py --modelo Qwen3-14B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-06T15:47:12Z fim rc=3
+limpar Qwen3-14B: NAO apagado, faltam 18 medidas: [('q8_0', 'mmlu'), ('q8_0', 'medqa'), ('q8_0', 'oab'), ('q8_0', 'pubmedqa'), ('q8_0', 'gsm8k'), ('q8_0', 'math500'), ('q8_0', 'wmt24'), ('q8_0', 'humaneval'), ('q8_0', 'mbpp'), ('q4_k_m', 'mmlu'), ('q4_k_m', 'medqa'), ('q4_k_m', 'oab')]
