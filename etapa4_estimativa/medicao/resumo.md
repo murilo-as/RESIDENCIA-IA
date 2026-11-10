@@ -641,6 +641,32 @@
 | Qwen3-14B | f16 | humaneval_base | 164 | 0.890244 | 0.024409 | 636.1 | 204.1 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-06T15:50:50Z |
 | Qwen3-14B | f16 | mbpp_plus | 378 | 0.743386 | 0.022465 | 690.5 | 88.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-06T15:50:50Z |
 | Qwen3-14B | f16 | mbpp_base | 378 | 0.896825 | 0.015646 | 690.5 | 88.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-06T15:50:50Z |
+| Qwen3-14B | q8_0 | mmlu | 1425 | 0.804912 | 0.010186 | 478.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T12:48:06Z |
+| Qwen3-14B | q8_0 | medqa | 1273 | 0.701493 | 0.012831 | 151.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T12:50:37Z |
+| Qwen3-14B | q8_0 | oab | 2205 | 0.57415 | 0.010533 | 2078.6 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T13:25:19Z |
+| Qwen3-14B | q8_0 | pubmedqa | 1000 | 0.795 | 0.012773 | 179.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T13:28:19Z |
+| Qwen3-14B | q8_0 | gsm8k | 1319 | 0.893101 | 0.008511 | 3358.4 | 160.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T14:25:00Z |
+| Qwen3-14B | q8_0 | gsm8k_strict | 1319 | 0.698256 | 0.012644 | 3358.4 | 160.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T14:25:00Z |
+| Qwen3-14B | q8_0 | wmt24 | 960 | 0.630459 | 0.00443 | 779.7 | 59.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T14:51:59Z |
+| Qwen3-14B | q8_0 | math500 | 500 | 0.86 | 0.015533 | 3394.1 | 618.7 | 23 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T15:48:36Z |
+| Qwen3-14B | q8_0 | math500_strict | 500 | 0.004 | 0.002826 | 3394.1 | 618.7 | 23 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T15:48:36Z |
+| Qwen3-14B | q4_k_m | mmlu | 1425 | 0.795088 | 0.010353 | 533.7 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T16:05:02Z |
+| Qwen3-14B | q4_k_m | medqa | 1273 | 0.69835 | 0.012869 | 157.7 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T16:07:40Z |
+| Qwen3-14B | q4_k_m | oab | 2205 | 0.584127 | 0.010499 | 2193.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T16:44:14Z |
+| Qwen3-14B | q4_k_m | pubmedqa | 1000 | 0.8 | 0.012655 | 179.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T16:47:14Z |
+| Qwen3-14B | q4_k_m | gsm8k | 1319 | 0.884761 | 0.008795 | 2539.2 | 160.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T17:30:09Z |
+| Qwen3-14B | q4_k_m | gsm8k_strict | 1319 | 0.536012 | 0.013737 | 2539.2 | 160.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T17:30:09Z |
+| Qwen3-14B | q4_k_m | wmt24 | 960 | 0.628743 | 0.004162 | 534.3 | 59.9 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T17:48:17Z |
+| Qwen3-14B | q4_k_m | math500 | 500 | 0.846 | 0.016158 | 2245.8 | 591.7 | 20 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:25:44Z |
+| Qwen3-14B | q4_k_m | math500_strict | 500 | 0.01 | 0.004454 | 2245.8 | 591.7 | 20 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:25:44Z |
+| Qwen3-14B | q4_k_m | humaneval_plus | 164 | 0.871951 | 0.026092 | 256.8 | 207.3 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen3-14B | q4_k_m | humaneval_base | 164 | 0.896341 | 0.023802 | 256.8 | 207.3 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen3-14B | q4_k_m | mbpp_plus | 378 | 0.751323 | 0.022232 | 295.5 | 94.5 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen3-14B | q4_k_m | mbpp_base | 378 | 0.896825 | 0.015646 | 295.5 | 94.5 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen3-14B | q8_0 | humaneval_plus | 164 | 0.853659 | 0.0276 | 391.8 | 204.9 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen3-14B | q8_0 | humaneval_base | 164 | 0.896341 | 0.023802 | 391.8 | 204.9 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen3-14B | q8_0 | mbpp_plus | 378 | 0.748677 | 0.022311 | 425.5 | 90.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen3-14B | q8_0 | mbpp_base | 378 | 0.902116 | 0.015284 | 425.5 | 90.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
 
 ## Pulado na etapa 1
 
@@ -1689,6 +1715,81 @@ Qwen3-1.7B pubmedqa: n=1000 (amostras A/B: 1000/1000)
 ```
 ```
 Qwen3-1.7B wmt24: sem comparacao pareada (KeyError: "sem comparacao pareada para 'wmt24' (metrica de corpus ou nao suportada)")
+```
+```
+Qwen3-14B gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.8916; acc q4_k_m = 0.8848; diferenca (A-B) = +0.0068
+  so f16 acertou: 55; so q4_k_m acertou: 46
+  erro padrao da diferenca pareada: 0.0076
+```
+```
+Qwen3-14B gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.6763; acc q4_k_m = 0.5360; diferenca (A-B) = +0.1403
+  so f16 acertou: 250; so q4_k_m acertou: 65
+  erro padrao da diferenca pareada: 0.0129
+```
+```
+Qwen3-14B humaneval_base: n=164 (amostras A/B: 164/164)
+  acc f16 = 0.8902; acc q4_k_m = 0.8963; diferenca (A-B) = -0.0061
+  so f16 acertou: 3; so q4_k_m acertou: 4
+  erro padrao da diferenca pareada: 0.0161
+```
+```
+Qwen3-14B humaneval_plus: n=164 (amostras A/B: 164/164)
+  acc f16 = 0.8415; acc q4_k_m = 0.8720; diferenca (A-B) = -0.0305
+  so f16 acertou: 2; so q4_k_m acertou: 7
+  erro padrao da diferenca pareada: 0.0181
+```
+```
+Qwen3-14B math500: n=500 (amostras A/B: 500/500)
+  acc f16 = 0.8540; acc q4_k_m = 0.8460; diferenca (A-B) = +0.0080
+  so f16 acertou: 16; so q4_k_m acertou: 12
+  erro padrao da diferenca pareada: 0.0106
+```
+```
+Qwen3-14B math500_strict: n=500 (amostras A/B: 500/500)
+  acc f16 = 0.0040; acc q4_k_m = 0.0100; diferenca (A-B) = -0.0060
+  so f16 acertou: 0; so q4_k_m acertou: 3
+  erro padrao da diferenca pareada: 0.0035
+```
+```
+Qwen3-14B mbpp_base: n=378 (amostras A/B: 378/378)
+  acc f16 = 0.8968; acc q4_k_m = 0.8968; diferenca (A-B) = +0.0000
+  so f16 acertou: 8; so q4_k_m acertou: 8
+  erro padrao da diferenca pareada: 0.0106
+```
+```
+Qwen3-14B mbpp_plus: n=378 (amostras A/B: 378/378)
+  acc f16 = 0.7434; acc q4_k_m = 0.7513; diferenca (A-B) = -0.0079
+  so f16 acertou: 8; so q4_k_m acertou: 11
+  erro padrao da diferenca pareada: 0.0115
+```
+```
+Qwen3-14B medqa: n=1273 (amostras A/B: 1273/1273)
+  acc f16 = 0.7038; acc q4_k_m = 0.6984; diferenca (A-B) = +0.0055
+  so f16 acertou: 42; so q4_k_m acertou: 35
+  erro padrao da diferenca pareada: 0.0069
+```
+```
+Qwen3-14B mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.8028; acc q4_k_m = 0.7951; diferenca (A-B) = +0.0077
+  so f16 acertou: 34; so q4_k_m acertou: 23
+  erro padrao da diferenca pareada: 0.0053
+```
+```
+Qwen3-14B oab: n=2205 (amostras A/B: 2205/2205)
+  acc f16 = 0.5760; acc q4_k_m = 0.5841; diferenca (A-B) = -0.0082
+  so f16 acertou: 66; so q4_k_m acertou: 84
+  erro padrao da diferenca pareada: 0.0056
+```
+```
+Qwen3-14B pubmedqa: n=1000 (amostras A/B: 1000/1000)
+  acc f16 = 0.7940; acc q4_k_m = 0.8000; diferenca (A-B) = -0.0060
+  so f16 acertou: 8; so q4_k_m acertou: 14
+  erro padrao da diferenca pareada: 0.0047
+```
+```
+Qwen3-14B wmt24: sem comparacao pareada (KeyError: "sem comparacao pareada para 'wmt24' (metrica de corpus ou nao suportada)")
 ```
 ```
 Qwen3-4B gsm8k: n=1319 (amostras A/B: 1319/1319)

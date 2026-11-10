@@ -59,3 +59,8 @@
 2026-11-06T15:50:46Z job 1248 (linha 10) submeteu linha 11 (p4-resumo): 1249
 2026-11-06T15:51:46Z job 1249 (linha 11): fim da cadeia
 2026-11-09T12:29:08Z job 1311 (linha 1) submeteu linha 2 (p4-pontuar-c): 1313
+2026-11-09T18:34:59Z job 1313 (linha 2) submeteu linha 3 (p4-ingerir-c): 1349
+2026-11-09T18:38:59Z job 1349 (linha 3) submeteu linha 4 (p4-10-letra08b): 1351
+2026-11-09T18:40:29Z job 1351 (linha 4) submeteu linha 5 (p4-gpqa): 1352
+2026-11-09T18:47:59Z job 1352 (linha 5) submeteu linha 6 (p4-5-limpar): 1357
+2026-11-10T00:35:24Z 1357 cancelado (pendente, nunca rodou); linha 6 = p4-56-limpar-kv submetida manualmente: 1396

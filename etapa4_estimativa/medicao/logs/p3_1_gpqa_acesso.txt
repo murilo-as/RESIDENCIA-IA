@@ -1,1 +1,2 @@
-falha: DatasetNotFoundError (termos do dataset nao aceitos, token sem acesso ou sem rede; mensagem omitida)
+Generating train split:   0%|          | 0/198 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 198/198 [00:00<00:00, 2783.88 examples/s]
+sucesso: 1 exemplo carregado

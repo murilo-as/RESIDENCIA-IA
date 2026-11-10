@@ -1,3 +1,15 @@
 falha: DatasetNotFoundError (termos do dataset nao aceitos, token sem acesso ou sem rede; mensagem omitida)
 experimentos/p3_1_gpqa.sh: line 12: /beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/venv/bin/python: No such file or directory
 falha: DatasetNotFoundError (termos do dataset nao aceitos, token sem acesso ou sem rede; mensagem omitida)
+Generating train split:   0%|          | 0/198 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 198/198 [00:00<00:00, 2783.88 examples/s]
+sucesso: 1 exemplo carregado
+2026-11-09T18:48:05Z inicio medir.py --modelo Qwen2.5-3B-Instruct --niveis f16 --benchmarks gpqa
+2026-11-09T18:53:53Z fim rc=0
+2026-11-09T18:53:58Z inicio medir.py --modelo Qwen2.5-7B-Instruct --niveis f16 --benchmarks gpqa
+2026-11-09T19:01:03Z fim rc=0
+2026-11-09T19:01:09Z inicio medir.py --modelo Qwen2.5-14B-Instruct --niveis f16 --benchmarks gpqa
+2026-11-09T19:11:27Z fim rc=0
+2026-11-09T19:11:32Z inicio medir.py --modelo Qwen3-8B --niveis f16 --benchmarks gpqa
+2026-11-09T19:19:58Z fim rc=0
+2026-11-09T19:20:03Z inicio medir.py --modelo Qwen3.5-9B --niveis f16 --benchmarks gpqa
+2026-11-09T19:28:47Z fim rc=0

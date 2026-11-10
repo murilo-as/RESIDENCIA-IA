@@ -1,0 +1,5 @@
+2026-11-09T18:40:31Z baixar Qwen/Qwen3.5-0.8B
+2026-11-09T18:41:08Z baixar rc=0
+2026-11-09T18:41:08Z inicio medir.py --modelo Qwen3.5-0.8B --niveis f16 q8_0 q4_k_m --kv 16 --saida kv.csv --benchmarks mmlu_letra
+2026-11-09T18:47:24Z fim rc=0
+limpar Qwen3.5-0.8B: todas as medidas registradas; apagados pesos e GGUFs (4.7 GB)
