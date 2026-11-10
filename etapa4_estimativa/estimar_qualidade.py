@@ -41,6 +41,27 @@ def ler_medicoes(caminhos, F):
             continue
         M[(i, NIVEL_BITS[r["nivel"]], r["benchmark"])] = {"valor": float(r["acuracia"]), "n": int(r["n"]),
                                                           "ep": float(r["erro_padrao"]) if r["erro_padrao"] else None}
+    return _mmlu_letra(M, caminhos, F)
+
+
+MMLU_LETRA = "Qwen/Qwen3.5-"  # prefixo dos modelos cujo MMLU vem da geracao da letra (kv.csv, kv=16): o log-prob deu 9B 68,7 < 4B 71,2 e q4 > f16
+
+
+def _mmlu_letra(M, caminhos, F):
+    """Troca o MMLU por log-prob pelo mmlu_letra (kv.csv, kv=16, raciocinio desligado) nos Qwen3.5 que tem os 3 niveis; os demais ficam como estavam."""
+    c0 = caminhos if isinstance(caminhos, str) else (caminhos[0] if caminhos else None)
+    arq = os.path.join(os.path.dirname(c0), "kv.csv") if c0 else None
+    if not arq or not os.path.exists(arq):
+        return M
+    L = {}
+    for r in csv.DictReader(open(arq, encoding="utf-8")):
+        i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
+        if r["benchmark"] == "mmlu_letra" and r["kv"] == "16" and r.get("raciocinio") == "desligado" and i in F and i.startswith(MMLU_LETRA) and F[i]["tipo"] != "base":
+            L[(i, NIVEL_BITS[r["nivel"]])] = {"valor": float(r["acuracia"]), "n": int(r["n"]), "ep": float(r["erro_padrao"]) if r["erro_padrao"] else None}
+    for i in {k[0] for k in L}:
+        if all((i, bits) in L for bits in (16, 8, 4)):
+            for bits in (16, 8, 4):
+                M[(i, bits, "mmlu")] = L[(i, bits)]
     return M
 
 
@@ -107,6 +128,14 @@ def publicado(i, b, formas, M):
         return {"valor": pub[i] + sum(d) / len(d), "tag": "C", "metodo": "publicado+desloc", "fonte": "arXiv 2505.02214 (MMLU 5-shot, 16 bits) + deslocamento da amostra"}
 
 
+SEM_LOGIT = {"wmt24"}  # chrF nao e uma proporcao de acertos
+
+
+def _logit(p):
+    p = min(max(p, 1e-3), 1 - 1e-3)
+    return math.log(p / (1 - p))
+
+
 def nota16(F, M, i, b, formas):
     m = M.get((i, 16, b))
     if m:
@@ -118,32 +147,51 @@ def nota16(F, M, i, b, formas):
     pts = [(tam(F[j]), v["valor"]) for (j, bits, bb), v in M.items() if bits == 16 and bb == b and j != i and linha(F[j]) == L]
     if len(pts) < 2:
         return None
-    v, pos = curva(tam(F[i]), pts)
+    if b in SEM_LOGIT:
+        v, pos = curva(tam(F[i]), pts)
+    else:  # reta em ln(tamanho) sobre o logit da acuracia: erro menor que a reta em 4 de 4 celulas (interp/extrap x conhecimento/geracao), leave-one-out de 09/11/2026
+        z, pos = curva(tam(F[i]), [(a, _logit(y)) for a, y in pts])
+        v = 1 / (1 + math.exp(-z))
     return {"valor": min(max(v, 0.0), 1.0), "tag": "C", "metodo": pos}
 
 
+# Classes para a razao da quantizacao (teste de 09/11/2026, 19 ancoras, leave-one-out em 4 bits, erro medio da nota em pts):
+# conhecimento 1,18 (razao 1) -> 1,05 (media da classe com forma); geracao 3,11 -> 2,47 (diferenca pareada 0,64 pts, 2,9 erros padrao). Em 8 bits razao 1 ganha ou empata. O vizinho da mesma linha e o irmao nao ganharam de razao 1.
+CLASSES_RAZAO = {"conhecimento": ["mmlu", "medqa", "pubmedqa", "oab"], "geracao": ["gsm8k", "math500", "humaneval_plus", "mbpp_plus"], "traducao": ["wmt24"]}
+CLASSE_DE = {b: c for c, bs in CLASSES_RAZAO.items() for b in bs}
+CLASSE_DE.update({"humaneval_base": "geracao", "mbpp_base": "geracao"})  # so recebem a razao; nao entram no conjunto da classe
+EXCLUIR_RAZAO = [("Qwen/Qwen3.5-", "math500")]  # 12% a 29% das respostas cortadas em 2048 tokens: a razao mede o corte, nao a quantizacao
+
+
+def classe_razao(b):
+    return CLASSE_DE.get(b)
+
+
+def _fora(j, b):
+    return any(j.startswith(p) and b == bb for p, bb in EXCLUIR_RAZAO)
+
+
 def razao(F, M, i, bits, b, formas):
+    """16 bits: 1 (definicao). 8 bits: 1 (razao1). 4 bits: media da classe com forma = 1 - media[(1 - razao_j) / forma_j] x forma_i, sobre os outros modelos com a razao medida
+    em qualquer prova da mesma classe. Tag C."""
     if bits == 16:
         return {"valor": 1.0, "tag": "A", "metodo": "definicao"}
-    f = F[i]
-    for j in irmaos(F, i):
-        r = razao_medida(M, j, bits, b)
-        if r is not None:
-            return {"valor": r, "tag": "C", "metodo": "irmao", "de": j, "outra_especialidade": F[j]["especialidade"] != f["especialidade"]}
-    metodo = None
-    cand = [(tam(F[j]), j) for j in F if j != i and linha(F[j]) == linha(f) and razao_medida(M, j, bits, b) is not None]
-    if not cand:
-        cand = [(tam(F[j]), j) for j in F if j != i and F[j]["familia"] == f["familia"] and F[j]["especialidade"] == f["especialidade"]
-                and razao_medida(M, j, bits, b) is not None]
-        metodo = "outra_geracao"
-    if not cand:
+    c = classe_razao(b)
+    if bits == 8:
+        return {"valor": 1.0, "tag": "C", "metodo": "razao1", "classe": c}
+    if c is None:
         return None
-    t, j = min(cand, key=lambda c: abs(math.log(c[0] / tam(f))))
-    r = razao_medida(M, j, bits, b)
-    if bits == 4:
-        r = 1 - (1 - r) * forma(f, formas) / forma(F[j], formas)
-    pos = "interp" if min(c[0] for c in cand) <= tam(f) <= max(c[0] for c in cand) else "extrap"
-    return {"valor": r, "tag": "C", "metodo": metodo or pos, "de": j}
+    perdas = []
+    for j in F:
+        if j == i:
+            continue
+        for bb in CLASSES_RAZAO[c]:
+            r = razao_medida(M, j, bits, bb)
+            if r is not None and not _fora(j, bb):
+                perdas.append((1 - r) / forma(F[j], formas))
+    if not perdas:
+        return None
+    return {"valor": 1 - sum(perdas) / len(perdas) * forma(F[i], formas), "tag": "C", "metodo": "media_classe", "classe": c, "n": len(perdas)}
 
 
 def estimar(F, M, i, bits, b, formas):
@@ -225,8 +273,9 @@ def razao_total(F, M, i, bits, b, formas):
     r = razao(F, M, i, bits, b, formas)
     if r:
         m = r["metodo"]
-        return {**r, "meio": 0.01 if m == "medido" else 0.02 if m == "irmao" else 0.04 if m == "outra_geracao" else 0.025,
-                "nivel": 0 if m == "medido" else 2 if m == "irmao" else 1}
+        # faixa provisoria (C): ~1,5x o erro do leave-one-out de 09/11 convertido em razao (conhecimento 1,05 pts, geracao 2,47 pts em 4 bits; 8 bits 0,25 e 1,03 pts)
+        meio = 0.01 if m == "medido" else {"conhecimento": 0.02, "geracao": 0.035, "traducao": 0.02}.get(r["classe"], 0.035) if bits == 4 else {"conhecimento": 0.01, "geracao": 0.02, "traducao": 0.01}.get(r["classe"], 0.02)
+        return {**r, "meio": meio, "nivel": 0 if m == "medido" else 2}
     if bits == 8:
         return {"valor": 1.0, "meio": 0.02, "metodo": "prior_8bits", "nivel": 5}
     ref = [(1 - v["valor"] / M[(j, 16, bb)]["valor"]) / forma(F[j], formas) for (j, bt, bb), v in M.items() if bt == 4 and (j, 16, bb) in M and M[(j, 16, bb)]["valor"]]
