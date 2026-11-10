@@ -1,0 +1,68 @@
+{
+  "texto": "Quero um modelo para resolver problemas de matemática no meu PC com 16 GB, com pelo menos 20 tokens por segundo.",
+  "tarefa": {
+    "valor": "QA",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "dominio": {
+    "valor": "matemática",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "preferencia": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "idioma": {
+    "valor": "pt",
+    "evidencia": "Uso",
+    "origem": "texto"
+  },
+  "entrada_longa": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "raciocinio": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "recursos": {
+    "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    }
+  },
+  "memoria_gb": {
+    "valor": 16,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "modelo": {
+    "valor": null,
+    "origem": "vazio",
+    "id": null,
+    "candidatos": [],
+    "regra": null
+  },
+  "hardware": {
+    "valor": "PC",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "avisos": []
+}
