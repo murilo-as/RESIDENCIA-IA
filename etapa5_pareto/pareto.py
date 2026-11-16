@@ -26,13 +26,18 @@ def eixos(e):
     if e["memoria"]["cabe"] == "nao" or e["atende_meta"] == "nao":
         return "não cabe na memória ou não atinge a meta de tokens/s"
     return {"mem_gib": e["memoria"]["min_gib"], "bytes_token_gib": round(l["bytes_pesos_gib"] + l["bytes_kv_gib_no_ctx"], 3),
-            "raciocinio": e["raciocinio"]}
+            "raciocinio": e["raciocinio"], "tok_s": l["tok_s_estimado"], "atende_meta": e["atende_meta"]}
+
+
+def tolerancia(a, b):
+    """Diferença de nota que não separa duas configurações. No mesmo modelo o erro da nota base é comum às duas, então só a diferença da técnica conta."""
+    return EMPATE_MESMO_MODELO if a["modelo"] == b["modelo"] else min(a["meio"], b["meio"])
 
 
 def domina(a, b):
-    """Nota dentro da menor faixa dos dois conta como empate: diferença menor que o erro não separa as configurações."""
+    """Nota dentro da tolerância conta como empate: diferença menor que o erro não separa as configurações."""
     menor = ("mem_gib", "bytes_token_gib", "raciocinio")
-    tol = EMPATE_MESMO_MODELO if a["modelo"] == b["modelo"] else min(a["meio"], b["meio"])      # no mesmo modelo o erro da nota base é comum às duas: compara o valor central
+    tol = tolerancia(a, b)
     d = a["nota_rank"] - b["nota_rank"]
     return d >= -tol and all(a[k] <= b[k] for k in menor) and (d > tol or any(a[k] < b[k] for k in menor))
 
