@@ -1142,5 +1142,125 @@
   "nivel": "f16",
   "motivo": "",
   "data": "2026-11-09T19:26:40Z"
+ },
+ "Qwen2.5-32B-Instruct|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-12T01:54:01Z"
+ },
+ "Qwen2.5-32B-Instruct|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-12T02:21:10Z"
+ },
+ "Qwen2.5-32B-Instruct|wmt24": {
+  "ok": true,
+  "valor": 64.79457062215238,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-12T03:23:10Z"
+ },
+ "Qwen2.5-32B-Instruct|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-12T04:23:07Z"
+ },
+ "Qwen3.5-35B-A3B|mmlu": {
+  "ok": true,
+  "valor": 0.8771929824561403,
+  "n": 285,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-14T02:57:45Z"
+ },
+ "Qwen3.5-35B-A3B|medqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-14T03:06:40Z"
+ },
+ "Qwen3.5-35B-A3B|oab": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-14T03:10:24Z"
+ },
+ "Qwen3.5-35B-A3B|pubmedqa": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-15T00:50:43Z"
+ },
+ "Qwen3.5-35B-A3B|gsm8k": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-15T13:55:30Z"
+ },
+ "Qwen3.5-35B-A3B|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-15T15:22:46Z"
+ },
+ "Qwen3.5-35B-A3B|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-15T15:32:32Z"
+ },
+ "Qwen3.5-35B-A3B|wmt24": {
+  "ok": true,
+  "valor": 65.0386768527966,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-15T15:50:10Z"
+ },
+ "Qwen3.5-35B-A3B|math500": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-15T16:06:28Z"
+ },
+ "Qwen3-30B-A3B|mmlu": {
+  "ok": false,
+  "valor": null,
+  "n": null,
+  "nivel": "f16",
+  "motivo": "erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 4353, in from_pretrained\n    loading_info, disk_offload_index = cls._load_pretrained_model(\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 4435, in _load_pretrained_model\n    caching_allocator_warmup(model, expanded_device_map, load_config.hf_quantizer)\n  File \"/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 5118, in caching_allocator_warmup\n    _ = torch.empty(int(byte_count // 2), dtype=torch.float16, device=device, requires_grad=False)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 has a total capacity of 121.69 GiB of which 22.47 GiB is free. Including non-PyTorch memory, this process has 170.48 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)\n",
+  "data": "2026-11-16T07:18:59Z"
+ },
+ "Qwen3.5-27B|gsm8k": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-16T12:56:49Z"
  }
 }

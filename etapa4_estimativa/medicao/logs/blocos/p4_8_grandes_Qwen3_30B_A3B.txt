@@ -1,0 +1,10 @@
+2026-11-13T11:18:50Z baixar Qwen/Qwen3-30B-A3B
+2026-11-13T11:33:44Z baixar rc=120
+Qwen3-30B-A3B: download falhou, pulado
+Qwen3-30B-A3B: pasta de modelos com 333 GB (precisa de ~200 GB livres dentro do limite de 450); pulado
+2026-11-16T06:12:47Z baixar Qwen/Qwen3-30B-A3B
+2026-11-16T06:22:01Z baixar rc=0
+2026-11-16T06:22:01Z inicio medir.py --modelo Qwen3-30B-A3B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-16T07:04:19Z fim rc=137
+2026-11-16T07:04:24Z Qwen3-30B-A3B: log-prob falhou em f16 (mmlu medqa oab pubmedqa); repetindo com --batch-hf 1
+2026-11-16T07:04:25Z inicio medir.py --modelo Qwen3-30B-A3B --batch-hf 1 --benchmarks mmlu medqa oab pubmedqa

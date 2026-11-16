@@ -1,10 +1,10 @@
 # Prioridade 4: resumo
 
-Periodo: 2026-11-05T21:38:44Z a 2026-11-06T15:51:48Z (gerado em 2026-11-06T15:51:48Z).
+Periodo: 2026-11-05T21:38:44Z a 2026-11-16T10:39:47Z (gerado em 2026-11-16T10:39:47Z).
 
 ## Linhas novas
 
-### resultados.csv (208 linhas)
+### resultados.csv (299 linhas)
 
 | modelo | nivel | benchmark | n | acuracia | erro_padrao | tempo_s | tokens_por_resposta | cortadas |
 |---|---|---|---|---|---|---|---|---|
@@ -216,8 +216,99 @@ Periodo: 2026-11-05T21:38:44Z a 2026-11-06T15:51:48Z (gerado em 2026-11-06T15:51
 | Qwen3-14B | f16 | humaneval_base | 164 | 0.890244 | 0.024409 | 636.1 | 204.1 | 0 |
 | Qwen3-14B | f16 | mbpp_plus | 378 | 0.743386 | 0.022465 | 690.5 | 88.2 | 0 |
 | Qwen3-14B | f16 | mbpp_base | 378 | 0.896825 | 0.015646 | 690.5 | 88.2 | 0 |
+| Qwen3-14B | q8_0 | mmlu | 1425 | 0.804912 | 0.010186 | 478.0 |  |  |
+| Qwen3-14B | q8_0 | medqa | 1273 | 0.701493 | 0.012831 | 151.1 |  |  |
+| Qwen3-14B | q8_0 | oab | 2205 | 0.57415 | 0.010533 | 2078.6 |  |  |
+| Qwen3-14B | q8_0 | pubmedqa | 1000 | 0.795 | 0.012773 | 179.0 |  |  |
+| Qwen3-14B | q8_0 | gsm8k | 1319 | 0.893101 | 0.008511 | 3358.4 | 160.7 | 0 |
+| Qwen3-14B | q8_0 | gsm8k_strict | 1319 | 0.698256 | 0.012644 | 3358.4 | 160.7 | 0 |
+| Qwen3-14B | q8_0 | wmt24 | 960 | 0.630459 | 0.00443 | 779.7 | 59.7 | 0 |
+| Qwen3-14B | q8_0 | math500 | 500 | 0.86 | 0.015533 | 3394.1 | 618.7 | 23 |
+| Qwen3-14B | q8_0 | math500_strict | 500 | 0.004 | 0.002826 | 3394.1 | 618.7 | 23 |
+| Qwen3-14B | q4_k_m | mmlu | 1425 | 0.795088 | 0.010353 | 533.7 |  |  |
+| Qwen3-14B | q4_k_m | medqa | 1273 | 0.69835 | 0.012869 | 157.7 |  |  |
+| Qwen3-14B | q4_k_m | oab | 2205 | 0.584127 | 0.010499 | 2193.1 |  |  |
+| Qwen3-14B | q4_k_m | pubmedqa | 1000 | 0.8 | 0.012655 | 179.5 |  |  |
+| Qwen3-14B | q4_k_m | gsm8k | 1319 | 0.884761 | 0.008795 | 2539.2 | 160.2 | 0 |
+| Qwen3-14B | q4_k_m | gsm8k_strict | 1319 | 0.536012 | 0.013737 | 2539.2 | 160.2 | 0 |
+| Qwen3-14B | q4_k_m | wmt24 | 960 | 0.628743 | 0.004162 | 534.3 | 59.9 | 0 |
+| Qwen3-14B | q4_k_m | math500 | 500 | 0.846 | 0.016158 | 2245.8 | 591.7 | 20 |
+| Qwen3-14B | q4_k_m | math500_strict | 500 | 0.01 | 0.004454 | 2245.8 | 591.7 | 20 |
+| Qwen3-14B | q4_k_m | humaneval_plus | 164 | 0.871951 | 0.026092 | 256.8 | 207.3 | 0 |
+| Qwen3-14B | q4_k_m | humaneval_base | 164 | 0.896341 | 0.023802 | 256.8 | 207.3 | 0 |
+| Qwen3-14B | q4_k_m | mbpp_plus | 378 | 0.751323 | 0.022232 | 295.5 | 94.5 | 0 |
+| Qwen3-14B | q4_k_m | mbpp_base | 378 | 0.896825 | 0.015646 | 295.5 | 94.5 | 0 |
+| Qwen3-14B | q8_0 | humaneval_plus | 164 | 0.853659 | 0.0276 | 391.8 | 204.9 | 0 |
+| Qwen3-14B | q8_0 | humaneval_base | 164 | 0.896341 | 0.023802 | 391.8 | 204.9 | 0 |
+| Qwen3-14B | q8_0 | mbpp_plus | 378 | 0.748677 | 0.022311 | 425.5 | 90.2 | 0 |
+| Qwen3-14B | q8_0 | mbpp_base | 378 | 0.902116 | 0.015284 | 425.5 | 90.2 | 0 |
+| Qwen2.5-3B-Instruct | f16 | gpqa | 198 | 0.30303 | 0.032743 | 31.2 |  |  |
+| Qwen2.5-7B-Instruct | f16 | gpqa | 198 | 0.313131 | 0.033042 | 54.8 |  |  |
+| Qwen2.5-14B-Instruct | f16 | gpqa | 198 | 0.388889 | 0.034733 | 112.0 |  |  |
+| Qwen3-8B | f16 | gpqa | 198 | 0.338384 | 0.033711 | 65.6 |  |  |
+| Qwen3.5-9B | f16 | gpqa | 198 | 0.419192 | 0.035155 | 123.7 |  |  |
+| Qwen2.5-32B-Instruct | f16 | wmt24 | 960 | 0.624481 | 0.006459 | 3197.9 | 62.8 | 1 |
+| Qwen2.5-32B-Instruct | f16 | math500 | 500 | 0.816 | 0.017346 | 10102.7 | 472.8 | 1 |
+| Qwen2.5-32B-Instruct | f16 | math500_strict | 500 | 0.0 | 0.0 | 10102.7 | 472.8 | 1 |
+| Qwen2.5-32B-Instruct | q8_0 | wmt24 | 960 | 0.624031 | 0.006422 | 1817.2 | 62.8 | 1 |
+| Qwen2.5-32B-Instruct | q8_0 | math500 | 500 | 0.812 | 0.017491 | 5705.8 | 472.1 | 1 |
+| Qwen2.5-32B-Instruct | q8_0 | math500_strict | 500 | 0.0 | 0.0 | 5705.8 | 472.1 | 1 |
+| Qwen2.5-32B-Instruct | q4_k_m | wmt24 | 960 | 0.617365 | 0.009184 | 1340.0 | 67.3 | 3 |
+| Qwen2.5-32B-Instruct | q4_k_m | math500 | 500 | 0.822 | 0.017124 | 4033.7 | 470.0 | 1 |
+| Qwen2.5-32B-Instruct | q4_k_m | math500_strict | 500 | 0.006 | 0.003457 | 4033.7 | 470.0 | 1 |
+| Qwen2.5-32B-Instruct | f16 | humaneval_plus | 164 | 0.859756 | 0.027115 | 1506.4 | 206.4 | 0 |
+| Qwen2.5-32B-Instruct | f16 | humaneval_base | 164 | 0.902439 | 0.02317 | 1506.4 | 206.4 | 0 |
+| Qwen2.5-32B-Instruct | f16 | mbpp_plus | 378 | 0.746032 | 0.022388 | 3248.4 | 195.7 | 0 |
+| Qwen2.5-32B-Instruct | f16 | mbpp_base | 378 | 0.891534 | 0.015994 | 3248.4 | 195.7 | 0 |
+| Qwen2.5-32B-Instruct | q4_k_m | humaneval_plus | 164 | 0.835366 | 0.028959 | 575.4 | 200.6 | 0 |
+| Qwen2.5-32B-Instruct | q4_k_m | humaneval_base | 164 | 0.871951 | 0.026092 | 575.4 | 200.6 | 0 |
+| Qwen2.5-32B-Instruct | q4_k_m | mbpp_plus | 378 | 0.759259 | 0.02199 | 1212.5 | 185.7 | 0 |
+| Qwen2.5-32B-Instruct | q4_k_m | mbpp_base | 378 | 0.910053 | 0.014716 | 1212.5 | 185.7 | 0 |
+| Qwen2.5-32B-Instruct | q8_0 | humaneval_plus | 164 | 0.865854 | 0.026613 | 848.4 | 206.8 | 0 |
+| Qwen2.5-32B-Instruct | q8_0 | humaneval_base | 164 | 0.902439 | 0.02317 | 848.4 | 206.8 | 0 |
+| Qwen2.5-32B-Instruct | q8_0 | mbpp_plus | 378 | 0.746032 | 0.022388 | 1847.7 | 198.6 | 0 |
+| Qwen2.5-32B-Instruct | q8_0 | mbpp_base | 378 | 0.896825 | 0.015646 | 1847.7 | 198.6 | 0 |
+| Qwen3.5-35B-A3B | f16 | medqa | 1273 | 0.865672 | 0.009561 | 201.9 |  |  |
+| Qwen3.5-35B-A3B | f16 | mmlu | 1425 | 0.853333 | 0.009007 | 850.1 |  |  |
+| Qwen3.5-35B-A3B | f16 | oab | 2205 | 0.690703 | 0.009845 | 2258.8 |  |  |
+| Qwen3.5-35B-A3B | f16 | pubmedqa | 1000 | 0.79 | 0.012887 | 450.6 |  |  |
+| Qwen3.5-35B-A3B | f16 | gsm8k | 1319 | 0.961334 | 0.005311 | 5212.9 | 167.9 | 5 |
+| Qwen3.5-35B-A3B | f16 | gsm8k_strict | 1319 | 0.961334 | 0.005311 | 5212.9 | 167.9 | 5 |
+| Qwen3.5-35B-A3B | f16 | wmt24 | 960 | 0.638112 | 0.004107 | 889.9 | 51.8 | 0 |
+| Qwen3.5-35B-A3B | f16 | math500 | 500 | 0.894 | 0.013781 | 4515.9 | 743.8 | 47 |
+| Qwen3.5-35B-A3B | f16 | math500_strict | 500 | 0.854 | 0.015807 | 4515.9 | 743.8 | 47 |
+| Qwen3.5-35B-A3B | q8_0 | mmlu | 1425 | 0.85614 | 0.00889 | 853.5 |  |  |
+| Qwen3.5-35B-A3B | q8_0 | medqa | 1273 | 0.867243 | 0.009514 | 472.8 |  |  |
+| Qwen3.5-35B-A3B | q8_0 | oab | 2205 | 0.685261 | 0.009892 | 2217.5 |  |  |
+| Qwen3.5-35B-A3B | q8_0 | pubmedqa | 1000 | 0.787 | 0.012954 | 453.1 |  |  |
+| Qwen3.5-35B-A3B | q8_0 | gsm8k | 1319 | 0.963609 | 0.005158 | 3535.5 | 168.9 | 4 |
+| Qwen3.5-35B-A3B | q8_0 | gsm8k_strict | 1319 | 0.962851 | 0.00521 | 3535.5 | 168.9 | 4 |
+| Qwen3.5-35B-A3B | q8_0 | wmt24 | 960 | 0.637913 | 0.00404 | 698.6 | 51.8 | 0 |
+| Qwen3.5-35B-A3B | q8_0 | math500 | 500 | 0.882 | 0.014442 | 3243.4 | 741.7 | 54 |
+| Qwen3.5-35B-A3B | q8_0 | math500_strict | 500 | 0.84 | 0.016412 | 3243.4 | 741.7 | 54 |
+| Qwen3.5-35B-A3B | q4_k_m | mmlu | 1425 | 0.858246 | 0.00892 | 871.4 |  |  |
+| Qwen3.5-35B-A3B | q4_k_m | medqa | 1273 | 0.864101 | 0.009608 | 470.5 |  |  |
+| Qwen3.5-35B-A3B | q4_k_m | oab | 2205 | 0.683447 | 0.009908 | 2238.6 |  |  |
+| Qwen3.5-35B-A3B | q4_k_m | pubmedqa | 1000 | 0.792 | 0.012841 | 450.6 |  |  |
+| Qwen3.5-35B-A3B | q4_k_m | gsm8k | 1319 | 0.956785 | 0.005601 | 2618.4 | 168.0 | 9 |
+| Qwen3.5-35B-A3B | q4_k_m | gsm8k_strict | 1319 | 0.956785 | 0.005601 | 2618.4 | 168.0 | 9 |
+| Qwen3.5-35B-A3B | q4_k_m | wmt24 | 960 | 0.637646 | 0.003977 | 505.8 | 51.9 | 0 |
+| Qwen3.5-35B-A3B | q4_k_m | math500 | 500 | 0.892 | 0.013895 | 2223.1 | 733.8 | 52 |
+| Qwen3.5-35B-A3B | q4_k_m | math500_strict | 500 | 0.844 | 0.016244 | 2223.1 | 733.8 | 52 |
+| Qwen3.5-35B-A3B | f16 | humaneval_plus | 164 | 0.902439 | 0.02317 | 545.6 | 257.5 | 1 |
+| Qwen3.5-35B-A3B | f16 | humaneval_base | 164 | 0.945122 | 0.017784 | 545.6 | 257.5 | 1 |
+| Qwen3.5-35B-A3B | f16 | mbpp_plus | 378 | 0.761905 | 0.021907 | 1025.4 | 204.7 | 9 |
+| Qwen3.5-35B-A3B | f16 | mbpp_base | 378 | 0.915344 | 0.014318 | 1025.4 | 204.7 | 9 |
+| Qwen3.5-35B-A3B | q4_k_m | humaneval_plus | 164 | 0.865854 | 0.026613 | 273.4 | 257.9 | 4 |
+| Qwen3.5-35B-A3B | q4_k_m | humaneval_base | 164 | 0.914634 | 0.021819 | 273.4 | 257.9 | 4 |
+| Qwen3.5-35B-A3B | q4_k_m | mbpp_plus | 378 | 0.76455 | 0.021823 | 553.0 | 222.0 | 8 |
+| Qwen3.5-35B-A3B | q4_k_m | mbpp_base | 378 | 0.910053 | 0.014716 | 553.0 | 222.0 | 8 |
+| Qwen3.5-35B-A3B | q8_0 | humaneval_plus | 164 | 0.884146 | 0.024992 | 392.4 | 257.1 | 2 |
+| Qwen3.5-35B-A3B | q8_0 | humaneval_base | 164 | 0.939024 | 0.018685 | 392.4 | 257.1 | 2 |
+| Qwen3.5-35B-A3B | q8_0 | mbpp_plus | 378 | 0.767196 | 0.021737 | 714.0 | 198.9 | 6 |
+| Qwen3.5-35B-A3B | q8_0 | mbpp_base | 378 | 0.920635 | 0.013903 | 714.0 | 198.9 | 6 |
 
-### kv.csv (7 linhas)
+### kv.csv (33 linhas)
 
 | modelo | nivel | kv | raciocinio | benchmark | n | acuracia | erro_padrao | tempo_s | tokens_por_resposta | cortadas |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -228,6 +319,32 @@ Periodo: 2026-11-05T21:38:44Z a 2026-11-06T15:51:48Z (gerado em 2026-11-06T15:51
 | Qwen3.5-4B | q8_0 | 16 | desligado | mmlu_letra | 1425 | 0.770526 | 0.011139 | 369.9 | 2.0 | 0 |
 | Qwen3.5-4B | q4_k_m | 16 | desligado | mmlu_letra | 1425 | 0.769825 | 0.011151 | 349.8 | 2.0 | 0 |
 | Qwen3.5-9B | q8_0 | 16 | desligado | mmlu_letra | 1425 | 0.804211 | 0.010512 | 478.6 | 2.0 | 0 |
+| Qwen3.5-0.8B | f16 | 16 | desligado | mmlu_letra | 1425 | 0.505965 | 0.013244 | 63.9 | 2.0 | 0 |
+| Qwen3.5-0.8B | q8_0 | 16 | desligado | mmlu_letra | 1425 | 0.513684 | 0.01324 | 58.3 | 2.0 | 0 |
+| Qwen3.5-0.8B | q4_k_m | 16 | desligado | mmlu_letra | 1425 | 0.49614 | 0.013245 | 55.2 | 2.0 | 0 |
+| Qwen2.5-3B-Instruct | q8_0 | 16 | desligado | mmlu_letra | 1425 | 0.668772 | 0.012468 | 98.4 | 2.0 | 0 |
+| Qwen2.5-3B-Instruct | q8_0 | 16 | desligado | oab_letra | 2205 | 0.47619 | 0.010636 | 170.1 | 2.0 | 0 |
+| Qwen2.5-3B-Instruct | q8_0 | 4 | desligado | gsm8k | 1319 | 0.195603 | 0.010926 | 1431.3 | 253.9 | 13 |
+| Qwen2.5-3B-Instruct | q8_0 | 4 | desligado | gsm8k_strict | 1319 | 0.08188 | 0.007552 | 1431.3 | 253.9 | 13 |
+| Qwen2.5-3B-Instruct | q8_0 | 4 | desligado | math500 | 500 | 0.168 | 0.016737 | 1029.3 | 605.8 | 31 |
+| Qwen2.5-3B-Instruct | q8_0 | 4 | desligado | math500_strict | 500 | 0.0 | 0.0 | 1029.3 | 605.8 | 31 |
+| Qwen2.5-3B-Instruct | q8_0 | 4 | desligado | mmlu_letra | 1425 | 0.478596 | 0.013233 | 104.4 | 2.12 | 53 |
+| Qwen2.5-3B-Instruct | q8_0 | 4 | desligado | oab_letra | 2205 | 0.297052 | 0.009731 | 177.6 | 2.7 | 125 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 16 | desligado | gsm8k | 1319 | 0.534496 | 0.01374 | 576.4 | 150.1 | 6 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 16 | desligado | gsm8k_strict | 1319 | 0.319939 | 0.012848 | 576.4 | 150.1 | 6 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 16 | desligado | math500 | 500 | 0.448 | 0.022262 | 543.8 | 484.2 | 16 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 16 | desligado | math500_strict | 500 | 0.12 | 0.014547 | 543.8 | 484.2 | 16 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 16 | desligado | mmlu_letra | 1425 | 0.618246 | 0.01287 | 52.6 | 2.0 | 0 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 16 | desligado | oab_letra | 2205 | 0.418594 | 0.010506 | 89.9 | 2.0 | 0 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 4 | desligado | gsm8k | 1319 | 0.003033 | 0.001515 | 5419.7 | 2033.2 | 1308 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 4 | desligado | gsm8k_strict | 1319 | 0.0 | 0.0 | 5419.7 | 2033.2 | 1308 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 4 | desligado | math500 | 500 | 0.002 | 0.002 | 2024.2 | 2048.0 | 500 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 4 | desligado | math500_strict | 500 | 0.0 | 0.0 | 2024.2 | 2048.0 | 500 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 4 | desligado | mmlu_letra | 1425 | 0.035088 | 0.004874 | 58.2 | 3.98 | 1216 |
+| Qwen2.5-1.5B-Instruct | q8_0 | 4 | desligado | oab_letra | 2205 | 0.0 | 0.0 | 103.6 | 4.0 | 2201 |
+| Qwen3.5-35B-A3B | f16 | 16 | desligado | mmlu_letra | 1425 | 0.854035 | 0.009353 | 952.1 | 2.0 | 0 |
+| Qwen3.5-35B-A3B | q8_0 | 16 | desligado | mmlu_letra | 1425 | 0.85193 | 0.009409 | 606.3 | 2.0 | 0 |
+| Qwen3.5-35B-A3B | q4_k_m | 16 | desligado | mmlu_letra | 1425 | 0.845614 | 0.009572 | 527.9 | 2.0 | 0 |
 
 ## Erros (erros.log)
 
@@ -236,9 +353,17 @@ Periodo: 2026-11-05T21:38:44Z a 2026-11-06T15:51:48Z (gerado em 2026-11-06T15:51
 
 2026-11-06T15:47:04Z Qwen3-14B q8_0 mmlu: Traceback (most recent call last):
 
+2026-11-14T03:06:25Z Qwen3.5-35B-A3B f16 mmlu: Traceback (most recent call last):
+
+2026-11-16T06:49:50Z Qwen3-30B-A3B f16 mmlu: teste de 5 exemplos reprovou, prova pulada: erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4353, in from_pretrained
+
+2026-11-16T07:18:59Z Qwen3-30B-A3B f16 mmlu: teste de 5 exemplos reprovou, prova pulada: erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4353, in from_pretrained
+
 ```
 
-Testes de 5 exemplos no periodo: 54 (0 reprovados)
+Testes de 5 exemplos no periodo: 73 (1 reprovados)
+- reprovado Qwen3-30B-A3B|mmlu: erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4353, in from_pretrained
+    loading_info, disk_offload_index = cls._load_pretrained
 
 ## Anomalias
 
@@ -270,14 +395,46 @@ Testes de 5 exemplos no periodo: 54 (0 reprovados)
 - resultados.csv: Qwen3.5-0.8B q8_0 mbpp_base: 11% das respostas cortadas
 - resultados.csv: Qwen3-14B f16 math500: 5% das respostas cortadas
 - resultados.csv: Qwen3-14B f16 math500_strict: 5% das respostas cortadas
+- resultados.csv: Qwen2.5-32B-Instruct f16 math500_strict: acuracia 0
+- resultados.csv: Qwen2.5-32B-Instruct q8_0 math500_strict: acuracia 0
+- resultados.csv: Qwen3.5-35B-A3B f16 math500: 9% das respostas cortadas
+- resultados.csv: Qwen3.5-35B-A3B f16 math500_strict: 9% das respostas cortadas
+- resultados.csv: Qwen3.5-35B-A3B q8_0 math500: 11% das respostas cortadas
+- resultados.csv: Qwen3.5-35B-A3B q8_0 math500_strict: 11% das respostas cortadas
+- resultados.csv: Qwen3.5-35B-A3B q4_k_m math500: 10% das respostas cortadas
+- resultados.csv: Qwen3.5-35B-A3B q4_k_m math500_strict: 10% das respostas cortadas
+- kv.csv: Qwen2.5-3B-Instruct q8_0 math500: 6% das respostas cortadas
+- kv.csv: Qwen2.5-3B-Instruct q8_0 math500_strict: acuracia 0
+- kv.csv: Qwen2.5-3B-Instruct q8_0 math500_strict: 6% das respostas cortadas
+- kv.csv: Qwen2.5-1.5B-Instruct q8_0 gsm8k: 99% das respostas cortadas
+- kv.csv: Qwen2.5-1.5B-Instruct q8_0 gsm8k_strict: acuracia 0
+- kv.csv: Qwen2.5-1.5B-Instruct q8_0 gsm8k_strict: 99% das respostas cortadas
+- kv.csv: Qwen2.5-1.5B-Instruct q8_0 math500: 100% das respostas cortadas
+- kv.csv: Qwen2.5-1.5B-Instruct q8_0 math500_strict: acuracia 0
+- kv.csv: Qwen2.5-1.5B-Instruct q8_0 math500_strict: 100% das respostas cortadas
+- kv.csv: Qwen2.5-1.5B-Instruct q8_0 oab_letra: acuracia 0
+- kv.csv: Qwen2.5-3B-Instruct mmlu_letra: queda com kv=4 (0.4786 contra 0.6688 com kv=16)
+- kv.csv: Qwen2.5-3B-Instruct oab_letra: queda com kv=4 (0.2971 contra 0.4762 com kv=16)
+- kv.csv: Qwen2.5-1.5B-Instruct gsm8k: queda com kv=4 (0.0030 contra 0.5345 com kv=16)
+- kv.csv: Qwen2.5-1.5B-Instruct gsm8k_strict: queda com kv=4 (0.0000 contra 0.3199 com kv=16)
+- kv.csv: Qwen2.5-1.5B-Instruct math500: queda com kv=4 (0.0020 contra 0.4480 com kv=16)
+- kv.csv: Qwen2.5-1.5B-Instruct math500_strict: queda com kv=4 (0.0000 contra 0.1200 com kv=16)
+- kv.csv: Qwen2.5-1.5B-Instruct mmlu_letra: queda com kv=4 (0.0351 contra 0.6182 com kv=16)
+- kv.csv: Qwen2.5-1.5B-Instruct oab_letra: queda com kv=4 (0.0000 contra 0.4186 com kv=16)
 
 
 ## Tempos
 
-Soma de tempo_s por prova (so o tempo medido, sem carga de modelo nem montagem das tarefas): gsm8k 4.19 h, gsm8k_strict 4.19 h, humaneval_base 0.50 h, humaneval_plus 0.50 h, math500 4.67 h, math500_strict 4.67 h, mbpp_base 0.70 h, mbpp_plus 0.70 h, medqa 0.20 h, mmlu 0.60 h, mmlu_letra 0.52 h, oab 2.40 h, pubmedqa 0.24 h, wmt24 1.10 h
+Soma de tempo_s por prova (so o tempo medido, sem carga de modelo nem montagem das tarefas): gpqa 0.11 h, gsm8k 11.05 h, gsm8k_strict 11.05 h, humaneval_base 1.83 h, humaneval_plus 1.83 h, math500 15.52 h, math500_strict 15.52 h, mbpp_base 3.29 h, mbpp_plus 3.29 h, medqa 0.60 h, mmlu 1.59 h, mmlu_letra 1.23 h, oab 5.46 h, oab_letra 0.15 h, pubmedqa 0.71 h, wmt24 3.81 h
 
 | bloco | chamada | duracao | rc |
 |---|---|---|---|
+| p3_1_gpqa | --modelo Qwen2.5-3B-Instruct --niveis f16 --benchmarks gpqa | 0.10 h | 0 |
+| p3_1_gpqa | --modelo Qwen2.5-7B-Instruct --niveis f16 --benchmarks gpqa | 0.12 h | 0 |
+| p3_1_gpqa | --modelo Qwen2.5-14B-Instruct --niveis f16 --benchmarks gpqa | 0.17 h | 0 |
+| p3_1_gpqa | --modelo Qwen3-8B --niveis f16 --benchmarks gpqa | 0.14 h | 0 |
+| p3_1_gpqa | --modelo Qwen3.5-9B --niveis f16 --benchmarks gpqa | 0.15 h | 0 |
+| p4_10_letra_08b | --modelo Qwen3.5-0.8B --niveis f16 q8_0 q4_k_m --kv 16 --saida kv.csv --benchmarks mmlu_letra | 0.10 h | 0 |
 | p4_1_letra | --modelo Qwen3.5-2B --kv 16 --saida kv.csv --benchmarks mmlu_letra | 0.16 h | 0 |
 | p4_1_letra | --modelo Qwen3.5-4B --kv 16 --saida kv.csv --benchmarks mmlu_letra | 0.44 h | 0 |
 | p4_1_letra | --modelo Qwen3.5-9B --kv 16 --saida kv.csv --benchmarks mmlu_letra | 0.16 h | 0 |
@@ -287,6 +444,19 @@ Soma de tempo_s por prova (so o tempo medido, sem carga de modelo nem montagem d
 | p4_3_ancoras | --modelo Qwen2.5-1.5B-Instruct --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 human | 1.98 h | 0 |
 | p4_3_ancoras | --modelo Qwen3-4B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp | 4.12 h | 0 |
 | p4_3_ancoras | --modelo Qwen3-14B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp | 4.92 h | 3 |
+| p4_6_kv_q4 | --modelo Qwen2.5-3B-Instruct --niveis q8_0 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8 | 0.10 h | 0 |
+| p4_6_kv_q4 | --modelo Qwen2.5-3B-Instruct --niveis q8_0 --kv 4 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k | 0.92 h | 0 |
+| p4_6_kv_q4 | --modelo Qwen2.5-1.5B-Instruct --niveis q8_0 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks gs | 0.10 h | 0 |
+| p4_6_kv_q4 | --modelo Qwen2.5-1.5B-Instruct --niveis q8_0 --kv 4 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm | 2.25 h | 0 |
+| p4_7_32b | --modelo Qwen2.5-32B-Instruct --niveis f16 --batch-hf 2 --benchmarks math500 wmt24 humaneval mbpp | 5.46 h | 0 |
+| p4_7_32b | --modelo Qwen2.5-32B-Instruct --niveis q8_0 --batch-hf 2 --benchmarks math500 wmt24 humaneval mbpp | 3.11 h | 0 |
+| p4_7_32b | --modelo Qwen2.5-32B-Instruct --niveis q4_k_m --batch-hf 2 --benchmarks math500 wmt24 humaneval mbpp | 2.23 h | 0 |
+| p4_8_grandes_Qwen3.5_35B_A3B | --modelo Qwen3.5-35B-A3B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval m | 0.75 h | 137 |
+| p4_8_grandes_Qwen3.5_35B_A3B | --modelo Qwen3.5-35B-A3B --niveis f16 q8_0 q4_k_m --kv 16 --saida kv.csv --benchmarks mmlu_letra | 1.03 h | 0 |
+| p4_8_grandes_Qwen3.5_35B_A3B | --modelo Qwen3.5-35B-A3B --batch-hf 1 --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt2 | 10.17 h | 0 |
+| p4_8_grandes_Qwen3.5_35B_A3B | --modelo Qwen3.5-35B-A3B --niveis f16 q8_0 q4_k_m --kv 16 --saida kv.csv --benchmarks mmlu_letra | 0.00 h | 0 |
+| p4_8_grandes_Qwen3_30B_A3B | --modelo Qwen3-30B-A3B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbp | 0.70 h | 137 |
+| p4_9_retomar_14b | --modelo Qwen3-14B --sem-raciocinio --niveis q8_0 q4_k_m --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wm | 5.95 h | 0 |
 
 ## Pendencias
 

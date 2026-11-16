@@ -1,0 +1,17 @@
+2026-11-14T01:55:33Z baixar Qwen/Qwen3.5-35B-A3B
+2026-11-14T02:30:49Z baixar rc=0
+2026-11-14T02:30:49Z inicio medir.py --modelo Qwen3.5-35B-A3B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-14T03:15:53Z fim rc=137
+2026-11-14T03:15:58Z inicio medir.py --modelo Qwen3.5-35B-A3B --niveis f16 q8_0 q4_k_m --kv 16 --saida kv.csv --benchmarks mmlu_letra
+2026-11-14T04:17:40Z fim rc=0
+limpar Qwen3.5-35B-A3B: NAO apagado, faltam 26 medidas: [('f16', 'mmlu'), ('f16', 'oab'), ('f16', 'pubmedqa'), ('f16', 'gsm8k'), ('f16', 'math500'), ('f16', 'wmt24'), ('f16', 'humaneval'), ('f16', 'mbpp'), ('q8_0', 'mmlu'), ('q8_0', 'medqa'), ('q8_0', 'oab'), ('q8_0', 'pubmedqa')]
+2026-11-14T23:45:54Z baixar Qwen/Qwen3.5-35B-A3B
+2026-11-14T23:46:32Z baixar rc=0
+2026-11-14T23:46:32Z inicio medir.py --modelo Qwen3.5-35B-A3B --batch-hf 1 --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-15T13:43:27Z baixar Qwen/Qwen3.5-35B-A3B
+2026-11-15T13:43:50Z baixar rc=0
+2026-11-15T13:43:50Z inicio medir.py --modelo Qwen3.5-35B-A3B --batch-hf 1 --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+2026-11-15T23:53:55Z fim rc=0
+2026-11-15T23:54:00Z inicio medir.py --modelo Qwen3.5-35B-A3B --niveis f16 q8_0 q4_k_m --kv 16 --saida kv.csv --benchmarks mmlu_letra
+2026-11-15T23:54:01Z fim rc=0
+limpar Qwen3.5-35B-A3B: todas as medidas registradas; apagados pesos e GGUFs (202.5 GB)

@@ -1,0 +1,9 @@
+2026-11-12T01:26:38Z baixar Qwen/Qwen2.5-32B-Instruct
+2026-11-12T01:44:12Z baixar rc=0
+2026-11-12T01:44:12Z inicio medir.py --modelo Qwen2.5-32B-Instruct --niveis f16 --batch-hf 2 --benchmarks math500 wmt24 humaneval mbpp
+2026-11-12T07:11:35Z fim rc=0
+2026-11-12T07:11:40Z inicio medir.py --modelo Qwen2.5-32B-Instruct --niveis q8_0 --batch-hf 2 --benchmarks math500 wmt24 humaneval mbpp
+2026-11-12T10:18:31Z fim rc=0
+2026-11-12T10:18:36Z inicio medir.py --modelo Qwen2.5-32B-Instruct --niveis q4_k_m --batch-hf 2 --benchmarks math500 wmt24 humaneval mbpp
+2026-11-12T12:32:28Z fim rc=0
+limpar Qwen2.5-32B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (185.7 GB)

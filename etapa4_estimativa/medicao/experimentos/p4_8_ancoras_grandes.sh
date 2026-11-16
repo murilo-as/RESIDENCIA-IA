@@ -10,7 +10,8 @@ for M in "$@"; do
   usado=$(du -s --block-size=1G /beegfs/home/user_muriloalves/work/models | cut -f1)
   if [ "$usado" -gt 250 ]; then echo "$M: pasta de modelos com ${usado} GB (precisa de ~200 GB livres dentro do limite de 450); pulado" | tee -a $LOG | tee -a erros.log; continue; fi
   baixar Qwen/$M || { echo "$M: download falhou, pulado" | tee -a $LOG; continue; }
-  med 20h --modelo $M --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
+  BH=""; [ "$M" = Qwen3.5-35B-A3B ] && BH="--batch-hf 1"   # 35B: log-prob f16 deu OOM em 14/11 com o lote padrao
+  med 20h --modelo $M $BH --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp
   EXIGIR="mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp"
   case $M in
     Qwen3.5-*)

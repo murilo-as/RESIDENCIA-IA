@@ -1,0 +1,3 @@
+2026-11-16T12:43:32Z baixar Qwen/Qwen3.5-27B
+2026-11-16T12:43:45Z baixar rc=0
+2026-11-16T12:43:45Z inicio medir.py --modelo Qwen3.5-27B --sem-raciocinio --benchmarks gsm8k math500 wmt24 humaneval mbpp

@@ -1,0 +1,14 @@
+2026-11-11T04:04:38Z baixar Qwen/Qwen2.5-3B-Instruct
+2026-11-11T04:05:10Z baixar rc=0
+2026-11-11T04:05:10Z inicio medir.py --modelo Qwen2.5-3B-Instruct --niveis q8_0 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-11-11T04:11:17Z fim rc=0
+2026-11-11T04:11:22Z inicio medir.py --modelo Qwen2.5-3B-Instruct --niveis q8_0 --kv 4 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-11-11T05:06:29Z fim rc=0
+limpar Qwen2.5-3B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (17.6 GB)
+2026-11-11T05:06:55Z baixar Qwen/Qwen2.5-1.5B-Instruct
+2026-11-11T05:08:28Z baixar rc=0
+2026-11-11T05:08:28Z inicio medir.py --modelo Qwen2.5-1.5B-Instruct --niveis q8_0 --kv 16 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-11-11T05:14:44Z fim rc=0
+2026-11-11T05:14:49Z inicio medir.py --modelo Qwen2.5-1.5B-Instruct --niveis q8_0 --kv 4 --saida kv.csv --reusar-de resultados.csv --benchmarks gsm8k math500 mmlu_letra oab_letra
+2026-11-11T07:29:48Z fim rc=0
+limpar Qwen2.5-1.5B-Instruct: todas as medidas registradas; apagados pesos e GGUFs (7.8 GB)

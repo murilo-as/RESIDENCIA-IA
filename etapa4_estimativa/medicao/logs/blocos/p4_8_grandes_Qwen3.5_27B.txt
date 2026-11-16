@@ -1,0 +1,4 @@
+Qwen3.5-27B: pasta de modelos com 333 GB (precisa de ~200 GB livres dentro do limite de 450); pulado
+2026-11-16T05:30:18Z baixar Qwen/Qwen3.5-27B
+2026-11-16T05:45:18Z baixar rc=0
+2026-11-16T05:45:18Z inicio medir.py --modelo Qwen3.5-27B --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa gsm8k math500 wmt24 humaneval mbpp

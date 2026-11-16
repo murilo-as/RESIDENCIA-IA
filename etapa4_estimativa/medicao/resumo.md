@@ -667,6 +667,71 @@
 | Qwen3-14B | q8_0 | humaneval_base | 164 | 0.896341 | 0.023802 | 391.8 | 204.9 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
 | Qwen3-14B | q8_0 | mbpp_plus | 378 | 0.748677 | 0.022311 | 425.5 | 90.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
 | Qwen3-14B | q8_0 | mbpp_base | 378 | 0.902116 | 0.015284 | 425.5 | 90.2 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:39:02Z |
+| Qwen2.5-3B-Instruct | f16 | gpqa | 198 | 0.30303 | 0.032743 | 31.2 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T18:53:51Z |
+| Qwen2.5-7B-Instruct | f16 | gpqa | 198 | 0.313131 | 0.033042 | 54.8 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T19:01:00Z |
+| Qwen2.5-14B-Instruct | f16 | gpqa | 198 | 0.388889 | 0.034733 | 112.0 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T19:11:23Z |
+| Qwen3-8B | f16 | gpqa | 198 | 0.338384 | 0.033711 | 65.6 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T19:19:56Z |
+| Qwen3.5-9B | f16 | gpqa | 198 | 0.419192 | 0.035155 | 123.7 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-09T19:28:44Z |
+| Qwen2.5-32B-Instruct | f16 | wmt24 | 960 | 0.624481 | 0.006459 | 3197.9 | 62.8 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T04:16:29Z |
+| Qwen2.5-32B-Instruct | f16 | math500 | 500 | 0.816 | 0.017346 | 10102.7 | 472.8 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T07:11:30Z |
+| Qwen2.5-32B-Instruct | f16 | math500_strict | 500 | 0.0 | 0.0 | 10102.7 | 472.8 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T07:11:30Z |
+| Qwen2.5-32B-Instruct | q8_0 | wmt24 | 960 | 0.624031 | 0.006422 | 1817.2 | 62.8 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T08:43:20Z |
+| Qwen2.5-32B-Instruct | q8_0 | math500 | 500 | 0.812 | 0.017491 | 5705.8 | 472.1 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T10:18:28Z |
+| Qwen2.5-32B-Instruct | q8_0 | math500_strict | 500 | 0.0 | 0.0 | 5705.8 | 472.1 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T10:18:28Z |
+| Qwen2.5-32B-Instruct | q4_k_m | wmt24 | 960 | 0.617365 | 0.009184 | 1340.0 | 67.3 | 3 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T11:25:09Z |
+| Qwen2.5-32B-Instruct | q4_k_m | math500 | 500 | 0.822 | 0.017124 | 4033.7 | 470.0 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T12:32:25Z |
+| Qwen2.5-32B-Instruct | q4_k_m | math500_strict | 500 | 0.006 | 0.003457 | 4033.7 | 470.0 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-12T12:32:25Z |
+| Qwen2.5-32B-Instruct | f16 | humaneval_plus | 164 | 0.859756 | 0.027115 | 1506.4 | 206.4 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:55Z |
+| Qwen2.5-32B-Instruct | f16 | humaneval_base | 164 | 0.902439 | 0.02317 | 1506.4 | 206.4 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:55Z |
+| Qwen2.5-32B-Instruct | f16 | mbpp_plus | 378 | 0.746032 | 0.022388 | 3248.4 | 195.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:55Z |
+| Qwen2.5-32B-Instruct | f16 | mbpp_base | 378 | 0.891534 | 0.015994 | 3248.4 | 195.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:55Z |
+| Qwen2.5-32B-Instruct | q4_k_m | humaneval_plus | 164 | 0.835366 | 0.028959 | 575.4 | 200.6 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen2.5-32B-Instruct | q4_k_m | humaneval_base | 164 | 0.871951 | 0.026092 | 575.4 | 200.6 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen2.5-32B-Instruct | q4_k_m | mbpp_plus | 378 | 0.759259 | 0.02199 | 1212.5 | 185.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen2.5-32B-Instruct | q4_k_m | mbpp_base | 378 | 0.910053 | 0.014716 | 1212.5 | 185.7 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen2.5-32B-Instruct | q8_0 | humaneval_plus | 164 | 0.865854 | 0.026613 | 848.4 | 206.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen2.5-32B-Instruct | q8_0 | humaneval_base | 164 | 0.902439 | 0.02317 | 848.4 | 206.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen2.5-32B-Instruct | q8_0 | mbpp_plus | 378 | 0.746032 | 0.022388 | 1847.7 | 198.6 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen2.5-32B-Instruct | q8_0 | mbpp_base | 378 | 0.896825 | 0.015646 | 1847.7 | 198.6 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-13T11:16:56Z |
+| Qwen3.5-35B-A3B | f16 | medqa | 1273 | 0.865672 | 0.009561 | 201.9 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-14T03:10:03Z |
+| Qwen3.5-35B-A3B | f16 | mmlu | 1425 | 0.853333 | 0.009007 | 850.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T00:12:54Z |
+| Qwen3.5-35B-A3B | f16 | oab | 2205 | 0.690703 | 0.009845 | 2258.8 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T00:50:36Z |
+| Qwen3.5-35B-A3B | f16 | pubmedqa | 1000 | 0.79 | 0.012887 | 450.6 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T00:58:13Z |
+| Qwen3.5-35B-A3B | f16 | gsm8k | 1319 | 0.961334 | 0.005311 | 5212.9 | 167.9 | 5 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T15:22:24Z |
+| Qwen3.5-35B-A3B | f16 | gsm8k_strict | 1319 | 0.961334 | 0.005311 | 5212.9 | 167.9 | 5 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T15:22:24Z |
+| Qwen3.5-35B-A3B | f16 | wmt24 | 960 | 0.638112 | 0.004107 | 889.9 | 51.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T16:05:01Z |
+| Qwen3.5-35B-A3B | f16 | math500 | 500 | 0.894 | 0.013781 | 4515.9 | 743.8 | 47 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T17:21:45Z |
+| Qwen3.5-35B-A3B | f16 | math500_strict | 500 | 0.854 | 0.015807 | 4515.9 | 743.8 | 47 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T17:21:45Z |
+| Qwen3.5-35B-A3B | q8_0 | mmlu | 1425 | 0.85614 | 0.00889 | 853.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T17:42:08Z |
+| Qwen3.5-35B-A3B | q8_0 | medqa | 1273 | 0.867243 | 0.009514 | 472.8 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T17:50:01Z |
+| Qwen3.5-35B-A3B | q8_0 | oab | 2205 | 0.685261 | 0.009892 | 2217.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T18:27:02Z |
+| Qwen3.5-35B-A3B | q8_0 | pubmedqa | 1000 | 0.787 | 0.012954 | 453.1 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T18:34:36Z |
+| Qwen3.5-35B-A3B | q8_0 | gsm8k | 1319 | 0.963609 | 0.005158 | 3535.5 | 168.9 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T19:35:09Z |
+| Qwen3.5-35B-A3B | q8_0 | gsm8k_strict | 1319 | 0.962851 | 0.00521 | 3535.5 | 168.9 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T19:35:09Z |
+| Qwen3.5-35B-A3B | q8_0 | wmt24 | 960 | 0.637913 | 0.00404 | 698.6 | 51.8 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T20:05:38Z |
+| Qwen3.5-35B-A3B | q8_0 | math500 | 500 | 0.882 | 0.014442 | 3243.4 | 741.7 | 54 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T20:59:42Z |
+| Qwen3.5-35B-A3B | q8_0 | math500_strict | 500 | 0.84 | 0.016412 | 3243.4 | 741.7 | 54 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T20:59:42Z |
+| Qwen3.5-35B-A3B | q4_k_m | mmlu | 1425 | 0.858246 | 0.00892 | 871.4 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T21:16:54Z |
+| Qwen3.5-35B-A3B | q4_k_m | medqa | 1273 | 0.864101 | 0.009608 | 470.5 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T21:24:45Z |
+| Qwen3.5-35B-A3B | q4_k_m | oab | 2205 | 0.683447 | 0.009908 | 2238.6 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T22:02:05Z |
+| Qwen3.5-35B-A3B | q4_k_m | pubmedqa | 1000 | 0.792 | 0.012841 | 450.6 |  |  | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T22:09:36Z |
+| Qwen3.5-35B-A3B | q4_k_m | gsm8k | 1319 | 0.956785 | 0.005601 | 2618.4 | 168.0 | 9 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T22:54:07Z |
+| Qwen3.5-35B-A3B | q4_k_m | gsm8k_strict | 1319 | 0.956785 | 0.005601 | 2618.4 | 168.0 | 9 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T22:54:07Z |
+| Qwen3.5-35B-A3B | q4_k_m | wmt24 | 960 | 0.637646 | 0.003977 | 505.8 | 51.9 | 0 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T23:16:42Z |
+| Qwen3.5-35B-A3B | q4_k_m | math500 | 500 | 0.892 | 0.013895 | 2223.1 | 733.8 | 52 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T23:53:46Z |
+| Qwen3.5-35B-A3B | q4_k_m | math500_strict | 500 | 0.844 | 0.016244 | 2223.1 | 733.8 | 52 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-15T23:53:46Z |
+| Qwen3.5-35B-A3B | f16 | humaneval_plus | 164 | 0.902439 | 0.02317 | 545.6 | 257.5 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:25Z |
+| Qwen3.5-35B-A3B | f16 | humaneval_base | 164 | 0.945122 | 0.017784 | 545.6 | 257.5 | 1 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:25Z |
+| Qwen3.5-35B-A3B | f16 | mbpp_plus | 378 | 0.761905 | 0.021907 | 1025.4 | 204.7 | 9 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:25Z |
+| Qwen3.5-35B-A3B | f16 | mbpp_base | 378 | 0.915344 | 0.014318 | 1025.4 | 204.7 | 9 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:25Z |
+| Qwen3.5-35B-A3B | q4_k_m | humaneval_plus | 164 | 0.865854 | 0.026613 | 273.4 | 257.9 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
+| Qwen3.5-35B-A3B | q4_k_m | humaneval_base | 164 | 0.914634 | 0.021819 | 273.4 | 257.9 | 4 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
+| Qwen3.5-35B-A3B | q4_k_m | mbpp_plus | 378 | 0.76455 | 0.021823 | 553.0 | 222.0 | 8 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
+| Qwen3.5-35B-A3B | q4_k_m | mbpp_base | 378 | 0.910053 | 0.014716 | 553.0 | 222.0 | 8 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
+| Qwen3.5-35B-A3B | q8_0 | humaneval_plus | 164 | 0.884146 | 0.024992 | 392.4 | 257.1 | 2 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
+| Qwen3.5-35B-A3B | q8_0 | humaneval_base | 164 | 0.939024 | 0.018685 | 392.4 | 257.1 | 2 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
+| Qwen3.5-35B-A3B | q8_0 | mbpp_plus | 378 | 0.767196 | 0.021737 | 714.0 | 198.9 | 6 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
+| Qwen3.5-35B-A3B | q8_0 | mbpp_base | 378 | 0.920635 | 0.013903 | 714.0 | 198.9 | 6 | 36e36e63a54fc8f85b95e9c499a022b597e478dd | 2026-11-16T05:28:26Z |
 
 ## Pulado na etapa 1
 
@@ -1031,6 +1096,64 @@ torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 h
     if not m.espaco_ok(modelo): raise RuntimeError("sem espaco livre")
                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 RuntimeError: sem espaco livre
+
+2026-11-14T03:06:25Z Qwen3.5-35B-A3B f16 mmlu: Traceback (most recent call last):
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 568, in main
+    if bench in LOGLIK: rodar_loglik(m, s, bench, limite)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 352, in rodar_loglik
+    res = m.avaliar(task, model=lm, num_fewshot=cfg.get("fewshot"), log_samples=not teste, evaluation_tracker=tracker, **sel)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 161, in avaliar
+    return simple_evaluate(tasks=[nome], task_manager=Pronto(self._carregado[nome]), **SEMENTES, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/evaluator.py", line 363, in simple_evaluate
+    results = evaluate(
+              ^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/evaluator.py", line 600, in evaluate
+    resps = getattr(lm, reqtype)(cloned_reqs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/models/huggingface.py", line 1224, in loglikelihood
+    return super().loglikelihood(requests, disable_tqdm=disable_tqdm)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/api/model.py", line 471, in loglikelihood
+    return self._loglikelihood_tokens(new_reqs, disable_tqdm=disable_tqdm)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/models/huggingface.py", line 1503, in _loglikelihood_tokens
+    multi_logits = F.log_softmax(
+                   ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/functional.py", line 2321, in log_softmax
+    ret = input.log_softmax(dim)
+          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.21 GiB. GPU 0 has a total capacity of 121.69 GiB of which 5.58 GiB is free. Including non-PyTorch memory, this process has 111.72 GiB memory in use. Of the allocated memory 107.26 GiB is allocated by PyTorch, and 4.18 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+Qwen3.5-27B: pasta de modelos com 333 GB (precisa de ~200 GB livres dentro do limite de 450); pulado
+Qwen3-30B-A3B: pasta de modelos com 333 GB (precisa de ~200 GB livres dentro do limite de 450); pulado
+2026-11-16T06:49:50Z Qwen3-30B-A3B f16 mmlu: teste de 5 exemplos reprovou, prova pulada: erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4353, in from_pretrained
+    loading_info, disk_offload_index = cls._load_pretrained_model(
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4435, in _load_pretrained_model
+    caching_allocator_warmup(model, expanded_device_map, load_config.hf_quantizer)
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 5118, in caching_allocator_warmup
+    _ = torch.empty(int(byte_count // 2), dtype=torch.float16, device=device, requires_grad=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 has a total capacity of 121.69 GiB of which 22.47 GiB is free. Including non-PyTorch memory, this process has 170.48 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+2026-11-16T07:18:59Z Qwen3-30B-A3B f16 mmlu: teste de 5 exemplos reprovou, prova pulada: erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4353, in from_pretrained
+    loading_info, disk_offload_index = cls._load_pretrained_model(
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4435, in _load_pretrained_model
+    caching_allocator_warmup(model, expanded_device_map, load_config.hf_quantizer)
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 5118, in caching_allocator_warmup
+    _ = torch.empty(int(byte_count // 2), dtype=torch.float16, device=device, requires_grad=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 has a total capacity of 121.69 GiB of which 22.47 GiB is free. Including non-PyTorch memory, this process has 170.48 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
 ```
 
 ## Pareado f16 x q4_k_m
@@ -1273,6 +1396,42 @@ Qwen2.5-32B-Instruct gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
   erro padrao da diferenca pareada: 0.0081
 ```
 ```
+Qwen2.5-32B-Instruct humaneval_base: n=164 (amostras A/B: 164/164)
+  acc f16 = 0.9024; acc q4_k_m = 0.8720; diferenca (A-B) = +0.0305
+  so f16 acertou: 9; so q4_k_m acertou: 4
+  erro padrao da diferenca pareada: 0.0219
+```
+```
+Qwen2.5-32B-Instruct humaneval_plus: n=164 (amostras A/B: 164/164)
+  acc f16 = 0.8598; acc q4_k_m = 0.8354; diferenca (A-B) = +0.0244
+  so f16 acertou: 8; so q4_k_m acertou: 4
+  erro padrao da diferenca pareada: 0.0210
+```
+```
+Qwen2.5-32B-Instruct math500: n=500 (amostras A/B: 500/500)
+  acc f16 = 0.8160; acc q4_k_m = 0.8220; diferenca (A-B) = -0.0060
+  so f16 acertou: 26; so q4_k_m acertou: 29
+  erro padrao da diferenca pareada: 0.0148
+```
+```
+Qwen2.5-32B-Instruct math500_strict: n=500 (amostras A/B: 500/500)
+  acc f16 = 0.0000; acc q4_k_m = 0.0060; diferenca (A-B) = -0.0060
+  so f16 acertou: 0; so q4_k_m acertou: 3
+  erro padrao da diferenca pareada: 0.0035
+```
+```
+Qwen2.5-32B-Instruct mbpp_base: n=378 (amostras A/B: 378/378)
+  acc f16 = 0.8915; acc q4_k_m = 0.9101; diferenca (A-B) = -0.0185
+  so f16 acertou: 7; so q4_k_m acertou: 14
+  erro padrao da diferenca pareada: 0.0121
+```
+```
+Qwen2.5-32B-Instruct mbpp_plus: n=378 (amostras A/B: 378/378)
+  acc f16 = 0.7460; acc q4_k_m = 0.7593; diferenca (A-B) = -0.0132
+  so f16 acertou: 8; so q4_k_m acertou: 13
+  erro padrao da diferenca pareada: 0.0121
+```
+```
 Qwen2.5-32B-Instruct medqa: n=1273 (amostras A/B: 1273/1273)
   acc f16 = 0.7258; acc q4_k_m = 0.7219; diferenca (A-B) = +0.0039
   so f16 acertou: 29; so q4_k_m acertou: 24
@@ -1295,6 +1454,9 @@ Qwen2.5-32B-Instruct pubmedqa: n=1000 (amostras A/B: 1000/1000)
   acc f16 = 0.7940; acc q4_k_m = 0.8030; diferenca (A-B) = -0.0090
   so f16 acertou: 2; so q4_k_m acertou: 11
   erro padrao da diferenca pareada: 0.0036
+```
+```
+Qwen2.5-32B-Instruct wmt24: sem comparacao pareada (KeyError: "sem comparacao pareada para 'wmt24' (metrica de corpus ou nao suportada)")
 ```
 ```
 Qwen2.5-3B-Instruct gsm8k: n=1319 (amostras A/B: 1319/1319)
@@ -2096,6 +2258,81 @@ Qwen3.5-2B pubmedqa: n=1000 (amostras A/B: 1000/1000)
 ```
 ```
 Qwen3.5-2B wmt24: sem comparacao pareada (KeyError: "sem comparacao pareada para 'wmt24' (metrica de corpus ou nao suportada)")
+```
+```
+Qwen3.5-35B-A3B gsm8k: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.9613; acc q4_k_m = 0.9568; diferenca (A-B) = +0.0045
+  so f16 acertou: 18; so q4_k_m acertou: 12
+  erro padrao da diferenca pareada: 0.0042
+```
+```
+Qwen3.5-35B-A3B gsm8k_strict: n=1319 (amostras A/B: 1319/1319)
+  acc f16 = 0.9613; acc q4_k_m = 0.9568; diferenca (A-B) = +0.0045
+  so f16 acertou: 19; so q4_k_m acertou: 13
+  erro padrao da diferenca pareada: 0.0043
+```
+```
+Qwen3.5-35B-A3B humaneval_base: n=164 (amostras A/B: 164/164)
+  acc f16 = 0.9451; acc q4_k_m = 0.9146; diferenca (A-B) = +0.0305
+  so f16 acertou: 6; so q4_k_m acertou: 1
+  erro padrao da diferenca pareada: 0.0160
+```
+```
+Qwen3.5-35B-A3B humaneval_plus: n=164 (amostras A/B: 164/164)
+  acc f16 = 0.9024; acc q4_k_m = 0.8659; diferenca (A-B) = +0.0366
+  so f16 acertou: 7; so q4_k_m acertou: 1
+  erro padrao da diferenca pareada: 0.0170
+```
+```
+Qwen3.5-35B-A3B math500: n=500 (amostras A/B: 500/500)
+  acc f16 = 0.8940; acc q4_k_m = 0.8920; diferenca (A-B) = +0.0020
+  so f16 acertou: 13; so q4_k_m acertou: 12
+  erro padrao da diferenca pareada: 0.0100
+```
+```
+Qwen3.5-35B-A3B math500_strict: n=500 (amostras A/B: 500/500)
+  acc f16 = 0.8540; acc q4_k_m = 0.8440; diferenca (A-B) = +0.0100
+  so f16 acertou: 20; so q4_k_m acertou: 15
+  erro padrao da diferenca pareada: 0.0118
+```
+```
+Qwen3.5-35B-A3B mbpp_base: n=378 (amostras A/B: 378/378)
+  acc f16 = 0.9153; acc q4_k_m = 0.9101; diferenca (A-B) = +0.0053
+  so f16 acertou: 9; so q4_k_m acertou: 7
+  erro padrao da diferenca pareada: 0.0106
+```
+```
+Qwen3.5-35B-A3B mbpp_plus: n=378 (amostras A/B: 378/378)
+  acc f16 = 0.7619; acc q4_k_m = 0.7646; diferenca (A-B) = -0.0026
+  so f16 acertou: 9; so q4_k_m acertou: 10
+  erro padrao da diferenca pareada: 0.0115
+```
+```
+Qwen3.5-35B-A3B medqa: n=1273 (amostras A/B: 1273/1273)
+  acc f16 = 0.8657; acc q4_k_m = 0.8641; diferenca (A-B) = +0.0016
+  so f16 acertou: 17; so q4_k_m acertou: 15
+  erro padrao da diferenca pareada: 0.0044
+```
+```
+Qwen3.5-35B-A3B mmlu: n=1425 (amostras A/B: 1425/1425)
+  acc f16 = 0.8533; acc q4_k_m = 0.8582; diferenca (A-B) = -0.0049
+  so f16 acertou: 26; so q4_k_m acertou: 33
+  erro padrao da diferenca pareada: 0.0054
+```
+```
+Qwen3.5-35B-A3B oab: n=2205 (amostras A/B: 2205/2205)
+  acc f16 = 0.6907; acc q4_k_m = 0.6834; diferenca (A-B) = +0.0073
+  so f16 acertou: 103; so q4_k_m acertou: 87
+  erro padrao da diferenca pareada: 0.0062
+```
+```
+Qwen3.5-35B-A3B pubmedqa: n=1000 (amostras A/B: 1000/1000)
+  acc f16 = 0.7900; acc q4_k_m = 0.7920; diferenca (A-B) = -0.0020
+  so f16 acertou: 16; so q4_k_m acertou: 18
+  erro padrao da diferenca pareada: 0.0058
+```
+```
+Qwen3.5-35B-A3B wmt24: sem comparacao pareada (KeyError: "sem comparacao pareada para 'wmt24' (metrica de corpus ou nao suportada)")
 ```
 ```
 Qwen3.5-4B gsm8k: n=1319 (amostras A/B: 1319/1319)

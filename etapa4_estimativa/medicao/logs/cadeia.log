@@ -64,3 +64,35 @@
 2026-11-09T18:40:29Z job 1351 (linha 4) submeteu linha 5 (p4-gpqa): 1352
 2026-11-09T18:47:59Z job 1352 (linha 5) submeteu linha 6 (p4-5-limpar): 1357
 2026-11-10T00:35:24Z 1357 cancelado (pendente, nunca rodou); linha 6 = p4-56-limpar-kv submetida manualmente: 1396
+2026-11-11T04:02:36Z job 1396 (linha 6) submeteu linha 7 (p4-7-32b): 1437
+2026-11-12T01:24:46Z job 1437 (linha 7) submeteu linha 8 (p4-pontuar-d): 1461
+2026-11-13T08:51:24Z job 1461 (linha 8) submeteu linha 9 (p4-ingerir-d): 1495
+2026-11-13T11:15:21Z job 1495 (linha 9) submeteu linha 10 (p4-8a-30b): 1496
+2026-11-13T11:18:48Z job 1496 (linha 10) submeteu linha 11 (p4-pontuar-e): 1500
+2026-11-14T01:51:49Z job 1500 (linha 11) submeteu linha 12 (p4-ingerir-e): 1531
+2026-11-14T01:53:58Z job 1531 (linha 12) submeteu linha 13 (p4-8b-35b): 1532
+2026-11-14T01:55:31Z job 1532 (linha 13) submeteu linha 14 (p4-pontuar-f): 1533
+2026-11-14T04:19:15Z job 1533 (linha 14) submeteu linha 15 (p4-ingerir-f): 1535
+2026-11-14T04:21:05Z job 1535 (linha 15) submeteu linha 16 (p4-8c-27b): 1536
+2026-11-14T04:22:23Z job 1536 (linha 16) submeteu linha 17 (p4-pontuar-g): 1537
+2026-11-14T04:22:27Z job 1537 (linha 17) submeteu linha 18 (p4-ingerir-g): 1538
+2026-11-14T04:24:05Z job 1538 (linha 18) submeteu linha 19 (p4-8a2-30b-retry): 1539
+2026-11-14T04:25:13Z job 1539 (linha 19) submeteu linha 20 (p4-pontuar-h): 1540
+2026-11-14T04:25:17Z job 1540 (linha 20) submeteu linha 21 (p4-ingerir-h): 1541
+2026-11-14T04:26:50Z job 1541 (linha 21) submeteu linha 22 (p4-resumo-c): 1542
+2026-11-14T04:28:04Z job 1542 (linha 22): fim da cadeia
+2026-11-14T21:54:13Z plano_final.txt iniciado manualmente: linha 1 = p4-8b2-35b: 1581
+2026-11-14T23:44:02Z job 1581 (linha 1) submeteu linha 2 (p4-pontuar-i): 1582
+2026-11-15T13:18:26Z 1581 NODE_FAIL (spark14 reiniciou); 1582 pontuar falhou em 2s (cadeia parou); resubmetido linha 1 = p4-8b2-35b: 1602
+2026-11-15T13:43:25Z job 1602 (linha 1) submeteu linha 2 (p4-pontuar-i): 1603
+2026-11-16T05:21:51Z job 1603 (linha 2) submeteu linha 3 (p4-ingerir-i): 1613
+2026-11-16T05:28:20Z job 1613 (linha 3) submeteu linha 4 (p4-8c2-27b): 1614
+2026-11-16T05:30:17Z job 1614 (linha 4) submeteu linha 5 (p4-pontuar-j): 1615
+2026-11-16T06:08:22Z job 1615 (linha 5) submeteu linha 6 (p4-ingerir-j): 1616
+2026-11-16T06:11:26Z job 1616 (linha 6) submeteu linha 7 (p4-8a3-30b): 1617
+2026-11-16T06:12:45Z job 1617 (linha 7) submeteu linha 8 (p4-pontuar-k): 1618
+2026-11-16T10:35:38Z job 1618 (linha 8) submeteu linha 9 (p4-ingerir-k): 1619
+2026-11-16T10:37:53Z job 1619 (linha 9) submeteu linha 10 (p4-resumo-d): 1620
+2026-11-16T10:39:45Z job 1620 (linha 10): fim da cadeia
+2026-11-16T12:43:28Z plano_dividido.txt iniciado manualmente: linha 1 = p4-11a-27b: 1621
+2026-11-16T12:43:30Z job 1621 (linha 1) submeteu linha 2 (p4-pontuar-l): 1622

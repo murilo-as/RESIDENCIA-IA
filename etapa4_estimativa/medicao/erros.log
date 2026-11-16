@@ -355,3 +355,61 @@ torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 h
                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 RuntimeError: sem espaco livre
 
+2026-11-14T03:06:25Z Qwen3.5-35B-A3B f16 mmlu: Traceback (most recent call last):
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 568, in main
+    if bench in LOGLIK: rodar_loglik(m, s, bench, limite)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 352, in rodar_loglik
+    res = m.avaliar(task, model=lm, num_fewshot=cfg.get("fewshot"), log_samples=not teste, evaluation_tracker=tracker, **sel)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 161, in avaliar
+    return simple_evaluate(tasks=[nome], task_manager=Pronto(self._carregado[nome]), **SEMENTES, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/evaluator.py", line 363, in simple_evaluate
+    results = evaluate(
+              ^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/evaluator.py", line 600, in evaluate
+    resps = getattr(lm, reqtype)(cloned_reqs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/models/huggingface.py", line 1224, in loglikelihood
+    return super().loglikelihood(requests, disable_tqdm=disable_tqdm)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/api/model.py", line 471, in loglikelihood
+    return self._loglikelihood_tokens(new_reqs, disable_tqdm=disable_tqdm)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/lm_eval/models/huggingface.py", line 1503, in _loglikelihood_tokens
+    multi_logits = F.log_softmax(
+                   ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/functional.py", line 2321, in log_softmax
+    ret = input.log_softmax(dim)
+          ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.21 GiB. GPU 0 has a total capacity of 121.69 GiB of which 5.58 GiB is free. Including non-PyTorch memory, this process has 111.72 GiB memory in use. Of the allocated memory 107.26 GiB is allocated by PyTorch, and 4.18 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+Qwen3.5-27B: pasta de modelos com 333 GB (precisa de ~200 GB livres dentro do limite de 450); pulado
+Qwen3-30B-A3B: pasta de modelos com 333 GB (precisa de ~200 GB livres dentro do limite de 450); pulado
+2026-11-16T06:49:50Z Qwen3-30B-A3B f16 mmlu: teste de 5 exemplos reprovou, prova pulada: erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4353, in from_pretrained
+    loading_info, disk_offload_index = cls._load_pretrained_model(
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4435, in _load_pretrained_model
+    caching_allocator_warmup(model, expanded_device_map, load_config.hf_quantizer)
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 5118, in caching_allocator_warmup
+    _ = torch.empty(int(byte_count // 2), dtype=torch.float16, device=device, requires_grad=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 has a total capacity of 121.69 GiB of which 22.47 GiB is free. Including non-PyTorch memory, this process has 170.48 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+2026-11-16T07:18:59Z Qwen3-30B-A3B f16 mmlu: teste de 5 exemplos reprovou, prova pulada: erro no teste: rojects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4353, in from_pretrained
+    loading_info, disk_offload_index = cls._load_pretrained_model(
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4435, in _load_pretrained_model
+    caching_allocator_warmup(model, expanded_device_map, load_config.hf_quantizer)
+  File "/beegfs/home/user_muriloalves/work/projects/RESIDENCIA-IA/piloto/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 5118, in caching_allocator_warmup
+    _ = torch.empty(int(byte_count // 2), dtype=torch.float16, device=device, requires_grad=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 56.87 GiB. GPU 0 has a total capacity of 121.69 GiB of which 22.47 GiB is free. Including non-PyTorch memory, this process has 170.48 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
