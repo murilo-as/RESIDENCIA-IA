@@ -84,7 +84,7 @@ A `grade.yaml` define:
 |---|---|
 | QA × geral | MMLU |
 | QA × saúde | MedQA, PubMedQA |
-| QA × ciência | GPQA |
+| QA × ciência | sem célula própria: usa MMLU (indireta) |
 | QA × matemática | GSM8K, MATH-500 |
 | QA × jurídico | OAB-Exams |
 | Código | HumanEval+, MBPP+ |
