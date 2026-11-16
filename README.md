@@ -10,17 +10,17 @@ Recebe a descrição de um problema em texto livre e devolve uma configuração 
 | 2 | Diagnóstico | Transforma o pedido em "o que medir e dentro de quais limites": benchmarks, orçamento de memória, banda, contexto | `etapa2_diagnostico/` |
 | 3 | Candidatura | Gera as combinações de modelo + técnicas e descarta as que não cabem | `etapa3_candidatura/` |
 | 4 | Estimativa | Estima memória, latência e qualidade de cada candidata; contém as medições que alimentam a qualidade | `etapa4_estimativa/` |
-| 5 | Pareto | Elimina candidatas dominadas | sem código |
-| 6 | Recomendação | Ordena conforme a preferência e justifica | sem código |
+| 5 | Pareto | Elimina candidatas dominadas | `etapa5_pareto/` |
+| 6 | Recomendação | Escolhe conforme a preferência e justifica | `etapa6_recomendacao/` |
 | 7 | Aplicação | Manual | — |
 | 8 | Verificação | Manual | — |
 
-`pipeline.py` roda as etapas 1 a 4 em sequência.
+`pipeline.py` roda as etapas 1 a 6 em sequência.
 
 ## Estrutura
 
 ```
-pipeline.py                roda as etapas 1 a 4 em sequência
+pipeline.py                roda as etapas 1 a 6 em sequência
 config.yaml                LLM extrator, limites e pasta de saída
 config.py                  lê o config.yaml
 data/                      dados compartilhados entre as etapas

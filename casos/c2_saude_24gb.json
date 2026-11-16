@@ -1,0 +1,68 @@
+{
+  "texto": "Preciso responder perguntas médicas com a maior precisão possível. Tenho 24 GB de memória.",
+  "tarefa": {
+    "valor": "QA",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "dominio": {
+    "valor": "saúde",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "preferencia": {
+    "valor": "qualidade",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "idioma": {
+    "valor": "pt",
+    "evidencia": "Uso",
+    "origem": "texto"
+  },
+  "entrada_longa": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "raciocinio": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "recursos": {
+    "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    }
+  },
+  "memoria_gb": {
+    "valor": 24,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "modelo": {
+    "valor": null,
+    "origem": "vazio",
+    "id": null,
+    "candidatos": [],
+    "regra": null
+  },
+  "hardware": {
+    "valor": "PC",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "avisos": []
+}

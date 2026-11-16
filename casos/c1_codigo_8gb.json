@@ -1,0 +1,72 @@
+{
+  "texto": "Uso o Qwen3-8B para programar em Python, mas meu PC tem 8 GB e está lento. Quero algo mais rápido.",
+  "tarefa": {
+    "valor": "Código",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "dominio": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "preferencia": {
+    "valor": "footprint",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "idioma": {
+    "valor": "pt",
+    "evidencia": "Uso",
+    "origem": "texto"
+  },
+  "entrada_longa": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "raciocinio": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "recursos": {
+    "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    }
+  },
+  "memoria_gb": {
+    "valor": 8,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "modelo": {
+    "valor": "Qwen3-8B",
+    "evidencia": "Qwen3-8B",
+    "origem": "texto",
+    "id": "Qwen/Qwen3-8B",
+    "candidatos": [
+      "Qwen/Qwen3-8B",
+      "Qwen/Qwen3-8B-Base"
+    ],
+    "regra": "nome exato"
+  },
+  "hardware": {
+    "valor": "PC",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "avisos": []
+}

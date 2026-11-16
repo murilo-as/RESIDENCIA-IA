@@ -7,7 +7,7 @@ import argparse, json, os, sys
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, RAIZ)
 from config import carregar as carregar_config
-for pasta in ("etapa1_extracao", "etapa2_diagnostico", "etapa3_candidatura", "etapa4_estimativa"):
+for pasta in ("etapa1_extracao", "etapa2_diagnostico", "etapa3_candidatura", "etapa4_estimativa", "etapa5_pareto", "etapa6_recomendacao"):
     sys.path.insert(0, os.path.join(RAIZ, pasta))
 
 
@@ -42,12 +42,24 @@ def etapa4_estimativa(ctx):
     return estimar(ctx["candidatos"], ctx["diagnostico"], _fichas(ctx)[0])
 
 
+def etapa5_pareto(ctx):
+    from pareto import pareto
+    return pareto(ctx["estimativas"])
+
+
+def etapa6_recomendacao(ctx):
+    from recomendar import recomendar
+    return recomendar(ctx["pareto"], ctx["candidatos"])
+
+
 # (arquivo de saída, função). Etapa nova = uma função no fim da lista.
 ETAPAS = [
     ("pedido", etapa1_extracao),
     ("diagnostico", etapa2_diagnostico),
     ("candidatos", etapa3_candidatura),
     ("estimativas", etapa4_estimativa),
+    ("pareto", etapa5_pareto),
+    ("recomendacao", etapa6_recomendacao),
 ]
 
 
@@ -61,6 +73,14 @@ def resumo(ctx):
     print(f"memoria     : orcamento={m['orcamento_gb']} GB ({m['origem']}), ctx={m['ctx_alvo']['valor']}")
     print(f"latencia    : banda={l['banda_gb_s']} GB/s ({l['origem']}; escala do decode vs Spark = {l['escala_decode']}), meta={l['meta']['min_tok_s']} tok/s")
     for av in d["avisos"]: print("aviso       :", av)
+    r, pa = ctx["recomendacao"], ctx["pareto"]["resumo"]
+    print(f"pareto      : {pa['na_fronteira']} na fronteira, {pa['dominadas']} dominadas, {pa['fora']} fora")
+    e = r["escolhida"]
+    fmt = lambda e: f"{e['id']}  nota {e['nota']:.1f} ± {e['meio']:.1f} (tag {e['tag']}), {e['mem_gib']} GiB"
+    if e: print("recomendacao:", fmt(e))
+    for nome in ("top_qualidade", "top_footprint"):
+        for i, x in enumerate(r.get(nome, []), 1): print(f"{nome} {i}:", fmt(x))
+    for av in r["avisos"]: print("aviso       :", av)
 
 
 def main():

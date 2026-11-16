@@ -1,0 +1,15 @@
+# Configuração de todos os scripts. Vazio (null) = não informado.
+
+llm:                      # LLM que extrai o pedido (etapa 1), não o modelo otimizado
+  backend: gemini         # gemini | openai | llamacpp
+  modelo: gemini-2.5-flash
+  url: null               # só no backend openai
+
+limites:
+  memoria_gb: 16
+  banda_gb_s: 89.6
+  min_tok_s: 20
+
+familias: [Qwen]     # so estas familias entram (null = todas). Gemma saiu em 21/10/2026
+
+saida: saidas/c3_matematica_16gb

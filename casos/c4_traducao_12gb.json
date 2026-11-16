@@ -1,0 +1,68 @@
+{
+  "texto": "Preciso traduzir textos do inglês para o português, leve, tenho 12 GB.",
+  "tarefa": {
+    "valor": "Tradução",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "dominio": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "preferencia": {
+    "valor": "footprint",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "idioma": {
+    "valor": "pt",
+    "evidencia": "Uso",
+    "origem": "texto"
+  },
+  "entrada_longa": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "raciocinio": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "recursos": {
+    "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    }
+  },
+  "memoria_gb": {
+    "valor": 12,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "modelo": {
+    "valor": null,
+    "origem": "vazio",
+    "id": null,
+    "candidatos": [],
+    "regra": null
+  },
+  "hardware": {
+    "valor": "PC",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "avisos": []
+}
