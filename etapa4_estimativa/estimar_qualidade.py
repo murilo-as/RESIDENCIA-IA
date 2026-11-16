@@ -220,12 +220,14 @@ _KV = {}
 def _kv_dados(F):
     """{(id, chave): {kv: nota}} do kv.csv: pesos Q8_0, raciocinio desligado. O efeito do KV e a diferenca contra o KV 16 do mesmo modelo e prova."""
     if "d" not in _KV:
-        d, arq = {}, os.path.join(AQUI, "medicao", "kv.csv")
+        d, ruim, arq = {}, set(), os.path.join(AQUI, "medicao", "kv.csv")
         for r in (csv.DictReader(open(arq, encoding="utf-8")) if os.path.exists(arq) else []):
             i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
             if i in F and r["nivel"] == "q8_0" and r["raciocinio"] == "desligado" and r["benchmark"] in KV_BENCH:
-                d.setdefault((i, KV_BENCH[r["benchmark"]]), {})[int(r["kv"])] = float(r["acuracia"])
-        _KV["d"] = d
+                k = (i, KV_BENCH[r["benchmark"]])
+                d.setdefault(k, {})[int(r["kv"])] = float(r["acuracia"])
+                if r["kv"] == "16" and int(r["cortadas"] or 0) > 0.10 * int(r["n"]): ruim.add(k)      # prova invalida ja com KV 16 (ex.: OAB por letra nos Qwen3: resposta sem letra)
+        _KV["d"] = {k: v for k, v in d.items() if k not in ruim}
     return _KV["d"]
 
 
