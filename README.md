@@ -114,13 +114,12 @@ Entrada: `diagnostico.json`. Saída: `candidatos.json`. Sem LLM.
 
 | Campo do `candidatos.json` | Conteúdo |
 |---|---|
-| `regras` | Cada passo com a regra, o arquivo de origem e a tag |
-| `modelos` | Por modelo e técnica medida: aplica, talvez ou não |
+| `regras` | Cada passo com a regra e o arquivo de origem |
+| `modelos` | Por modelo, as técnicas que aplicam ou talvez (medidas ou não), com a regra de cada decisão. A etapa 6 usa essa lista para sugerir técnicas conforme a preferência |
 | `configuracoes` | Modelo + técnicas + níveis, com memória mínima, se cabe, `status` e `talvez_por` |
 | `modelos_descartados` | Quem saiu e por quê |
-| `tecnicas_nao_medidas` | Direção do efeito, fora do Pareto |
 
-`candidatar.py` faz: 3.1 escolhe modelos · 3.2 aplica técnicas · 3.3 enumera pesos × KV × modo de raciocínio · 3.4 corta o que não cabe na memória · 3.5 marca o que favorece a preferência · 3.6 lista técnicas não medidas. `regras.py` tem os predicados das técnicas (lógica de 3 valores: sim, talvez, não), a memória mínima teórica, o `config_id` e o validador do `efeitos.csv`.
+`candidatar.py` faz: 3.1 escolhe modelos · 3.2 aplica técnicas · 3.3 enumera pesos × KV × modo de raciocínio · 3.4 corta o que não cabe na memória · 3.5 marca o que favorece a preferência. `regras.py` tem os predicados das técnicas (lógica de 3 valores: sim, talvez, não), a memória mínima teórica, o `config_id` e o validador cruzado de fichas e técnicas.
 
 Regras (tag C, exceto a conta de memória, B):
 - Modelo citado no pedido: só ele; as técnicas são recomendadas para ele.

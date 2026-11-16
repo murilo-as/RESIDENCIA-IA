@@ -39,7 +39,7 @@ def escolher_modelos(F, grade, d, avisos):
         if not fixos: raise KeyError(f"modelo {r['modelo_ids']} fora do fichas.json")
         fora = []
         if len(fixos) > 1 and treino is not True:      # variantes: o base so fica se puder treinar
-            fora = [{"id": i, "motivo": "modelo base sem poder treinar", "regra": "base so entra com treino=true (C)"} for i in fixos if F[i]["tipo"] == "base"]
+            fora = [{"id": i, "motivo": "modelo base sem poder treinar", "regra": "base so entra com treino=true"} for i in fixos if F[i]["tipo"] == "base"]
             fixos = [i for i in fixos if F[i]["tipo"] != "base"] or fixos
         for i in fixos:
             if not modos_raciocinio(F[i], rac):
@@ -49,8 +49,8 @@ def escolher_modelos(F, grade, d, avisos):
     ok, fora = [], []
     for i, f in F.items():
         if f["especialidade"] not in permitido: fora.append({"id": i, "motivo": f"especialidade {f['especialidade']!r} fora da celula", "regra": "grade.yaml:especialidade"})
-        elif f["tipo"] == "base" and treino is not True: fora.append({"id": i, "motivo": "modelo base sem poder treinar", "regra": "base so entra com treino=true (C)"})
-        elif not modos_raciocinio(f, rac): fora.append({"id": i, "motivo": f"tipo {f['tipo']!r} nao combina com raciocinio={rac}", "regra": "regra de raciocinio (C)"})
+        elif f["tipo"] == "base" and treino is not True: fora.append({"id": i, "motivo": "modelo base sem poder treinar", "regra": "base so entra com treino=true"})
+        elif not modos_raciocinio(f, rac): fora.append({"id": i, "motivo": f"tipo {f['tipo']!r} nao combina com raciocinio={rac}", "regra": "regra de raciocinio"})
         else: ok.append(i)
     return ok, fora, "catalogo filtrado"
 
@@ -88,46 +88,21 @@ def configuracoes(i, f, T, cat, d, ctx, orc, pref):
     return out
 
 
-# por que cada técnica medida se aplica (ou não) a cada modelo, com a regra e o arquivo
+# técnicas aplicáveis (ou talvez) a cada modelo, com a regra de cada decisão; movimento, custo e efeito ficam no tecnicas.yaml
 def decisoes(i, F, T, recursos, pref):
-    return [{"tecnica": x["tecnica"], "status": {True: "aplica", None: "talvez", False: "nao"}[x["status"]], "porque": x["porque"]}
-            for x in situacao_tecnicas(F[i], F, T, recursos, pref) if x["medida_na_v1"] == "sim"]
-
-
-# 3.6 técnicas não medidas: o que o usuário pode aplicar (recursos) e quer (preferência), em escada por custo de adaptação
-CUSTO = {"nenhum": 0, "leve": 1, "varia": 2, "alto": 3}
-GRUPO = {"Improve": "qualidade", "Grow": "qualidade", "Shrink": "footprint", "Speed-up": "footprint"}
-RECURSOS = [("dados", "dados"), ("treino", "treino"), ("gpu", "gpu_para_aplicar")]
-
-
-def tecnicas_nao_medidas(F, T, modelos, recursos, pref=None):
     out = []
-    for k, t in T["tecnicas"].items():
-        if t["aplica_em"] != "modelo_pronto" or t["medida_na_v1"] == "sim": continue
-        r = avalia_recursos(t, recursos)
-        if r is False: continue
-        g = GRUPO[t["movimento"]]
-        if pref in ("qualidade", "footprint") and g != pref: continue
-        ms = [avalia(t, F[i], F) for i in modelos]
-        if not any(m is not False for m in ms): continue
-        exige = {rot: t["exige"][c] for rot, c in RECURSOS if t["exige"][c] != "nao"}
-        tem = lambda v: {True: "sim", False: "nao", None: "nao informado"}[v]
-        out.append({"tecnica": k, "grupo": g, "movimento": t["movimento"], "custo": t["custo_adaptacao"], "efeito_esperado": t["efeito_esperado"],
-                    "recursos": {True: "ok", None: "talvez"}[r],
-                    "porque": {"exige": exige, "usuario": {rot: tem((recursos or {}).get(rot)) for rot in exige},
-                               "preferencia": pref or "nao informada (mostra os dois grupos)"},
-                    "modelos_aplicaveis": sum(m is not False for m in ms), "tag": t["tag_efeitos"],
-                    "nota": "so a direcao do efeito; nao medida na v1, fora do Pareto"})
-    return sorted(out, key=lambda x: ({"qualidade": 0, "footprint": 1}[x["grupo"]], CUSTO[x["custo"]], x["tecnica"]))
+    for x in situacao_tecnicas(F[i], F, T, recursos, pref):
+        if x["status"] is False: continue
+        out.append({"tecnica": x["tecnica"], "status": {True: "aplica", None: "talvez"}[x["status"]], "porque": x["porque"]})
+    return out
 
 
 REGRAS = [
-    {"passo": "3.1 modelos", "regra": "modelo citado: só ele; senão catálogo filtrado por especialidade da célula, tipo (base só com treino) e raciocínio", "fonte": "grade.yaml:especialidade, fichas.json", "tag": "C"},
-    {"passo": "3.2 técnicas", "regra": "aplica_em = modelo_pronto, requer_modelo (ficha) e exige x recursos do usuário, em 3 valores (sim, talvez, não)", "fonte": "tecnicas.yaml, fichas.json", "tag": "B"},
-    {"passo": "3.3 enumeração", "regra": "pesos {16,8,4} x KV {16,8,4} x modo de raciocínio (híbridos); 16 bits = sem técnica; até 3 técnicas", "fonte": "tecnicas.yaml:niveis, configuracao.max_tecnicas", "tag": "B"},
-    {"passo": "3.4 memória", "regra": "mínimo teórico (pesos + KV) acima do orçamento = sai; folga menor que 20% = 'sem folga'; orçamento desconhecido não exclui", "fonte": "fichas.json, fichas_kv.py", "tag": "B (a folga de 20% é C)"},
-    {"passo": "3.5 preferência", "regra": "só marca as técnicas que favorecem; nunca exclui", "fonte": "regras.py:FAVORECE", "tag": "C"},
-    {"passo": "3.6 não medidas", "regra": "técnicas aplicáveis sem medida na v1, filtradas pelo que o usuário tem (exige x recursos) e quer (qualidade = Improve/Grow; footprint = Shrink/Speed-up; sem preferência = os dois grupos), em escada por custo de adaptação; só a direção do efeito, fora do Pareto", "fonte": "tecnicas.yaml:exige, movimento, custo_adaptacao", "tag": "C"},
+    {"passo": "3.1 modelos", "regra": "modelo citado: só ele (e suas variantes); senão catálogo filtrado por especialidade da célula, tipo (base só com treino) e raciocínio", "fonte": "grade.yaml:especialidade, fichas.json"},
+    {"passo": "3.2 técnicas", "regra": "aplica_em = modelo_pronto, requer_modelo (ficha) e exige x recursos do usuário, em 3 valores (sim, talvez, não); a lista por modelo guarda as que aplicam ou talvez, com a regra de cada decisão", "fonte": "tecnicas.yaml, fichas.json"},
+    {"passo": "3.3 enumeração", "regra": "pesos {16,8,4} x KV {16,8,4} x modo de raciocínio (híbridos); 16 bits = sem técnica; até 3 técnicas", "fonte": "tecnicas.yaml:niveis, configuracao.max_tecnicas"},
+    {"passo": "3.4 memória", "regra": "mínimo teórico (pesos + KV) acima do orçamento = sai; folga menor que 20% = 'sem folga'; orçamento desconhecido não exclui", "fonte": "fichas.json, fichas_kv.py"},
+    {"passo": "3.5 preferência", "regra": "só marca as técnicas que favorecem (qualidade: Improve e Grow; footprint: Shrink e Speed-up); nunca exclui", "fonte": "regras.py:FAVORECE"},
 ]
 
 
@@ -135,14 +110,14 @@ def candidatar(d, F=None, T=None):
     F, T = (F, T) if F and T else carregar()
     grade = yaml.safe_load(open(_achar("grade.yaml")))
     avisos = list(d.get("avisos", []))
-    ctx = d["memoria"]["ctx_alvo"]["valor"]; orc = d["memoria"]["orcamento_gb"]     # GB do pedido = GiB (B)
+    ctx = d["memoria"]["ctx_alvo"]["valor"]; orc = d["memoria"]["orcamento_gb"]     # GB do pedido = GiB
     pref = d["repasse"]["preferencia"]
     modelos, fora, como = escolher_modelos(F, grade, d, avisos)
     configs, sem_memoria = [], []
     for i in modelos:
         cs = configuracoes(i, F[i], T, F, d, ctx, orc, pref)
         viaveis = [c for c in cs if c["cabe"] != "nao"]
-        if not viaveis: sem_memoria.append({"id": i, "motivo": "nem a menor configuracao cabe", "minimo_gib": min(c["memoria_min_gib"] for c in cs), "regra": "memoria minima teorica (B)"})
+        if not viaveis: sem_memoria.append({"id": i, "motivo": "nem a menor configuracao cabe", "minimo_gib": min(c["memoria_min_gib"] for c in cs), "regra": "memoria minima teorica"})
         configs += viaveis
     n_total = len(configs)
     ids_ok = {c["modelo"] for c in configs}
@@ -157,7 +132,6 @@ def candidatar(d, F=None, T=None):
             "modelos_descartados": fora + sem_memoria,
             "modelos": cand,
             "configuracoes": configs,
-            "tecnicas_nao_medidas": tecnicas_nao_medidas(F, T, modelos, d["repasse"]["recursos"] or {}, pref),
             "avisos": avisos + (["orcamento de memoria desconhecido: nenhuma configuracao foi excluida por memoria"] if orc is None else [])}
 
 
