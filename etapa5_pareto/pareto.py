@@ -16,7 +16,8 @@ def agregar(e):
     meio = round(math.sqrt(sum(v["meio_pts"] ** 2 for v in q.values())) / n, 2)
     sem_base = any("prior_global" in (v.get("fonte") or "") for v in q.values())
     return {"nota": nota, "meio": meio, "sem_base": sem_base, "nota_rank": round(nota - meio, 2) if sem_base else nota,
-            "tag": max((v["tag"] for v in q.values()), key=TAGS.index), "benchmarks": list(q)}
+            "tag": max((v["tag"] for v in q.values()), key=TAGS.index), "benchmarks": list(q),
+            "metodos": {b: (v.get("fonte") or "").split(": ", 1)[-1] for b, v in q.items()}}
 
 
 def eixos(e):

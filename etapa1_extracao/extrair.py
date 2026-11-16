@@ -22,7 +22,7 @@ REGRA PRINCIPAL: preencha um campo só se o TEXTO o diz de forma explícita. Nã
 
 Campos:
 - modelo: nome de modelo de linguagem que o usuário usa ou quer usar (um nome próprio, não uma descrição como "um modelo pequeno"). Nomes citados só como exemplo ou comparação ("tipo um ChatGPT") não contam.
-- tarefa: QA (responder perguntas, conversar, explicar, resumir, escrever, analisar texto), Codigo (programar), Traducao (traduzir). Só se o TEXTO descrever o que o modelo vai fazer. Tarefa sobre texto que não seja programar nem traduzir (ex.: classificar) é QA.
+- tarefa: QA (responder perguntas, conversar, explicar, resumir, escrever, analisar texto), Codigo (programar), Traducao (traduzir). Só se o TEXTO descrever o que o modelo vai fazer. Tarefa sobre texto que não seja programar nem traduzir (ex.: classificar) é QA. tarefa.encaixada = true quando a tarefa descrita não é literalmente responder perguntas/conversar, programar ou traduzir e foi colocada em QA por aproximação (ex.: resumir, classificar, escrever); false nos demais casos.
 - dominio: o ASSUNTO do conteúdo: geral (sem assunto específico), saude, juridico, ciencia, matematica ou outro (assunto específico fora dessa lista). A tarefa (programar, traduzir) não é assunto. Só se o TEXTO indicar o assunto.
 - hardware: máquina ou placa citada no TEXTO.
 - memoria_gb: memória que o TEXTO diz ter. valor = o número exatamente como escrito; unidade = MB, GB ou TB; placas = quantas placas/GPUs têm essa memória (só se o TEXTO disser; senão 1). Se o TEXTO cita RAM e VRAM, use a da placa de vídeo. Só se o TEXTO disser o número.
@@ -135,6 +135,7 @@ def pos_processar(texto, bruto, fichas):
 
     for nome in ("tarefa", "dominio", "preferencia"):
         pedido[nome] = campo(nome, bruto[nome], lambda v: NOMES.get(v, v))
+    if pedido["tarefa"]["valor"]: pedido["tarefa"]["encaixada"] = bool(bruto["tarefa"].get("encaixada"))
     for nome in ("entrada_longa", "raciocinio"):
         pedido[nome] = campo(nome, bruto[nome])
     pedido["recursos"] = {k: campo(f"recursos.{k}", bruto["recursos"][k]) for k in ("dados", "treino", "gpu")}

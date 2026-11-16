@@ -60,6 +60,10 @@ def diagnosticar(pedido, memoria_gb=None, banda_gb_s=None, min_tok_s=None, folga
     else:
         q.update(benchmarks=[], medida="falta medir", regra=regra)
 
+    t = pedido.get("tarefa") or {}
+    if t.get("encaixada") and q["medida"] != "falta medir":
+        avisos.append(f"tarefa {t.get('evidencia')!r} foi encaixada em {v('tarefa')}: a nota mede {', '.join(q['benchmarks'])}, não a tarefa em si")
+
     # contexto alvo
     longo = v("entrada_longa")
     ctx = {"valor": CTX_LONGO if longo else CTX_CURTO, "regra": "entrada longa" if longo else "padrao curto"}

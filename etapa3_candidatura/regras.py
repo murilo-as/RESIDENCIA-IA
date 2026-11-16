@@ -110,15 +110,20 @@ def preferencia_da(t, pref):
     if pref is None: return "indiferente"
     return "favorece" if t["movimento"] in FAVORECE[pref] else "nao_favorece"
 
+ATENDE = {True: "atende", False: "não atende", None: "pode não atender"}
+NOME_RECURSO = {"dados": "dados", "treino": "treino", "gpu_para_aplicar": "GPU para aplicar"}
+TEM = {True: "você tem", False: "você não tem", None: "você não informou se tem"}
+
+
 def _porque(t, f, cat, recursos):
     """Regra e fonte de cada decisao (justificativa por passo)."""
     p = []
     for q in t["requer_modelo"]:
         nome = q if isinstance(q, str) else next(iter(q))
-        p.append(f"modelo: {nome} = {_chamar(q, f, cat)}  [tecnicas.yaml:requer_modelo + fichas.json]")
-    if t["aplica_em"] != "modelo_pronto": p.append(f"aplica_em = {t['aplica_em']}  [tecnicas.yaml]")
+        p.append(f"o modelo {ATENDE[_chamar(q, f, cat)]} o requisito {nome}")
+    if t["aplica_em"] != "modelo_pronto": p.append(f"só se aplica a {t['aplica_em']}")
     for k, v in t["exige"].items():
-        if v != "nao": p.append(f"recurso: exige {k} = {v}; usuario {RECURSOS[k]} = {recursos.get(RECURSOS[k])}  [tecnicas.yaml:exige]")
+        if v != "nao": p.append(f"exige {NOME_RECURSO[k]} ({v}); {TEM[recursos.get(RECURSOS[k])]}")
     return p
 
 def candidatar(f, cat, T, recursos=None, preferencia=None):
