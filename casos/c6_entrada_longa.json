@@ -1,0 +1,68 @@
+{
+  "texto": "Preciso resumir contratos com textos de entrada muito longos, tenho 12 GB.",
+  "tarefa": {
+    "valor": "QA",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "dominio": {
+    "valor": "jurídico",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "preferencia": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "idioma": {
+    "valor": "pt",
+    "evidencia": "Uso",
+    "origem": "texto"
+  },
+  "entrada_longa": {
+    "valor": true,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "raciocinio": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "recursos": {
+    "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    }
+  },
+  "memoria_gb": {
+    "valor": 12,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "modelo": {
+    "valor": null,
+    "origem": "vazio",
+    "id": null,
+    "candidatos": [],
+    "regra": null
+  },
+  "hardware": {
+    "valor": "PC",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "avisos": []
+}

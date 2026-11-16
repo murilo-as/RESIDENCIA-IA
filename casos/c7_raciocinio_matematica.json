@@ -1,0 +1,68 @@
+{
+  "texto": "Quero resolver problemas de matemática com raciocínio passo a passo, tenho 16 GB.",
+  "tarefa": {
+    "valor": "QA",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "dominio": {
+    "valor": "matemática",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "preferencia": {
+    "valor": "qualidade",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "idioma": {
+    "valor": "pt",
+    "evidencia": "Uso",
+    "origem": "texto"
+  },
+  "entrada_longa": {
+    "valor": null,
+    "evidencia": null,
+    "origem": "vazio"
+  },
+  "raciocinio": {
+    "valor": true,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "recursos": {
+    "dados": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "treino": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    },
+    "gpu": {
+      "valor": null,
+      "evidencia": null,
+      "origem": "vazio"
+    }
+  },
+  "memoria_gb": {
+    "valor": 16,
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "modelo": {
+    "valor": null,
+    "origem": "vazio",
+    "id": null,
+    "candidatos": [],
+    "regra": null
+  },
+  "hardware": {
+    "valor": "PC",
+    "evidencia": null,
+    "origem": "texto"
+  },
+  "avisos": []
+}
