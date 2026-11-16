@@ -1,7 +1,5 @@
 p4-11a-27b|rodar.sbatch|2-00:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G --requeue|bash experimentos/p4_11_grandes_divididos.sh Qwen3.5-27B
 p4-pontuar-l|pontuar_codigo.sbatch|03:00:00||
-p4-ingerir-l|rodar.sbatch|00:30:00||bash finalizar.sh
-p4-11b-30b|rodar.sbatch|2-00:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G --requeue|bash experimentos/p4_11_grandes_divididos.sh Qwen3-30B-A3B
+p4-11b-30b|rodar.sbatch|2-00:00:00|--gres=gpu:1 --cpus-per-task=8 --mem=95G --requeue|bash experimentos/p4_11_30b.sh
 p4-pontuar-m|pontuar_codigo.sbatch|03:00:00||
-p4-ingerir-m|rodar.sbatch|00:30:00||bash finalizar.sh
-p4-resumo-e|rodar.sbatch|00:20:00||bash experimentos/resumo_prioridade.sh 4
+p4-ingerir-resumo|rodar.sbatch|00:40:00||bash experimentos/p4_12_ingerir_resumo.sh
