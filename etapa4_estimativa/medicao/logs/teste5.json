@@ -1262,5 +1262,37 @@
   "nivel": "f16",
   "motivo": "",
   "data": "2026-11-16T12:56:49Z"
+ },
+ "Qwen3.5-27B|humaneval": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-16T16:34:26Z"
+ },
+ "Qwen3.5-27B|mbpp": {
+  "ok": true,
+  "valor": 5.0,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-16T17:06:13Z"
+ },
+ "Qwen3.5-27B|wmt24": {
+  "ok": true,
+  "valor": 66.84229099512807,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-16T18:05:20Z"
+ },
+ "Qwen3.5-27B|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "f16",
+  "motivo": "",
+  "data": "2026-11-16T18:58:49Z"
  }
 }
