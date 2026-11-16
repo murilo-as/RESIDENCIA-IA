@@ -32,12 +32,19 @@ def modos_raciocinio(f, raciocinio):
 
 def escolher_modelos(F, grade, d, avisos):
     r = d["repasse"]; rac = r["raciocinio"]; treino = (r["recursos"] or {}).get("treino")
-    fixo = r["modelo_id"]
-    if fixo:
-        if fixo not in F: raise KeyError(f"modelo {fixo} fora do fichas.json")
-        if not modos_raciocinio(F[fixo], rac):
-            avisos.append(f"{fixo}: tipo {F[fixo]['tipo']!r} nao combina com raciocinio={rac}; mantido porque o modelo foi pedido")
-        return [fixo], [], "modelo fixo"
+    fixos = r["modelo_ids"]
+    if fixos:
+        for i in [i for i in fixos if i not in F]: avisos.append(f"modelo {i} fora do fichas.json; ignorado")
+        fixos = [i for i in fixos if i in F]
+        if not fixos: raise KeyError(f"modelo {r['modelo_ids']} fora do fichas.json")
+        fora = []
+        if len(fixos) > 1 and treino is not True:      # variantes: o base so fica se puder treinar
+            fora = [{"id": i, "motivo": "modelo base sem poder treinar", "regra": "base so entra com treino=true (C)"} for i in fixos if F[i]["tipo"] == "base"]
+            fixos = [i for i in fixos if F[i]["tipo"] != "base"] or fixos
+        for i in fixos:
+            if not modos_raciocinio(F[i], rac):
+                avisos.append(f"{i}: tipo {F[i]['tipo']!r} nao combina com raciocinio={rac}; mantido porque o modelo foi pedido")
+        return fixos, fora, "modelo fixo"
     permitido = especialidades_permitidas(grade, d["qualidade"].get("celula_usada"))
     ok, fora = [], []
     for i, f in F.items():
@@ -143,7 +150,7 @@ def candidatar(d, F=None, T=None):
     cand = [{"id": i, "tipo": F[i]["tipo"], "especialidade": F[i]["especialidade"], "tecnicas": decisoes(i, F, T, rec, pref)}
             for i in modelos if i in ids_ok]
     return {"entrada": {"celula": d["qualidade"].get("celula_usada"), "orcamento_gb": orc, "ctx_alvo": ctx, "preferencia": pref,
-                        "raciocinio": d["repasse"]["raciocinio"], "recursos": d["repasse"]["recursos"], "modelo_fixo": d["repasse"]["modelo_id"]},
+                        "raciocinio": d["repasse"]["raciocinio"], "recursos": d["repasse"]["recursos"], "modelo_fixo": d["repasse"]["modelo_ids"]},
             "regras": REGRAS,
             "resumo": {"modelos_considerados": len(modelos), "modelos_com_configuracao": len(ids_ok), "configuracoes": n_total,
                        "orcamento_desconhecido": orc is None},

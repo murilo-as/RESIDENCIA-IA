@@ -22,17 +22,16 @@ REGRA PRINCIPAL: preencha um campo só se o TEXTO o diz de forma explícita. Nã
 
 Campos:
 - modelo: nome de modelo de linguagem que o usuário usa ou quer usar (um nome próprio, não uma descrição como "um modelo pequeno"). Nomes citados só como exemplo ou comparação ("tipo um ChatGPT") não contam.
-- tarefa: QA (responder perguntas, conversar, explicar, resumir, escrever, analisar texto), Codigo (programar), Traducao (traduzir). Só se o TEXTO descrever o que o modelo vai fazer.
+- tarefa: QA (responder perguntas, conversar, explicar, resumir, escrever, analisar texto), Codigo (programar), Traducao (traduzir). Só se o TEXTO descrever o que o modelo vai fazer. Tarefa sobre texto que não seja programar nem traduzir (ex.: classificar) é QA.
 - dominio: o ASSUNTO do conteúdo: geral (sem assunto específico), saude, juridico, ciencia, matematica ou outro (assunto específico fora dessa lista). A tarefa (programar, traduzir) não é assunto. Só se o TEXTO indicar o assunto.
 - hardware: máquina ou placa citada no TEXTO.
-- memoria_gb: número de GB de memória, só se o TEXTO disser o número.
-- preferencia: só se o TEXTO pedir isso explicitamente. "qualidade" = quer a melhor resposta/precisão, aceita lentidão. "footprint" = quer algo mais rápido, leve, pequeno ou com pouca memória. Elogios vagos como "bom" não contam.
+- memoria_gb: memória que o TEXTO diz ter. valor = o número exatamente como escrito; unidade = MB, GB ou TB; placas = quantas placas/GPUs têm essa memória (só se o TEXTO disser; senão 1). Se o TEXTO cita RAM e VRAM, use a da placa de vídeo. Só se o TEXTO disser o número.
+- preferencia: só se o TEXTO pedir isso explicitamente. "qualidade" = quer a melhor resposta/precisão, aceita lentidão. "footprint" = quer algo mais rápido, leve, pequeno ou com pouca memória. Elogios vagos como "bom" não contam. Limite de memória ou de hardware (caber em X GB) não é preferência.
 - recursos.dados: true/false só se o TEXTO disser se tem ou não tem dados próprios.
 - recursos.treino: true/false só se o TEXTO disser se pode ou não treinar ou ajustar o modelo. Ter ou não ter dados não responde isto.
 - recursos.gpu: true/false só se o TEXTO falar de placa de vídeo, GPU ou VRAM. O nome de uma máquina não conta.
 - entrada_longa: true só se o TEXTO diz que os textos de entrada são longos. O tipo de documento, ou ter muitos exemplos, não conta.
-- raciocinio: true/false só se o TEXTO pedir (ou recusar) raciocínio passo a passo.
-- idioma: idioma em que o TEXTO está escrito (pt, en, outro); evidencia = uma ou duas palavras copiadas do TEXTO."""
+- raciocinio: true/false só se o TEXTO pedir (ou recusar) que o modelo pense ou explique passo a passo antes de responder. O assunto envolver raciocínio, lógica ou matemática não conta."""
 
 
 # ---------------- LLM ----------------
@@ -94,17 +93,33 @@ def _compacto(s):
 def tem_evidencia(evid, texto):
     return bool(evid) and _norm(evid) in _norm(texto)
 
+def _grupo(i, fichas):
+    """Variantes do mesmo modelo, ligadas pelo campo base_de (ex.: Qwen2.5-7B e Qwen2.5-7B-Instruct)."""
+    esp = fichas[i]["especialidade"]                     # Coder e Math também derivam do mesmo base: não são a mesma variante
+    raiz = fichas[i].get("base_de") if (fichas.get(fichas[i].get("base_de")) or {}).get("especialidade") == esp else None
+    raiz = raiz or i
+    return {j for j, f in fichas.items() if f["especialidade"] == esp and (j == raiz or f.get("base_de") == raiz)}
+
 def resolver_modelo(mencao, fichas):
-    """Menção -> id do fichas.json: nome só com letras e dígitos igual ao do id, ou prefixo dele. Com vários, prefere o não-base (B)."""
+    """Menção -> lista de ids do fichas.json. Nome só com letras e dígitos igual ao do id, ou prefixo dele. Entram todas as variantes do mesmo modelo (base, instruct); vários modelos diferentes = ambíguo."""
     alvo = _compacto(mencao)
-    if not alvo: return None, [], "mencao vazia"
+    if not alvo: return [], [], "mencao vazia"
     cands = [i for i in fichas if _compacto(i.split("/")[1]).startswith(alvo)]
-    if not cands: return None, [], "nenhum modelo do catalogo corresponde"
+    if not cands: return [], [], "nenhum modelo do catalogo corresponde"
     exatos = [i for i in cands if _compacto(i.split("/")[1]) == alvo]
-    if len(exatos) == 1: return exatos[0], cands, "nome exato"
-    nao_base = [i for i in cands if fichas[i]["tipo"] != "base"]
-    if len(nao_base) == 1: return nao_base[0], cands, "prefixo; preferido o modelo nao-base"
-    return None, cands, "ambiguo: varios candidatos"
+    if len(exatos) == 1:
+        ids = sorted(_grupo(exatos[0], fichas), key=lambda i: i != exatos[0])
+        return ids, cands, "nome exato" + (" + variantes do mesmo modelo" if len(ids) > 1 else "")
+    grupos = {frozenset(_grupo(i, fichas)) for i in cands}
+    if len(grupos) == 1: return sorted(cands), cands, "prefixo; variantes do mesmo modelo"
+    return [], cands, "ambiguo: varios modelos diferentes"
+
+_FATOR_GB = {"MB": 1 / 1024, "GB": 1, "TB": 1024}
+
+def para_gb(item):
+    """{valor, unidade, placas} -> GB total (None se vazio)."""
+    if item.get("valor") is None: return None
+    return float(item["valor"]) * _FATOR_GB.get(item.get("unidade") or "GB", 1) * (item.get("placas") or 1)
 
 def pos_processar(texto, bruto, fichas):
     avisos, pedido = [], {"texto": texto}
@@ -118,22 +133,33 @@ def pos_processar(texto, bruto, fichas):
             return {"valor": None, "evidencia": None, "origem": "descartado"}
         return {"valor": exibir(v), "evidencia": ev, "origem": "texto"}
 
-    for nome in ("tarefa", "dominio", "preferencia", "idioma"):
+    for nome in ("tarefa", "dominio", "preferencia"):
         pedido[nome] = campo(nome, bruto[nome], lambda v: NOMES.get(v, v))
     for nome in ("entrada_longa", "raciocinio"):
         pedido[nome] = campo(nome, bruto[nome])
     pedido["recursos"] = {k: campo(f"recursos.{k}", bruto["recursos"][k]) for k in ("dados", "treino", "gpu")}
 
     m = campo("memoria_gb", bruto["memoria_gb"])
-    if m["valor"] is not None and not re.search(rf"(?<!\d){re.escape(str(int(m['valor'])) if float(m['valor']).is_integer() else str(m['valor']))}(?!\d)", m["evidencia"]):
-        avisos.append(f"memoria_gb: {m['valor']} nao aparece na evidencia {m['evidencia']!r}; descartado")
-        m = {"valor": None, "evidencia": None, "origem": "descartado"}
+    if m["valor"] is not None:
+        ev = re.sub(r"(?<=\d),(?=\d)", ".", m["evidencia"])            # 0,5 -> 0.5
+        v = float(m["valor"]); vtxt = str(int(v)) if v.is_integer() else str(v)
+        if not re.search(rf"(?<!\d){re.escape(vtxt)}(?!\d)", ev):
+            avisos.append(f"memoria_gb: {m['valor']} nao aparece na evidencia {m['evidencia']!r}; descartado")
+            m = {"valor": None, "evidencia": None, "origem": "descartado"}
+        else:
+            un, n = bruto["memoria_gb"].get("unidade") or "GB", bruto["memoria_gb"].get("placas") or 1
+            m["valor_texto"] = f"{vtxt} {un}" + (f" x {n:g} placas" if n != 1 else "")
+            m["valor"] = round(para_gb({"valor": v, "unidade": un, "placas": n}), 3)
+            if n != 1: avisos.append(f"memoria_gb: {m['valor_texto']} somados = {m['valor']:g} GB (assume que o modelo pode ser dividido entre as placas)")
+            if len(re.findall(r"\d+(?:[.,]\d+)?\s*(?:gb|mb|tb)\b", _norm(texto))) > 1:
+                avisos.append(f"memoria_gb: o texto cita mais de uma memoria; usado {m['valor_texto']}. Confira")
     pedido["memoria_gb"] = m
 
     mo = campo("modelo", bruto["modelo"])
     if mo["valor"]:
-        mo["id"], mo["candidatos"], mo["regra"] = resolver_modelo(mo["valor"], fichas)
-        if not mo["id"]: avisos.append(f"modelo: {mo['valor']!r} nao resolvido ({mo['regra']}; candidatos: {mo['candidatos'][:5]})")
+        mo["ids"], mo["candidatos"], mo["regra"] = resolver_modelo(mo["valor"], fichas)
+        if not mo["ids"]: avisos.append(f"modelo: {mo['valor']!r} nao resolvido ({mo['regra']}; candidatos: {mo['candidatos'][:5]})")
+        elif len(mo["ids"]) > 1: avisos.append(f"modelo: {mo['valor']!r} corresponde a {len(mo['ids'])} variantes ({', '.join(mo['ids'])}); todas entram")
     pedido["modelo"] = mo
 
     pedido["hardware"] = campo("hardware", bruto["hardware"])     # so a mencao; a etapa 2 usa a memoria, nao a maquina

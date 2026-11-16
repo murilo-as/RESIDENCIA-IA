@@ -39,6 +39,12 @@ def achar_celula(grade, tarefa, dominio):
 BANDA_MEDIDA_GB_S = 273
 
 
+def _ids_modelo(m):
+    """Ids do modelo pedido (lista); aceita pedido antigo com um só "id"."""
+    m = m or {}
+    return m.get("ids") or ([m["id"]] if m.get("id") else [])
+
+
 def diagnosticar(pedido, memoria_gb=None, banda_gb_s=None, min_tok_s=None):
     grade = yaml.safe_load(open(_achar("grade.yaml")))
     v = lambda k: (pedido.get(k) or {}).get("valor")
@@ -90,8 +96,8 @@ def diagnosticar(pedido, memoria_gb=None, banda_gb_s=None, min_tok_s=None):
                     + ["eta, fracao da banda realmente usada (medir no Spark)", "prefill: so medido (depende de calculo, nao de banda)"]}
 
     return {"qualidade": q, "memoria": mem, "latencia": lat,
-            "repasse": {"modelo_id": (pedido.get("modelo") or {}).get("id"), "preferencia": v("preferencia"),
-                        "raciocinio": v("raciocinio"), "idioma": v("idioma"),
+            "repasse": {"modelo_ids": _ids_modelo(pedido.get("modelo")), "preferencia": v("preferencia"),
+                        "raciocinio": v("raciocinio"),
                         "recursos": {k: (x or {}).get("valor") for k, x in (pedido.get("recursos") or {}).items()}},
             "avisos": avisos}
 
