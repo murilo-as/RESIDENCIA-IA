@@ -69,7 +69,7 @@ def estimar_config(c, f, d, benchmarks, F=None, qual=None):
         if nivel(c, "modo_raciocinio", None) == "ligado": motivo = "raciocínio ligado sem medida (nem do modelo nem de irmão, na mesma classe de prova): sem estimativa"
         elif bk == 4: motivo = "KV 4 bits sem medida e kv_heads < 8: risco de colapso (Qwen2.5 de 2 e 4 cabeças colapsou)"
     return {"id": c["id"], "modelo": c["modelo"], "memoria": {"min_gib": c["memoria_min_gib"], "cabe": c["cabe"], "tag": "C (fórmula)", "falta": "overhead do motor (medir no Spark)"},
-            "latencia_decodificacao": l, "atende_meta": atende, "qualidade": q, "talvez_por": c["talvez_por"],
+            "latencia_decodificacao": l, "atende_meta": atende, "raciocinio": int(nivel(c, "modo_raciocinio", None) == "ligado" or f["tipo"] == "thinking"), "qualidade": q, "talvez_por": c["talvez_por"],
             **({"sem_nota_motivo": motivo} if motivo else {})}
 
 
