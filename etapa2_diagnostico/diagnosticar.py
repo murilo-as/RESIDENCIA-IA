@@ -31,8 +31,6 @@ def achar_celula(grade, tarefa, dominio):
     return None, "falta medir", avisos
 
 
-# Banda da máquina onde se mede (DGX Spark, especificação).
-BANDA_MEDIDA_GB_S = 273
 
 
 def _ids_modelo(m):
@@ -41,7 +39,7 @@ def _ids_modelo(m):
     return m.get("ids") or ([m["id"]] if m.get("id") else [])
 
 
-def diagnosticar(pedido, memoria_gb=None, banda_gb_s=None, min_tok_s=None):
+def diagnosticar(pedido, memoria_gb=None, banda_gb_s=None, min_tok_s=None, folga_memoria=None, eficiencia_banda=None):
     grade = yaml.safe_load(open(_achar("grade.yaml")))
     v = lambda k: (pedido.get(k) or {}).get("valor")
     avisos = list(pedido.get("avisos", []))
@@ -72,14 +70,12 @@ def diagnosticar(pedido, memoria_gb=None, banda_gb_s=None, min_tok_s=None):
     else: orc, org = None, "nao informado"
     if orc is None and v("hardware"):
         avisos.append(f"hardware {v('hardware')!r} citado, mas sem GB: informe a memoria no pedido ou em config.yaml (limites.memoria_gb) para filtrar")
-    mem = {"orcamento_gb": orc, "origem": org, "ctx_alvo": ctx}
+    mem = {"orcamento_gb": orc, "origem": org, "ctx_alvo": ctx, "folga": folga_memoria}
 
     # latência
     if banda_gb_s is not None: ban, orb = banda_gb_s, "config.yaml"
     else: ban, orb = None, "nao informada"
-    esc = round(ban / BANDA_MEDIDA_GB_S, 3) if ban else None
-    lat = {"banda_gb_s": ban, "origem": orb, "ctx_alvo": ctx,
-           "banda_medida_gb_s": BANDA_MEDIDA_GB_S, "escala_decode": esc,
+    lat = {"banda_gb_s": ban, "origem": orb, "ctx_alvo": ctx, "eficiencia_banda": eficiencia_banda,
            "meta": {"min_tok_s": min_tok_s, "regra": "config.yaml" if min_tok_s is not None else "sem limite"}}
 
     return {"qualidade": q, "memoria": mem, "latencia": lat,
@@ -94,7 +90,7 @@ if __name__ == "__main__":
     ap.add_argument("pedido"); ap.add_argument("--config"); ap.add_argument("-o", "--saida")
     a = ap.parse_args()
     L = carregar_config(a.config, AQUI)["limites"]
-    d = diagnosticar(json.load(open(a.pedido)), L["memoria_gb"], L["banda_gb_s"], L["min_tok_s"])
+    d = diagnosticar(json.load(open(a.pedido)), L["memoria_gb"], L["banda_gb_s"], L["min_tok_s"], L["folga_memoria"], L["eficiencia_banda"])
     txt = json.dumps(d, ensure_ascii=False, indent=2)
     if a.saida: open(a.saida, "w").write(txt)
     print(txt)

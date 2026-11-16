@@ -4,7 +4,7 @@
 padroes: {tarefa: QA, dominio: geral}
 # Uso geral foi FUNDIDA em QA (decisao do Murilo, 19/10): conversar/resumir/escrever medem-se por QA do dominio.
 # IFEval sai da v1 (ficava so em Uso geral); continua no benchmarks_candidatos.csv.
-# QA x ciencia saiu (16/11/2026): GPQA Diamond nao carregou e tinha so 5 modelos medidos. Cai no fallback: mesma tarefa em geral (MMLU, medida indireta).
+# QA x ciencia saiu (16/11/2026): a prova de ciencia saiu do projeto. Cai no fallback: mesma tarefa em geral (MMLU, medida indireta).
 celulas:
   - {tarefa: QA,        dominio: geral,      benchmarks: [MMLU],               medida: direta}   # MMLU no lugar do MMLU-Pro (23/10/2026): barato (log-prob) e com dado publico
   - {tarefa: QA,        dominio: saude,      benchmarks: [MedQA, PubMedQA],    medida: direta}

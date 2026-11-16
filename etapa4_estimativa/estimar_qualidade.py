@@ -10,7 +10,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 DADOS = os.path.join(AQUI, "..", "data")
 CSVS = sorted(glob.glob(os.path.join(AQUI, "medicao", "resultados*.csv")))
 NIVEL_BITS = {"f16": 16, "q8_0": 8, "q4_k_m": 4}
-CHAVES = {"MMLU": ["mmlu"], "MedQA": ["medqa", "medqa_4options"], "PubMedQA": ["pubmedqa"], "GPQA Diamond": ["gpqa", "gpqa_diamond"], "GSM8K": ["gsm8k"],
+CHAVES = {"MMLU": ["mmlu"], "MedQA": ["medqa", "medqa_4options"], "PubMedQA": ["pubmedqa"], "GSM8K": ["gsm8k"],
           "MATH-500": ["math500", "math_500", "minerva_math500"], "OAB-Exams 1a fase": ["oab", "oab_exams"],
           "HumanEval+": ["humaneval_plus", "humanevalplus", "humaneval"], "MBPP+": ["mbpp_plus", "mbppplus", "mbpp"], "WMT24++": ["wmt24pp", "wmt24"]}
 
@@ -213,7 +213,71 @@ def estimar(F, M, i, bits, b, formas):
 # 3 irmao (nota), 4 ponte entre provas, 5 prior global, 6 prior nao medido (KV, raciocinio). Faixas provisorias: 1,5x o erro medio do leave-one-out (Qwen2.5).
 GERATIVOS = {"gsm8k", "math500", "humaneval_plus", "humaneval_base", "mbpp_plus", "mbpp_base", "wmt24"}
 CURVA_MEIO = {"conhecimento": (1.5, 3.5), "oab": (5.0, 11.0), "gerativo": (9.0, 17.0)}
-KV_PRIOR = {16: (0.0, 0.0), 8: (-0.3, 1.0), 4: (-1.5, 3.0)}          # (delta, meio) em pts: prior provisorio, nao medido
+KV_BENCH = {"mmlu_letra": "mmlu", "oab_letra": "oab", "gsm8k": "gsm8k", "math500": "math500"}      # nome em kv.csv -> chave do estimador
+_KV = {}
+
+
+def _kv_dados(F):
+    """{(id, chave): {kv: nota}} do kv.csv: pesos Q8_0, raciocinio desligado. O efeito do KV e a diferenca contra o KV 16 do mesmo modelo e prova."""
+    if "d" not in _KV:
+        d, arq = {}, os.path.join(AQUI, "medicao", "kv.csv")
+        for r in (csv.DictReader(open(arq, encoding="utf-8")) if os.path.exists(arq) else []):
+            i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
+            if i in F and r["nivel"] == "q8_0" and r["raciocinio"] == "desligado" and r["benchmark"] in KV_BENCH:
+                d.setdefault((i, KV_BENCH[r["benchmark"]]), {})[int(r["kv"])] = float(r["acuracia"])
+        _KV["d"] = d
+    return _KV["d"]
+
+
+def _delta(D, i, k, kv):
+    x = D.get((i, k), {})
+    return 100 * (x[kv] - x[16]) if kv in x and 16 in x else None
+
+
+def _deltas_modelo(D, i, kv):
+    v = [d for (j, k) in D if j == i and (d := _delta(D, i, k, kv)) is not None]
+    return sum(v) / len(v) if v else None
+
+
+def _rc_dados(F, M):
+    """{(id, chave): nota ligada} do raciocinio.csv (Q4_K_M, KV 16), so de provas validas: ate 10% das respostas cortadas no limite de tokens."""
+    if "rc" not in _KV:
+        d, arq = {}, os.path.join(AQUI, "medicao", "raciocinio.csv")
+        for r in (csv.DictReader(open(arq, encoding="utf-8")) if os.path.exists(arq) else []):
+            i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
+            if i in F and r["benchmark"] in KV_BENCH and r["nivel"] == "q4_k_m" and int(r["cortadas"] or 0) <= 0.10 * int(r["n"]):
+                d[(i, KV_BENCH[r["benchmark"]])] = float(r["acuracia"])
+        _KV["rc"] = d
+    return _KV["rc"]
+
+
+def racio_efeito(F, M, i, k):
+    """Efeito do raciocinio ligado em pontos: (delta, meio, metodo) ou None. Cascata: medido na prova, medido no modelo (outras provas), irmao de arquitetura
+    identica, sempre dentro da mesma classe de prova. Sem medida nao ha estimativa: um unico modelo (Qwen3-8B, GSM8K) nao sustenta um valor para os demais."""
+    R = _rc_dados(F, M)
+    def d(j, kk): return 100 * (R[(j, kk)] - M[(j, 4, kk)]["valor"]) if (j, kk) in R and (j, 4, kk) in M else None
+    def dm(j):      # outras provas da mesma classe: o ganho em geracao nao vale para conhecimento
+        v = [x for (jj, kk) in R if jj == j and classe(kk) == classe(k) and (x := d(j, kk)) is not None]
+        return sum(v) / len(v) if v else None
+    if (x := d(i, k)) is not None: return x, 3.0, "racio_medido"
+    if (x := dm(i)) is not None: return x, 8.0, "racio_medido_modelo"
+    for j in irmaos(F, i):
+        if (x := d(j, k)) is not None or (x := dm(j)) is not None: return x, 10.0, "racio_irmao"
+    return None
+
+
+def kv_efeito(F, i, k, kv):
+    """Efeito do KV quantizado em pontos: (delta, meio, metodo, nivel) ou None. Cascata: medido na prova, medido no modelo (outras provas), irmao de arquitetura
+    identica, prior da mediana dos modelos medidos. Em 4 bits o prior so vale com kv_heads >= 8: abaixo disso o Qwen2.5 medido (2 e 4 cabecas) colapsou."""
+    D = _kv_dados(F)
+    if (d := _delta(D, i, k, kv)) is not None: return d, 3.0, "kv_medido", 0
+    if (d := _deltas_modelo(D, i, kv)) is not None: return d, 8.0, "kv_medido_modelo", 0
+    for j in irmaos(F, i):
+        if (d := _delta(D, j, k, kv)) is not None or (d := _deltas_modelo(D, j, kv)) is not None: return d, 10.0, "kv_irmao", 6
+    if kv == 4 and F[i]["arquitetura"]["kv_heads"] < 8: return None
+    alvo = [d for j in {j for j, _ in D} if kv == 8 or F[j]["arquitetura"]["kv_heads"] >= 8 if (d := _deltas_modelo(D, j, kv)) is not None]
+    alvo.sort()
+    return (alvo[len(alvo) // 2], 3.0 if kv == 4 else 1.0, "kv_prior", 6) if alvo else None
 
 
 def classe(b):
@@ -264,7 +328,8 @@ def nota_base(F, M, i, b, formas):
     if len(pts) == 1:
         return {"valor": pts[0][1], "meio": 15.0, "metodo": "prior_global", "nivel": 5}
     a, c, sd = _fit(*zip(*pts))
-    return {"valor": _cl(a + c * math.log(tam_eff(F[i]))), "meio": max(10.0, 150 * sd), "metodo": "prior_global", "nivel": 5}
+    # sem base na linha: não passa da melhor nota medida nesta prova (nada sustenta bater todos os medidos)
+    return {"valor": min(_cl(a + c * math.log(tam_eff(F[i]))), max(v for _, v in pts)), "meio": max(10.0, 150 * sd), "metodo": "prior_global", "nivel": 5}
 
 
 def razao_total(F, M, i, bits, b, formas):
@@ -284,10 +349,13 @@ def razao_total(F, M, i, bits, b, formas):
 
 def estimar_total(F, M, i, b, bits=16, kv=16, racio=None, formas=None):
     f = F[i]; m = M.get((i, bits, b))
-    puro = kv == 16 and racio != "ligado" and f["tipo"] != "thinking"
+    puro = kv == 16 and racio != "ligado"          # modelo thinking: a nota medida ja e a dele, com raciocinio
     ep = 200 * (m["ep"] or 0.01) if m else None
     if m and puro:
         return {"valor": m["valor"], "meio": ep, "tag": "A", "metodo": "medido", "nivel": 0}
+    x = _kv_dados(F).get((i, b), {}).get(kv) if bits == 8 and kv != 16 and racio != "ligado" else None
+    if x is not None:
+        return {"valor": x, "meio": 3.0, "tag": "A", "metodo": "medido_kv", "nivel": 0}
     if m:
         pesos = {"valor": m["valor"], "meio": ep, "metodo": "medido", "nivel": 0}
     else:
@@ -297,11 +365,22 @@ def estimar_total(F, M, i, b, bits=16, kv=16, racio=None, formas=None):
         rz = razao_total(F, M, i, bits, b, formas)
         pesos = {"valor": base["valor"] * rz["valor"], "meio": (base["meio"] ** 2 + (100 * base["valor"] * rz["meio"]) ** 2) ** 0.5,
                  "metodo": base["metodo"] + "+" + rz["metodo"], "nivel": max(base["nivel"], rz["nivel"])}
-    dk, mk = KV_PRIOR[kv]
-    dr, mr = ((4.0, 8.0) if classe(b) == "gerativo" else (0.0, 3.0)) if (racio == "ligado" or f["tipo"] == "thinking") else (0.0, 0.0)
-    prior = kv != 16 or dr or mr
+    dk, mk, mkv, nkv = 0.0, 0.0, "", 0
+    if kv != 16:
+        e = kv_efeito(F, i, b, kv)
+        if e is None:
+            return None
+        dk, mk, mkv, nkv = e
+    dr, mr, mrc = 0.0, 0.0, ""
+    if racio == "ligado":
+        if bits == 4 and kv == 16 and (i, b) in _rc_dados(F, M):
+            return {"valor": _rc_dados(F, M)[(i, b)], "meio": 3.0, "tag": "A", "metodo": "medido_racio", "nivel": 0}
+        e = racio_efeito(F, M, i, b)
+        if e is None:
+            return None
+        dr, mr, mrc = e
     return {"valor": _cl(pesos["valor"] + (dk + dr) / 100), "meio": (pesos["meio"] ** 2 + mk ** 2 + mr ** 2) ** 0.5, "tag": "C",
-            "metodo": pesos["metodo"] + ("+kv_prior" if kv != 16 else "") + ("+racio_prior" if dr or mr else ""), "nivel": max(pesos["nivel"], 6 if prior else 0)}
+            "metodo": pesos["metodo"] + ("+" + mkv if kv != 16 else "") + ("+" + mrc if mrc else ""), "nivel": max(pesos["nivel"], nkv, 5 if mrc == "racio_irmao" else 0)}
 
 
 def loo(F, M, alvo, formas):

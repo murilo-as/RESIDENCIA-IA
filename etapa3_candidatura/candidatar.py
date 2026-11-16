@@ -6,7 +6,7 @@ import yaml
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
-from regras import (carregar, _achar, avalia, avalia_recursos, config_id, memoria_gib, cabe, FAVORECE, _e3, candidatar as situacao_tecnicas)
+from regras import (carregar, _achar, avalia, avalia_recursos, config_id, memoria_gib, cabe, MARGEM, FAVORECE, _e3, candidatar as situacao_tecnicas)
 
 PESOS_BASE, KV_BASE = 16, 16
 CABE_TXT = {True: "sim", None: "sem folga", False: "nao"}
@@ -67,6 +67,7 @@ def niveis_pesos_kv(f, T, cat, recursos):
 
 
 def configuracoes(i, f, T, cat, d, ctx, orc, pref):
+    folga = d["memoria"].get("folga"); folga = MARGEM if folga is None else folga      # config.yaml: limites.folga_memoria
     recursos = {k: v for k, v in (d["repasse"]["recursos"] or {}).items()}
     tec = T["tecnicas"]; niv = niveis_pesos_kv(f, T, cat, recursos)
     modos = modos_raciocinio(f, d["repasse"]["raciocinio"]) or ([None] if not f["tipo"] == "hibrido" else ["desligado", "ligado"])
@@ -78,7 +79,7 @@ def configuracoes(i, f, T, cat, d, ctx, orc, pref):
                 tecs = ([("quantizacao_pesos", bp)] if bp != PESOS_BASE else []) + ([("quantizacao_kv", bk)] if bk != KV_BASE else []) \
                        + ([("modo_raciocinio", modo)] if modo else [])
                 mem = memoria_gib(f, ctx, bp, bk)
-                c = None if orc is None else cabe(mem, orc)
+                c = None if orc is None else cabe(mem, orc, folga)
                 sts = [niv[t][1] for t, _ in tecs if t in niv] + ([st_modo] if modo else [])
                 talvez = [t for (t, _), s in zip(tecs, [niv[t][1] if t in niv else st_modo for t, _ in tecs]) if s is not True]
                 fav = [t for t, n in tecs if pref and tec[t]["movimento"] in FAVORECE[pref] and not (t == "modo_raciocinio" and n == "desligado")]
@@ -101,7 +102,7 @@ REGRAS = [
     {"passo": "3.1 modelos", "regra": "modelo citado: só ele (e suas variantes); senão catálogo filtrado por especialidade da célula, tipo (base só com treino) e raciocínio", "fonte": "grade.yaml:especialidade, fichas.json"},
     {"passo": "3.2 técnicas", "regra": "aplica_em = modelo_pronto, requer_modelo (ficha) e exige x recursos do usuário, em 3 valores (sim, talvez, não); a lista por modelo guarda as que aplicam ou talvez, com a regra de cada decisão", "fonte": "tecnicas.yaml, fichas.json"},
     {"passo": "3.3 enumeração", "regra": "pesos {16,8,4} x KV {16,8,4} x modo de raciocínio (híbridos); 16 bits = sem técnica; até 3 técnicas", "fonte": "tecnicas.yaml:niveis, configuracao.max_tecnicas"},
-    {"passo": "3.4 memória", "regra": "mínimo teórico (pesos + KV) acima do orçamento = sai; folga menor que 20% = 'sem folga'; orçamento desconhecido não exclui", "fonte": "fichas.json, fichas_kv.py"},
+    {"passo": "3.4 memória", "regra": "mínimo teórico (pesos + KV) acima do orçamento = sai; folga menor que a do config.yaml (padrão 20%) = 'sem folga'; orçamento desconhecido não exclui", "fonte": "fichas.json, fichas_kv.py"},
     {"passo": "3.5 preferência", "regra": "só marca as técnicas que favorecem (qualidade: Improve e Grow; footprint: Shrink e Speed-up); nunca exclui", "fonte": "regras.py:FAVORECE"},
 ]
 

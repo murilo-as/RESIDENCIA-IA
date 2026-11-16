@@ -136,7 +136,7 @@ Parte 2, Qwen3.5-9B Q4_K_M, --limit 20 (1140 questoes):
 - Comparacao com o T2: aquele foi com --limit 2 (114 questoes), entao nao e comparavel com estes tempos.
 
 ## T3 parte 3 (em andamento): datasets e inventario
-Datasets abertos baixados para `hf_cache` (job 875): MedQA 4 opcoes (test 1273), MATH-500 (500), OAB-Exams (2210), HumanEval+ (164), MBPP+ (378). `bigbio/pubmed_qa` falhou ("Dataset scripts are no longer supported"). GPQA (gated) e WMT24++ nao foram baixados. Detalhes e a conferencia do OAB em `05_compatibilidade/INVENTARIO.md`. Medicoes de 20 exemplos ainda pendentes.
+Datasets abertos baixados para `hf_cache` (job 875): MedQA 4 opcoes (test 1273), MATH-500 (500), OAB-Exams (2210), HumanEval+ (164), MBPP+ (378). `bigbio/pubmed_qa` falhou ("Dataset scripts are no longer supported"). WMT24++ nao foi baixado. Detalhes e a conferencia do OAB em `05_compatibilidade/INVENTARIO.md`. Medicoes de 20 exemplos ainda pendentes.
 
 ### T3 parte 3: medicoes de 20 exemplos (Qwen2.5-7B Q4_K_M; jobs 876, 877, 878, 879)
 - Rodada offline (job 876, `--limit 20`, `HF_DATASETS_OFFLINE=1`): montar tarefas 364.0 s (normal: 363.7 s), avaliacao 176.7 s (normal: 176.0 s), acc 0.7588 (igual). **`HF_DATASETS_OFFLINE=1` nao reduziu nada**; a hipotese de que o tempo fixo vinha da consulta ao Hub esta refutada.

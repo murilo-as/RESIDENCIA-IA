@@ -22,7 +22,7 @@ def etapa1_extracao(ctx):
 def etapa2_diagnostico(ctx):
     from diagnosticar import diagnosticar
     L = ctx["config"]["limites"]
-    return diagnosticar(ctx["pedido"], L["memoria_gb"], L["banda_gb_s"], L["min_tok_s"])
+    return diagnosticar(ctx["pedido"], L["memoria_gb"], L["banda_gb_s"], L["min_tok_s"], L["folga_memoria"], L["eficiencia_banda"])
 
 
 def _fichas(ctx):
@@ -68,10 +68,10 @@ def resumo(ctx):
     q, m, l = d["qualidade"], d["memoria"], d["latencia"]
     print("\n--- resumo ---")
     print(f"pedido      : tarefa={(p['tarefa'] or {}).get('valor')} dominio={(p['dominio'] or {}).get('valor')} "
-          f"modelo={(p['modelo'] or {}).get('id') or (p['modelo'] or {}).get('valor')}")
+          f"modelo={', '.join((p['modelo'] or {}).get('ids') or []) or (p['modelo'] or {}).get('id') or (p['modelo'] or {}).get('valor')}")
     print(f"qualidade   : {q['celula_pedida']} -> {', '.join(q['benchmarks']) or '(falta medir)'} [{q['medida']}]")
     print(f"memoria     : orcamento={m['orcamento_gb']} GB ({m['origem']}), ctx={m['ctx_alvo']['valor']}")
-    print(f"latencia    : banda={l['banda_gb_s']} GB/s ({l['origem']}; escala do decode vs Spark = {l['escala_decode']}), meta={l['meta']['min_tok_s']} tok/s")
+    print(f"latencia    : banda={l['banda_gb_s']} GB/s ({l['origem']}; eficiência = {l['eficiencia_banda']}), meta={l['meta']['min_tok_s']} tok/s")
     for av in d["avisos"]: print("aviso       :", av)
     r, pa = ctx["recomendacao"], ctx["pareto"]["resumo"]
     print(f"pareto      : {pa['na_fronteira']} na fronteira, {pa['dominadas']} dominadas, {pa['fora']} fora")
@@ -80,6 +80,8 @@ def resumo(ctx):
     if e: print("recomendacao:", fmt(e))
     for nome in ("top_qualidade", "top_footprint"):
         for i, x in enumerate(r.get(nome, []), 1): print(f"{nome} {i}:", fmt(x))
+    for t in r.get("tecnicas_da_configuracao", []): print(f"tecnica     : {t['tecnica']}={t['nivel']} (movimento {t['movimento']})")
+    for mov, ts in r["tecnicas_sugeridas"].items(): print(f"sugeridas   : {mov}: " + ", ".join(f"{t['tecnica']} (custo {t['custo']}, recursos {t['recursos']})" for t in ts))
     for av in r["avisos"]: print("aviso       :", av)
 
 
@@ -102,7 +104,7 @@ def main():
     print(f"candidatura : {c['modelos_considerados']} modelos, {c['modelos_com_configuracao']} com configuracao, {c['configuracoes']} configuracoes"
           + (" (orcamento desconhecido: nada excluido por memoria)" if c["orcamento_desconhecido"] else ""))
     e = ctx["estimativas"]["resumo"]
-    print(f"estimativa  : {e['com_qualidade']}/{e['configuracoes']} com qualidade medida; meta de tok/s: {e['atende_meta']}")
+    print(f"estimativa  : {e['com_qualidade']}/{e['configuracoes']} com nota (medida ou estimada); meta de tok/s: {e['atende_meta']}")
     print(f"\ngravado em {a.saida}/")
 
 

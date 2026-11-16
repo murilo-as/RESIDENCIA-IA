@@ -44,8 +44,10 @@ Toda opção fica em `config.yaml`; os scripts só aceitam o que muda a cada exe
 | `llm.modelo` | `gemini-2.5-flash` | Nome do LLM extrator |
 | `llm.url` | vazio | Endereço do servidor (só no backend `openai`) |
 | `limites.memoria_gb` | vazio | Orçamento de memória; a etapa 3 corta o que não cabe |
-| `limites.banda_gb_s` | 89,6 | Banda da máquina simulada, em GB/s (PC médio, DDR5-5600 dual channel, pico teórico, tag C). O decode medido no Spark (273 GB/s) é escalado pela razão das bandas. Vazio = latência só relativa |
+| `limites.banda_gb_s` | 89,6 | Banda da máquina simulada, em GB/s (PC médio, DDR5-5600 dual channel, pico teórico, tag C). Vazio = sem teto de tokens/s |
 | `limites.min_tok_s` | vazio | Meta de tokens/s |
+| `limites.folga_memoria` | 0,20 | Folga sobre o mínimo teórico de memória (hipótese); abaixo dela a configuração fica "sem folga" |
+| `limites.eficiencia_banda` | 0,45 | Fração da banda usada no decode. Vem de uma medida só (Qwen3.5-35B-A3B Q4_K_M no Spark: 82,4 tok/s contra teto de 182), tag C |
 | `saida` | `saidas` | Pasta dos JSON do pipeline |
 
 Vazio = não informado. Os limites do `config.yaml` valem mais que os do texto do pedido. Chave desconhecida no arquivo dá erro.
@@ -61,7 +63,7 @@ Vazio = não informado. Os limites do `config.yaml` valem mais que os do texto d
 | `python etapa1_extracao/avaliar_extracao.py --gabarito` | Sem LLM: testa só o código (deve dar 120/120) |
 | `python etapa2_diagnostico/diagnosticar.py pedido.json [-o diagnostico.json]` | Só a etapa 2 |
 | `python etapa3_candidatura/candidatar.py diagnostico.json [-o candidatos.json]` | Só a etapa 3 |
-| `python etapa3_candidatura/regras.py` | Valida `fichas.json`, `tecnicas.yaml` e `efeitos.csv` |
+| `python etapa3_candidatura/regras.py` | Valida `fichas.json` e `tecnicas.yaml` |
 | `python etapa4_estimativa/estimar.py candidatos.json diagnostico.json [-o estimativas.json]` | Só a etapa 4 |
 | `python etapa4_estimativa/analise.py [-r resultados.csv ...] [-a texto_do_id] [-o analise.md]` | Validação do estimador de qualidade (deixa um modelo de fora e compara) |
 
@@ -104,7 +106,7 @@ Tarefas: QA (inclui conversar, resumir, explicar), Código e Tradução. Com o G
 
 ## Etapa 2: Diagnóstico
 
-`diagnosticar.py` lê o pedido e a `grade.yaml` e devolve três blocos: **qualidade** (célula, benchmarks, medida direta ou indireta), **memória** (orçamento, contexto alvo, fórmula) e **latência** (banda, escala em relação ao Spark, meta opcional de tokens/s). Não calcula números de opções.
+`diagnosticar.py` lê o pedido e a `grade.yaml` e devolve três blocos: **qualidade** (célula, benchmarks, medida direta ou indireta), **memória** (orçamento, contexto alvo, fórmula) e **latência** (banda, eficiência da banda, meta opcional de tokens/s). Não calcula números de opções.
 
 Regras: tarefa vazia vira QA e domínio vazio vira geral; célula sem benchmark usa o mesmo benchmark do domínio geral; em Código e Tradução o domínio é ignorado com aviso; contexto de 4k, ou 32k com entrada longa. Memória: `config.yaml`, depois o pedido, senão desconhecida (ninguém é excluído). Sem limite informado não há limite.
 
@@ -124,7 +126,7 @@ Entrada: `diagnostico.json`. Saída: `candidatos.json`. Sem LLM.
 Regras (tag C, exceto a conta de memória, B):
 - Modelo citado no pedido: só ele; as técnicas são recomendadas para ele.
 - Sem modelo: catálogo filtrado pela especialidade da célula, base só se `treino=true`, e regra de raciocínio (true → híbrido ligado; false → instruct ou híbrido desligado).
-- Memória: pesos + KV com folga de 20%; abaixo disso fica "sem folga". "GB" do pedido é tratado como GiB.
+- Memória: pesos + KV com folga (config.yaml: `limites.folga_memoria`, padrão 20%); abaixo disso fica "sem folga". "GB" do pedido é tratado como GiB.
 - A preferência só marca; nunca exclui.
 
 ## Etapa 4: Estimativa
@@ -133,13 +135,12 @@ Entrada: `candidatos.json` e `diagnostico.json`. Saída: `estimativas.json`. Sem
 
 | Eixo | De onde vem | Tag |
 |---|---|---|
-| Memória | Mínimo teórico da etapa 3 (pesos + KV) | B |
-| Latência, teto | banda ÷ bytes lidos por token; um teto só com pesos e outro com pesos + KV no contexto alvo | B |
-| Latência, real | Linha do `efeitos.csv` (própria > paper > card), escalada pela razão das bandas | A ou B; escala C |
+| Memória | Mínimo teórico da etapa 3 (pesos + KV) | C |
+| Latência | teto = banda ÷ bytes lidos por token (só pesos e pesos + KV no contexto alvo); estimativa = teto com KV × `eficiencia_banda` | C |
 | Qualidade | `estimar_qualidade.py`: nota por benchmark a partir das medições | A, B ou C |
-| Meta de tok/s | Teto só com pesos abaixo da meta = "não"; acima = "talvez"; com medida = "sim" ou "não" | — |
+| Meta de tok/s | Teto só com pesos abaixo da meta = "não"; estimativa (teto × eficiência) na meta ou acima = "sim"; senão "talvez" | — |
 
-MoE com parâmetros ativos desconhecidos fica sem teto. Não existe `efeitos.csv` ainda, então a latência real fica sem dado.
+MoE com parâmetros ativos desconhecidos fica sem teto. A eficiência da banda vem de um modelo MoE só; em densos pode diferir.
 
 ### Arquivos
 
@@ -191,7 +192,7 @@ Dados e relatórios:
 
 O estimador lê `medicao/resultados*.csv`; `kv.csv` e `raciocinio.csv` não entram nessa leitura. Detalhes de uso: [medicao/README.md](etapa4_estimativa/medicao/README.md).
 
-**Modelos medidos:** 23 (15 pós-treino, 8 base) das famílias Qwen2.5, Qwen3, Qwen3.5 e Qwen3.6. **Provas:** MMLU, MedQA, PubMedQA, OAB, GSM8K, MATH-500, HumanEval+, MBPP+, WMT24++. O GPQA não carregou (dataset não encontrado).
+**Modelos medidos:** 23 (15 pós-treino, 8 base) das famílias Qwen2.5, Qwen3, Qwen3.5 e Qwen3.6. **Provas:** MMLU, MedQA, PubMedQA, OAB, GSM8K, MATH-500, HumanEval+, MBPP+, WMT24++.
 
 ## `piloto/`
 
