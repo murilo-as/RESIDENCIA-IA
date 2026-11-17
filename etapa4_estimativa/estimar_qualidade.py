@@ -3,12 +3,13 @@ Cascata: medido (A) > irmão, razão da âncora (C) > curva em log do tamanho (C
 A forma da queda em 4 bits vem do artigo 2505.02214 (data/curva_forma_qwen3.csv); o valor, da nossa âncora.
 resultados.csv: modelo,nivel(f16|q8_0|q4_k_m),benchmark,n,acuracia(0-1),erro_padrao
   python estimar_qualidade.py ID BITS BENCHMARK [-r resultados.csv ...]
-  python estimar_qualidade.py --loo ID [-r resultados.csv ...]   (padrao: medicao/resultados*.csv, um por maquina)"""
+  python estimar_qualidade.py --loo ID [-r resultados.csv ...]   (padrao: data/medicoes/resultados*.csv, um por maquina)"""
 import argparse, bisect, csv, glob, json, math, os
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 DADOS = os.path.join(AQUI, "..", "data")
-CSVS = sorted(glob.glob(os.path.join(AQUI, "medicao", "resultados*.csv")))
+MEDICOES = os.path.join(DADOS, "medicoes")     # resultados, kv, raciocinio, verificacoes e velocidade
+CSVS = sorted(glob.glob(os.path.join(MEDICOES, "resultados*.csv")))
 NIVEL_BITS = {"f16": 16, "q8_0": 8, "q4_k_m": 4}
 CHAVES = {"MMLU": ["mmlu"], "MedQA": ["medqa", "medqa_4options"], "PubMedQA": ["pubmedqa"], "GSM8K": ["gsm8k"],
           "MATH-500": ["math500", "math_500", "minerva_math500"], "OAB-Exams 1a fase": ["oab", "oab_exams"],
@@ -242,7 +243,7 @@ _KV = {}
 def _kv_dados(F):
     """{(id, chave): {kv: nota}} do kv.csv: pesos Q8_0, raciocinio desligado. O efeito do KV e a diferenca contra o KV 16 do mesmo modelo e prova."""
     if "d" not in _KV:
-        d, ruim, arq = {}, set(), os.path.join(AQUI, "medicao", "kv.csv")
+        d, ruim, arq = {}, set(), os.path.join(MEDICOES, "kv.csv")
         for r in (csv.DictReader(open(arq, encoding="utf-8")) if os.path.exists(arq) else []):
             i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
             if i in F and r["nivel"] == "q8_0" and r["raciocinio"] == "desligado" and r["benchmark"] in KV_BENCH:
@@ -266,7 +267,7 @@ def _deltas_modelo(D, i, kv):
 def _rc_dados(F, M):
     """{(id, chave): nota ligada} do raciocinio.csv (Q4_K_M, KV 16), so de provas validas: ate 10% das respostas cortadas no limite de tokens."""
     if "rc" not in _KV:
-        d, arq = {}, os.path.join(AQUI, "medicao", "raciocinio.csv")
+        d, arq = {}, os.path.join(MEDICOES, "raciocinio.csv")
         for r in (csv.DictReader(open(arq, encoding="utf-8")) if os.path.exists(arq) else []):
             i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
             if i in F and r["benchmark"] in KV_BENCH and r["nivel"] == "q4_k_m" and int(r["cortadas"] or 0) <= 0.10 * int(r["n"]):

@@ -3,12 +3,14 @@ import csv, datetime, glob, json, math, os, re, sys
 from collections import defaultdict
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
+DADOS = os.path.join(RAIZ, "data", "medicoes")                  # CSVs, amostras, logs
 N = int(sys.argv[1])
 agora = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def ler_marco(n):
-    p = os.path.join(AQUI, "logs", "blocos", f"prioridade_{n}.inicio")
+    p = os.path.join(DADOS, "logs", "blocos", f"prioridade_{n}.inicio")
     return open(p).read().strip() if os.path.exists(p) else None
 
 
@@ -17,7 +19,7 @@ no_periodo = lambda ts: inicio <= ts < fim
 CSVS = ["resultados.csv", "kv.csv", "raciocinio.csv", "vazao_moe.csv"]
 novas = {}
 for arq in CSVS:
-    p = os.path.join(AQUI, arq)
+    p = os.path.join(DADOS, arq)
     if os.path.exists(p): novas[arq] = [r for r in csv.DictReader(open(p)) if no_periodo(r["data"])]
 
 
@@ -40,10 +42,10 @@ if not any(novas.values()): out.append("(nenhuma linha nova)\n")
 
 # erros do periodo (so a primeira linha de cada registro)
 out.append("## Erros (erros.log)\n")
-p = os.path.join(AQUI, "erros.log")
+p = os.path.join(DADOS, "erros.log")
 erros = [l[:400] for l in open(p) if re.match(r"\d{4}-\d\d-\d\dT", l) and no_periodo(l.split()[0])] if os.path.exists(p) else []
 out.append("```\n" + ("\n".join(erros) if erros else "(nenhum erro novo)") + "\n```\n")
-t5 = os.path.join(AQUI, "logs", "teste5.json")
+t5 = os.path.join(DADOS, "logs", "teste5.json")
 if os.path.exists(t5):
     d = json.load(open(t5))
     rep = {k: v for k, v in d.items() if no_periodo(v["data"])}
@@ -80,7 +82,7 @@ for linhas in novas.values():
     for r in linhas: soma[r["benchmark"]] += f(r["tempo_s"]) or 0
 out += ["Soma de tempo_s por prova (so o tempo medido, sem carga de modelo nem montagem das tarefas): " + ", ".join(f"{b} {t / 3600:.2f} h" for b, t in sorted(soma.items())), ""]
 chamadas = []
-for arq in sorted(glob.glob(os.path.join(AQUI, "logs", "blocos", "*.txt"))):
+for arq in sorted(glob.glob(os.path.join(DADOS, "logs", "blocos", "*.txt"))):
     ini = None
     for l in open(arq):
         ts = l.split()[0] if l.strip() else ""
@@ -98,8 +100,8 @@ def incluir(titulo, caminho):
 
 
 if N == 1:
-    incluir("1.1 Validacao da geracao de letra", os.path.join(AQUI, "logs", "p1_1_validacao.md"))
-    kvm = os.path.join(AQUI, "kv_memoria.csv")
+    incluir("1.1 Validacao da geracao de letra", os.path.join(DADOS, "logs", "p1_1_validacao.md"))
+    kvm = os.path.join(DADOS, "kv_memoria.csv")
     if os.path.exists(kvm):
         mem = [r for r in csv.DictReader(open(kvm)) if r["momento"] == "pronto" and no_periodo(r["data"])]
         for r in mem:
@@ -112,11 +114,11 @@ if N == 1:
     if d:
         out += ["## 1.4 Diagnostico do MMLU (mesma amostra de 1425 questoes)\n"] + tabela(sorted(d, key=lambda r: (r["modelo"], r["benchmark"], r["nivel"])), ["modelo", "nivel", "benchmark", "n", "acuracia", "erro_padrao"]) + [""]
 if N == 2:
-    prompts = sorted({(p.split("/amostras/")[1].split("/")[0], open(p).read().strip()) for p in glob.glob(os.path.join(AQUI, "amostras", "*", "*", "*", "*", "prompt_sistema.txt"))})
+    prompts = sorted({(p.split("/amostras/")[1].split("/")[0], open(p).read().strip()) for p in glob.glob(os.path.join(DADOS, "amostras", "*", "*", "*", "*", "prompt_sistema.txt"))})
     if prompts: out += ["## Prompt de sistema usado nos especialistas de matematica\n"] + [f"- {m}: `{t}`" for m, t in prompts] + [""]
 if N == 3:
-    incluir("3.1 Acesso ao GPQA", os.path.join(AQUI, "logs", "p3_1_gpqa_acesso.txt"))
-    incluir("3.2 Vazao dos MoE", os.path.join(AQUI, "vazao_moe.md"))
+    incluir("3.1 Acesso ao GPQA", os.path.join(DADOS, "logs", "p3_1_gpqa_acesso.txt"))
+    incluir("3.2 Vazao dos MoE", os.path.join(DADOS, "vazao_moe.md"))
 out.append("## Pendencias\n\nVer a secao de erros acima e `erros.log`; provas puladas pelo teste de 5 exemplos aparecem em `logs/teste5.json`.\n")
-open(os.path.join(AQUI, f"resumo_prioridade_{N}.md"), "w").write("\n".join(out) + "\n")
+open(os.path.join(RAIZ, "docs", "medicao_spark", f"{datetime.date.today()}_spark_resumo-prioridade-{N}.md"), "w").write("\n".join(out) + "\n")
 print(f"resumo_prioridade_{N}.md escrito ({sum(len(v) for v in novas.values())} linhas novas)")

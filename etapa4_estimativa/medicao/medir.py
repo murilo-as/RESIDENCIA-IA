@@ -6,14 +6,16 @@ Uso: medir.py --modelo Qwen2.5-7B-Instruct [--niveis f16 q8_0 q4_k_m] [--benchma
 import argparse, ast, csv, datetime, gc, json, math, os, random, shutil, signal, subprocess, sys, time, traceback, urllib.request
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-PILOTO = os.path.abspath(os.path.join(AQUI, "..", "..", "piloto"))
+RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
+DADOS = os.path.join(RAIZ, "data", "medicoes")     # CSVs, amostras, logs e etapa1.json desta medicao
+# llama.cpp e venv: na raiz do repo; as pastas antigas (piloto/ e arquivo/2026-10_testes_ambiente_execucao/) valem como segunda opcao
+ANTIGAS = [os.path.join(RAIZ, "piloto"), os.path.join(RAIZ, "arquivo", "2026-10_testes_ambiente_execucao")]
 MODELOS = "/beegfs/home/user_muriloalves/work/models"
 TMP_CODIGO = "/beegfs/home/user_muriloalves/work/tmp_codigo"
-LLAMA = os.path.join(PILOTO, "llama.cpp")
+LLAMA = next((p for p in [os.path.join(RAIZ, "llama.cpp")] + [os.path.join(a, "llama.cpp") for a in ANTIGAS] if os.path.isdir(p)), os.path.join(RAIZ, "llama.cpp"))
 BIN = os.path.join(LLAMA, "build", "bin")
-RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
-VENV_PY = next((v for v in (os.path.join(RAIZ, "venv", "bin", "python"), os.path.join(PILOTO, "venv", "bin", "python")) if os.path.exists(v)), os.path.join(RAIZ, "venv", "bin", "python"))  # venv na raiz do projeto; piloto/venv como reserva
-PROXY = os.path.join(PILOTO, "04_gsm8k", "proxy.py")
+VENV_PY = next((v for v in [os.path.join(d, "venv", "bin", "python") for d in [RAIZ] + ANTIGAS] if os.path.exists(v)), os.path.join(RAIZ, "venv", "bin", "python"))  # venv na raiz do projeto; piloto/venv como reserva
+PROXY = os.path.join(AQUI, "proxy.py")
 TAREFAS = os.path.join(AQUI, "tasks")
 CAMPOS = ["modelo", "nivel", "benchmark", "n", "acuracia", "erro_padrao", "tempo_s", "tokens_por_resposta", "cortadas", "commit_llama_cpp", "data"]
 TIPO = {"f16": None, "q8_0": "Q8_0", "q4_k_m": "Q4_K_M"}
@@ -62,8 +64,8 @@ class Medicao:
         self.campos = CAMPOS_EXT if self.extras else CAMPOS
         self.csv = os.path.join(pasta, saida)
         self.erros = os.path.join(pasta, "erros.log")
-        self.parar = os.path.join(AQUI, "PARAR")
-        self.teste = os.path.abspath(pasta) != AQUI  # --dir diferente: amostras de codigo com prefixo teste_
+        self.parar = os.path.join(DADOS, "PARAR")
+        self.teste = os.path.abspath(pasta) != DADOS  # --dir diferente: amostras de codigo com prefixo teste_
         self.commit = subprocess.run(["git", "-C", LLAMA, "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
         self._tm = None
         self._carregado = {}
@@ -165,7 +167,7 @@ def gguf(modelo, nivel): return os.path.join(MODELOS, f"{modelo.lower()}-{nivel}
 
 
 def log_servidor(modelo, nivel, kv=None):
-    pasta = os.path.join(AQUI, "logs", "servidor")
+    pasta = os.path.join(DADOS, "logs", "servidor")
     os.makedirs(pasta, exist_ok=True)
     return os.path.join(pasta, f"{modelo}_{nivel}{'_kv' + kv if kv else ''}_{time.strftime('%Y%m%dT%H%M%S')}.log")
 
@@ -374,7 +376,7 @@ def rodar_gerativo(m, s, bench, limite, teste=0):
     from lm_eval.loggers import EvaluationTracker
     task = GERATIVO[bench]["task"]
     s.servidor()
-    saida = os.path.join(AQUI, "logs", "teste5", f"{s.modelo}_{bench}") if teste else amostra_dir(m, s, bench)
+    saida = os.path.join(DADOS, "logs", "teste5", f"{s.modelo}_{bench}") if teste else amostra_dir(m, s, bench)
     os.makedirs(saida, exist_ok=True)
     proxy_log = os.path.join(saida, "proxy.jsonl")
     proxy = subprocess.Popen([VENV_PY, PROXY, "http://127.0.0.1:8080", proxy_log, "8081"])
@@ -526,7 +528,7 @@ def main():
     ap.add_argument("--batch-hf", type=int, default=16, help="batch_size do HFLM (log-prob); reduzir para modelos muito grandes")
     ap.add_argument("--respeitar-etapa1", action="store_true", help="pula os benchmarks marcados como pulados em etapa1.json")
     ap.add_argument("--ingerir-codigo", action="store_true")
-    ap.add_argument("--dir", default=AQUI)
+    ap.add_argument("--dir", default=DADOS)
     a = ap.parse_args()
     if a.raciocinio_ligado and a.sem_raciocinio: ap.error("--raciocinio-ligado e --sem-raciocinio juntos")
     extras = {"kv": a.kv or "16", "raciocinio": "ligado" if a.raciocinio_ligado else "desligado"} if a.saida != "resultados.csv" else None
@@ -543,7 +545,7 @@ def main():
     limites = {k: int(v) for k, v in (x.split("=") for x in a.limites)}
     ativos = [b for b in ORDEM if b in a.benchmarks]
     if a.respeitar_etapa1:
-        e1 = json.load(open(os.path.join(AQUI, "etapa1.json")))
+        e1 = json.load(open(os.path.join(DADOS, "etapa1.json")))
         for b in list(ativos):
             if e1.get(b, {}).get("status") == "pulado":
                 print(f"pula {b}: etapa 1 -> {e1[b].get('motivo')}", flush=True)

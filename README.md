@@ -1,6 +1,6 @@
 # Ferramenta de decisão de eficiência em LLMs
 
-Recebe a descrição de um problema em texto livre e devolve uma configuração (modelo, técnicas de eficiência e níveis) com justificativa. O escopo é a família Qwen (2.5 em diante), para computadores pessoais. As medições são feitas no DGX Spark. Rodar a recomendação (etapa 7) é trabalho manual; verificá-la e atualizar a base (etapa 8) tem scripts.
+Recebe a descrição de um problema em texto livre e devolve uma configuração (modelo, técnicas de eficiência e níveis) com justificativa. O escopo é a família Qwen (2.5 em diante), para computadores pessoais. As medições-base são feitas no DGX Spark; as verificações, em outras máquinas (hoje uma RTX 4090).
 
 ## Pipeline
 
@@ -9,29 +9,42 @@ Recebe a descrição de um problema em texto livre e devolve uma configuração 
 | 1 | Extração | Um LLM (API) transforma o texto do usuário em campos estruturados | `etapa1_extracao/` |
 | 2 | Diagnóstico | Transforma o pedido em "o que medir e dentro de quais limites": benchmarks, orçamento de memória, banda, contexto | `etapa2_diagnostico/` |
 | 3 | Candidatura | Gera as combinações de modelo + técnicas e descarta as que não cabem | `etapa3_candidatura/` |
-| 4 | Estimativa | Estima memória, latência e qualidade de cada candidata; contém as medições que alimentam a qualidade | `etapa4_estimativa/` |
+| 4 | Estimativa | Estima memória, latência e qualidade de cada candidata | `etapa4_estimativa/` |
 | 5 | Pareto | Elimina candidatas dominadas | `etapa5_pareto/` |
 | 6 | Recomendação | Escolhe conforme a preferência e justifica | `etapa6_recomendacao/` |
-| 7 | Execução | Manual: roda a configuração recomendada (baixa o modelo, aplica os níveis, sobe o servidor) | — |
-| 8 | Verificação e atualização | Mede a configuração rodada, compara com a estimativa e acrescenta o resultado à base | `etapa8_verificacao/` |
+| 7 | Execução | Roda a configuração recomendada numa máquina (hoje, tarefas de código) | `etapa7_executar_verificar/` |
+| 8 | Verificação e atualização | Compara o medido com a estimativa e acrescenta o resultado à base que a etapa 4 lê | `etapa7_executar_verificar/` (mesmo script) |
 
-`pipeline.py` roda as etapas 1 a 6 em sequência.
-
-## Estrutura
+`pipeline.py` roda as etapas 1 a 6. O ciclo se fecha na etapa 8: o que ela grava em `data/medicoes/` é lido pela etapa 4 na próxima execução.
 
 ```
-pipeline.py                roda as etapas 1 a 6 em sequência
-config.yaml                LLM extrator, limites e pasta de saída
-config.py                  lê o config.yaml
-data/                      dados compartilhados entre as etapas
-etapa1_extracao/
-etapa2_diagnostico/
-etapa3_candidatura/
-etapa4_estimativa/         estimador, análise e medições (medicao/)
-piloto/                    testes de ambiente no DGX Spark; o venv dos jobs fica aqui
-preparo_dados/             scripts que constroem a base (rodam raramente)
-saidas/                    JSON da última execução (fora do git)
+texto → 1 extração → 2 diagnóstico → 3 candidatura → 4 estimativa → 5 Pareto → 6 recomendação
+                                                          ↑                          │
+                                       data/medicoes/ ←── 8 verificação ←── 7 execução ┘
 ```
+
+## Estrutura do repositório
+
+```
+README.md · config.yaml · config.py · pipeline.py · .env (chave do Gemini, fora do git)
+
+etapa1_extracao/ … etapa6_recomendacao/    uma pasta por etapa; o código de cada uma
+etapa7_executar_verificar/                 etapas 7 e 8: verificar.py e casos/ (um JSON por modelo a verificar)
+
+data/                                      tudo que as etapas leem
+  fichas.json, tecnicas.yaml, grade.yaml, …  catálogo de modelos, técnicas e benchmarks
+  medicoes/                                  medidas: resultados.csv, kv.csv, raciocinio.csv, verificacoes.csv, velocidade.csv, …
+  preparo/                                   scripts que constroem as fichas (rodam raramente)
+
+casos_teste/                               pedidos de ponta a ponta (c1 a c9), cada um com .json e .yaml
+resultados/<modelo>/<data>_<o que foi>/    saída bruta de cada verificação, agrupada por modelo (no git)
+docs/<origem>/                             relatórios, diário e planos; nome = AAAA-MM-DD_<origem>_<conteúdo>.md
+arquivo/                                   o que não é mais chamado, com período e origem no nome da pasta
+saidas/                                    JSON da última execução do pipeline (fora do git)
+modelos/                                   GGUF baixados pela verificação (fora do git)
+```
+
+Convenção de nomes: documentos levam a data (ou o período) e a origem no nome (`2026-10-31_spark_plano-de-medicao.md`); resultados ficam sob o modelo (`resultados/Qwen2.5-Coder-1.5B-Instruct/2026-11-16_verificacao_q8_0_kv8/`).
 
 ## Configuração (`config.yaml`)
 
@@ -57,29 +70,30 @@ Vazio = não informado. Os limites do `config.yaml` valem mais que os do texto d
 
 | Comando | O que faz |
 |---|---|
-| `python pipeline.py "texto do pedido"` | Etapas 1 a 4; grava `pedido.json`, `diagnostico.json`, `candidatos.json` e `estimativas.json` na pasta de saída |
-| `python pipeline.py --pedido saidas/pedido.json` | Pula a etapa 1 (sem API) |
+| `python pipeline.py "texto do pedido"` | Etapas 1 a 6; grava um JSON por etapa na pasta de saída |
+| `python pipeline.py --pedido casos_teste/c1_codigo_8gb.json` | Pula a etapa 1 (sem API) |
+| `python pipeline.py --pedido casos_teste/c1_codigo_8gb.json --config casos_teste/c1_codigo_8gb.yaml` | Idem, com o orçamento daquele caso |
 | `python etapa1_extracao/extrair.py "texto"` | Só a etapa 1; imprime o pedido |
-| `python etapa1_extracao/avaliar_extracao.py` | Avalia o LLM do `config.yaml` nos 10 casos; resultado em `resultados/` |
-| `python etapa1_extracao/avaliar_extracao.py --gabarito` | Sem LLM: testa só o código (deve dar 120/120) |
-| `python etapa2_diagnostico/diagnosticar.py pedido.json [-o diagnostico.json]` | Só a etapa 2 |
-| `python etapa3_candidatura/candidatar.py diagnostico.json [-o candidatos.json]` | Só a etapa 3 |
+| `python etapa1_extracao/avaliar_extracao.py [--gabarito]` | Avalia o LLM do `config.yaml` nos casos com gabarito (`--gabarito`: sem LLM, testa só o código) |
+| `python etapa2_diagnostico/diagnosticar.py pedido.json` | Só a etapa 2 |
+| `python etapa3_candidatura/candidatar.py diagnostico.json` | Só a etapa 3 |
 | `python etapa3_candidatura/regras.py` | Valida `fichas.json` e `tecnicas.yaml` |
-| `python etapa4_estimativa/estimar.py candidatos.json diagnostico.json [-o estimativas.json]` | Só a etapa 4 |
-| `python etapa4_estimativa/analise.py [-r resultados.csv ...] [-a texto_do_id] [-o analise.md]` | Validação do estimador de qualidade (deixa um modelo de fora e compara) |
-
-Para testar outro orçamento de memória, mude `limites.memoria_gb` ou use `--config outro.yaml`.
+| `python etapa4_estimativa/estimar.py candidatos.json diagnostico.json` | Só a etapa 4 |
+| `python etapa4_estimativa/analise.py [-a texto_do_id] [-o analise.md]` | Validação do estimador de qualidade (deixa um modelo de fora e compara) |
+| `python etapa7_executar_verificar/verificar.py etapa7_executar_verificar/casos/<caso>.json --llama-dir <build/bin>` | Etapas 7 e 8: roda, compara e acrescenta à base |
+| `python etapa7_executar_verificar/verificar.py --so-ingerir <resultado.json> [--dry-run]` | Só acrescenta à base um resultado já medido |
 
 ## `data/`
 
 | Arquivo | Conteúdo |
 |---|---|
-| `fichas.json` | Catálogo de 105 fichas: 72 Qwen (no escopo) e 33 Gemma (fora do escopo). Parâmetros, atenção, tokenizer |
-| `fichas_eliminadas.json` | 6 fichas Qwen retiradas do escopo: não cabem em 128 GB nem em 4 bits, então não há como medir nem verificar |
+| `fichas.json` | Catálogo de fichas: Qwen (no escopo) e Gemma (fora do escopo). Parâmetros, atenção, tokenizer |
+| `fichas_eliminadas.json` | Fichas Qwen retiradas do escopo: não cabem em 128 GB nem em 4 bits, então não há como medir nem verificar |
 | `tecnicas.yaml` | 22 técnicas de eficiência em 4 movimentos (Shrink, Improve, Grow, Speed-up): requisitos, direção esperada do efeito, níveis. Três têm efeito medido (quantização de pesos, quantização do KV, raciocínio ligado/desligado), 12 se aplicam sem medida, 3 exigem treino do zero e 4 são embutidas no modelo |
-| `grade.yaml` | Célula tarefa × domínio → benchmarks, medida direta ou indireta, ordem de fallback e especialidade dos modelos (v0.4) |
+| `grade.yaml` | Célula tarefa × domínio → benchmarks, medida direta ou indireta, ordem de fallback e especialidade dos modelos |
 | `curva_forma_qwen3.csv` | Perda relativa por tamanho do Qwen3 em 4 bits (artigo [arXiv 2505.02214](https://arxiv.org/abs/2505.02214)); só a forma da curva é usada |
 | `fichas_kv.py` | Cache de KV teórico por tipo de atenção, a partir de uma ficha |
+| `preparo/contar_params_texto.py` | Lê o cabeçalho dos safetensors no Hugging Face e conta os parâmetros só do texto. Repositórios fechados exigem `HF_TOKEN` |
 
 A `grade.yaml` define:
 
@@ -93,6 +107,21 @@ A `grade.yaml` define:
 | Código | HumanEval+, MBPP+ |
 | Tradução | WMT24++ |
 
+### `data/medicoes/`
+
+| Arquivo | Conteúdo | Quem lê |
+|---|---|---|
+| `resultados.csv` | Uma linha por (modelo, nível de pesos, prova): raciocínio desligado, KV padrão | estimador |
+| `kv.csv` | KV quantizado (`kv` = 16, 8, 4 ou k4v8) e geração de letra | estimador |
+| `raciocinio.csv` | Raciocínio ligado, 4096 tokens por resposta | estimador |
+| `verificacoes.csv` | Notas verificadas em outras máquinas (etapa 8), com o que foi estimado e a faixa | estimador, se `fontes_medida` inclui `verificacao` |
+| `velocidade.csv` | tok/s e eficiência da banda medidos na verificação | ainda nenhum (para calibrar `eficiencia_banda`) |
+| `kv_memoria.csv` | Por servidor com KV configurado: KV pela fórmula, memória usada, RSS, `nvidia-smi` | conferência da fórmula |
+| `vazao_moe.csv` | Vazão dos MoE | conferência |
+| `etapa1.json`, `erros.log`, `logs/` | Estado e registro da campanha de medição | `medir.py` |
+
+Medida de 8 bits de uma verificação vale também como nota de 16 bits na curva de tamanho (regra razão 1); linhas com KV 4 bits ficam de fora; a medida da Spark vence em caso de conflito. **Modelos medidos no Spark:** Qwen2.5, Qwen3, Qwen3.5 e Qwen3.6, em F16, Q8_0 e Q4_K_M. **Provas:** MMLU, MedQA, PubMedQA, OAB, GSM8K, MATH-500, HumanEval+, MBPP+, WMT24++.
+
 ## Etapa 1: Extração
 
 | Arquivo | Para que serve |
@@ -100,7 +129,7 @@ A `grade.yaml` define:
 | `extrair.py` | Chama o LLM, valida a resposta e liga o nome do modelo ao id do `fichas.json` |
 | `pedido.schema.json` | Formato da resposta (campo = valor + trecho do texto que o justifica) |
 | `avaliar_extracao.py` | Roda os casos de teste e conta acertos, alucinações, omissões e erros por campo |
-| `casos/pedidos.jsonl` | 10 pedidos com gabarito |
+| `casos/pedidos.jsonl`, `casos/pedidos_dificeis.jsonl` | Pedidos com gabarito |
 | `resultados/` | Saída de cada avaliação (fora do git) |
 
 Tarefas: QA (inclui conversar, resumir, explicar), Código e Tradução. Com o Gemini 2.5 Flash, a avaliação deu 117/120 campos. O filtro de evidência confere que o trecho existe no texto, não que ele sustenta o valor.
@@ -137,22 +166,20 @@ Entrada: `candidatos.json` e `diagnostico.json`. Saída: `estimativas.json`. Sem
 | Eixo | De onde vem | Tag |
 |---|---|---|
 | Memória | Mínimo teórico da etapa 3 (pesos + KV) | C |
-| Latência | teto = banda ÷ bytes lidos por token (só pesos e pesos + KV no contexto alvo); estimativa = teto com KV × `eficiencia_banda` | C |
+| Latência | teto = banda ÷ bytes lidos por token; estimativa = teto com KV × `eficiencia_banda` | C |
 | Qualidade | `estimar_qualidade.py`: nota por benchmark a partir das medições | A, B ou C |
-| Meta de tok/s | Teto só com pesos abaixo da meta = "não"; estimativa (teto × eficiência) na meta ou acima = "sim"; senão "talvez" | — |
+| Meta de tok/s | Teto só com pesos abaixo da meta = "não"; estimativa na meta ou acima = "sim"; senão "talvez" | — |
 
-MoE com parâmetros ativos desconhecidos fica sem teto. A eficiência da banda vem de um modelo MoE só; em densos pode diferir.
-
-### Arquivos
+MoE com parâmetros ativos desconhecidos fica sem teto. A eficiência da banda cresce com o tamanho do modelo (0,20 no 0,5B e 0,36 no 1,5B na 4090; 0,45 no Qwen3.5-35B-A3B no Spark); o valor do `config.yaml` é um só.
 
 | Arquivo | Para que serve |
 |---|---|
 | `estimar.py` | Memória, tetos de tokens/s, meta e qualidade de cada configuração, com origem e tag em cada número |
 | `estimar_qualidade.py` | Estimador de qualidade (abaixo) |
 | `analise.py` | Validação por deixar um modelo de fora: erro por benchmark, por interpolação ou extrapolação, contra a linha de base ingênua |
-| `medicao/` | Código, dados e relatórios das medições |
+| `medicao/` | Ferramentas para medir (abaixo) |
 
-### Estimador de qualidade
+### Estimador de qualidade (`estimar_qualidade.py`)
 
 `nota(modelo, bits, benchmark) = nota em 16 bits × razão da quantização`.
 
@@ -161,67 +188,59 @@ MoE com parâmetros ativos desconhecidos fica sem teto. A eficiência da banda v
 - **Cascata de evidência:** 0 medido · 1 curva da linha · 2 irmão, pela razão · 3 irmão, pela nota · 4 ponte entre provas · 5 prior global · 6 prior de modelo não medido. Cada resultado traz o nível, o intervalo e a tag.
 - **Validação:** `analise.py` deixa cada modelo de fora e compara com a linha de base ingênua (copiar a nota do medido de tamanho mais próximo na linha).
 
-### `medicao/`
+### `etapa4_estimativa/medicao/` (ferramentas; os dados ficam em `data/medicoes/`)
 
-Mede cada modelo em GGUF com llama.cpp nos níveis F16, Q8_0 e Q4_K_M. Provas de múltipla escolha por log-prob passam pelo lm-eval (hf + `gguf_file`, que desquantiza para fp16); provas geradas usam o llama-server com decodificação gulosa. Os jobs rodam por SLURM no DGX Spark.
+Mede cada modelo em GGUF com llama.cpp nos níveis F16, Q8_0 e Q4_K_M. Provas de múltipla escolha por log-prob passam pelo lm-eval (hf + `gguf_file`, que desquantiza para fp16); provas geradas usam o llama-server com decodificação gulosa. Os jobs rodam por SLURM no DGX Spark. O `medir.py` procura o `llama.cpp/` e o `venv/` na raiz do repositório (e, se não achar, nas pastas antigas do piloto). Guia de uso: [docs/medicao_spark/2026-10-25_a_2026-11-05_spark_como-medir.md](docs/medicao_spark/2026-10-25_a_2026-11-05_spark_como-medir.md).
 
 | Arquivo | Para que serve |
 |---|---|
 | `medir.py` | Um processo por modelo: gera o GGUF se faltar e grava uma linha por (modelo, nível, prova). Retomável |
 | `letra.py` | Múltipla escolha por geração da letra (`mmlu_letra`, `oab_letra`) |
 | `codigo.py`, `pontuar_codigo.py` | HumanEval+ e MBPP+: geração pelo servidor; pontuação do evalplus em container isolado |
+| `proxy.py` | Proxy usado nas provas de GSM8K |
 | `limpar.py` | Apaga os arquivos de um modelo só se todas as medidas pedidas já estão registradas |
 | `pareado.py` | Compara dois níveis questão a questão |
-| `resumo.py`, `resumo_prioridade.py` | Escrevem `resumo.md` e `resumo_prioridade_N.md` |
-| `validar_letra.py` | Compara a geração de letra com o log-prob no Qwen2.5-7B |
+| `resumo.py`, `resumo_prioridade.py` | Escrevem relatórios datados em `docs/medicao_spark/` |
 | `baixar_modelos.py` | Baixa modelos do Hugging Face, retomável |
-| `arquivo/` | Scripts da primeira campanha e dos testes de aceite (`campanha.sh`, `repetir*.sh`, `etapa1*`, `oab_*`, `plano.txt`) e seus CSVs; não são mais chamados |
-| `experimentos/` | Um script por bloco (`p0` a `p3`), `comum.sh` e `plano.txt` (a cadeia de jobs) |
-| `tasks/` | Tarefas lm-eval próprias: `oab_exams`, `oab_exams_5shot`, `pubmedqa_qiaojin` |
+| `tasks/` | Tarefas lm-eval próprias: `oab_exams`, `oab_exams_5shot`, `pubmedqa_qiaojin`, `wmt24pp_en_pt_br` |
 
-Dados e relatórios:
+## Etapas 5 e 6: Pareto e recomendação
 
-| Arquivo | Conteúdo |
-|---|---|
-| `resultados.csv` | 429 linhas: raciocínio desligado, KV padrão |
-| `kv.csv` | 63 linhas: KV quantizado, geração de letra, diagnóstico do MMLU. `kv` = 16, 8, 4 ou k4v8 |
-| `raciocinio.csv` | 8 linhas: raciocínio ligado, 4096 tokens por resposta |
-| `kv_memoria.csv` | Por servidor com KV configurado: KV pela fórmula, memória usada, RSS, `nvidia-smi` |
-| `vazao_moe.csv`, `vazao_moe.md` | Teste de vazão dos MoE |
-| `resumo.md`, `resumo_prioridade_1/2/3.md` | Relatórios gerados |
-| `DIARIO.md`, `plano_medicao.md` | Registro das ações e plano com estimativas de tempo |
+`etapa5_pareto/pareto.py` mantém só as candidatas não dominadas em nota, memória, bytes lidos por token e raciocínio. Duas configurações empatam se a diferença de nota cabe na tolerância: 0,5 ponto no mesmo modelo, e o menor intervalo entre modelos diferentes. Configurações com resultado idêntico viram uma só, com `equivalentes`.
 
-O estimador lê `medicao/resultados*.csv` e, se `fontes_medida` incluir `verificacao`, `medicao/verificacoes.csv` (medida de 8 bits vale também como nota de 16 bits na curva de tamanho, pela regra razão 1; linhas com KV 4 bits ficam de fora; a medida da Spark vence em caso de conflito). `medicao/velocidade.csv` guarda tok/s medidos por verificação, para calibrar a eficiência da banda (ainda não lido). `kv.csv` e `raciocinio.csv` têm leitura própria. Detalhes de uso: [medicao/README.md](etapa4_estimativa/medicao/README.md).
+`etapa6_recomendacao/recomendar.py` escolhe na fronteira: qualidade = maior piso (nota − intervalo); entre as que empatam com a melhor, a de menor footprint (soma das posições em memória e em bytes lidos por token). Devolve `porque_escolhida`, a origem da nota (medida, curva, irmão, prior), as alternativas e avisos (configurações excluídas e o motivo).
 
-**Modelos medidos:** 23 (15 pós-treino, 8 base) das famílias Qwen2.5, Qwen3, Qwen3.5 e Qwen3.6. **Provas:** MMLU, MedQA, PubMedQA, OAB, GSM8K, MATH-500, HumanEval+, MBPP+, WMT24++.
+## Etapas 7 e 8: executar, verificar e atualizar
 
-## `piloto/`
+`etapa7_executar_verificar/verificar.py` pega um caso (`casos/*.json`: modelo, GGUF, nível, KV e o que a pipeline estimou), baixa o GGUF para `modelos/`, mede HumanEval+ e MBPP+ completos (mesmo protocolo do Spark) e a velocidade (llama-bench), compara com a estimativa e acrescenta as linhas a `data/medicoes/verificacoes.csv` e `velocidade.csv`. A saída bruta fica em `resultados/<modelo>/<data>_verificacao_<nível>_kv<kv>/`. Teste rápido (`--limite`) nunca entra na base. Rodar o pipeline de novo já usa as medidas novas.
 
-Testes que validaram o ambiente do DGX Spark: llama.cpp com CUDA, conversão e quantização de modelos Qwen, avaliação com lm-eval. Cada script é um job SLURM; versões e comandos estão em `piloto/NOTAS.md`. A pasta guarda também o `venv` (fora do git) que todos os jobs de medição usam.
+Requisitos: llama.cpp compilado com CUDA e `pip install huggingface_hub datasets evalplus`. O evalplus executa o código gerado pelo modelo: use ambiente descartável.
 
-## `preparo_dados/`
+| Verificação | Estimado | Medido | Faixa |
+|---|---|---|---|
+| Coder-0,5B q8, HumanEval+ | 78,5 ± 17,1 | 54,9 | fora |
+| Coder-0,5B q8, MBPP+ | 50,1 ± 17,1 | 42,9 | dentro |
+| Coder-1,5B q8, HumanEval+ | 71,7 ± 9,2 | 65,9 | dentro |
+| Coder-1,5B q8, MBPP+ | 56,0 ± 9,1 | 59,5 | dentro |
 
-| Arquivo | Para que serve |
-|---|---|
-| `contar_params_texto.py` | Lê o cabeçalho dos safetensors no Hugging Face e conta os parâmetros só do texto. Repositórios fechados exigem `HF_TOKEN` |
+## `docs/` e `arquivo/`
+
+- `docs/medicao_spark/`: guia de medição, plano, diário, resumos por prioridade e resumo geral, todos com data no nome.
+- `arquivo/2026-10_testes_ambiente_execucao/`: testes que validaram o ambiente do DGX Spark (llama.cpp com CUDA, conversão e quantização, lm-eval). Cada script é um job SLURM; versões e comandos em `NOTAS.md`.
+- `arquivo/2026-10_medicao_spark/`: scripts das campanhas (`experimentos/`, `etapa1_legado/`, `fumaca/`) e análises pontuais; não são mais chamados.
+- `arquivo/2026-11-09_etapa4_teste_camada2_analise_camada2.py`: teste da camada 2 do estimador (razão da quantização) feito em 09/11/2026.
 
 ## Convenções
 
-- **Tags de confiança:** **A** = verificado na fonte ou medido por nós; **B** = fonte ou regra sem checagem independente; **C** = inferência, fonte única ou proxy.
+- **Tags de confiança:** **A** = medido por nós; **B** = fonte ou regra sem checagem independente; **C** = inferência, fonte única ou proxy. Aparecem nos resultados do estimador e nas medidas, não nas regras das etapas.
 - O LLM só extrai dados do texto. Toda decisão fica em código, com regra e fonte.
 - Valor sem medida fica "desconhecido"; nunca se inventa número.
 
 ## Histórico
 
-1. **Piloto.** Ambiente do Spark, llama.cpp, conversão para GGUF, primeiros MMLU e GSM8K em Qwen2.5 (`piloto/`).
-2. **Etapas 1 a 3.** Extração com 10 casos anotados, diagnóstico com a grade de benchmarks, candidatura com regras de técnicas e memória.
-3. **Etapa 4, memória e latência.** Fórmulas de memória e teto de tokens/s; definição do estimador `nota16 × razão`.
-4. **Primeira campanha de medição.** Qwen2.5 3B, 7B e 14B em F16, Q8_0 e Q4_K_M, com MMLU e GSM8K.
-5. **Benchmarks novos.** MedQA, PubMedQA, OAB, MATH-500, HumanEval+, MBPP+ e WMT24++; o OAB foi refeito com instrução em português e 5-shot.
-6. **Medições da etapa 4.** KV quantizado, raciocínio ligado, geração de letra no lugar do log-prob, modelos base e Qwen3, Qwen3.5 e Qwen3.6, MoE.
-7. **Escopo.** Gemma saiu; 6 fichas Qwen grandes demais foram eliminadas (72 restantes).
-
-## Etapas 7 e 8: rodar, verificar e atualizar
-1. **Etapa 7 (rodar):** aplicar a configuração da recomendação numa máquina. O `etapa8_verificacao/verificar.py` faz isso para tarefas de código: lê um caso de `etapa8_verificacao/casos/*.json` (modelo, GGUF, nível, KV e o que a pipeline estimou), como `c8.json` (Coder-0,5B) e `c8_coder15b.json` (Coder-1,5B).
-2. **Etapa 8 (verificar):** o script mede a nota (HumanEval+ e MBPP+ completos) e a velocidade (llama-bench) e compara com o que a pipeline estimou. Resultado em `verificacao_c8/resultado.json`.
-3. **Etapa 8 (atualizar):** `python etapa8_verificacao/ingerir.py verificacao_c8/resultado.json` acrescenta as linhas a `verificacoes.csv` (nota, estimativa e faixa, máquina, versão do llama.cpp) e `velocidade.csv`. Resultado de teste rápido (`--limite`) é recusado. Rodar a pipeline de novo já usa as medidas novas.
+1. **Ambiente.** Spark, llama.cpp, conversão para GGUF, primeiros MMLU e GSM8K em Qwen2.5 (`arquivo/2026-10_testes_ambiente_execucao/`).
+2. **Etapas 1 a 3.** Extração com casos anotados, diagnóstico com a grade de benchmarks, candidatura com regras de técnicas e memória.
+3. **Etapa 4.** Fórmulas de memória e teto de tokens/s; estimador `nota16 × razão`; campanhas de medição (benchmarks, KV, raciocínio, modelos base, Qwen3 a 3.6, MoE).
+4. **Escopo.** Gemma saiu; fichas Qwen grandes demais foram eliminadas.
+5. **Etapas 5 e 6.** Pareto com tolerância por empate; recomendação por piso de qualidade e footprint.
+6. **Etapas 7 e 8.** Verificação em outra máquina (RTX 4090) que alimenta a base; `fontes_medida` no `config.yaml`.

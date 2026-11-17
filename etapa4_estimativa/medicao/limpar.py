@@ -5,6 +5,8 @@ porque a pontuacao do evalplus so entra no CSV depois, no job isolado. Nao apaga
 import argparse, csv, os, shutil
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
+DADOS = os.path.join(RAIZ, "data", "medicoes")                  # CSVs, amostras, logs
 MODELOS = "/beegfs/home/user_muriloalves/work/models"
 NOMES = {"humaneval": "humaneval_plus", "mbpp": "mbpp_plus"}
 
@@ -16,13 +18,13 @@ a = ap.parse_args()
 
 linhas = set()
 for arq in ("resultados.csv", "kv.csv", "raciocinio.csv"):
-    caminho = os.path.join(AQUI, arq)
+    caminho = os.path.join(DADOS, arq)
     if os.path.exists(caminho): linhas |= {(r["modelo"], r["nivel"], r["benchmark"]) for r in csv.DictReader(open(caminho))}
 
 
 def feito(nivel, prova):
     if prova in NOMES:
-        return os.path.exists(os.path.join(AQUI, "amostras", a.modelo, nivel, prova, "geracao.json")) or (a.modelo, nivel, NOMES[prova]) in linhas
+        return os.path.exists(os.path.join(DADOS, "amostras", a.modelo, nivel, prova, "geracao.json")) or (a.modelo, nivel, NOMES[prova]) in linhas
     return (a.modelo, nivel, prova) in linhas
 
 

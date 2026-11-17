@@ -1,12 +1,18 @@
-"""Etapa 7 e 8 (rodar e verificar) para tarefas de código: baixa o GGUF do caso, roda HumanEval+ e MBPP+ completos e a velocidade, e compara com o que a pipeline estimou.
-  python verificar.py casos/c8_coder15b.json --llama-dir /caminho/llama.cpp/build/bin                  # tudo
-  python verificar.py casos/c8_coder15b.json --llama-dir ... --limite 10 --pular-velocidade            # teste rápido do caminho
-  python ingerir.py verificacao_<caso>/resultado.json                                                  # depois, para alimentar a base
-Cada caso é um JSON em casos/ (modelo, GGUF, nível, KV e o que a pipeline estimou). Requisitos: llama.cpp compilado com CUDA, e  pip install huggingface_hub datasets evalplus
+"""Etapas 7 e 8 (rodar e verificar/atualizar), para tarefas de código: baixa o GGUF do caso, roda HumanEval+ e MBPP+ completos e a velocidade, compara com o que a
+pipeline estimou e acrescenta o resultado à base (data/medicoes/verificacoes.csv e velocidade.csv, que o estimador lê quando config.yaml tem `fontes_medida: [..., verificacao]`).
+  python etapa7_executar_verificar/verificar.py etapa7_executar_verificar/casos/c8_coder15b.json --llama-dir /caminho/llama.cpp/build/bin      # roda tudo e acrescenta à base
+  python ... --limite 10 --pular-velocidade        # teste rápido do caminho (nunca entra na base)
+  python ... --sem-ingerir                         # roda e só guarda o resultado
+  python ... --so-ingerir resultados/<modelo>/<pasta>/resultado.json [--dry-run]     # acrescenta à base um resultado já medido
+Cada caso é um JSON em etapa7_executar_verificar/casos/ (modelo, GGUF, nível, KV e o que a pipeline estimou). Os resultados ficam em resultados/<modelo>/<data>_verificacao_<nível>_kv<kv>/
+e o GGUF baixado em modelos/. Linhas repetidas (mesmo modelo, nível, KV, prova e data) não são duplicadas na base.
+Requisitos: llama.cpp compilado com CUDA, e  pip install huggingface_hub datasets evalplus
 ATENÇÃO: o evalplus executa o código gerado pelo modelo. Rode em ambiente descartável (container/VM) se puder."""
-import argparse, json, math, os, platform, re, shutil, subprocess, sys, time, urllib.request
+import argparse, csv, glob, json, math, os, platform, re, shutil, subprocess, sys, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDICOES = os.path.join(RAIZ, "data", "medicoes")
 BANDA_4090_GB_S = 1008                                              # especificação da RTX 4090 (mude com --banda em outra GPU)
 KV_TIPO = {"16": "f16", "8": "q8_0", "4": "q4_0"}
 CASO = {}                                                           # preenchido em main() com o JSON de casos/
@@ -55,9 +61,16 @@ def binario(llama_dir, nome):
     return p
 
 
-def baixar(pasta):
+def baixar():
     from huggingface_hub import hf_hub_download
-    return hf_hub_download(CASO["gguf_repo"], CASO["gguf_arquivo"], local_dir=pasta)
+    return hf_hub_download(CASO["gguf_repo"], CASO["gguf_arquivo"], local_dir=os.path.join(RAIZ, "modelos"))
+
+
+def pasta_padrao():
+    """resultados/<modelo>/<data>_verificacao_<nível>_kv<kv>; se já existe uma desta configuração, usa a mais recente (assim --pular-* não perde o que já foi medido)."""
+    base = os.path.join(RAIZ, "resultados", CASO["modelo"]); sufixo = f"verificacao_{CASO['nivel']}_kv{CASO['kv']}"
+    antigas = sorted(glob.glob(os.path.join(base, f"*_{sufixo}")))
+    return antigas[-1] if antigas else os.path.join(base, f"{time.strftime('%Y-%m-%d')}_{sufixo}")
 
 
 def velocidade(llama_dir, gguf):
@@ -116,21 +129,68 @@ def veredito(medido, est):
     return "DENTRO da faixa" if abs(medido - est["nota"]) <= est["meio"] else "FORA da faixa"
 
 
+CAMPOS_V = ["modelo", "nivel", "kv", "raciocinio", "benchmark", "n", "acuracia", "erro_padrao", "tokens_por_resposta", "estimado", "meio_estimado", "caso", "maquina", "gpu", "llama_cpp", "gguf", "data"]
+CAMPOS_S = ["modelo", "nivel", "kv", "gpu", "banda_gb_s", "tg_tok_s", "desvio", "bytes_gib", "eficiencia", "maquina", "llama_cpp", "caso", "data"]
+PROVAS = {"HumanEval+": "humaneval_plus", "MBPP+": "mbpp_plus"}
+
+
+def acrescentar(arq, campos, linhas, chave, dry):
+    existe = [dict(l) for l in csv.DictReader(open(arq, encoding="utf-8"))] if os.path.exists(arq) else []
+    ja = {tuple(l[c] for c in chave) for l in existe}
+    novas = [l for l in linhas if tuple(str(l[c]) for c in chave) not in ja]
+    if novas and not dry:
+        novo = not os.path.exists(arq)
+        with open(arq, "a", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, campos)
+            if novo: w.writeheader()
+            w.writerows(novas)
+    print(f"{os.path.basename(arq)}: {len(novas)} linha(s) {'a gravar' if dry else 'gravada(s)'}, {len(linhas) - len(novas)} já existia(m)")
+
+
+def ingerir(r, dry_run=False):
+    """Etapa 8: acrescenta o resultado à base da pipeline (verificacoes.csv: nota por prova; velocidade.csv: tok/s e eficiência da banda)."""
+    if r.get("limite"): raise SystemExit("resultado de teste rápido (--limite): não entra na base")
+    c = r["config"]
+    comum = {"maquina": r.get("maquina"), "gpu": r.get("gpu"), "llama_cpp": " ".join(r.get("llama_cpp") or []), "caso": c["caso"], "data": r["data"]}
+    cod, vel = [], []
+    for nome, m in (r.get("codigo") or {}).items():
+        if nome not in PROVAS: continue
+        b = PROVAS[nome]; e = (r.get("estimado") or {}).get(b, {})
+        cod.append({"modelo": c["modelo"], "nivel": c["nivel"], "kv": c["kv"], "raciocinio": c["raciocinio"], "benchmark": b, "n": m["n"], "acuracia": round(m["passou"] / m["n"], 6),
+                    "erro_padrao": round(m["erro_padrao_pts"] / 100, 6), "tokens_por_resposta": m["tokens_medios"], "estimado": e.get("nota"), "meio_estimado": e.get("meio"),
+                    "gguf": r["modelo"], **comum})
+    if r.get("velocidade"):
+        v = r["velocidade"]
+        vel.append({"modelo": c["modelo"], "nivel": c["nivel"], "kv": c["kv"], "gpu": r.get("gpu"), "banda_gb_s": r["banda_gb_s"], "tg_tok_s": round(v["tg128_tok_s"], 1),
+                    "desvio": round(v.get("desvio") or 0, 1), "bytes_gib": r["bytes_gib"], "eficiencia": v["eficiencia_medida"], **{k: comum[k] for k in ("maquina", "llama_cpp", "caso", "data")}})
+    acrescentar(os.path.join(MEDICOES, "verificacoes.csv"), CAMPOS_V, cod, ("modelo", "nivel", "kv", "benchmark", "data"), dry_run)
+    acrescentar(os.path.join(MEDICOES, "velocidade.csv"), CAMPOS_S, vel, ("modelo", "nivel", "kv", "gpu", "data"), dry_run)
+    for l in cod:
+        d = l["acuracia"] * 100 - (l["estimado"] or 0); dentro = l["estimado"] is not None and abs(d) <= l["meio_estimado"]
+        print(f"  {l['benchmark']}: estimado {l['estimado']} ± {l['meio_estimado']} | medido {l['acuracia'] * 100:.1f} | {'dentro' if dentro else 'FORA'} da faixa")
+
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("caso", help="JSON do caso (casos/*.json)")
+    ap.add_argument("caso", nargs="?", help="JSON do caso (casos/*.json)")
     ap.add_argument("--llama-dir", help="pasta com llama-server e llama-bench (padrão: o que estiver no PATH)")
-    ap.add_argument("--pasta", help="onde guardar o modelo, as soluções e os resultados (padrão: verificacao_<caso>)")
+    ap.add_argument("--pasta", help="onde guardar as soluções e o resultado (padrão: resultados/<modelo>/<data>_verificacao_<nível>_kv<kv>)")
     ap.add_argument("--banda", type=float, default=BANDA_4090_GB_S, help="banda da GPU em GB/s (padrão: RTX 4090)")
     ap.add_argument("--limite", type=int, default=0, help="só os N primeiros problemas de cada prova (teste rápido); 0 = completo")
     ap.add_argument("--pular-velocidade", action="store_true"); ap.add_argument("--pular-codigo", action="store_true")
+    ap.add_argument("--sem-ingerir", action="store_true", help="não acrescenta o resultado à base")
+    ap.add_argument("--so-ingerir", metavar="RESULTADO_JSON", help="só acrescenta à base um resultado.json já medido (não roda nada)")
+    ap.add_argument("--dry-run", action="store_true", help="com --so-ingerir: mostra o que seria gravado")
     a = ap.parse_args()
+    if a.so_ingerir: return ingerir(json.load(open(a.so_ingerir, encoding="utf-8")), a.dry_run)
+    if not a.caso: ap.error("informe o JSON do caso (ou --so-ingerir)")
     CASO.update(json.load(open(a.caso, encoding="utf-8")))
     est = CASO["estimado"]
     media_est = {"nota": sum(e["nota"] for e in est.values()) / len(est), "meio": math.sqrt(sum(e["meio"] ** 2 for e in est.values())) / len(est)}
-    pasta = a.pasta or f"verificacao_{CASO['caso']}"
+    pasta = a.pasta or pasta_padrao()
     os.makedirs(pasta, exist_ok=True)
-    gguf = baixar(pasta)
+    gguf = baixar()
     versao = subprocess.run([binario(a.llama_dir, "llama-server"), "--version"], capture_output=True, text=True)
     saida_json = os.path.join(pasta, "resultado.json")
     anterior = json.load(open(saida_json)) if os.path.exists(saida_json) else {}                  # --pular-* não apaga o que já foi medido
@@ -165,7 +225,9 @@ def main():
     if "velocidade" in r:
         v = r["velocidade"]
         print(f"\nvelocidade ({r['gpu']}, {a.banda:g} GB/s): estimado {v['estimado_tok_s']:.0f} tok/s | medido {v['tg128_tok_s']:.0f} tok/s | eficiência medida {v['eficiencia_medida']:.2f} (a ferramenta usa {CASO['eficiencia_banda']})")
-    print(f"\nresultado salvo em {saida_json}\npara alimentar a base da pipeline: python etapa8_verificacao/ingerir.py {saida_json}")
+    print(f"\nresultado salvo em {saida_json}")
+    if a.limite or a.sem_ingerir: print("não acrescentado à base (" + ("teste rápido" if a.limite else "--sem-ingerir") + "); para acrescentar: python etapa7_executar_verificar/verificar.py --so-ingerir " + saida_json)
+    else: print("\nbase da pipeline:"); ingerir(r)
 
 
 if __name__ == "__main__":

@@ -8,3 +8,5 @@ etapa1_extracao/resultados/
 slurm/
 *.gguf
 llama.cpp/
+modelos/
+venv/

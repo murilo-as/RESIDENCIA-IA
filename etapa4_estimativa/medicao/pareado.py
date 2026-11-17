@@ -3,6 +3,8 @@ Benchmarks: mmlu, mmlu_completo, medqa, oab, pubmedqa, gpqa, gsm8k, gsm8k_strict
 import argparse, glob, json, math, os, re
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
+DADOS = os.path.join(RAIZ, "data", "medicoes")                  # CSVs, amostras, logs
 # benchmark -> (pasta em amostras/, metrica por questao, filtro do lm-eval)
 LM_EVAL = {"mmlu": ("mmlu", "acc", None), "mmlu_completo": ("mmlu_completo", "acc", None), "medqa": ("medqa", "acc", None), "oab": ("oab", "acc", None),
            "pubmedqa": ("pubmedqa", "acc", None), "gpqa": ("gpqa", "acc", None), "gsm8k": ("gsm8k", "exact_match", "flexible-extract"),
@@ -58,6 +60,6 @@ def texto(r):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("modelo"); ap.add_argument("nivel_a"); ap.add_argument("nivel_b"); ap.add_argument("benchmark")
-    ap.add_argument("--dir", default=AQUI)
+    ap.add_argument("--dir", default=DADOS)
     a = ap.parse_args()
     print(texto(comparar(a.dir, a.modelo, a.nivel_a, a.nivel_b, a.benchmark)))
