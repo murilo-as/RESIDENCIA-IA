@@ -1,0 +1,4 @@
+{"caso": "c8", "modelo": "Qwen2.5-Coder-0.5B-Instruct", "gguf_repo": "Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF", "gguf_arquivo": "qwen2.5-coder-0.5b-instruct-q8_0.gguf",
+ "nivel": "q8_0", "kv": "8", "raciocinio": "desligado",
+ "estimado": {"humaneval_plus": {"nota": 78.52, "meio": 17.1}, "mbpp_plus": {"nota": 50.10, "meio": 17.1}},
+ "bytes_pesos_gib": 0.46, "bytes_kv_gib": 0.023, "eficiencia_banda": 0.45}

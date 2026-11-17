@@ -222,6 +222,6 @@ Testes que validaram o ambiente do DGX Spark: llama.cpp com CUDA, conversão e q
 7. **Escopo.** Gemma saiu; 6 fichas Qwen grandes demais foram eliminadas (72 restantes).
 
 ## Etapas 7 e 8: rodar, verificar e atualizar
-1. **Etapa 7 (rodar):** aplicar a configuração da recomendação numa máquina. O `etapa8_verificacao/verificar_c8.py` faz isso para o caso c8 (Qwen2.5-Coder-0.5B-Instruct, Q8_0, KV q8_0) e serve de modelo para outros casos.
+1. **Etapa 7 (rodar):** aplicar a configuração da recomendação numa máquina. O `etapa8_verificacao/verificar.py` faz isso para tarefas de código: lê um caso de `etapa8_verificacao/casos/*.json` (modelo, GGUF, nível, KV e o que a pipeline estimou), como `c8.json` (Coder-0,5B) e `c8_coder15b.json` (Coder-1,5B).
 2. **Etapa 8 (verificar):** o script mede a nota (HumanEval+ e MBPP+ completos) e a velocidade (llama-bench) e compara com o que a pipeline estimou. Resultado em `verificacao_c8/resultado.json`.
 3. **Etapa 8 (atualizar):** `python etapa8_verificacao/ingerir.py verificacao_c8/resultado.json` acrescenta as linhas a `verificacoes.csv` (nota, estimativa e faixa, máquina, versão do llama.cpp) e `velocidade.csv`. Resultado de teste rápido (`--limite`) é recusado. Rodar a pipeline de novo já usa as medidas novas.
