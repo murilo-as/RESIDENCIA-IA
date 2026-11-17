@@ -39,7 +39,7 @@ def etapa3_candidatura(ctx):
 
 def etapa4_estimativa(ctx):
     from estimar import estimar
-    return estimar(ctx["candidatos"], ctx["diagnostico"], _fichas(ctx)[0])
+    return estimar(ctx["candidatos"], ctx["diagnostico"], _fichas(ctx)[0], ctx["config"]["fontes_medida"])
 
 
 def etapa5_pareto(ctx):

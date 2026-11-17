@@ -31,7 +31,23 @@ def linha(f):
     return (f["familia"], f["geracao"], f["especialidade"], grupo(f))
 
 
-def ler_medicoes(caminhos, F):
+FONTES_PADRAO = ("spark",)      # quem chama de fora (analises, leave-one-out) mede so o protocolo da Spark; a pipeline passa o filtro do config.yaml
+
+
+def _verificacoes(M, caminhos, F):
+    """verificacoes.csv (etapa 8: medidas de outras maquinas/versoes). Entram como medida no nivel de pesos da linha, sem sobrescrever a da Spark. Linhas com KV 4 bits ficam
+    de fora (o efeito do KV 4 bits e outro); KV 8 bits entra como o nivel dos pesos (efeito medido de -0,17 pt em media, abaixo do erro padrao)."""
+    c0 = caminhos if isinstance(caminhos, str) else (caminhos[0] if caminhos else None)
+    arq = os.path.join(os.path.dirname(c0), "verificacoes.csv") if c0 else None
+    for r in (csv.DictReader(open(arq, encoding="utf-8")) if arq and os.path.exists(arq) else []):
+        i = r["modelo"] if r["modelo"] in F else "Qwen/" + r["modelo"]
+        if i not in F or r["kv"] == "4" or r["raciocinio"] != "desligado": continue
+        k = (i, NIVEL_BITS[r["nivel"]], r["benchmark"])
+        if k not in M: M[k] = {"valor": float(r["acuracia"]), "n": int(r["n"]), "ep": float(r["erro_padrao"]) if r["erro_padrao"] else None, "fonte": "verificacao"}
+    return M
+
+
+def ler_medicoes(caminhos, F, fontes=FONTES_PADRAO):
     M = {}
     for r in (row for c in ([caminhos] if isinstance(caminhos, str) else caminhos) for row in csv.DictReader(open(c, encoding="utf-8"))):
         if r["benchmark"].endswith("_strict"):
@@ -41,7 +57,8 @@ def ler_medicoes(caminhos, F):
             continue
         M[(i, NIVEL_BITS[r["nivel"]], r["benchmark"])] = {"valor": float(r["acuracia"]), "n": int(r["n"]),
                                                           "ep": float(r["erro_padrao"]) if r["erro_padrao"] else None}
-    return _mmlu_letra(M, caminhos, F)
+    M = _mmlu_letra(M, caminhos, F)
+    return _verificacoes(M, caminhos, F) if fontes is None or "verificacao" in fontes else M
 
 
 MMLU_LETRA = "Qwen/Qwen3.5-"  # prefixo dos modelos cujo MMLU vem da geracao da letra (kv.csv, kv=16): o log-prob deu 9B 68,7 < 4B 71,2 e q4 > f16
@@ -140,11 +157,16 @@ def nota16(F, M, i, b, formas):
     m = M.get((i, 16, b))
     if m:
         return {"valor": m["valor"], "tag": "A", "metodo": "medido"}
+    m8 = M.get((i, 8, b))
+    if m8 and m8.get("fonte") == "verificacao":          # so tem a verificacao em 8 bits: vale como a de 16 pela regra razao1
+        return {"valor": m8["valor"], "tag": "A", "metodo": "medido_8bits"}
     p = publicado(i, b, formas, M)
     if p:
         return p
     L = linha(F[i])
-    pts = [(tam(F[j]), v["valor"]) for (j, bits, bb), v in M.items() if bits == 16 and bb == b and j != i and linha(F[j]) == L]
+    # um modelo so com verificacao em 8 bits entra na curva pela regra razao1 (8 bits = nota de 16 bits)
+    pts = [(tam(F[j]), v["valor"]) for (j, bits, bb), v in M.items() if bb == b and j != i and linha(F[j]) == L
+           and (bits == 16 or (bits == 8 and v.get("fonte") == "verificacao" and (j, 16, b) not in M))]
     if len(pts) < 2:
         return None
     if b in SEM_LOGIT:
@@ -309,8 +331,8 @@ def nota_base(F, M, i, b, formas):
     n = nota16(F, M, i, b, formas)
     if n:
         m = n["metodo"]
-        meio = 200 * (M[(i, 16, b)]["ep"] or 0.01) if m == "medido" else 2.5 if m.startswith("publicado") else CURVA_MEIO[classe(b)][0 if m == "interp" else 1]
-        return {**n, "meio": meio, "nivel": 0 if m == "medido" else 1}
+        meio = 200 * ((M.get((i, 16, b)) or M[(i, 8, b)])["ep"] or 0.01) if m in ("medido", "medido_8bits") else 2.5 if m.startswith("publicado") else CURVA_MEIO[classe(b)][0 if m == "interp" else 1]
+        return {**n, "meio": meio, "nivel": 0 if m in ("medido", "medido_8bits") else 1}
     for j in irmaos(F, i):
         if (j, 16, b) in M:
             meio = 15.0 if F[j]["especialidade"] != F[i]["especialidade"] else 8.0 if classe(b) == "conhecimento" else 12.0

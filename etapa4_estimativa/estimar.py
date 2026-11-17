@@ -73,10 +73,10 @@ def estimar_config(c, f, d, benchmarks, F=None, qual=None):
             **({"sem_nota_motivo": motivo} if motivo else {})}
 
 
-def estimar(cand, d, F=None):
+def estimar(cand, d, F=None, fontes=None):
     F = F or carregar()[0]
     benchmarks = d["qualidade"].get("benchmarks", [])
-    qual = (EQ.ler_medicoes(EQ.CSVS, F), EQ.ler_forma(F)) if EQ.CSVS else None
+    qual = (EQ.ler_medicoes(EQ.CSVS, F, fontes or EQ.FONTES_PADRAO), EQ.ler_forma(F)) if EQ.CSVS else None
     est = [estimar_config(c, F[c["modelo"]], d, benchmarks, F, qual) for c in cand["configuracoes"]]
     com_q = sum(any(v for v in e["qualidade"].values()) for e in est)
     return {"entrada": {"banda_gb_s": d["latencia"]["banda_gb_s"], "meta_tok_s": d["latencia"]["meta"]["min_tok_s"], "benchmarks": benchmarks,

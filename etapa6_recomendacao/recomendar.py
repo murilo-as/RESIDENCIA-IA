@@ -20,7 +20,7 @@ def ligado(p): return bool(p["raciocinio"])
 def tecnicas(id_): return [t for t in id_.split("|")[1].split("+") if t != "nenhuma"]
 
 
-METODOS = {"medido": "medida direta", "interp": "curva do tamanho entre modelos medidos da mesma linha", "extrap": "curva do tamanho, fora do intervalo medido",
+METODOS = {"medido": "medida direta", "medido_8bits": "medida direta em 8 bits (verificação)", "interp": "curva do tamanho entre modelos medidos da mesma linha", "extrap": "curva do tamanho, fora do intervalo medido",
            "irmao_nota": "nota de modelo irmão (mesma arquitetura)", "prior_global": "prior global, sem medida na linha", "prior_global_4bits": "perda de 4 bits por prior global",
            "prior_8bits": "perda de 8 bits por prior", "razao1": "8 bits sem perda de nota", "media_classe": "perda média de 4 bits da classe de prova",
            "medido_kv": "medida direta com KV quantizado", "kv_medido": "efeito do KV medido na prova", "kv_medido_modelo": "efeito do KV medido no modelo, em outras provas",

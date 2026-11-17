@@ -4,7 +4,7 @@ Configuração recomendada: Qwen2.5-Coder-0.5B-Instruct, pesos Q8_0, KV q8_0. Co
   python verificar_c8.py --llama-dir ... --limite 10 --pular-velocidade      # teste rápido do caminho (10 problemas por prova)
 Requisitos: llama.cpp compilado com CUDA (llama-server e llama-bench), e  pip install huggingface_hub datasets evalplus
 ATENÇÃO: o evalplus executa o código gerado pelo modelo. Rode em ambiente descartável (container/VM) se puder."""
-import argparse, json, math, os, re, shutil, subprocess, sys, time, urllib.request
+import argparse, json, math, os, platform, re, shutil, subprocess, sys, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 # ---- o que a ferramenta estimou (saída de etapa4/estimar.py para a configuração acima, 16/11/2026) ----
@@ -44,6 +44,11 @@ def um(bench, d):
     sol = extrair_codigo(texto)
     if bench == "humaneval" and f"def {d['entry_point']}" not in sol: sol = d["prompt"] + sol
     return {"task_id": task_id(bench, d), "solution": sol, "tokens": ntok}
+
+
+def _gpu():
+    try: return subprocess.run(["nvidia-smi", "--query-gpu=name", "--format=csv,noheader"], capture_output=True, text=True).stdout.strip().splitlines()[0]
+    except Exception: return None
 
 
 def binario(llama_dir, nome):
@@ -123,7 +128,13 @@ def main():
     os.makedirs(a.pasta, exist_ok=True)
     gguf = baixar(a.pasta)
     versao = subprocess.run([binario(a.llama_dir, "llama-server"), "--version"], capture_output=True, text=True)
-    r = {"modelo": REPO + "/" + ARQUIVO, "llama_cpp": (versao.stdout + versao.stderr).strip().splitlines()[-1:], "limite": a.limite, "data": time.strftime("%Y-%m-%d %H:%M")}
+    saida_json = os.path.join(a.pasta, "resultado.json")
+    anterior = json.load(open(saida_json)) if os.path.exists(saida_json) else {}                  # --pular-* não apaga o que já foi medido
+    r = {**{k: anterior[k] for k in ("velocidade", "codigo") if k in anterior},
+         "modelo": REPO + "/" + ARQUIVO, "llama_cpp": (versao.stdout + versao.stderr).strip().splitlines()[-1:], "limite": a.limite, "data": time.strftime("%Y-%m-%d %H:%M"),
+         "config": {"modelo": "Qwen2.5-Coder-0.5B-Instruct", "nivel": "q8_0", "kv": "8", "raciocinio": "desligado", "caso": "c8"},
+         "estimado": {"humaneval_plus": ESTIMADO["HumanEval+"], "mbpp_plus": ESTIMADO["MBPP+"]}, "banda_gb_s": BANDA_4090_GB_S, "bytes_gib": BYTES_PESOS_GIB + BYTES_KV_GIB,
+         "maquina": platform.node(), "gpu": _gpu()}
     if not a.pular_velocidade:
         v = velocidade(a.llama_dir, gguf)
         teto = BANDA_4090_GB_S * 1e9 / ((BYTES_PESOS_GIB + BYTES_KV_GIB) * 2 ** 30)
@@ -136,7 +147,7 @@ def main():
             r["codigo"][NOMES[bench]] = {"passou": ok, "n": n, "nota": round(100 * ok / n, 2), "tokens_medios": round(sum(s["tokens"] for s in sol) / len(sol), 1),
                                          "erro_padrao_pts": round(100 * math.sqrt((ok / n) * (1 - ok / n) / n), 2)}
         r["codigo"]["media"] = round(sum(r["codigo"][NOMES[b]]["nota"] for b in DATASETS) / 2, 2)
-    json.dump(r, open(os.path.join(a.pasta, "resultado.json"), "w"), indent=1, ensure_ascii=False)
+    json.dump(r, open(saida_json, "w"), indent=1, ensure_ascii=False)
 
     print("\n=== Caso c8: Qwen2.5-Coder-0.5B-Instruct, pesos Q8_0, KV q8_0 ===")
     if "codigo" in r:
@@ -150,7 +161,7 @@ def main():
     if "velocidade" in r:
         v = r["velocidade"]
         print(f"\nvelocidade (RTX 4090, {BANDA_4090_GB_S} GB/s): estimado {v['estimado_tok_s']:.0f} tok/s | medido {v['tg128_tok_s']:.0f} tok/s | eficiência medida {v['eficiencia_medida']:.2f} (a ferramenta usa {EFICIENCIA})")
-    print(f"\nresultado salvo em {os.path.join(a.pasta, 'resultado.json')}")
+    print(f"\nresultado salvo em {saida_json}\npara alimentar a base da pipeline: python etapa8_verificacao/ingerir.py {saida_json}")
 
 
 if __name__ == "__main__":

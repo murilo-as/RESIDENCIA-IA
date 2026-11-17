@@ -1,6 +1,6 @@
 # Ferramenta de decisão de eficiência em LLMs
 
-Recebe a descrição de um problema em texto livre e devolve uma configuração (modelo, técnicas de eficiência e níveis) com justificativa. O escopo é a família Qwen (2.5 em diante), para computadores pessoais. As medições são feitas no DGX Spark. Aplicar a recomendação e verificá-la (etapas 7 e 8) é trabalho manual.
+Recebe a descrição de um problema em texto livre e devolve uma configuração (modelo, técnicas de eficiência e níveis) com justificativa. O escopo é a família Qwen (2.5 em diante), para computadores pessoais. As medições são feitas no DGX Spark. Rodar a recomendação (etapa 7) é trabalho manual; verificá-la e atualizar a base (etapa 8) tem scripts.
 
 ## Pipeline
 
@@ -12,8 +12,8 @@ Recebe a descrição de um problema em texto livre e devolve uma configuração 
 | 4 | Estimativa | Estima memória, latência e qualidade de cada candidata; contém as medições que alimentam a qualidade | `etapa4_estimativa/` |
 | 5 | Pareto | Elimina candidatas dominadas | `etapa5_pareto/` |
 | 6 | Recomendação | Escolhe conforme a preferência e justifica | `etapa6_recomendacao/` |
-| 7 | Aplicação | Manual | — |
-| 8 | Verificação | Manual | — |
+| 7 | Execução | Manual: roda a configuração recomendada (baixa o modelo, aplica os níveis, sobe o servidor) | — |
+| 8 | Verificação e atualização | Mede a configuração rodada, compara com a estimativa e acrescenta o resultado à base | `etapa8_verificacao/` |
 
 `pipeline.py` roda as etapas 1 a 6 em sequência.
 
@@ -46,6 +46,7 @@ Toda opção fica em `config.yaml`; os scripts só aceitam o que muda a cada exe
 | `limites.memoria_gb` | vazio | Orçamento de memória; a etapa 3 corta o que não cabe |
 | `limites.banda_gb_s` | 89,6 | Banda da máquina simulada, em GB/s (PC médio, DDR5-5600 dual channel, pico teórico, tag C). Vazio = sem teto de tokens/s |
 | `limites.min_tok_s` | vazio | Meta de tokens/s |
+| `fontes_medida` | `[spark, verificacao]` | De onde vêm as medidas do estimador: `spark` = `resultados.csv`; `verificacao` = `verificacoes.csv` (etapa 8, outras máquinas). `[spark]` ignora as verificações |
 | `limites.folga_memoria` | 0,20 | Folga sobre o mínimo teórico de memória (hipótese); abaixo dela a configuração fica "sem folga" |
 | `limites.eficiencia_banda` | 0,45 | Fração da banda usada no decode. Vem de uma medida só (Qwen3.5-35B-A3B Q4_K_M no Spark: 82,4 tok/s contra teto de 182), tag C |
 | `saida` | `saidas` | Pasta dos JSON do pipeline |
@@ -190,7 +191,7 @@ Dados e relatórios:
 | `resumo.md`, `resumo_prioridade_1/2/3.md` | Relatórios gerados |
 | `DIARIO.md`, `plano_medicao.md` | Registro das ações e plano com estimativas de tempo |
 
-O estimador lê `medicao/resultados*.csv`; `kv.csv` e `raciocinio.csv` não entram nessa leitura. Detalhes de uso: [medicao/README.md](etapa4_estimativa/medicao/README.md).
+O estimador lê `medicao/resultados*.csv` e, se `fontes_medida` incluir `verificacao`, `medicao/verificacoes.csv` (medida de 8 bits vale também como nota de 16 bits na curva de tamanho, pela regra razão 1; linhas com KV 4 bits ficam de fora; a medida da Spark vence em caso de conflito). `medicao/velocidade.csv` guarda tok/s medidos por verificação, para calibrar a eficiência da banda (ainda não lido). `kv.csv` e `raciocinio.csv` têm leitura própria. Detalhes de uso: [medicao/README.md](etapa4_estimativa/medicao/README.md).
 
 **Modelos medidos:** 23 (15 pós-treino, 8 base) das famílias Qwen2.5, Qwen3, Qwen3.5 e Qwen3.6. **Provas:** MMLU, MedQA, PubMedQA, OAB, GSM8K, MATH-500, HumanEval+, MBPP+, WMT24++.
 
@@ -219,3 +220,8 @@ Testes que validaram o ambiente do DGX Spark: llama.cpp com CUDA, conversão e q
 5. **Benchmarks novos.** MedQA, PubMedQA, OAB, MATH-500, HumanEval+, MBPP+ e WMT24++; o OAB foi refeito com instrução em português e 5-shot.
 6. **Medições da etapa 4.** KV quantizado, raciocínio ligado, geração de letra no lugar do log-prob, modelos base e Qwen3, Qwen3.5 e Qwen3.6, MoE.
 7. **Escopo.** Gemma saiu; 6 fichas Qwen grandes demais foram eliminadas (72 restantes).
+
+## Etapas 7 e 8: rodar, verificar e atualizar
+1. **Etapa 7 (rodar):** aplicar a configuração da recomendação numa máquina. O `etapa8_verificacao/verificar_c8.py` faz isso para o caso c8 (Qwen2.5-Coder-0.5B-Instruct, Q8_0, KV q8_0) e serve de modelo para outros casos.
+2. **Etapa 8 (verificar):** o script mede a nota (HumanEval+ e MBPP+ completos) e a velocidade (llama-bench) e compara com o que a pipeline estimou. Resultado em `verificacao_c8/resultado.json`.
+3. **Etapa 8 (atualizar):** `python etapa8_verificacao/ingerir.py verificacao_c8/resultado.json` acrescenta as linhas a `verificacoes.csv` (nota, estimativa e faixa, máquina, versão do llama.cpp) e `velocidade.csv`. Resultado de teste rápido (`--limite`) é recusado. Rodar a pipeline de novo já usa as medidas novas.

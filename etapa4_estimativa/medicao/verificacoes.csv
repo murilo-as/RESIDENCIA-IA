@@ -1,0 +1,3 @@
+modelo,nivel,kv,raciocinio,benchmark,n,acuracia,erro_padrao,tokens_por_resposta,estimado,meio_estimado,caso,maquina,gpu,llama_cpp,gguf,data
+Qwen2.5-Coder-0.5B-Instruct,q8_0,8,desligado,humaneval_plus,164,0.54878,0.0389,228.6,78.52,17.1,c8,4090nrc01,NVIDIA GeForce RTX 4090,"version: 1.0.0-dev (build 12463, commit 9581154a2)",Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF/qwen2.5-coder-0.5b-instruct-q8_0.gguf,2026-11-16 21:29
+Qwen2.5-Coder-0.5B-Instruct,q8_0,8,desligado,mbpp_plus,378,0.428571,0.0255,107.2,50.1,17.1,c8,4090nrc01,NVIDIA GeForce RTX 4090,"version: 1.0.0-dev (build 12463, commit 9581154a2)",Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF/qwen2.5-coder-0.5b-instruct-q8_0.gguf,2026-11-16 21:29

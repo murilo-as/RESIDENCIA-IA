@@ -12,6 +12,8 @@ limites:
   folga_memoria: 0.20   # HIPOTESE: folga sobre o minimo teorico (pesos + KV); abaixo dela a config e "sem folga"
   eficiencia_banda: 0.45  # fracao da banda realmente usada no decode (1 medida: Qwen3.5-35B-A3B Q4_K_M no Spark, 82,4 tok/s)
 
+fontes_medida: [spark, verificacao]   # de onde vêm as medidas que o estimador usa: spark = resultados.csv; verificacao = verificacoes.csv (etapa 8, outras máquinas). [spark] ignora as verificações
+
 familias: [Qwen]     # so estas familias entram (null = todas). Gemma saiu em 21/10/2026
 
 saida: saidas
