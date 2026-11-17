@@ -1,0 +1,53 @@
+{
+ "modelo": "Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF/qwen2.5-coder-1.5b-instruct-q8_0.gguf",
+ "llama_cpp": [
+  "built with GNU 13.3.0 for Linux x86_64"
+ ],
+ "limite": 0,
+ "data": "2026-11-16 21:53",
+ "config": {
+  "modelo": "Qwen2.5-Coder-1.5B-Instruct",
+  "nivel": "q8_0",
+  "kv": "8",
+  "raciocinio": "desligado",
+  "caso": "c8_coder15b"
+ },
+ "estimado": {
+  "humaneval_plus": {
+   "nota": 71.66,
+   "meio": 9.2
+  },
+  "mbpp_plus": {
+   "nota": 55.96,
+   "meio": 9.1
+  }
+ },
+ "banda_gb_s": 1008,
+ "bytes_gib": 1.4929999999999999,
+ "maquina": "4090nrc01",
+ "gpu": "NVIDIA GeForce RTX 4090",
+ "velocidade": {
+  "tg128_tok_s": 226.24691,
+  "desvio": 3.63807,
+  "teto_tok_s": 628.8,
+  "estimado_tok_s": 283.0,
+  "eficiencia_medida": 0.36
+ },
+ "codigo": {
+  "HumanEval+": {
+   "passou": 108,
+   "n": 164,
+   "nota": 65.85,
+   "tokens_medios": 194.4,
+   "erro_padrao_pts": 3.7
+  },
+  "MBPP+": {
+   "passou": 225,
+   "n": 378,
+   "nota": 59.52,
+   "tokens_medios": 82.8,
+   "erro_padrao_pts": 2.52
+  },
+  "media": 62.69
+ }
+}

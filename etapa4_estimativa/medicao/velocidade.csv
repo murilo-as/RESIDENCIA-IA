@@ -1,3 +1,4 @@
 modelo,nivel,kv,gpu,banda_gb_s,tg_tok_s,desvio,bytes_gib,eficiencia,maquina,llama_cpp,caso,data
 Qwen2.5-Coder-0.5B-Instruct,q8_0,8,NVIDIA GeForce RTX 4090,1008,391.6,9.3,0.483,0.201,4090nrc01,"version: 1.0.0-dev (build 12463, commit 9581154a2)",c8,2026-11-16 21:23
 Qwen2.5-Coder-0.5B-Instruct,q8_0,8,NVIDIA GeForce RTX 4090,1008,374.2,3.2,0.483,0.193,4090nrc01,"version: 1.0.0-dev (build 12463, commit 9581154a2)",c8,2026-11-16 21:26
+Qwen2.5-Coder-1.5B-Instruct,q8_0,8,NVIDIA GeForce RTX 4090,1008,226.2,3.6,1.4929999999999999,0.36,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c8_coder15b,2026-11-16 21:53
