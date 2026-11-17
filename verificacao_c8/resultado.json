@@ -1,0 +1,25 @@
+{
+ "modelo": "Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF/qwen2.5-coder-0.5b-instruct-q8_0.gguf",
+ "llama_cpp": [
+  "built with GNU 13.3.0 for Linux x86_64"
+ ],
+ "limite": 0,
+ "data": "2026-11-16 21:29",
+ "codigo": {
+  "HumanEval+": {
+   "passou": 90,
+   "n": 164,
+   "nota": 54.88,
+   "tokens_medios": 228.6,
+   "erro_padrao_pts": 3.89
+  },
+  "MBPP+": {
+   "passou": 162,
+   "n": 378,
+   "nota": 42.86,
+   "tokens_medios": 107.2,
+   "erro_padrao_pts": 2.55
+  },
+  "media": 48.87
+ }
+}
