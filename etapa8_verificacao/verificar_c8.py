@@ -47,8 +47,8 @@ def um(bench, d):
 
 
 def binario(llama_dir, nome):
-    p = os.path.join(llama_dir, nome) if llama_dir else shutil.which(nome)
-    if not p or not os.path.exists(p): sys.exit(f"não achei {nome}: use --llama-dir com a pasta onde o llama.cpp foi compilado (build/bin)")
+    p = next((c for c in (os.path.join(llama_dir, nome), os.path.join(llama_dir, nome + ".exe")) if os.path.exists(c)), None) if llama_dir else shutil.which(nome)      # .exe no Windows
+    if not p: sys.exit(f"não achei {nome}: use --llama-dir com a pasta onde o llama.cpp foi compilado (build/bin)")
     return p
 
 
@@ -100,8 +100,11 @@ def pontuar(bench, solucoes, pasta):
         for s in solucoes: f.write(json.dumps({"task_id": s["task_id"], "solution": s["solution"]}) + "\n")
         for t in todos:
             if t not in gerados: f.write(json.dumps({"task_id": t, "solution": "pass"}) + "\n")
+    antigo = os.path.join(pasta, f"{bench}_eval_results.json")
+    if os.path.exists(antigo): os.remove(antigo)             # o evalplus reaproveita o resultado de uma rodada anterior (ex.: teste rápido) e não pontua de novo
     subprocess.run([sys.executable, "-m", "evalplus.evaluate", "--dataset", bench, "--samples", amostras], check=True)
-    res = json.load(open(os.path.join(pasta, f"{bench}_eval_results.json")))["eval"]
+    res = json.load(open(antigo))["eval"]
+    assert len(res) == len(todos), f"{bench}: o evalplus avaliou {len(res)} problemas, esperava {len(todos)}"
     ok = sum(res[s["task_id"]][0]["base_status"] == "pass" and res[s["task_id"]][0]["plus_status"] == "pass" for s in solucoes)
     return ok, len(solucoes)
 
