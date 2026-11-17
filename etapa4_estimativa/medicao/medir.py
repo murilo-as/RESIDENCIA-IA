@@ -10,11 +10,13 @@ RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
 DADOS = os.path.join(RAIZ, "data", "medicoes")     # CSVs, amostras, logs e etapa1.json desta medicao
 # llama.cpp e venv: na raiz do repo; as pastas antigas (piloto/ e arquivo/2026-10_testes_ambiente_execucao/) valem como segunda opcao
 ANTIGAS = [os.path.join(RAIZ, "piloto"), os.path.join(RAIZ, "arquivo", "2026-10_testes_ambiente_execucao")]
-MODELOS = "/beegfs/home/user_muriloalves/work/models"
+_SPARK = "/beegfs/home/user_muriloalves/work/models"
+MODELOS = os.environ.get("MODELOS_DIR") or (_SPARK if os.path.isdir(_SPARK) else os.path.join(RAIZ, "modelos", "hf"))   # pesos originais (HF) e GGUFs gerados; em outra maquina: modelos/hf
+os.makedirs(MODELOS, exist_ok=True)
 TMP_CODIGO = "/beegfs/home/user_muriloalves/work/tmp_codigo"
 LLAMA = next((p for p in [os.path.join(RAIZ, "llama.cpp")] + [os.path.join(a, "llama.cpp") for a in ANTIGAS] if os.path.isdir(p)), os.path.join(RAIZ, "llama.cpp"))
 BIN = os.path.join(LLAMA, "build", "bin")
-VENV_PY = next((v for v in [os.path.join(d, "venv", "bin", "python") for d in [RAIZ] + ANTIGAS] if os.path.exists(v)), os.path.join(RAIZ, "venv", "bin", "python"))  # venv na raiz do projeto; piloto/venv como reserva
+VENV_PY = next((v for v in [os.path.join(d, "venv", "bin", "python") for d in [RAIZ] + ANTIGAS] if os.path.exists(v)), sys.executable)  # venv na raiz do projeto; piloto/venv como reserva
 PROXY = os.path.join(AQUI, "proxy.py")
 TAREFAS = os.path.join(AQUI, "tasks")
 CAMPOS = ["modelo", "nivel", "benchmark", "n", "acuracia", "erro_padrao", "tempo_s", "tokens_por_resposta", "cortadas", "commit_llama_cpp", "data"]
