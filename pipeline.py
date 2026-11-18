@@ -12,8 +12,15 @@ for pasta in ("etapa1_extracao", "etapa2_diagnostico", "etapa3_candidatura", "et
 
 
 def etapa1_extracao(ctx):
-    if ctx["args"].pedido:
-        return json.load(open(ctx["args"].pedido))
+    a = ctx["args"]
+    if a.pedido:                                                   # JSON ja extraido pela etapa 1: usa ele
+        return json.load(open(a.pedido, encoding="utf-8"))
+    ant = os.path.join(a.saida, "pedido.json")                     # mesmo texto ja extraido nesta pasta: reaproveita (evita nova chamada ao LLM)
+    if not a.reextrair and os.path.exists(ant):
+        p = json.load(open(ant, encoding="utf-8"))
+        if p.get("texto", "").strip() == a.texto.strip():
+            print(f"etapa 1: mesmo texto ja extraido em {os.path.relpath(ant, RAIZ)}, reaproveitando (--reextrair chama o LLM de novo)")
+            return p
     from extrair import extrair
     a, L = ctx["args"], ctx["config"]["llm"]
     return extrair(a.texto, L["backend"], L["modelo"], L["url"])
@@ -87,12 +94,15 @@ def resumo(ctx):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("texto", nargs="?", help="pedido em texto livre (obrigatorio se nao usar --pedido)")
+    ap.add_argument("texto", nargs="?", help="pedido em texto livre, ou um arquivo .txt com ele (obrigatorio se nao usar --pedido)")
     ap.add_argument("--pedido", help="JSON de pedido ja extraido: pula a etapa 1")
+    ap.add_argument("--reextrair", action="store_true", help="chama o LLM da etapa 1 mesmo que a pasta de saida ja tenha o pedido extraido do mesmo texto")
+    ap.add_argument("--saida", help="pasta de saida (padrao: `saida` do config.yaml)")
     ap.add_argument("--config", help="outro arquivo de configuracao (padrao: config.yaml na raiz)")
     a = ap.parse_args()
-    cfg = carregar_config(a.config, RAIZ); a.saida = os.path.join(RAIZ, cfg["saida"])
+    cfg = carregar_config(a.config, RAIZ); a.saida = os.path.join(RAIZ, a.saida or cfg["saida"])
     if not a.texto and not a.pedido: ap.error("informe o texto ou --pedido")
+    if a.texto and os.path.isfile(a.texto): a.texto = open(a.texto, encoding="utf-8").read().strip()
     os.makedirs(a.saida, exist_ok=True)
     ctx = {"args": a, "config": cfg}
     for nome, fn in ETAPAS:

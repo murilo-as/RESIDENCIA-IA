@@ -9,7 +9,7 @@ Cada caso é um JSON em etapa7_executar_verificar/casos/ (modelo, GGUF, nível, 
 e o GGUF baixado em modelos/. Linhas repetidas (mesmo modelo, nível, KV, prova e data) não são duplicadas na base.
 Requisitos: llama.cpp compilado com CUDA, e  pip install huggingface_hub datasets evalplus
 ATENÇÃO: o evalplus executa o código gerado pelo modelo. Rode em ambiente descartável (container/VM) se puder."""
-import argparse, csv, glob, json, math, os, platform, re, shutil, subprocess, sys, time, urllib.request
+import argparse, csv, glob, hashlib, json, math, os, platform, re, shutil, subprocess, sys, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -187,10 +187,13 @@ def rodar_generico(a):
     import yaml
     sys.path.insert(0, os.path.join(RAIZ, "etapa4_estimativa", "medicao"))
     import medir
-    caso = os.path.abspath(a.caso); yml = os.path.splitext(caso)[0] + ".yaml"
-    config = yml if os.path.exists(yml) else os.path.join(RAIZ, "config.yaml")
-    subprocess.run([sys.executable, os.path.join(RAIZ, "pipeline.py"), "--pedido", caso] + (["--config", yml] if config == yml else []), check=True, cwd=RAIZ)
-    saida = os.path.join(RAIZ, yaml.safe_load(open(config, encoding="utf-8"))["saida"])
+    # entrada: o TEXTO do pedido (um .txt ou o texto entre aspas; a pipeline roda da etapa 1 ao fim) ou um JSON que a etapa 1 ja extraiu (usado como esta, sem chamar o LLM)
+    arq = os.path.isfile(a.caso); extraido = arq and a.caso.endswith(".json")
+    base = os.path.splitext(os.path.basename(a.caso))[0] if arq else "livre_" + hashlib.md5(a.caso.strip().encode()).hexdigest()[:6]
+    yml = os.path.splitext(os.path.abspath(a.caso))[0] + ".yaml" if arq else ""        # opcional: so para o que o texto nao carrega (banda_gb_s, min_tok_s)
+    rel = os.path.join("saidas", base); saida = os.path.join(RAIZ, rel)
+    entrada = ["--pedido", os.path.abspath(a.caso)] if extraido else [a.caso]
+    subprocess.run([sys.executable, os.path.join(RAIZ, "pipeline.py"), *entrada, "--saida", rel] + (["--reextrair"] if a.reextrair else []) + (["--config", yml] if yml and os.path.exists(yml) else []), check=True, cwd=RAIZ)
     rec = json.load(open(os.path.join(saida, "recomendacao.json"), encoding="utf-8")); est = json.load(open(os.path.join(saida, "estimativas.json"), encoding="utf-8"))
     esc = rec.get("escolhida")
     if not esc:                                                       # sem preferencia no pedido: a pipeline devolve dois topos (qualidade e footprint); --top escolhe o que medir
@@ -209,7 +212,8 @@ def rodar_generico(a):
     for rot in e["qualidade"]:
         if rot not in mapa: print(f"aviso: {rot} ainda não é medido por este comando (fica de fora da verificação)")
     if not alvos: sys.exit("nenhuma prova deste caso é medível aqui (GSM8K, MATH-500, WMT24++, OAB, MMLU, MedQA e PubMedQA; código usa o caso casos/c8*.json)")
-    cid_caso = os.path.basename(caso).split("_")[0]
+    if a.dry_run: return print(f"[dry-run] mediria {nome}, pesos {nivel}, KV {kv}, raciocinio {racio}: {', '.join(alvos)}")
+    cid_caso = base.split("_")[0]
     CASO.update(modelo=nome, nivel=nivel, kv=kv, raciocinio=racio, caso=cid_caso)
     pasta = a.pasta or pasta_padrao()
     if a.max_gen and not a.pasta: pasta += f"_maxgen{a.max_gen}"      # outra pasta: o medir.py pula o que ja esta no CSV
@@ -288,7 +292,7 @@ def repontuar_gsm8k(pasta, aplicar):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("caso", nargs="?", help="JSON do caso (casos/*.json)")
+    ap.add_argument("caso", nargs="?", help="pedido: texto entre aspas ou arquivo .txt (a pipeline roda da etapa 1 ao fim), ou JSON ja extraido pela etapa 1 (casos_teste/*.json, usado como esta). JSON com gguf_repo = fluxo antigo de codigo (casos/*.json)")
     ap.add_argument("--llama-dir", help="pasta com llama-server e llama-bench (padrão: o que estiver no PATH; no modo genérico, o llama.cpp/build/bin do repo)")
     ap.add_argument("--pasta", help="onde guardar as soluções e o resultado (padrão: resultados/<modelo>/<data>_verificacao_<nível>_kv<kv>)")
     ap.add_argument("--banda", type=float, default=BANDA_4090_GB_S, help="banda da GPU em GB/s (padrão: RTX 4090)")
@@ -303,13 +307,14 @@ def main():
     ap.add_argument("--so-ingerir", metavar="RESULTADO_JSON", help="só acrescenta à base um resultado.json já medido (não roda nada)")
     ap.add_argument("--repontuar-gsm8k", metavar="PASTA", help="relê o GSM8K de uma verificação já medida pelo \\boxed{} (sem rodar modelo); mostra o antes/depois, com --aplicar grava")
     ap.add_argument("--aplicar", action="store_true", help="com --repontuar-gsm8k: grava a correção")
-    ap.add_argument("--dry-run", action="store_true", help="com --so-ingerir: mostra o que seria gravado")
+    ap.add_argument("--dry-run", action="store_true", help="com --so-ingerir: mostra o que seria gravado; num pedido: roda as etapas 1 a 6 e mostra o que seria medido, sem medir")
+    ap.add_argument("--reextrair", action="store_true", help="texto: chama o LLM da etapa 1 de novo mesmo que saidas/<caso>/pedido.json ja tenha o mesmo texto")
     a = ap.parse_args()
     if a.repontuar_gsm8k: return repontuar_gsm8k(a.repontuar_gsm8k, a.aplicar)
     if a.so_ingerir: return ingerir(json.load(open(a.so_ingerir, encoding="utf-8")), a.dry_run)
-    if not a.caso: ap.error("informe o JSON do caso (ou --so-ingerir)")
+    if not a.caso: ap.error("informe o pedido (ou --so-ingerir)")
+    if not a.caso.endswith(".json") or "gguf_repo" not in json.load(open(a.caso, encoding="utf-8")): return rodar_generico(a)       # pedido da pipeline (texto): modo generico, sem codigo
     CASO.update(json.load(open(a.caso, encoding="utf-8")))
-    if "gguf_repo" not in CASO: CASO.clear(); return rodar_generico(a)                      # pedido da pipeline (casos_teste/): modo generico, sem codigo
     est = CASO["estimado"]
     media_est = {"nota": sum(e["nota"] for e in est.values()) / len(est), "meio": math.sqrt(sum(e["meio"] ** 2 for e in est.values())) / len(est)}
     pasta = a.pasta or pasta_padrao()
