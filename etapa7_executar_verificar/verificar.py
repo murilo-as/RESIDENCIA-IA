@@ -189,7 +189,12 @@ def rodar_generico(a):
     import medir
     # entrada: o TEXTO do pedido (um .txt ou o texto entre aspas; a pipeline roda da etapa 1 ao fim) ou um JSON que a etapa 1 ja extraiu (usado como esta, sem chamar o LLM)
     arq = os.path.isfile(a.caso); extraido = arq and a.caso.endswith(".json")
-    base = os.path.splitext(os.path.basename(a.caso))[0] if arq else "livre_" + hashlib.md5(a.caso.strip().encode()).hexdigest()[:6]
+    if not arq and re.fullmatch(r"c\d+", a.caso):                  # id de um caso de etapa1_extracao/casos/pedidos_pipeline.jsonl: o texto vem de la
+        lista = os.path.join(RAIZ, "etapa1_extracao", "casos", "pedidos_pipeline.jsonl")
+        achou = next((c for c in map(json.loads, filter(str.strip, open(lista, encoding="utf-8"))) if c["id"] == a.caso), None)
+        if not achou: sys.exit(f"caso {a.caso} nao esta em {os.path.relpath(lista, RAIZ)}")
+        a.caso, base = achou["texto"], achou["id"]
+    else: base = os.path.splitext(os.path.basename(a.caso))[0] if arq else "livre_" + hashlib.md5(a.caso.strip().encode()).hexdigest()[:6]
     yml = os.path.splitext(os.path.abspath(a.caso))[0] + ".yaml" if arq else ""        # opcional: so para o que o texto nao carrega (banda_gb_s, min_tok_s)
     rel = os.path.join("saidas", base); saida = os.path.join(RAIZ, rel)
     entrada = ["--pedido", os.path.abspath(a.caso)] if extraido else [a.caso]
