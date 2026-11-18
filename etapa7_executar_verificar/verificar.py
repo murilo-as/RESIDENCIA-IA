@@ -198,7 +198,7 @@ def rodar_generico(a):
         if not topo: sys.exit("a pipeline não recomendou nenhuma configuração para este caso (nada a verificar)")
         esc = topo[0]; print(f"sem preferência no pedido: medindo o top 1 por {a.top} ({esc['id'].split('|')[0]})")
     cid = esc["id"]; hf, cfg = cid.split("|")[:2]; p = dict(x.split(":") for x in cfg.split("+"))
-    nome, nivel, kv, racio = hf.split("/")[-1], NIVEL_PESOS[p["quantizacao_pesos"]], p["quantizacao_kv"], p["modo_raciocinio"]
+    nome, nivel, kv, racio = hf.split("/")[-1], NIVEL_PESOS[p["quantizacao_pesos"]], p["quantizacao_kv"], p.get("modo_raciocinio", "ligado" if "thinking" in hf.lower() else "desligado")      # modelos so-Thinking nao tem a dimensao modo_raciocinio
     e = next(x for x in est["estimativas"] if x["id"] == cid)
     mapa = dict(GENERICAS)
     if nome.startswith(MMLU_LETRA): mapa["MMLU"] = ("mmlu_letra", "mmlu")
