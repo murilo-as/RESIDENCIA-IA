@@ -209,6 +209,7 @@ def rodar_generico(a):
            "--kv", kv, "--saida", "kv.csv", "--dir", pasta] + (["--raciocinio-ligado"] if racio == "ligado" else [])
     if a.limite: cmd += ["--limites", *[f"{GENERICAS[r][0]}={a.limite}" for r in alvos]]
     subprocess.run(cmd, check=True)
+    if not os.path.exists(os.path.join(pasta, "kv.csv")): sys.exit(f"a medição não gerou resultado (nenhuma prova terminou): veja {os.path.join(pasta, 'erros.log')}")
     linhas = {l["benchmark"]: l for l in csv.DictReader(open(os.path.join(pasta, "kv.csv"), encoding="utf-8")) if l["modelo"] == nome and l["nivel"] == nivel and l["kv"] == kv}
     provas = []
     for rot, q in alvos.items():

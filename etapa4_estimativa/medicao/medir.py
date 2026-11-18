@@ -495,7 +495,7 @@ def testar(m, s, bench):
     Codigo: passa se pelo menos uma das solucoes e Python sintaticamente valido (a pontuacao so existe no job isolado). Devolve True/False e registra em logs/teste5.json."""
     chave = f"{s.modelo}|{bench}" + ("|raciocinio" if s.raciocinio else "")
     anterior = m.teste5().get(chave)
-    if anterior: return anterior["ok"]
+    if anterior and anterior["ok"]: return True          # so a aprovacao vale como registro: uma reprovacao (ex.: pacote faltando) e testada de novo
     try:
         for k in (5, 20):
             if bench in LOGLIK: valor, n = rodar_loglik(m, s, bench, 0, teste=k)
