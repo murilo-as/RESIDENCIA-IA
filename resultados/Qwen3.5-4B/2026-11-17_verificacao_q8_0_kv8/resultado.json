@@ -4,7 +4,7 @@
   "built with GNU 13.3.0 for Linux x86_64"
  ],
  "limite": 0,
- "data": "2026-11-18 17:30",
+ "data": "2026-11-18 18:25",
  "config": {
   "modelo": "Qwen3.5-4B",
   "nivel": "q8_0",
@@ -40,8 +40,8 @@
  "maquina": "4090nrc01",
  "gpu": "NVIDIA GeForce RTX 4090",
  "velocidade": {
-  "tg128_tok_s": 163.552798,
-  "desvio": 0.171527,
+  "tg128_tok_s": 163.621822,
+  "desvio": 0.060418,
   "teto_tok_s": 233.1,
   "estimado_tok_s": 104.9,
   "eficiencia_medida": 0.702
