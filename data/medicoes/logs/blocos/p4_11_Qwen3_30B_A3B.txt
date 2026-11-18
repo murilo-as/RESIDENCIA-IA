@@ -1,0 +1,5 @@
+2026-11-18T04:44:50Z baixar Qwen/Qwen3-30B-A3B
+2026-11-18T04:45:02Z baixar rc=0
+2026-11-18T04:45:02Z inicio medir.py --modelo Qwen3-30B-A3B --sem-raciocinio --benchmarks gsm8k math500 wmt24 humaneval mbpp
+2026-11-18T11:14:15Z fim rc=0
+2026-11-18T11:14:20Z inicio medir.py --modelo Qwen3-30B-A3B --niveis q4_k_m --batch-hf 1 --sem-raciocinio --benchmarks mmlu medqa oab pubmedqa

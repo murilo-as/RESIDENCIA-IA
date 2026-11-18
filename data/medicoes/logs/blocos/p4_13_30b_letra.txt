@@ -1,0 +1,4 @@
+2026-11-18T15:35:12Z Qwen3-30B-A3B: log-prob (mmlu medqa oab pubmedqa) falhou: job 1673 encerrado pelo vigia-memoria (~100 GiB de RAM ao carregar o GGUF f16/q4_k_m no HF); registrado como falhou
+2026-11-18T15:35:12Z inicio medir.py --modelo Qwen3-30B-A3B --sem-raciocinio --niveis f16 q8_0 q4_k_m --kv 16 --saida kv.csv --benchmarks mmlu_letra
+2026-11-18T16:02:37Z fim rc=0
+limpar Qwen3-30B-A3B: todas as medidas registradas; apagados pesos e GGUFs (173.2 GB)
