@@ -1,0 +1,2 @@
+modelo,nivel,kv,raciocinio,benchmark,n,acuracia,erro_padrao,tempo_s,tokens_por_resposta,cortadas,commit_llama_cpp,data
+Qwen3.5-9B,q4_k_m,8,desligado,oab_letra,2205,0.612698,0.010374,211.7,2.01,0,9581154a2250cc9e6948e4c2a2fc4b4e19d1a57e,2026-11-18T02:43:55Z
