@@ -1,3 +1,0 @@
-modelo,nivel,kv,raciocinio,benchmark,n,acuracia,erro_padrao,tempo_s,tokens_por_resposta,cortadas,commit_llama_cpp,data
-Qwen3.5-4B,q8_0,8,desligado,medqa,1273,0.250589,0.012151,49.9,,,9581154a2250cc9e6948e4c2a2fc4b4e19d1a57e,2026-11-18T21:27:22Z
-Qwen3.5-4B,q8_0,8,desligado,pubmedqa,1000,0.341,0.014998,51.8,,,9581154a2250cc9e6948e4c2a2fc4b4e19d1a57e,2026-11-18T21:28:18Z
