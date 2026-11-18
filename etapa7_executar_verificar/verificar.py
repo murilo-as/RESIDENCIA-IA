@@ -189,8 +189,12 @@ def rodar_generico(a):
     subprocess.run([sys.executable, os.path.join(RAIZ, "pipeline.py"), "--pedido", caso] + (["--config", yml] if config == yml else []), check=True, cwd=RAIZ)
     saida = os.path.join(RAIZ, yaml.safe_load(open(config, encoding="utf-8"))["saida"])
     rec = json.load(open(os.path.join(saida, "recomendacao.json"), encoding="utf-8")); est = json.load(open(os.path.join(saida, "estimativas.json"), encoding="utf-8"))
-    if not rec.get("escolhida"): sys.exit("a pipeline não recomendou nenhuma configuração para este caso (nada a verificar)")
-    cid = rec["escolhida"]["id"]; hf, cfg = cid.split("|")[:2]; p = dict(x.split(":") for x in cfg.split("+"))
+    esc = rec.get("escolhida")
+    if not esc:                                                       # sem preferencia no pedido: a pipeline devolve dois topos (qualidade e footprint); --top escolhe o que medir
+        topo = rec.get("top_" + a.top) or []
+        if not topo: sys.exit("a pipeline não recomendou nenhuma configuração para este caso (nada a verificar)")
+        esc = topo[0]; print(f"sem preferência no pedido: medindo o top 1 por {a.top} ({esc['id'].split('|')[0]})")
+    cid = esc["id"]; hf, cfg = cid.split("|")[:2]; p = dict(x.split(":") for x in cfg.split("+"))
     nome, nivel, kv, racio = hf.split("/")[-1], NIVEL_PESOS[p["quantizacao_pesos"]], p["quantizacao_kv"], p["modo_raciocinio"]
     e = next(x for x in est["estimativas"] if x["id"] == cid)
     alvos = {rot: q for rot, q in e["qualidade"].items() if rot in GENERICAS}
@@ -199,7 +203,9 @@ def rodar_generico(a):
     if not alvos: sys.exit("nenhuma prova deste caso é medível aqui (só GSM8K, MATH-500, WMT24++ e OAB por enquanto)")
     cid_caso = os.path.basename(caso).split("_")[0]
     CASO.update(modelo=nome, nivel=nivel, kv=kv, raciocinio=racio, caso=cid_caso)
-    pasta = a.pasta or pasta_padrao(); os.makedirs(pasta, exist_ok=True)
+    pasta = a.pasta or pasta_padrao()
+    if a.limite and not a.pasta: pasta += "_teste"          # teste rapido nunca divide pasta com a medicao completa (o medir.py pula o que ja esta no CSV)
+    os.makedirs(pasta, exist_ok=True)
     print(f"\n>>> {cid_caso}: {hf}, pesos {nivel}, KV {kv}, raciocínio {racio}; provas: {', '.join(alvos)}\n", flush=True)
     dest = os.path.join(medir.MODELOS, nome)
     if not os.path.exists(os.path.join(dest, "config.json")):
@@ -243,6 +249,7 @@ def main():
     ap.add_argument("--banda", type=float, default=BANDA_4090_GB_S, help="banda da GPU em GB/s (padrão: RTX 4090)")
     ap.add_argument("--limite", type=int, default=0, help="só os N primeiros problemas de cada prova (teste rápido); 0 = completo")
     ap.add_argument("--pular-velocidade", action="store_true"); ap.add_argument("--pular-codigo", action="store_true")
+    ap.add_argument("--top", choices=["qualidade", "footprint"], default="qualidade", help="caso sem preferência na recomendação: mede o top 1 por qualidade (padrão) ou por footprint")
     ap.add_argument("--sem-ingerir", action="store_true", help="não acrescenta o resultado à base")
     ap.add_argument("--so-ingerir", metavar="RESULTADO_JSON", help="só acrescenta à base um resultado.json já medido (não roda nada)")
     ap.add_argument("--dry-run", action="store_true", help="com --so-ingerir: mostra o que seria gravado")
