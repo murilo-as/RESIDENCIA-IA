@@ -1,0 +1,18 @@
+{
+ "Qwen3.5-4B|medqa": {
+  "ok": true,
+  "valor": 0.4,
+  "n": 5,
+  "nivel": "q8_0",
+  "motivo": "",
+  "data": "2026-11-18T21:43:35Z"
+ },
+ "Qwen3.5-4B|pubmedqa": {
+  "ok": true,
+  "valor": 0.6,
+  "n": 5,
+  "nivel": "q8_0",
+  "motivo": "",
+  "data": "2026-11-18T21:44:29Z"
+ }
+}

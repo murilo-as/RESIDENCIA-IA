@@ -1,0 +1,49 @@
+{
+ "modelo": "Qwen/Qwen3.5-4B (GGUF próprio, q8_0)",
+ "llama_cpp": [
+  "built with GNU 13.3.0 for Linux x86_64"
+ ],
+ "limite": 0,
+ "data": "2026-11-18 18:45",
+ "config": {
+  "modelo": "Qwen3.5-4B",
+  "nivel": "q8_0",
+  "kv": "8",
+  "raciocinio": "desligado",
+  "caso": "c12",
+  "id": "Qwen/Qwen3.5-4B|modo_raciocinio:desligado+quantizacao_kv:8+quantizacao_pesos:8|ctx=4096"
+ },
+ "provas": [
+  {
+   "prova": "MedQA",
+   "base": "medqa",
+   "n": 1273,
+   "acuracia": 0.707777,
+   "erro_padrao": 0.012752,
+   "tokens": 0.0,
+   "estimado": 70.46,
+   "meio": 2.7
+  },
+  {
+   "prova": "PubMedQA",
+   "base": "pubmedqa",
+   "n": 1000,
+   "acuracia": 0.781,
+   "erro_padrao": 0.013085,
+   "tokens": 0.0,
+   "estimado": 77.72,
+   "meio": 2.8
+  }
+ ],
+ "banda_gb_s": 1008,
+ "bytes_gib": 4.027,
+ "maquina": "4090nrc01",
+ "gpu": "NVIDIA GeForce RTX 4090",
+ "velocidade": {
+  "tg128_tok_s": 163.596829,
+  "desvio": 0.074918,
+  "teto_tok_s": 233.1,
+  "estimado_tok_s": 104.9,
+  "eficiencia_medida": 0.702
+ }
+}
