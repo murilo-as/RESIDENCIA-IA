@@ -23,11 +23,23 @@ def montar(instrucao, exemplos, pergunta, alternativas):
     return msgs + [{"role": "user", "content": bloco(pergunta, alternativas)}]
 
 
+def assuntos_mmlu():
+    """Os 57 assuntos do MMLU, em ordem alfabetica. Vem da lista de configs do dataset (nao depende do cache da maquina); sem rede, cai no cache do HF."""
+    try:
+        from datasets import get_dataset_config_names
+        nomes = get_dataset_config_names("cais/mmlu")
+    except Exception:
+        cache = os.path.join(os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface")), "datasets", "cais___mmlu")
+        nomes = [d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))]
+    assuntos = sorted(n for n in nomes if n not in ("all", "auxiliary_train"))
+    if len(assuntos) != 57: raise RuntimeError(f"MMLU: esperava 57 assuntos, achei {len(assuntos)}")
+    return assuntos
+
+
 def itens_mmlu(limite):
     from datasets import load_dataset
-    cache = os.path.join(os.environ.get("HF_HOME", ""), "datasets", "cais___mmlu")
     itens = []
-    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+    for assunto in assuntos_mmlu():
         ds = load_dataset("cais/mmlu", assunto)
         exemplos = [(d["question"], d["choices"], LETRAS[d["answer"]]) for d in list(ds["dev"])[:5]]
         teste = list(ds["test"])[:limite] if limite else list(ds["test"])
