@@ -1,0 +1,49 @@
+{
+ "modelo": "Qwen/Qwen3-30B-A3B-Thinking-2507 (GGUF próprio, q4_k_m)",
+ "llama_cpp": [
+  "built with GNU 13.3.0 for Linux x86_64"
+ ],
+ "limite": 0,
+ "data": "2026-11-18 02:03",
+ "config": {
+  "modelo": "Qwen3-30B-A3B-Thinking-2507",
+  "nivel": "q4_k_m",
+  "kv": "8",
+  "raciocinio": "ligado",
+  "caso": "c7",
+  "id": "Qwen/Qwen3-30B-A3B-Thinking-2507|quantizacao_kv:8+quantizacao_pesos:4|ctx=4096"
+ },
+ "provas": [
+  {
+   "prova": "GSM8K",
+   "base": "gsm8k",
+   "n": 1319,
+   "acuracia": 0.779378,
+   "erro_padrao": 0.011422,
+   "tokens": 786.6,
+   "estimado": 92.22,
+   "meio": 17.3
+  },
+  {
+   "prova": "MATH-500",
+   "base": "math500",
+   "n": 500,
+   "acuracia": 0.768,
+   "erro_padrao": 0.018896,
+   "tokens": 2217.8,
+   "estimado": 89.68,
+   "meio": 17.3
+  }
+ ],
+ "banda_gb_s": 1008,
+ "bytes_gib": 1.585,
+ "maquina": "4090nrc01",
+ "gpu": "NVIDIA GeForce RTX 4090",
+ "velocidade": {
+  "tg128_tok_s": 153.124769,
+  "desvio": 0.282857,
+  "teto_tok_s": 592.3,
+  "estimado_tok_s": 266.5,
+  "eficiencia_medida": 0.259
+ }
+}

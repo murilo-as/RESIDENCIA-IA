@@ -5,3 +5,4 @@ Qwen2.5-Coder-1.5B-Instruct,q8_0,8,NVIDIA GeForce RTX 4090,1008,226.2,3.6,1.493,
 Qwen3.5-4B,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,117.5,0.3,2.068,0.259,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c4,2026-11-17 21:07
 Qwen3.5-4B,q8_0,8,NVIDIA GeForce RTX 4090,1008,94.0,0.4,4.027,0.403,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c3,2026-11-17 22:04
 Qwen3.5-9B,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,85.2,0.1,4.717,0.428,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c6,2026-11-17 23:43
+Qwen3-30B-A3B-Thinking-2507,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,153.1,0.3,1.585,0.259,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c7,2026-11-18 02:03
