@@ -1,0 +1,37 @@
+2026-11-17T23:54:54Z Qwen3.5-4B q4_k_m wmt24: teste de 5 exemplos reprovou, prova pulada: erro no teste: _carregado[nome]), **SEMENTES, **kw)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 257, in simple_evaluate
+    lm = lm_eval.api.registry.get_model(model).create_from_arg_string(
+        model_args,
+    ...<4 lines>...
+        },
+    )
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/api/model.py", line 146, in create_from_arg_string
+    return cls(**args, **args2)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/openai_completions.py", line 163, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        base_url=base_url,
+        ^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/openai_completions.py", line 52, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        base_url=base_url,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/api_models.py", line 152, in __init__
+    raise ModuleNotFoundError(
+    ...<2 lines>...
+    )
+ModuleNotFoundError: Attempted to use an API model, but the required packages ['tenacity'] are not installed. Please install these via `pip install lm-eval[api]` or `pip install -e ."[api]"`
+

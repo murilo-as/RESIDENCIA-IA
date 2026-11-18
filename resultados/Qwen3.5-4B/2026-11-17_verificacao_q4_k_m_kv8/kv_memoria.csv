@@ -1,0 +1,7 @@
+modelo,nivel,kv,momento,ctx_total,kv_formula_mib,gguf_mib,mem_usada_mib,mem_antes_do_servidor_mib,rss_servidor_mib,pico_rss_servidor_mib,nvidia_smi,data
+Qwen3.5-4B,q4_k_m,8,pronto,32768,544.0,2685,22265,21881,980,3069,7449 MiB,2026-11-17T23:54:46Z
+Qwen3.5-4B,q4_k_m,8,fim,32768,544.0,2685,22707,21881,980,3069,7449 MiB,2026-11-17T23:54:54Z
+Qwen3.5-4B,q4_k_m,8,pronto,32768,544.0,2685,22395,21999,978,3069,7967 MiB,2026-11-18T00:03:44Z
+Qwen3.5-4B,q4_k_m,8,fim,32768,544.0,2685,23671,21999,1863,3069,7985 MiB,2026-11-18T00:04:04Z
+Qwen3.5-4B,q4_k_m,8,pronto,32768,544.0,2685,22556,22177,980,3069,8181 MiB,2026-11-18T00:09:10Z
+Qwen3.5-4B,q4_k_m,8,fim,32768,544.0,2685,31433,22177,9576,9654,8243 MiB,2026-11-18T00:12:21Z
