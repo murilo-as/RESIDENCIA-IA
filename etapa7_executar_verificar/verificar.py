@@ -175,7 +175,10 @@ def ingerir(r, dry_run=False):
 
 
 # rotulo da prova na pipeline -> (benchmark do medir.py, nome na base). MedQA/PubMedQA/MMLU ainda nao: usam log-prob pelo hf, nao so o llama-server
-GENERICAS = {"GSM8K": ("gsm8k", "gsm8k"), "MATH-500": ("math500", "math500"), "WMT24++": ("wmt24", "wmt24"), "OAB-Exams 1a fase": ("oab_letra", "oab")}
+GENERICAS = {"GSM8K": ("gsm8k", "gsm8k"), "MATH-500": ("math500", "math500"), "WMT24++": ("wmt24", "wmt24"), "OAB-Exams 1a fase": ("oab_letra", "oab"),
+             "MMLU": ("mmlu", "mmlu"), "MedQA": ("medqa", "medqa"), "PubMedQA": ("pubmedqa", "pubmedqa")}
+LOGPROB = {"mmlu", "medqa", "pubmedqa"}          # medidas pelo hf com o GGUF dequantizado a fp16 (protocolo da Spark): o KV nao entra, e o modelo inteiro em fp16 precisa caber na GPU
+MMLU_LETRA = "Qwen3.5-"                          # Qwen3.5: o MMLU da pipeline vem da geracao da letra (mmlu_letra), como em estimar_qualidade.py
 NIVEL_PESOS = {"16": "f16", "8": "q8_0", "4": "q4_k_m"}
 
 
@@ -197,10 +200,12 @@ def rodar_generico(a):
     cid = esc["id"]; hf, cfg = cid.split("|")[:2]; p = dict(x.split(":") for x in cfg.split("+"))
     nome, nivel, kv, racio = hf.split("/")[-1], NIVEL_PESOS[p["quantizacao_pesos"]], p["quantizacao_kv"], p["modo_raciocinio"]
     e = next(x for x in est["estimativas"] if x["id"] == cid)
-    alvos = {rot: q for rot, q in e["qualidade"].items() if rot in GENERICAS}
+    mapa = dict(GENERICAS)
+    if nome.startswith(MMLU_LETRA): mapa["MMLU"] = ("mmlu_letra", "mmlu")
+    alvos = {rot: q for rot, q in e["qualidade"].items() if rot in mapa}
     for rot in e["qualidade"]:
-        if rot not in GENERICAS: print(f"aviso: {rot} ainda não é medido por este comando (fica de fora da verificação)")
-    if not alvos: sys.exit("nenhuma prova deste caso é medível aqui (só GSM8K, MATH-500, WMT24++ e OAB por enquanto)")
+        if rot not in mapa: print(f"aviso: {rot} ainda não é medido por este comando (fica de fora da verificação)")
+    if not alvos: sys.exit("nenhuma prova deste caso é medível aqui (GSM8K, MATH-500, WMT24++, OAB, MMLU, MedQA e PubMedQA; código usa o caso casos/c8*.json)")
     cid_caso = os.path.basename(caso).split("_")[0]
     CASO.update(modelo=nome, nivel=nivel, kv=kv, raciocinio=racio, caso=cid_caso)
     pasta = a.pasta or pasta_padrao()
@@ -211,16 +216,23 @@ def rodar_generico(a):
     if not os.path.exists(os.path.join(dest, "config.json")):
         from huggingface_hub import snapshot_download
         snapshot_download(hf, local_dir=dest)
-    cmd = [sys.executable, os.path.join(RAIZ, "etapa4_estimativa", "medicao", "medir.py"), "--modelo", nome, "--niveis", nivel, "--benchmarks", *[GENERICAS[r][0] for r in alvos],
+    fp16_gib = sum(os.path.getsize(os.path.join(dest, x)) for x in os.listdir(dest) if x.endswith(".safetensors")) / 2 ** 30
+    try: livre_gib = float(subprocess.run(["nvidia-smi", "--query-gpu=memory.free", "--format=csv,noheader,nounits"], capture_output=True, text=True).stdout.split()[0]) / 1024
+    except Exception: livre_gib = 0
+    for rot in [r for r in alvos if mapa[r][0] in LOGPROB]:
+        if fp16_gib > 0.9 * livre_gib:
+            print(f"aviso: {rot} fica de fora: mede com o modelo inteiro em fp16 ({fp16_gib:.0f} GiB) e a GPU tem {livre_gib:.0f} GiB livres"); alvos.pop(rot)
+    if not alvos: sys.exit("nenhuma prova restou para medir")
+    cmd = [sys.executable, os.path.join(RAIZ, "etapa4_estimativa", "medicao", "medir.py"), "--modelo", nome, "--niveis", nivel, "--benchmarks", *[mapa[r][0] for r in alvos],
            "--kv", kv, "--saida", "kv.csv", "--dir", pasta] + (["--raciocinio-ligado"] if racio == "ligado" else [])
-    if a.limite: cmd += ["--limites", *[f"{GENERICAS[r][0]}={a.limite}" for r in alvos]]
+    if a.limite: cmd += ["--limites", *[f"{mapa[r][0]}={a.limite}" for r in alvos]]
     subprocess.run(cmd, check=True)
     if not os.path.exists(os.path.join(pasta, "kv.csv")): sys.exit(f"a medição não gerou resultado (nenhuma prova terminou): veja {os.path.join(pasta, 'erros.log')}")
     linhas = {l["benchmark"]: l for l in csv.DictReader(open(os.path.join(pasta, "kv.csv"), encoding="utf-8")) if l["modelo"] == nome and l["nivel"] == nivel and l["kv"] == kv}
     provas = []
     for rot, q in alvos.items():
-        l = linhas.get(GENERICAS[rot][0])
-        if l: provas.append({"prova": rot, "base": GENERICAS[rot][1], "n": int(l["n"]), "acuracia": float(l["acuracia"]), "erro_padrao": float(l["erro_padrao"] or 0),
+        l = linhas.get(mapa[rot][0])
+        if l: provas.append({"prova": rot, "base": mapa[rot][1], "n": int(l["n"]), "acuracia": float(l["acuracia"]), "erro_padrao": float(l["erro_padrao"] or 0),
                              "tokens": float(l["tokens_por_resposta"] or 0), "estimado": round(q["valor"] * 100, 2), "meio": q["meio_pts"]})
     versao = subprocess.run([binario(a.llama_dir or medir.BIN, "llama-server"), "--version"], capture_output=True, text=True)
     lat = e["latencia_decodificacao"]; bytes_gib = lat["bytes_pesos_gib"] + lat["bytes_kv_gib_no_ctx"]
