@@ -3,7 +3,7 @@ Uso: medir.py --modelo Qwen2.5-7B-Instruct [--niveis f16 q8_0 q4_k_m] [--benchma
      medir.py ... --kv 8 --saida kv.csv            (KV quantizado: grava em kv.csv, com as colunas kv e raciocinio)
      medir.py ... --raciocinio-ligado              (raciocinio ligado, 4096 tokens: grava em raciocinio.csv)
      medir.py --ingerir-codigo [--dir DIR]         (le a pontuacao do evalplus e grava as linhas de HumanEval+ e MBPP+)"""
-import argparse, ast, csv, datetime, gc, json, math, os, random, shutil, signal, subprocess, sys, time, traceback, urllib.request
+import argparse, ast, csv, datetime, gc, glob, json, math, os, random, re, shutil, signal, subprocess, sys, time, traceback, urllib.request
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
@@ -262,9 +262,9 @@ class ServidorFalhou(RuntimeError): pass
 class Sessao:
     """Um (modelo, nivel): carrega o hf ou sobe o llama-server so quando um benchmark precisa, e libera o outro.
     kv: None = servidor como nas medicoes antigas; "16"/"8"/"4"/"k4v8" = tipos do cache KV (liga flash attention) e registra a memoria em kv_memoria.csv."""
-    def __init__(self, m, modelo, nivel, raciocinio, batch_hf=16, kv=None, ctx=32768, max_gen=2048, sistema=None):
+    def __init__(self, m, modelo, nivel, raciocinio, batch_hf=16, kv=None, ctx=32768, max_gen=2048, sistema=None, paralelo=8):
         self.m, self.modelo, self.nivel, self.raciocinio, self.batch_hf = m, modelo, nivel, raciocinio, batch_hf
-        self.kv, self.ctx, self.max_gen, self.sistema = kv, ctx, max_gen, sistema
+        self.kv, self.ctx, self.max_gen, self.sistema, self.paralelo = kv, ctx, max_gen, sistema, paralelo   # paralelo: slots do llama-server (cada um fica com ctx/paralelo tokens)
         self._lm = self._srv = self._path = self._dtype = None
         self._mem_antes = None
 
@@ -292,7 +292,7 @@ class Sessao:
         self.fechar_hf()
         if self._srv is None or self._srv.poll() is not None:
             matar(self._srv)
-            cmd = [os.path.join(BIN, "llama-server"), "-m", self.path(), "-ngl", "99", "-np", "8", "-c", str(self.ctx), "--host", "127.0.0.1", "--port", "8080"]
+            cmd = [os.path.join(BIN, "llama-server"), "-m", self.path(), "-ngl", "99", "-np", str(self.paralelo), "-c", str(self.ctx), "--host", "127.0.0.1", "--port", "8080"]
             if self.kv: cmd += ["-ctk", KV_TIPOS[self.kv][0], "-ctv", KV_TIPOS[self.kv][1], "-fa", "on"]  # V quantizado exige flash attention
             if not self.raciocinio: cmd += ["--chat-template-kwargs", '{"enable_thinking":false}']
             self._mem_antes = mem_usada_mib()
@@ -373,6 +373,39 @@ def stats_proxy(log):
     return round(sum(r["completion_tokens"] for r in ok) / max(len(ok), 1), 1), sum(r["finish_reason"] == "length" for r in ok)
 
 
+def ultimo_boxed(t):
+    """Conteudo do ultimo \\boxed{...} do texto (com chaves aninhadas), ou None."""
+    i = t.rfind("\\boxed{")
+    if i < 0: return None
+    i += len("\\boxed{"); nivel, j = 1, i
+    while j < len(t) and nivel:
+        nivel += (t[j] == "{") - (t[j] == "}"); j += 1
+    return t[i:j - 1] if nivel == 0 else None
+
+
+def numero_gsm8k(x):
+    x = re.sub(r"\\text\{[^}]*\}|\\(?:,|!|;|%|\$)|[$%\s]", "", x or "").replace(",", "")
+    mm = re.fullmatch(r"-?\d+(?:\.\d+)?", x)
+    return float(mm.group()) if mm else None
+
+
+def gsm8k_com_boxed(pasta):
+    """GSM8K lido tambem pelo \\boxed{}. O filtro flexible-extract do lm-eval pega o ultimo "numero" do texto e, em respostas que terminam com  $$ \\boxed{64} $$ , extrai "$$"
+    (c7, Qwen3-30B-A3B-Thinking: 240 respostas certas marcadas como erradas). Conta como certa a resposta que o flexible-extract acertou OU cujo ultimo \\boxed bate com o alvo,
+    entao quem nao termina em \\boxed fica igual. Devolve (acuracia, erro_padrao, n, recuperadas, acuracia_original) a partir do samples_gsm8k_*.jsonl mais recente em `pasta`, ou None."""
+    arqs = sorted(glob.glob(os.path.join(pasta, "**", "samples_gsm8k_*.jsonl"), recursive=True))
+    if not arqs: return None
+    fl = [x for x in map(json.loads, open(arqs[-1], encoding="utf-8")) if x.get("filter") == "flexible-extract"]
+    antes = depois = 0
+    for x in fl:
+        ok = float(x["exact_match"]) == 1.0
+        resp = x["resps"][0]; resp = resp[0] if isinstance(resp, list) else resp
+        b, t = numero_gsm8k(ultimo_boxed(resp)), numero_gsm8k(str(x["target"]).split("####")[-1])
+        antes += ok; depois += ok or (b is not None and t is not None and abs(b - t) < 1e-6)
+    n = len(fl)
+    return depois / n, math.sqrt(depois / n * (1 - depois / n) / n), n, depois - antes, antes / n
+
+
 def rodar_gerativo(m, s, bench, limite, teste=0):
     """teste > 0: roda so `teste` exemplos, sem gravar nada, e devolve (valor principal, n)."""
     from lm_eval.loggers import EvaluationTracker
@@ -389,7 +422,7 @@ def rodar_gerativo(m, s, bench, limite, teste=0):
         extra = dict(system_instruction=s.sistema) if s.sistema else {}
         t0 = time.perf_counter()
         res = m.avaliar(task, model="local-chat-completions",
-                        model_args="model=qwen,base_url=http://127.0.0.1:8081/v1/chat/completions,num_concurrent=8,max_retries=1,tokenized_requests=False,timeout=3600",
+                        model_args=f"model=qwen,base_url=http://127.0.0.1:8081/v1/chat/completions,num_concurrent={s.paralelo},max_retries=1,tokenized_requests=False,timeout=3600",
                         limit=teste or limite or None, apply_chat_template=True, fewshot_as_multiturn=True, gen_kwargs=f"temperature=0,max_gen_toks={s.max_gen}",
                         log_samples=not teste, evaluation_tracker=tracker, **extra)
         tempo = time.perf_counter() - t0
@@ -406,7 +439,10 @@ def rodar_gerativo(m, s, bench, limite, teste=0):
         return r[chave], n
     comum = dict(modelo=s.modelo, nivel=s.nivel, n=n, tempo_s=round(tempo, 1), tokens_por_resposta=tokens, cortadas=cortadas)
     if bench == "gsm8k":
-        m.gravar(benchmark="gsm8k", acuracia=num(r["exact_match,flexible-extract"]), erro_padrao=num(r["exact_match_stderr,flexible-extract"]), **comum)
+        bx = gsm8k_com_boxed(saida)                 # le tambem o \\boxed{} (ver gsm8k_com_boxed); nas respostas sem esse problema o valor e o do flexible-extract
+        acc, ep = (bx[0], bx[1]) if bx and bx[2] == n else (r["exact_match,flexible-extract"], r["exact_match_stderr,flexible-extract"])
+        if bx and bx[3]: print(f"gsm8k: {bx[3]} respostas certas lidas pelo \\boxed (flexible-extract original {bx[4]:.4f}, corrigido {bx[0]:.4f})", flush=True)
+        m.gravar(benchmark="gsm8k", acuracia=num(acc), erro_padrao=num(ep), **comum)
         m.gravar(benchmark="gsm8k_strict", acuracia=num(r["exact_match,strict-match"]), erro_padrao=num(r["exact_match_stderr,strict-match"]), **comum)
         print(f"gsm8k {s.modelo} {s.nivel}: n={n} flexible={r['exact_match,flexible-extract']:.4f} tokens/resp={tokens} cortadas={cortadas} em {tempo:.0f} s", flush=True)
     elif bench == "math500":
@@ -526,6 +562,7 @@ def main():
     ap.add_argument("--saida", default="resultados.csv", help="CSV de saida; kv.csv e raciocinio.csv levam as colunas kv e raciocinio")
     ap.add_argument("--reusar-de", help="copia de resultados.csv as linhas (gsm8k, math500, mmlu) ja medidas com a mesma configuracao, em vez de repetir")
     ap.add_argument("--sistema", help="prompt de sistema nos gerativos (lm-eval system_instruction)")
+    ap.add_argument("--paralelo", type=int, default=8, help="respostas em paralelo no llama-server (-np); o contexto de cada uma e ctx/paralelo. Use 4 ou menos com --max-gen alto")
     ap.add_argument("--max-gen", type=int, help="max_gen_toks dos gerativos (padrao 2048; 4096 com raciocinio ligado)")
     ap.add_argument("--batch-hf", type=int, default=16, help="batch_size do HFLM (log-prob); reduzir para modelos muito grandes")
     ap.add_argument("--respeitar-etapa1", action="store_true", help="pula os benchmarks marcados como pulados em etapa1.json")
@@ -555,7 +592,7 @@ def main():
     falhou = servidor_falhou = False
     ligado = a.raciocinio_ligado
     for nivel in a.niveis:
-        s = Sessao(m, a.modelo, nivel, ligado, a.batch_hf, kv=a.kv, ctx=65536 if ligado else 32768, max_gen=a.max_gen or (4096 if ligado else 2048), sistema=a.sistema)
+        s = Sessao(m, a.modelo, nivel, ligado, a.batch_hf, kv=a.kv, ctx=65536 if ligado else 32768, max_gen=a.max_gen or (4096 if ligado else 2048), sistema=a.sistema, paralelo=a.paralelo)
         try:
             for bench in ativos:
                 if (a.modelo, nivel, nome_csv(bench)) in m.feitos():

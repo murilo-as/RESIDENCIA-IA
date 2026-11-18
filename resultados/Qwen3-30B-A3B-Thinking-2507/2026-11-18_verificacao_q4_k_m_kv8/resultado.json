@@ -18,11 +18,12 @@
    "prova": "GSM8K",
    "base": "gsm8k",
    "n": 1319,
-   "acuracia": 0.779378,
-   "erro_padrao": 0.011422,
+   "acuracia": 0.961334,
+   "erro_padrao": 0.005309,
    "tokens": 786.6,
    "estimado": 92.22,
-   "meio": 17.3
+   "meio": 17.3,
+   "repontuado": "boxed lido (flexible-extract original: 0.7794)"
   },
   {
    "prova": "MATH-500",

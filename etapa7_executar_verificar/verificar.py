@@ -203,12 +203,16 @@ def rodar_generico(a):
     mapa = dict(GENERICAS)
     if nome.startswith(MMLU_LETRA): mapa["MMLU"] = ("mmlu_letra", "mmlu")
     alvos = {rot: q for rot, q in e["qualidade"].items() if rot in mapa}
+    if a.provas:
+        quer = {x.lower() for x in a.provas}
+        alvos = {r: q for r, q in alvos.items() if r.lower() in quer or mapa[r][0] in quer or mapa[r][1] in quer}
     for rot in e["qualidade"]:
         if rot not in mapa: print(f"aviso: {rot} ainda não é medido por este comando (fica de fora da verificação)")
     if not alvos: sys.exit("nenhuma prova deste caso é medível aqui (GSM8K, MATH-500, WMT24++, OAB, MMLU, MedQA e PubMedQA; código usa o caso casos/c8*.json)")
     cid_caso = os.path.basename(caso).split("_")[0]
     CASO.update(modelo=nome, nivel=nivel, kv=kv, raciocinio=racio, caso=cid_caso)
     pasta = a.pasta or pasta_padrao()
+    if a.max_gen and not a.pasta: pasta += f"_maxgen{a.max_gen}"      # outra pasta: o medir.py pula o que ja esta no CSV
     if a.limite and not a.pasta: pasta += "_teste"          # teste rapido nunca divide pasta com a medicao completa (o medir.py pula o que ja esta no CSV)
     os.makedirs(pasta, exist_ok=True)
     print(f"\n>>> {cid_caso}: {hf}, pesos {nivel}, KV {kv}, raciocínio {racio}; provas: {', '.join(alvos)}\n", flush=True)
@@ -225,6 +229,7 @@ def rodar_generico(a):
     if not alvos: sys.exit("nenhuma prova restou para medir")
     cmd = [sys.executable, os.path.join(RAIZ, "etapa4_estimativa", "medicao", "medir.py"), "--modelo", nome, "--niveis", nivel, "--benchmarks", *[mapa[r][0] for r in alvos],
            "--kv", kv, "--saida", "kv.csv", "--dir", pasta] + (["--raciocinio-ligado"] if racio == "ligado" else [])
+    cmd += ["--batch-hf", str(a.batch_hf), "--paralelo", str(a.paralelo)] + (["--max-gen", str(a.max_gen)] if a.max_gen else [])
     if a.limite: cmd += ["--limites", *[f"{mapa[r][0]}={a.limite}" for r in alvos]]
     subprocess.run(cmd, check=True)
     if not os.path.exists(os.path.join(pasta, "kv.csv")): sys.exit(f"a medição não gerou resultado (nenhuma prova terminou): veja {os.path.join(pasta, 'erros.log')}")
@@ -253,6 +258,34 @@ def rodar_generico(a):
     else: print("\nbase da pipeline:"); ingerir(r)
 
 
+def repontuar_gsm8k(pasta, aplicar):
+    """Relê o GSM8K de uma verificação já medida pelo \\boxed{} (medir.gsm8k_com_boxed), sem rodar modelo. Sem --aplicar só mostra; com, atualiza kv.csv, resultado.json e verificacoes.csv."""
+    sys.path.insert(0, os.path.join(RAIZ, "etapa4_estimativa", "medicao"))
+    import medir
+    bx = medir.gsm8k_com_boxed(pasta)
+    if not bx: sys.exit("nao achei samples_gsm8k_*.jsonl em " + pasta)
+    acc, ep, n, rec, orig = bx
+    print(f"GSM8K n={n}: flexible-extract {orig * 100:.2f} -> com \\boxed {acc * 100:.2f} ± {ep * 100:.2f} ({rec} respostas recuperadas)")
+    if not aplicar: return print("(use --aplicar para gravar)")
+    rj = os.path.join(pasta, "resultado.json"); r = json.load(open(rj, encoding="utf-8")); c = r["config"]
+    def regravar(arq, linhas):
+        with open(arq, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, list(linhas[0].keys())); w.writeheader(); w.writerows(linhas)
+    kv = os.path.join(pasta, "kv.csv"); tab = list(csv.DictReader(open(kv, encoding="utf-8")))
+    for l in tab:
+        if l["benchmark"] == "gsm8k": l["acuracia"], l["erro_padrao"] = round(acc, 6), round(ep, 6)
+    regravar(kv, tab)
+    for pr in r.get("provas") or []:
+        if pr["base"] == "gsm8k": pr["acuracia"], pr["erro_padrao"] = round(acc, 6), round(ep, 6)
+    json.dump(r, open(rj, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+    arq = os.path.join(MEDICOES, "verificacoes.csv"); ver = list(csv.DictReader(open(arq, encoding="utf-8"))); mudou = 0
+    for l in ver:
+        if (l["modelo"], l["nivel"], l["kv"], l["benchmark"], l["caso"]) == (c["modelo"], str(c["nivel"]), str(c["kv"]), "gsm8k", c["caso"]):
+            l["acuracia"], l["erro_padrao"] = round(acc, 6), round(ep, 6); mudou += 1
+    regravar(arq, ver)
+    print(f"gravado: kv.csv, resultado.json e {mudou} linha(s) de verificacoes.csv")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("caso", nargs="?", help="JSON do caso (casos/*.json)")
@@ -262,10 +295,17 @@ def main():
     ap.add_argument("--limite", type=int, default=0, help="só os N primeiros problemas de cada prova (teste rápido); 0 = completo")
     ap.add_argument("--pular-velocidade", action="store_true"); ap.add_argument("--pular-codigo", action="store_true")
     ap.add_argument("--top", choices=["qualidade", "footprint"], default="qualidade", help="caso sem preferência na recomendação: mede o top 1 por qualidade (padrão) ou por footprint")
+    ap.add_argument("--batch-hf", type=int, default=16, help="batch do log-prob (MedQA, PubMedQA, MMLU); use 1 em modelos muito grandes (ex.: 35B na Spark)")
+    ap.add_argument("--max-gen", type=int, help="tokens por resposta nas provas geradas (padrao do medir.py: 2048; 4096 com raciocinio ligado). O contexto de cada resposta e 32768/paralelo (65536/paralelo com raciocinio ligado)")
+    ap.add_argument("--paralelo", type=int, default=8, help="respostas em paralelo no llama-server; baixe (ex.: 4) quando subir --max-gen")
+    ap.add_argument("--provas", nargs="+", help="so estas provas (ex.: MATH-500), em vez de todas as do caso")
     ap.add_argument("--sem-ingerir", action="store_true", help="não acrescenta o resultado à base")
     ap.add_argument("--so-ingerir", metavar="RESULTADO_JSON", help="só acrescenta à base um resultado.json já medido (não roda nada)")
+    ap.add_argument("--repontuar-gsm8k", metavar="PASTA", help="relê o GSM8K de uma verificação já medida pelo \\boxed{} (sem rodar modelo); mostra o antes/depois, com --aplicar grava")
+    ap.add_argument("--aplicar", action="store_true", help="com --repontuar-gsm8k: grava a correção")
     ap.add_argument("--dry-run", action="store_true", help="com --so-ingerir: mostra o que seria gravado")
     a = ap.parse_args()
+    if a.repontuar_gsm8k: return repontuar_gsm8k(a.repontuar_gsm8k, a.aplicar)
     if a.so_ingerir: return ingerir(json.load(open(a.so_ingerir, encoding="utf-8")), a.dry_run)
     if not a.caso: ap.error("informe o JSON do caso (ou --so-ingerir)")
     CASO.update(json.load(open(a.caso, encoding="utf-8")))
