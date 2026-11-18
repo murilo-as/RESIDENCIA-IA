@@ -1,0 +1,1141 @@
+etapa 1: mesmo texto ja extraido em saidas/c13/pedido.json, reaproveitando (--reextrair chama o LLM de novo)
+
+--- resumo ---
+pedido      : tarefa=QA dominio=geral modelo=None
+qualidade   : qa x geral -> MMLU [direta]
+memoria     : orcamento=1.0 GB (pedido), ctx=4096
+latencia    : banda=None GB/s (nao informada; eficiência = 0.45), meta=None tok/s
+pareto      : 2 na fronteira, 18 dominadas, 20 fora
+recomendacao: Qwen/Qwen2.5-1.5B-Instruct|quantizacao_kv:8+quantizacao_pesos:4|ctx=4096  nota 61.3 ± 2.7 (tag C), 0.77 GiB
+tecnica     : quantizacao_kv=8 (movimento Shrink)
+tecnica     : quantizacao_pesos=4 (movimento Shrink)
+sugeridas   : Shrink: kv_cache_evicao (custo nenhum, recursos ok), quantizacao_kv (custo nenhum, recursos ok), quantizacao_pesos (custo nenhum, recursos ok), decomposicao_low_rank (custo varia, recursos talvez), early_exit (custo varia, recursos talvez), pruning (custo varia, recursos talvez), token_pruning (custo varia, recursos talvez), weight_sharing (custo varia, recursos talvez)
+sugeridas   : Speed-up: decoding_especulativo (custo nenhum, recursos ok), decoding_paralelo (custo alto, recursos talvez)
+aviso       : 14 configurações ficaram fora da análise: raciocínio ligado sem medida (nem do modelo nem de irmão, na mesma classe de prova): sem estimativa
+aviso       : 6 configurações ficaram fora da análise: KV 4 bits sem medida e kv_heads < 8: risco de colapso (Qwen2.5 de 2 e 4 cabeças colapsou)
+aviso       : nota estimada 61.3 ± 2.7 (tag C): conferir medindo a configuração (etapa 8)
+candidatura : 30 modelos, 5 com configuracao, 40 configuracoes
+estimativa  : 20/40 com nota (medida ou estimada); meta de tok/s: {'sim': 0, 'talvez': 0, 'nao': 0, 'sem meta': 40, 'desconhecido': 0}
+
+gravado em /timevoz/QA-SpeechRAG/RESIDENCIA-IA/saidas/c13/
+
+>>> c13: Qwen/Qwen2.5-1.5B-Instruct, pesos q4_k_m, KV 8, raciocínio desligado; provas: MMLU
+
+##### Qwen2.5-1.5B-Instruct q4_k_m mmlu (2026-11-18T17:53:53Z)
+INFO:hf-to-gguf:Loading model: Qwen2.5-1.5B-Instruct
+INFO:hf-to-gguf:Model architecture: Qwen2ForCausalLM
+INFO:hf-to-gguf:gguf: indexing model part 'model.safetensors'
+INFO:gguf.gguf_writer:gguf: This GGUF file is for Little Endian only
+INFO:hf-to-gguf:Exporting model...
+INFO:hf-to-gguf:token_embd.weight,         torch.bfloat16 --> F16, shape = {1536, 151936}
+INFO:hf-to-gguf:blk.0.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.0.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.0.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.0.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.0.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.0.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.0.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.0.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.0.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.0.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.0.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.0.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.1.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.1.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.1.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.1.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.1.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.1.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.1.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.1.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.1.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.1.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.1.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.1.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.10.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.10.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.10.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.10.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.10.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.10.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.10.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.10.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.10.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.10.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.10.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.10.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.11.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.11.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.11.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.11.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.11.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.11.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.11.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.11.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.11.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.11.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.11.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.11.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.12.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.12.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.12.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.12.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.12.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.12.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.12.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.12.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.12.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.12.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.12.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.12.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.13.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.13.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.13.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.13.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.13.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.13.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.13.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.13.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.13.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.13.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.13.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.13.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.14.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.14.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.14.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.14.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.14.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.14.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.14.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.14.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.14.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.14.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.14.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.14.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.15.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.15.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.15.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.15.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.15.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.15.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.15.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.15.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.15.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.15.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.15.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.15.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.16.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.16.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.16.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.16.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.16.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.16.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.16.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.16.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.16.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.16.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.16.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.16.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.17.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.17.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.17.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.17.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.17.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.17.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.17.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.17.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.17.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.17.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.17.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.17.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.18.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.18.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.18.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.18.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.18.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.18.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.18.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.18.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.18.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.18.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.18.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.18.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.19.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.19.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.19.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.19.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.19.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.19.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.19.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.19.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.19.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.19.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.19.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.19.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.2.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.2.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.2.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.2.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.2.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.2.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.2.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.2.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.2.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.2.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.2.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.2.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.20.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.20.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.20.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.20.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.20.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.20.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.20.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.20.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.20.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.20.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.20.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.20.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.21.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.21.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.21.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.21.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.21.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.21.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.21.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.21.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.21.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.21.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.21.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.21.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.22.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.22.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.22.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.22.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.22.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.22.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.22.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.22.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.22.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.22.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.22.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.22.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.23.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.23.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.23.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.23.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.23.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.23.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.23.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.23.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.23.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.23.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.23.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.23.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.24.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.24.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.24.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.24.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.24.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.24.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.24.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.24.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.24.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.24.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.24.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.24.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.25.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.25.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.25.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.25.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.25.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.25.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.25.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.25.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.25.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.25.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.25.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.25.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.26.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.26.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.26.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.26.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.26.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.26.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.26.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.26.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.26.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.26.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.26.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.26.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.27.attn_norm.weight,   torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.27.ffn_down.weight,    torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.27.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.27.ffn_up.weight,      torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.27.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.27.attn_k.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.27.attn_k.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.27.attn_output.weight, torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.27.attn_q.bias,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.27.attn_q.weight,      torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.27.attn_v.bias,        torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.27.attn_v.weight,      torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.3.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.3.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.3.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.3.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.3.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.3.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.3.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.3.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.3.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.3.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.3.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.3.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.4.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.4.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.4.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.4.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.4.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.4.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.4.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.4.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.4.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.4.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.4.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.4.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.5.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.5.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.5.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.5.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.5.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.5.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.5.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.5.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.5.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.5.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.5.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.5.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.6.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.6.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.6.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.6.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.6.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.6.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.6.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.6.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.6.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.6.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.6.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.6.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.7.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.7.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.7.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.7.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.7.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.7.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.7.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.7.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.7.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.7.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.7.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.7.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.8.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.8.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.8.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.8.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.8.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.8.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.8.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.8.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.8.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.8.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.8.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.8.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.9.attn_norm.weight,    torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.9.ffn_down.weight,     torch.bfloat16 --> F16, shape = {8960, 1536}
+INFO:hf-to-gguf:blk.9.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.9.ffn_up.weight,       torch.bfloat16 --> F16, shape = {1536, 8960}
+INFO:hf-to-gguf:blk.9.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.9.attn_k.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.9.attn_k.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:blk.9.attn_output.weight,  torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.9.attn_q.bias,         torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:blk.9.attn_q.weight,       torch.bfloat16 --> F16, shape = {1536, 1536}
+INFO:hf-to-gguf:blk.9.attn_v.bias,         torch.bfloat16 --> F32, shape = {256}
+INFO:hf-to-gguf:blk.9.attn_v.weight,       torch.bfloat16 --> F16, shape = {1536, 256}
+INFO:hf-to-gguf:output_norm.weight,        torch.bfloat16 --> F32, shape = {1536}
+INFO:hf-to-gguf:Set meta model
+INFO:hf-to-gguf:Set model parameters
+INFO:hf-to-gguf:gguf: context length = 32768
+INFO:hf-to-gguf:gguf: embedding length = 1536
+INFO:hf-to-gguf:gguf: feed forward length = 8960
+INFO:hf-to-gguf:gguf: head count = 12
+INFO:hf-to-gguf:gguf: key-value head count = 2
+WARNING:hf-to-gguf:Unknown RoPE type: default
+INFO:hf-to-gguf:gguf: rope scaling type = NONE
+INFO:hf-to-gguf:gguf: rope theta = 1000000.0
+INFO:hf-to-gguf:gguf: rms norm epsilon = 1e-06
+INFO:hf-to-gguf:gguf: file type = 1
+INFO:hf-to-gguf:Set model quantization version
+INFO:hf-to-gguf:Set model tokenizer
+INFO:gguf.vocab:Adding 151387 merge(s).
+INFO:gguf.vocab:Setting special token type eos to 151645
+INFO:gguf.vocab:Setting special token type pad to 151643
+INFO:gguf.vocab:Setting special token type bos to 151643
+INFO:gguf.vocab:Setting add_bos_token to False
+INFO:gguf.vocab:Setting add_eos_token to False
+INFO:gguf.vocab:Setting chat_template to {%- if tools %}
+    {{- '<|im_start|>system\n' }}
+    {%- if messages[0]['role'] == 'system' %}
+        {{- messages[0]['content'] }}
+    {%- else %}
+        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}
+    {%- endif %}
+    {{- "\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>" }}
+    {%- for tool in tools %}
+        {{- "\n" }}
+        {{- tool | tojson }}
+    {%- endfor %}
+    {{- "\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call><|im_end|>\n" }}
+{%- else %}
+    {%- if messages[0]['role'] == 'system' %}
+        {{- '<|im_start|>system\n' + messages[0]['content'] + '<|im_end|>\n' }}
+    {%- else %}
+        {{- '<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n' }}
+    {%- endif %}
+{%- endif %}
+{%- for message in messages %}
+    {%- if (message.role == "user") or (message.role == "system" and not loop.first) or (message.role == "assistant" and not message.tool_calls) %}
+        {{- '<|im_start|>' + message.role + '\n' + message.content + '<|im_end|>' + '\n' }}
+    {%- elif message.role == "assistant" %}
+        {{- '<|im_start|>' + message.role }}
+        {%- if message.content %}
+            {{- '\n' + message.content }}
+        {%- endif %}
+        {%- for tool_call in message.tool_calls %}
+            {%- if tool_call.function is defined %}
+                {%- set tool_call = tool_call.function %}
+            {%- endif %}
+            {{- '\n<tool_call>\n{"name": "' }}
+            {{- tool_call.name }}
+            {{- '", "arguments": ' }}
+            {{- tool_call.arguments | tojson }}
+            {{- '}\n</tool_call>' }}
+        {%- endfor %}
+        {{- '<|im_end|>\n' }}
+    {%- elif message.role == "tool" %}
+        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != "tool") %}
+            {{- '<|im_start|>user' }}
+        {%- endif %}
+        {{- '\n<tool_response>\n' }}
+        {{- message.content }}
+        {{- '\n</tool_response>' }}
+        {%- if loop.last or (messages[loop.index0 + 1].role != "tool") %}
+            {{- '<|im_end|>\n' }}
+        {%- endif %}
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|im_start|>assistant\n' }}
+{%- endif %}
+
+INFO:gguf.vocab:Setting normalizer_nfc to True
+INFO:gguf.vocab:Setting clean_spaces to False
+INFO:gguf.gguf_writer:Writing the following files:
+INFO:gguf.gguf_writer:/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/qwen2.5-1.5b-instruct-f16.gguf.parcial: n_tensors = 338, total_size = 3.1G
+Writing:   0%|          | 0.00/3.09G [00:00<?, ?byte/s]Writing:  15%|█▌        | 467M/3.09G [00:00<00:03, 835Mbyte/s]Writing:  18%|█▊        | 555M/3.09G [00:00<00:03, 785Mbyte/s]Writing:  21%|██        | 643M/3.09G [00:00<00:03, 791Mbyte/s]Writing:  24%|██▍       | 737M/3.09G [00:00<00:02, 787Mbyte/s]Writing:  27%|██▋       | 830M/3.09G [00:01<00:02, 818Mbyte/s]Writing:  30%|██▉       | 924M/3.09G [00:01<00:02, 822Mbyte/s]Writing:  33%|███▎      | 1.02G/3.09G [00:01<00:02, 822Mbyte/s]Writing:  36%|███▌      | 1.11G/3.09G [00:01<00:02, 819Mbyte/s]Writing:  39%|███▉      | 1.20G/3.09G [00:01<00:02, 818Mbyte/s]Writing:  42%|████▏     | 1.30G/3.09G [00:01<00:02, 809Mbyte/s]Writing:  45%|████▌     | 1.39G/3.09G [00:01<00:02, 839Mbyte/s]Writing:  48%|████▊     | 1.49G/3.09G [00:01<00:01, 836Mbyte/s]Writing:  51%|█████     | 1.58G/3.09G [00:01<00:01, 824Mbyte/s]Writing:  54%|█████▍    | 1.67G/3.09G [00:02<00:01, 849Mbyte/s]Writing:  57%|█████▋    | 1.77G/3.09G [00:02<00:01, 847Mbyte/s]Writing:  60%|██████    | 1.86G/3.09G [00:02<00:01, 839Mbyte/s]Writing:  63%|██████▎   | 1.95G/3.09G [00:02<00:01, 861Mbyte/s]Writing:  66%|██████▋   | 2.05G/3.09G [00:02<00:01, 871Mbyte/s]Writing:  69%|██████▉   | 2.14G/3.09G [00:02<00:01, 882Mbyte/s]Writing:  72%|███████▏  | 2.23G/3.09G [00:02<00:00, 869Mbyte/s]Writing:  75%|███████▌  | 2.33G/3.09G [00:02<00:00, 866Mbyte/s]Writing:  78%|███████▊  | 2.42G/3.09G [00:02<00:00, 863Mbyte/s]Writing:  81%|████████▏ | 2.52G/3.09G [00:03<00:00, 870Mbyte/s]Writing:  84%|████████▍ | 2.61G/3.09G [00:03<00:00, 857Mbyte/s]Writing:  88%|████████▊ | 2.70G/3.09G [00:03<00:00, 872Mbyte/s]Writing:  91%|█████████ | 2.80G/3.09G [00:03<00:00, 873Mbyte/s]Writing:  94%|█████████▎| 2.89G/3.09G [00:03<00:00, 870Mbyte/s]Writing:  97%|█████████▋| 2.98G/3.09G [00:03<00:00, 866Mbyte/s]Writing: 100%|█████████▉| 3.08G/3.09G [00:03<00:00, 861Mbyte/s]Writing: 100%|██████████| 3.09G/3.09G [00:03<00:00, 839Mbyte/s]
+INFO:hf-to-gguf:Model successfully exported to /timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/qwen2.5-1.5b-instruct-f16.gguf.parcial
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24080 MiB):
+  Device 0: NVIDIA GeForce RTX 4090, compute capability 8.9, VMM: yes, VRAM: 24080 MiB
+version: 1.0.0-dev (build 12463, commit 9581154a2)
+built with GNU 13.3.0 for Linux x86_64
+llama_quantize: quantizing '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/qwen2.5-1.5b-instruct-f16.gguf' to '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/qwen2.5-1.5b-instruct-q4_k_m.gguf.parcial' as Q4_K_M
+llama_model_loader: loaded meta data with 41 key-value pairs and 338 tensors from /timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/qwen2.5-1.5b-instruct-f16.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = qwen2
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                     general.sampling.top_k i32              = 20
+llama_model_loader: - kv   3:                     general.sampling.top_p f32              = 0.800000
+llama_model_loader: - kv   4:                      general.sampling.temp f32              = 0.700000
+llama_model_loader: - kv   5:            general.sampling.penalty_repeat f32              = 1.100000
+llama_model_loader: - kv   6:                               general.name str              = Qwen2.5 1.5B Instruct
+llama_model_loader: - kv   7:                           general.finetune str              = Instruct
+llama_model_loader: - kv   8:                           general.basename str              = Qwen2.5
+llama_model_loader: - kv   9:                         general.size_label str              = 1.5B
+llama_model_loader: - kv  10:                            general.license str              = apache-2.0
+llama_model_loader: - kv  11:                       general.license.link str              = https://huggingface.co/Qwen/Qwen2.5-1...
+llama_model_loader: - kv  12:                   general.base_model.count u32              = 1
+llama_model_loader: - kv  13:                  general.base_model.0.name str              = Qwen2.5 1.5B
+llama_model_loader: - kv  14:          general.base_model.0.organization str              = Qwen
+llama_model_loader: - kv  15:              general.base_model.0.repo_url str              = https://huggingface.co/Qwen/Qwen2.5-1.5B
+llama_model_loader: - kv  16:                               general.tags arr[str,2]       = ["chat", "text-generation"]
+llama_model_loader: - kv  17:                          general.languages arr[str,1]       = ["en"]
+llama_model_loader: - kv  18:                          qwen2.block_count u32              = 28
+llama_model_loader: - kv  19:                       qwen2.context_length u32              = 32768
+llama_model_loader: - kv  20:                     qwen2.embedding_length u32              = 1536
+llama_model_loader: - kv  21:                  qwen2.feed_forward_length u32              = 8960
+llama_model_loader: - kv  22:                 qwen2.attention.head_count u32              = 12
+llama_model_loader: - kv  23:              qwen2.attention.head_count_kv u32              = 2
+llama_model_loader: - kv  24:                       qwen2.rope.freq_base f32              = 1000000.000000
+llama_model_loader: - kv  25:     qwen2.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  26:                          general.file_type u32              = 1
+llama_model_loader: - kv  27:               general.quantization_version u32              = 2
+llama_model_loader: - kv  28:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  29:                         tokenizer.ggml.pre str              = qwen2
+llama_model_loader: - kv  30:                      tokenizer.ggml.tokens arr[str,151936]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  31:                  tokenizer.ggml.token_type arr[i32,151936]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  32:                      tokenizer.ggml.merges arr[str,151387]  = ["Ġ Ġ", "ĠĠ ĠĠ", "i n", "Ġ t",...
+llama_model_loader: - kv  33:                tokenizer.ggml.eos_token_id u32              = 151645
+llama_model_loader: - kv  34:            tokenizer.ggml.padding_token_id u32              = 151643
+llama_model_loader: - kv  35:                tokenizer.ggml.bos_token_id u32              = 151643
+llama_model_loader: - kv  36:               tokenizer.ggml.add_bos_token bool             = false
+llama_model_loader: - kv  37:               tokenizer.ggml.add_eos_token bool             = false
+llama_model_loader: - kv  38:                    tokenizer.chat_template str              = {%- if tools %}\n    {{- '<|im_start|>...
+llama_model_loader: - kv  39:              tokenizer.ggml.normalizer.nfc bool             = true
+llama_model_loader: - kv  40:                tokenizer.ggml.clean_spaces bool             = false
+llama_model_loader: - type  f32:  141 tensors
+llama_model_loader: - type  f16:  197 tensors
+[   1/ 338] output_norm.weight                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[   2/ 338] token_embd.weight                    - [  1536, 151936,      1,      1], type =    f16, converting to q6_K .. size =   445.12 MiB ->   182.57 MiB
+[   3/ 338] blk.0.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[   4/ 338] blk.0.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[   5/ 338] blk.0.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[   6/ 338] blk.0.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[   7/ 338] blk.0.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[   8/ 338] blk.0.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[   9/ 338] blk.0.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  10/ 338] blk.0.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[  11/ 338] blk.0.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[  12/ 338] blk.0.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  13/ 338] blk.0.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  14/ 338] blk.0.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  15/ 338] blk.1.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  16/ 338] blk.1.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  17/ 338] blk.1.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  18/ 338] blk.1.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  19/ 338] blk.1.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  20/ 338] blk.1.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  21/ 338] blk.1.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  22/ 338] blk.1.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[  23/ 338] blk.1.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[  24/ 338] blk.1.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  25/ 338] blk.1.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  26/ 338] blk.1.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  27/ 338] blk.2.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  28/ 338] blk.2.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  29/ 338] blk.2.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  30/ 338] blk.2.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  31/ 338] blk.2.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  32/ 338] blk.2.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  33/ 338] blk.2.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  34/ 338] blk.2.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[  35/ 338] blk.2.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[  36/ 338] blk.2.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  37/ 338] blk.2.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  38/ 338] blk.2.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  39/ 338] blk.3.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  40/ 338] blk.3.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  41/ 338] blk.3.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  42/ 338] blk.3.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  43/ 338] blk.3.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  44/ 338] blk.3.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  45/ 338] blk.3.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  46/ 338] blk.3.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  47/ 338] blk.3.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  48/ 338] blk.3.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  49/ 338] blk.3.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  50/ 338] blk.3.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  51/ 338] blk.4.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  52/ 338] blk.4.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  53/ 338] blk.4.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  54/ 338] blk.4.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  55/ 338] blk.4.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  56/ 338] blk.4.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  57/ 338] blk.4.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  58/ 338] blk.4.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  59/ 338] blk.4.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  60/ 338] blk.4.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  61/ 338] blk.4.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  62/ 338] blk.4.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  63/ 338] blk.5.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  64/ 338] blk.5.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  65/ 338] blk.5.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  66/ 338] blk.5.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  67/ 338] blk.5.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  68/ 338] blk.5.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  69/ 338] blk.5.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  70/ 338] blk.5.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[  71/ 338] blk.5.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[  72/ 338] blk.5.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  73/ 338] blk.5.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  74/ 338] blk.5.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  75/ 338] blk.6.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  76/ 338] blk.6.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  77/ 338] blk.6.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  78/ 338] blk.6.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  79/ 338] blk.6.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  80/ 338] blk.6.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  81/ 338] blk.6.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  82/ 338] blk.6.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  83/ 338] blk.6.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  84/ 338] blk.6.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  85/ 338] blk.6.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  86/ 338] blk.6.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  87/ 338] blk.7.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  88/ 338] blk.7.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  89/ 338] blk.7.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  90/ 338] blk.7.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  91/ 338] blk.7.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  92/ 338] blk.7.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[  93/ 338] blk.7.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[  94/ 338] blk.7.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[  95/ 338] blk.7.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  96/ 338] blk.7.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  97/ 338] blk.7.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[  98/ 338] blk.7.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[  99/ 338] blk.8.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 100/ 338] blk.8.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 101/ 338] blk.8.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 102/ 338] blk.8.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 103/ 338] blk.8.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 104/ 338] blk.8.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 105/ 338] blk.8.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 106/ 338] blk.8.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 107/ 338] blk.8.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 108/ 338] blk.8.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 109/ 338] blk.8.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 110/ 338] blk.8.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 111/ 338] blk.9.attn_k.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 112/ 338] blk.9.attn_k.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 113/ 338] blk.9.attn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 114/ 338] blk.9.attn_output.weight             - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 115/ 338] blk.9.attn_q.bias                    - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 116/ 338] blk.9.attn_q.weight                  - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 117/ 338] blk.9.attn_v.bias                    - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 118/ 338] blk.9.attn_v.weight                  - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 119/ 338] blk.9.ffn_down.weight                - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 120/ 338] blk.9.ffn_gate.weight                - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 121/ 338] blk.9.ffn_norm.weight                - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 122/ 338] blk.9.ffn_up.weight                  - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 123/ 338] blk.10.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 124/ 338] blk.10.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 125/ 338] blk.10.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 126/ 338] blk.10.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 127/ 338] blk.10.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 128/ 338] blk.10.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 129/ 338] blk.10.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 130/ 338] blk.10.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 131/ 338] blk.10.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 132/ 338] blk.10.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 133/ 338] blk.10.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 134/ 338] blk.10.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 135/ 338] blk.11.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 136/ 338] blk.11.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 137/ 338] blk.11.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 138/ 338] blk.11.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 139/ 338] blk.11.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 140/ 338] blk.11.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 141/ 338] blk.11.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 142/ 338] blk.11.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 143/ 338] blk.11.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 144/ 338] blk.11.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 145/ 338] blk.11.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 146/ 338] blk.11.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 147/ 338] blk.12.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 148/ 338] blk.12.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 149/ 338] blk.12.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 150/ 338] blk.12.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 151/ 338] blk.12.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 152/ 338] blk.12.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 153/ 338] blk.12.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 154/ 338] blk.12.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 155/ 338] blk.12.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 156/ 338] blk.12.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 157/ 338] blk.12.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 158/ 338] blk.12.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 159/ 338] blk.13.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 160/ 338] blk.13.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 161/ 338] blk.13.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 162/ 338] blk.13.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 163/ 338] blk.13.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 164/ 338] blk.13.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 165/ 338] blk.13.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 166/ 338] blk.13.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 167/ 338] blk.13.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 168/ 338] blk.13.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 169/ 338] blk.13.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 170/ 338] blk.13.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 171/ 338] blk.14.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 172/ 338] blk.14.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 173/ 338] blk.14.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 174/ 338] blk.14.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 175/ 338] blk.14.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 176/ 338] blk.14.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 177/ 338] blk.14.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 178/ 338] blk.14.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 179/ 338] blk.14.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 180/ 338] blk.14.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 181/ 338] blk.14.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 182/ 338] blk.14.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 183/ 338] blk.15.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 184/ 338] blk.15.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 185/ 338] blk.15.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 186/ 338] blk.15.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 187/ 338] blk.15.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 188/ 338] blk.15.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 189/ 338] blk.15.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 190/ 338] blk.15.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 191/ 338] blk.15.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 192/ 338] blk.15.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 193/ 338] blk.15.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 194/ 338] blk.15.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 195/ 338] blk.16.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 196/ 338] blk.16.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 197/ 338] blk.16.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 198/ 338] blk.16.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 199/ 338] blk.16.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 200/ 338] blk.16.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 201/ 338] blk.16.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 202/ 338] blk.16.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 203/ 338] blk.16.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 204/ 338] blk.16.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 205/ 338] blk.16.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 206/ 338] blk.16.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 207/ 338] blk.17.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 208/ 338] blk.17.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 209/ 338] blk.17.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 210/ 338] blk.17.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 211/ 338] blk.17.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 212/ 338] blk.17.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 213/ 338] blk.17.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 214/ 338] blk.17.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 215/ 338] blk.17.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 216/ 338] blk.17.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 217/ 338] blk.17.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 218/ 338] blk.17.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 219/ 338] blk.18.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 220/ 338] blk.18.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 221/ 338] blk.18.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 222/ 338] blk.18.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 223/ 338] blk.18.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 224/ 338] blk.18.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 225/ 338] blk.18.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 226/ 338] blk.18.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 227/ 338] blk.18.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 228/ 338] blk.18.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 229/ 338] blk.18.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 230/ 338] blk.18.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 231/ 338] blk.19.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 232/ 338] blk.19.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 233/ 338] blk.19.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 234/ 338] blk.19.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 235/ 338] blk.19.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 236/ 338] blk.19.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 237/ 338] blk.19.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 238/ 338] blk.19.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 239/ 338] blk.19.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 240/ 338] blk.19.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 241/ 338] blk.19.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 242/ 338] blk.19.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 243/ 338] blk.20.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 244/ 338] blk.20.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 245/ 338] blk.20.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 246/ 338] blk.20.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 247/ 338] blk.20.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 248/ 338] blk.20.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 249/ 338] blk.20.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 250/ 338] blk.20.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 251/ 338] blk.20.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 252/ 338] blk.20.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 253/ 338] blk.20.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 254/ 338] blk.20.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 255/ 338] blk.21.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 256/ 338] blk.21.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 257/ 338] blk.21.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 258/ 338] blk.21.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 259/ 338] blk.21.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 260/ 338] blk.21.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 261/ 338] blk.21.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 262/ 338] blk.21.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 263/ 338] blk.21.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 264/ 338] blk.21.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 265/ 338] blk.21.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 266/ 338] blk.21.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 267/ 338] blk.22.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 268/ 338] blk.22.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 269/ 338] blk.22.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 270/ 338] blk.22.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 271/ 338] blk.22.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 272/ 338] blk.22.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 273/ 338] blk.22.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 274/ 338] blk.22.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 275/ 338] blk.22.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 276/ 338] blk.22.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 277/ 338] blk.22.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 278/ 338] blk.22.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 279/ 338] blk.23.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 280/ 338] blk.23.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 281/ 338] blk.23.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 282/ 338] blk.23.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 283/ 338] blk.23.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 284/ 338] blk.23.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 285/ 338] blk.23.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 286/ 338] blk.23.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 287/ 338] blk.23.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 288/ 338] blk.23.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 289/ 338] blk.23.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 290/ 338] blk.23.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 291/ 338] blk.24.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 292/ 338] blk.24.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 293/ 338] blk.24.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 294/ 338] blk.24.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 295/ 338] blk.24.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 296/ 338] blk.24.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 297/ 338] blk.24.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 298/ 338] blk.24.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 299/ 338] blk.24.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 300/ 338] blk.24.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 301/ 338] blk.24.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 302/ 338] blk.24.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 303/ 338] blk.25.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 304/ 338] blk.25.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 305/ 338] blk.25.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 306/ 338] blk.25.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 307/ 338] blk.25.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 308/ 338] blk.25.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 309/ 338] blk.25.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 310/ 338] blk.25.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 311/ 338] blk.25.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 312/ 338] blk.25.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 313/ 338] blk.25.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 314/ 338] blk.25.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 315/ 338] blk.26.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 316/ 338] blk.26.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 317/ 338] blk.26.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 318/ 338] blk.26.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 319/ 338] blk.26.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 320/ 338] blk.26.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 321/ 338] blk.26.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 322/ 338] blk.26.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 323/ 338] blk.26.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 324/ 338] blk.26.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 325/ 338] blk.26.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 326/ 338] blk.26.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 327/ 338] blk.27.attn_k.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 328/ 338] blk.27.attn_k.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q4_K .. size =     0.75 MiB ->     0.21 MiB
+[ 329/ 338] blk.27.attn_norm.weight              - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 330/ 338] blk.27.attn_output.weight            - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 331/ 338] blk.27.attn_q.bias                   - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 332/ 338] blk.27.attn_q.weight                 - [  1536,   1536,      1,      1], type =    f16, converting to q4_K .. size =     4.50 MiB ->     1.27 MiB
+[ 333/ 338] blk.27.attn_v.bias                   - [   256,      1,      1,      1], type =    f32, size =    0.001 MiB
+[ 334/ 338] blk.27.attn_v.weight                 - [  1536,    256,      1,      1], type =    f16, converting to q6_K .. size =     0.75 MiB ->     0.31 MiB
+[ 335/ 338] blk.27.ffn_down.weight               - [  8960,   1536,      1,      1], type =    f16, converting to q6_K .. size =    26.25 MiB ->    10.77 MiB
+[ 336/ 338] blk.27.ffn_gate.weight               - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+[ 337/ 338] blk.27.ffn_norm.weight               - [  1536,      1,      1,      1], type =    f32, size =    0.006 MiB
+[ 338/ 338] blk.27.ffn_up.weight                 - [  1536,   8960,      1,      1], type =    f16, converting to q4_K .. size =    26.25 MiB ->     7.38 MiB
+llama_model_quantize_impl: model size  =  2944.68 MiB (16.00 BPW)
+llama_model_quantize_impl: quant size  =   934.69 MiB (5.08 BPW)
+
+llama_quantize: quantize time =  5087.40 ms
+llama_quantize:    total time =  5087.40 ms
+[transformers] Loading a GGUF checkpoint with its weights packed is fastest in float32, and this one was asked for in torch.float16. The kernels compute in float32, so every matmul will cast its input and its output. Pass `dtype=torch.float32` to avoid it -- the weights stay quantized regardless, so this costs no extra memory.
+Converting and de-quantizing GGUF tensors...:   0%|          | 0/338 [00:00<?, ?it/s]Converting and de-quantizing GGUF tensors...:   1%|          | 2/338 [00:01<03:53,  1.44it/s]Converting and de-quantizing GGUF tensors...:   4%|▎         | 12/338 [00:01<00:31, 10.42it/s]Converting and de-quantizing GGUF tensors...:   7%|▋         | 23/338 [00:01<00:14, 21.60it/s]Converting and de-quantizing GGUF tensors...:   9%|▉         | 31/338 [00:01<00:10, 29.26it/s]Converting and de-quantizing GGUF tensors...:  12%|█▏        | 39/338 [00:01<00:08, 35.35it/s]Converting and de-quantizing GGUF tensors...:  15%|█▍        | 50/338 [00:02<00:06, 44.99it/s]Converting and de-quantizing GGUF tensors...:  18%|█▊        | 62/338 [00:02<00:05, 54.43it/s]Converting and de-quantizing GGUF tensors...:  21%|██▏       | 72/338 [00:02<00:04, 63.50it/s]Converting and de-quantizing GGUF tensors...:  25%|██▍       | 84/338 [00:02<00:03, 68.53it/s]Converting and de-quantizing GGUF tensors...:  28%|██▊       | 95/338 [00:02<00:03, 77.73it/s]Converting and de-quantizing GGUF tensors...:  31%|███       | 104/338 [00:02<00:03, 77.23it/s]Converting and de-quantizing GGUF tensors...:  33%|███▎      | 113/338 [00:02<00:03, 74.13it/s]Converting and de-quantizing GGUF tensors...:  36%|███▌      | 122/338 [00:02<00:03, 69.78it/s]Converting and de-quantizing GGUF tensors...:  39%|███▉      | 132/338 [00:03<00:02, 75.50it/s]Converting and de-quantizing GGUF tensors...:  42%|████▏     | 143/338 [00:03<00:02, 82.12it/s]Converting and de-quantizing GGUF tensors...:  45%|████▍     | 152/338 [00:03<00:02, 79.02it/s]Converting and de-quantizing GGUF tensors...:  48%|████▊     | 161/338 [00:03<00:02, 73.10it/s]Converting and de-quantizing GGUF tensors...:  50%|█████     | 169/338 [00:03<00:02, 72.56it/s]Converting and de-quantizing GGUF tensors...:  53%|█████▎    | 179/338 [00:03<00:02, 76.90it/s]Converting and de-quantizing GGUF tensors...:  55%|█████▌    | 187/338 [00:03<00:02, 73.15it/s]Converting and de-quantizing GGUF tensors...:  58%|█████▊    | 195/338 [00:03<00:02, 61.82it/s]Converting and de-quantizing GGUF tensors...:  60%|██████    | 204/338 [00:04<00:02, 65.16it/s]Converting and de-quantizing GGUF tensors...:  64%|██████▎   | 215/338 [00:04<00:01, 71.80it/s]Converting and de-quantizing GGUF tensors...:  66%|██████▌   | 223/338 [00:04<00:01, 68.31it/s]Converting and de-quantizing GGUF tensors...:  68%|██████▊   | 230/338 [00:04<00:01, 58.29it/s]Converting and de-quantizing GGUF tensors...:  71%|███████   | 240/338 [00:04<00:01, 64.43it/s]Converting and de-quantizing GGUF tensors...:  74%|███████▍  | 251/338 [00:04<00:01, 71.38it/s]Converting and de-quantizing GGUF tensors...:  77%|███████▋  | 259/338 [00:04<00:01, 68.16it/s]Converting and de-quantizing GGUF tensors...:  79%|███████▊  | 266/338 [00:05<00:01, 59.11it/s]Converting and de-quantizing GGUF tensors...:  82%|████████▏ | 276/338 [00:05<00:00, 65.53it/s]Converting and de-quantizing GGUF tensors...:  85%|████████▍ | 287/338 [00:05<00:00, 72.25it/s]Converting and de-quantizing GGUF tensors...:  87%|████████▋ | 295/338 [00:05<00:00, 68.39it/s]Converting and de-quantizing GGUF tensors...:  90%|████████▉ | 303/338 [00:05<00:00, 60.97it/s]Converting and de-quantizing GGUF tensors...:  92%|█████████▏| 312/338 [00:05<00:00, 64.56it/s]Converting and de-quantizing GGUF tensors...:  96%|█████████▌| 323/338 [00:05<00:00, 69.24it/s]Converting and de-quantizing GGUF tensors...:  98%|█████████▊| 331/338 [00:05<00:00, 67.58it/s]Converting and de-quantizing GGUF tensors...: 100%|██████████| 338/338 [00:06<00:00, 58.38it/s]Converting and de-quantizing GGUF tensors...: 100%|██████████| 338/338 [00:06<00:00, 55.08it/s]
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 112/338 [00:00<00:00, 1108.47it/s]Loading weights:  80%|███████▉  | 270/338 [00:00<00:00, 1384.50it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 1411.45it/s]
+TaskManager criado em 2.5 s
+Generating test split:   0%|          | 0/144 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 144/144 [00:00<00:00, 59417.59 examples/s]
+Generating validation split:   0%|          | 0/16 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 16/16 [00:00<00:00, 18211.36 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 6607.28 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 53560.26 examples/s]
+Generating validation split:   0%|          | 0/8 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 8/8 [00:00<00:00, 6867.46 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4719.06 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 54344.44 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 10784.79 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4818.82 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 54372.62 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 10075.86 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5098.84 examples/s]
+Generating test split:   0%|          | 0/102 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 102/102 [00:00<00:00, 64131.17 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 11283.28 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5798.04 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 50454.76 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 9530.54 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4381.85 examples/s]
+Generating test split:   0%|          | 0/235 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 235/235 [00:00<00:00, 110835.65 examples/s]
+Generating validation split:   0%|          | 0/26 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 26/26 [00:00<00:00, 25191.02 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4691.62 examples/s]
+Generating test split:   0%|          | 0/145 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 145/145 [00:00<00:00, 89529.53 examples/s]
+Generating validation split:   0%|          | 0/16 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 16/16 [00:00<00:00, 13859.74 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5153.97 examples/s]
+Generating test split:   0%|          | 0/378 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 378/378 [00:00<00:00, 188519.25 examples/s]
+Generating validation split:   0%|          | 0/41 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 41/41 [00:00<00:00, 40944.40 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5553.90 examples/s]
+Generating test split:   0%|          | 0/310 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 310/310 [00:00<00:00, 160186.55 examples/s]
+Generating validation split:   0%|          | 0/32 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 32/32 [00:00<00:00, 28623.96 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5122.50 examples/s]
+Generating test split:   0%|          | 0/203 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 203/203 [00:00<00:00, 100548.38 examples/s]
+Generating validation split:   0%|          | 0/22 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 22/22 [00:00<00:00, 21310.55 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5212.91 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 76987.96 examples/s]
+Generating validation split:   0%|          | 0/9 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 9/9 [00:00<00:00, 12413.26 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 7468.49 examples/s]
+Generating test split:   0%|          | 0/270 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 270/270 [00:00<00:00, 143222.72 examples/s]
+Generating validation split:   0%|          | 0/29 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 29/29 [00:00<00:00, 28505.93 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5087.70 examples/s]
+Generating test split:   0%|          | 0/151 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 151/151 [00:00<00:00, 79635.35 examples/s]
+Generating validation split:   0%|          | 0/17 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 17/17 [00:00<00:00, 17523.51 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5340.34 examples/s]
+Generating test split:   0%|          | 0/216 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 216/216 [00:00<00:00, 105726.42 examples/s]
+Generating validation split:   0%|          | 0/23 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 23/23 [00:00<00:00, 20786.25 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5113.76 examples/s]
+Generating test split:   0%|          | 0/112 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 112/112 [00:00<00:00, 67816.09 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 9868.95 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5179.43 examples/s]
+Generating test split:   0%|          | 0/265 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 265/265 [00:00<00:00, 160434.55 examples/s]
+Generating validation split:   0%|          | 0/29 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 29/29 [00:00<00:00, 24869.11 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5534.84 examples/s]
+Generating test split:   0%|          | 0/173 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 173/173 [00:00<00:00, 66254.07 examples/s]
+Generating validation split:   0%|          | 0/22 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 22/22 [00:00<00:00, 12035.31 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 3077.71 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 63908.33 examples/s]
+Generating validation split:   0%|          | 0/10 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 10/10 [00:00<00:00, 11388.28 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5410.61 examples/s]
+Generating test split:   0%|          | 0/223 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 223/223 [00:00<00:00, 150811.00 examples/s]
+Generating validation split:   0%|          | 0/23 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 23/23 [00:00<00:00, 24281.15 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 6267.64 examples/s]
+Generating test split:   0%|          | 0/103 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 103/103 [00:00<00:00, 58753.34 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 10289.33 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5058.25 examples/s]
+Generating test split:   0%|          | 0/234 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 234/234 [00:00<00:00, 128750.77 examples/s]
+Generating validation split:   0%|          | 0/25 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 25/25 [00:00<00:00, 20480.00 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5646.61 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 59705.40 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 10038.59 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5297.18 examples/s]
+Generating test split:   0%|          | 0/783 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 783/783 [00:00<00:00, 371761.38 examples/s]
+Generating validation split:   0%|          | 0/86 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 86/86 [00:00<00:00, 80786.15 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5391.14 examples/s]
+Generating test split:   0%|          | 0/306 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 306/306 [00:00<00:00, 174359.06 examples/s]
+Generating validation split:   0%|          | 0/33 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 33/33 [00:00<00:00, 27219.67 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4632.54 examples/s]
+Generating test split:   0%|          | 0/282 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 282/282 [00:00<00:00, 169091.31 examples/s]
+Generating validation split:   0%|          | 0/31 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 31/31 [00:00<00:00, 31868.49 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5044.87 examples/s]
+Generating test split:   0%|          | 0/272 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 272/272 [00:00<00:00, 108487.13 examples/s]
+Generating validation split:   0%|          | 0/31 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 31/31 [00:00<00:00, 25844.45 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5807.68 examples/s]
+Generating test split:   0%|          | 0/166 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 166/166 [00:00<00:00, 94420.19 examples/s]
+Generating validation split:   0%|          | 0/18 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 18/18 [00:00<00:00, 15147.97 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4631.52 examples/s]
+Generating test split:   0%|          | 0/114 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 114/114 [00:00<00:00, 55207.33 examples/s]
+Generating validation split:   0%|          | 0/12 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 12/12 [00:00<00:00, 10766.13 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5257.34 examples/s]
+Generating test split:   0%|          | 0/198 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 198/198 [00:00<00:00, 103679.42 examples/s]
+Generating validation split:   0%|          | 0/22 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 22/22 [00:00<00:00, 21459.23 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4382.76 examples/s]
+Generating test split:   0%|          | 0/193 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 193/193 [00:00<00:00, 113185.22 examples/s]
+Generating validation split:   0%|          | 0/21 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 21/21 [00:00<00:00, 21102.15 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5565.69 examples/s]
+Generating test split:   0%|          | 0/390 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 390/390 [00:00<00:00, 233649.27 examples/s]
+Generating validation split:   0%|          | 0/43 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 43/43 [00:00<00:00, 46256.75 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 6309.12 examples/s]
+Generating test split:   0%|          | 0/238 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 238/238 [00:00<00:00, 115778.75 examples/s]
+Generating validation split:   0%|          | 0/26 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 26/26 [00:00<00:00, 21624.41 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5667.98 examples/s]
+Generating test split:   0%|          | 0/545 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 545/545 [00:00<00:00, 319303.77 examples/s]
+Generating validation split:   0%|          | 0/60 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 60/60 [00:00<00:00, 55358.17 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5152.71 examples/s]
+Generating test split:   0%|          | 0/131 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 131/131 [00:00<00:00, 75010.76 examples/s]
+Generating validation split:   0%|          | 0/12 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 12/12 [00:00<00:00, 10591.68 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4704.24 examples/s]
+Generating test split:   0%|          | 0/612 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 612/612 [00:00<00:00, 256948.35 examples/s]
+Generating validation split:   0%|          | 0/69 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 69/69 [00:00<00:00, 54739.36 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4932.15 examples/s]
+Generating test split:   0%|          | 0/110 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 110/110 [00:00<00:00, 62004.23 examples/s]
+Generating validation split:   0%|          | 0/12 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 12/12 [00:00<00:00, 11735.05 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5060.69 examples/s]
+Generating test split:   0%|          | 0/245 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 245/245 [00:00<00:00, 87522.74 examples/s]
+Generating validation split:   0%|          | 0/27 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 27/27 [00:00<00:00, 19906.17 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 3739.57 examples/s]
+Generating test split:   0%|          | 0/201 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 201/201 [00:00<00:00, 118807.09 examples/s]
+Generating validation split:   0%|          | 0/22 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 22/22 [00:00<00:00, 20042.29 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 6078.70 examples/s]
+Generating test split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 100/100 [00:00<00:00, 68377.96 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 13022.11 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4682.19 examples/s]
+Generating test split:   0%|          | 0/126 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 126/126 [00:00<00:00, 65780.72 examples/s]
+Generating validation split:   0%|          | 0/14 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 14/14 [00:00<00:00, 14176.79 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5294.50 examples/s]
+Generating test split:   0%|          | 0/165 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 165/165 [00:00<00:00, 85260.58 examples/s]
+Generating validation split:   0%|          | 0/18 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 18/18 [00:00<00:00, 15102.51 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5840.02 examples/s]
+Generating test split:   0%|          | 0/204 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 204/204 [00:00<00:00, 79402.19 examples/s]
+Generating validation split:   0%|          | 0/22 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 22/22 [00:00<00:00, 22638.54 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5363.56 examples/s]
+Generating test split:   0%|          | 0/237 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 237/237 [00:00<00:00, 79289.31 examples/s]
+Generating validation split:   0%|          | 0/26 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 26/26 [00:00<00:00, 22369.62 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5748.77 examples/s]
+Generating test split:   0%|          | 0/121 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 121/121 [00:00<00:00, 55825.63 examples/s]
+Generating validation split:   0%|          | 0/13 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 13/13 [00:00<00:00, 6647.07 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4115.29 examples/s]
+Generating test split:   0%|          | 0/108 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 108/108 [00:00<00:00, 75422.05 examples/s]
+Generating validation split:   0%|          | 0/11 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 11/11 [00:00<00:00, 10358.63 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5131.27 examples/s]
+Generating test split:   0%|          | 0/163 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 163/163 [00:00<00:00, 101075.04 examples/s]
+Generating validation split:   0%|          | 0/18 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 18/18 [00:00<00:00, 21694.68 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5583.47 examples/s]
+Generating test split:   0%|          | 0/346 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 346/346 [00:00<00:00, 216763.13 examples/s]
+Generating validation split:   0%|          | 0/38 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 38/38 [00:00<00:00, 35881.03 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5290.49 examples/s]
+Generating test split:   0%|          | 0/895 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 895/895 [00:00<00:00, 429311.77 examples/s]
+Generating validation split:   0%|          | 0/100 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 100/100 [00:00<00:00, 93643.76 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4831.03 examples/s]
+Generating test split:   0%|          | 0/311 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 311/311 [00:00<00:00, 202739.90 examples/s]
+Generating validation split:   0%|          | 0/34 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 34/34 [00:00<00:00, 34858.55 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5775.69 examples/s]
+Generating test split:   0%|          | 0/324 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 324/324 [00:00<00:00, 206339.89 examples/s]
+Generating validation split:   0%|          | 0/35 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 35/35 [00:00<00:00, 40109.46 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5405.03 examples/s]
+Generating test split:   0%|          | 0/1534 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1534/1534 [00:00<00:00, 332492.50 examples/s]
+Generating validation split:   0%|          | 0/170 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 170/170 [00:00<00:00, 153736.89 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 5649.66 examples/s]
+Generating test split:   0%|          | 0/171 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 171/171 [00:00<00:00, 106968.83 examples/s]
+Generating validation split:   0%|          | 0/19 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 19/19 [00:00<00:00, 16240.43 examples/s]
+Generating dev split:   0%|          | 0/5 [00:00<?, ? examples/s]Generating dev split: 100%|██████████| 5/5 [00:00<00:00, 4513.89 examples/s]
+tarefa mmlu montada em 503.5 s
+Overwriting default num_fewshot of mmlu_abstract_algebra from None to 5
+Overwriting default num_fewshot of mmlu_anatomy from None to 5
+Overwriting default num_fewshot of mmlu_astronomy from None to 5
+Overwriting default num_fewshot of mmlu_college_biology from None to 5
+Overwriting default num_fewshot of mmlu_college_chemistry from None to 5
+Overwriting default num_fewshot of mmlu_college_computer_science from None to 5
+Overwriting default num_fewshot of mmlu_college_mathematics from None to 5
+Overwriting default num_fewshot of mmlu_college_physics from None to 5
+Overwriting default num_fewshot of mmlu_computer_security from None to 5
+Overwriting default num_fewshot of mmlu_conceptual_physics from None to 5
+Overwriting default num_fewshot of mmlu_electrical_engineering from None to 5
+Overwriting default num_fewshot of mmlu_elementary_mathematics from None to 5
+Overwriting default num_fewshot of mmlu_high_school_biology from None to 5
+Overwriting default num_fewshot of mmlu_high_school_chemistry from None to 5
+Overwriting default num_fewshot of mmlu_high_school_computer_science from None to 5
+Overwriting default num_fewshot of mmlu_high_school_mathematics from None to 5
+Overwriting default num_fewshot of mmlu_high_school_physics from None to 5
+Overwriting default num_fewshot of mmlu_high_school_statistics from None to 5
+Overwriting default num_fewshot of mmlu_machine_learning from None to 5
+Overwriting default num_fewshot of mmlu_business_ethics from None to 5
+Overwriting default num_fewshot of mmlu_clinical_knowledge from None to 5
+Overwriting default num_fewshot of mmlu_college_medicine from None to 5
+Overwriting default num_fewshot of mmlu_global_facts from None to 5
+Overwriting default num_fewshot of mmlu_human_aging from None to 5
+Overwriting default num_fewshot of mmlu_management from None to 5
+Overwriting default num_fewshot of mmlu_marketing from None to 5
+Overwriting default num_fewshot of mmlu_medical_genetics from None to 5
+Overwriting default num_fewshot of mmlu_miscellaneous from None to 5
+Overwriting default num_fewshot of mmlu_nutrition from None to 5
+Overwriting default num_fewshot of mmlu_professional_accounting from None to 5
+Overwriting default num_fewshot of mmlu_professional_medicine from None to 5
+Overwriting default num_fewshot of mmlu_virology from None to 5
+Overwriting default num_fewshot of mmlu_econometrics from None to 5
+Overwriting default num_fewshot of mmlu_high_school_geography from None to 5
+Overwriting default num_fewshot of mmlu_high_school_government_and_politics from None to 5
+Overwriting default num_fewshot of mmlu_high_school_macroeconomics from None to 5
+Overwriting default num_fewshot of mmlu_high_school_microeconomics from None to 5
+Overwriting default num_fewshot of mmlu_high_school_psychology from None to 5
+Overwriting default num_fewshot of mmlu_human_sexuality from None to 5
+Overwriting default num_fewshot of mmlu_professional_psychology from None to 5
+Overwriting default num_fewshot of mmlu_public_relations from None to 5
+Overwriting default num_fewshot of mmlu_security_studies from None to 5
+Overwriting default num_fewshot of mmlu_sociology from None to 5
+Overwriting default num_fewshot of mmlu_us_foreign_policy from None to 5
+Overwriting default num_fewshot of mmlu_formal_logic from None to 5
+Overwriting default num_fewshot of mmlu_high_school_european_history from None to 5
+Overwriting default num_fewshot of mmlu_high_school_us_history from None to 5
+Overwriting default num_fewshot of mmlu_high_school_world_history from None to 5
+Overwriting default num_fewshot of mmlu_international_law from None to 5
+Overwriting default num_fewshot of mmlu_jurisprudence from None to 5
+Overwriting default num_fewshot of mmlu_logical_fallacies from None to 5
+Overwriting default num_fewshot of mmlu_moral_disputes from None to 5
+Overwriting default num_fewshot of mmlu_moral_scenarios from None to 5
+Overwriting default num_fewshot of mmlu_philosophy from None to 5
+Overwriting default num_fewshot of mmlu_prehistory from None to 5
+Overwriting default num_fewshot of mmlu_professional_law from None to 5
+Overwriting default num_fewshot of mmlu_world_religions from None to 5
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 354.12it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 368.86it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 377.70it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 382.22it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 384.74it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 383.42it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 381.79it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 396.27it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 387.13it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 383.52it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 382.32it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 384.50it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 388.57it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 383.14it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 378.47it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 380.28it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 386.29it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 376.21it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 367.12it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 379.85it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 374.25it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 386.05it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 378.01it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 362.33it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 361.43it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 361.25it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 366.33it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 369.69it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 386.05it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 376.48it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 379.27it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 379.94it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 385.00it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 379.66it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 371.92it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 380.09it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 383.37it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 377.61it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 387.47it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 385.55it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 385.53it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 380.94it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 378.34it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 382.18it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 381.81it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 380.69it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 375.80it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 380.05it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 372.94it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 379.22it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 391.35it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 382.69it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 386.33it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 380.66it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 382.92it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 382.74it/s]
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 369.50it/s]
+Tokenizing inputs:   0%|          | 0/1140 [00:00<?, ?it/s]Tokenizing inputs:  12%|█▏        | 137/1140 [00:00<00:00, 1363.61it/s]Tokenizing inputs:  26%|██▌       | 295/1140 [00:00<00:00, 1481.81it/s]Tokenizing inputs:  39%|███▉      | 444/1140 [00:00<00:00, 1392.12it/s]Tokenizing inputs:  54%|█████▎    | 610/1140 [00:00<00:00, 1491.29it/s]Tokenizing inputs:  67%|██████▋   | 765/1140 [00:00<00:00, 1511.74it/s]Tokenizing inputs:  80%|████████  | 917/1140 [00:00<00:00, 1201.20it/s]Tokenizing inputs:  92%|█████████▏| 1047/1140 [00:00<00:00, 1027.91it/s]Tokenizing inputs: 100%|██████████| 1140/1140 [00:00<00:00, 1194.47it/s]
+Running loglikelihood requests:   0%|          | 0/1140 [00:00<?, ?it/s][W1118 15:02:52.879907681 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 14455668736 bytes (free: 1810628608, total: 25250627584).
+[W1118 15:02:54.196545082 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 14455668736 bytes (free: 7110131712, total: 25250627584).
+Running loglikelihood requests:   0%|          | 0/1140 [00:01<?, ?it/s]
+ERRO Qwen2.5-1.5B-Instruct q4_k_m mmlu: teste de 5 exemplos reprovou, prova pulada: erro no teste: line 1224, in loglikelihood
+    return super().loglikelihood(requests, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/api/model.py", line 471, in loglikelihood
+    return self._loglikelihood_tokens(new_reqs, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1503, in _loglikelihood_tokens
+    multi_logits = F.log_softmax(
+        self._model_call(batched_inps, **call_kwargs),
+        dim=-1,
+        dtype=self.softmax_dtype,
+    )  # [batch, padding_length (inp or cont), vocab]
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/torch/nn/functional.py", line 2321, in log_softmax
+    ret = input.log_softmax(dim)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 13.46 GiB. GPU 0 has a total capacity of 23.52 GiB of which 6.62 GiB is free. Including non-PyTorch memory, this process has 16.85 GiB memory in use. Of the allocated memory 16.35 GiB is allocated by PyTorch, and 49.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+pula Qwen2.5-1.5B-Instruct q4_k_m mmlu: teste de 5 exemplos reprovou (ver erros.log)
+a medição não gerou resultado (nenhuma prova terminou): veja /timevoz/QA-SpeechRAG/RESIDENCIA-IA/resultados/Qwen2.5-1.5B-Instruct/2026-11-18_verificacao_q4_k_m_kv8/erros.log

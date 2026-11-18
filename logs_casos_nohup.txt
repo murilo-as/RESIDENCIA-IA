@@ -1,0 +1,13 @@
+nohup: ignorando entrada
+=== c13: qua 18 nov 2026 14:53:52 -03 ===
+c13 terminou com código 1 em qua 18 nov 2026 15:02:55 -03
+=== c16: qua 18 nov 2026 15:02:55 -03 ===
+c16 terminou com código 0 em qua 18 nov 2026 15:18:28 -03
+=== c12: qua 18 nov 2026 15:18:28 -03 ===
+c12 terminou com código 1 em qua 18 nov 2026 15:19:12 -03
+=== c15: qua 18 nov 2026 15:19:12 -03 ===
+c15 terminou com código 0 em qua 18 nov 2026 15:27:45 -03
+=== c3: qua 18 nov 2026 15:27:45 -03 ===
+c3 terminou com código 0 em qua 18 nov 2026 16:26:57 -03
+=== c14: qua 18 nov 2026 16:26:57 -03 ===
+c14 terminou com código 0 em qua 18 nov 2026 17:06:40 -03

@@ -1,0 +1,142 @@
+etapa 1: mesmo texto ja extraido em saidas/c12/pedido.json, reaproveitando (--reextrair chama o LLM de novo)
+
+--- resumo ---
+pedido      : tarefa=QA dominio=saúde modelo=None
+qualidade   : qa x saude -> MedQA, PubMedQA [direta]
+memoria     : orcamento=12.0 GB (pedido), ctx=4096
+latencia    : banda=None GB/s (nao informada; eficiência = 0.45), meta=None tok/s
+pareto      : 7 na fronteira, 102 dominadas, 83 fora
+recomendacao: Qwen/Qwen3.5-4B|modo_raciocinio:desligado+quantizacao_kv:8+quantizacao_pesos:8|ctx=4096  nota 74.1 ± 1.9 (tag C), 4.03 GiB
+tecnica     : quantizacao_kv=8 (movimento Shrink)
+tecnica     : quantizacao_pesos=8 (movimento Shrink)
+sugeridas   : Improve: data_augmentation (custo leve, recursos talvez), decoding_recuperacao (custo leve, recursos talvez), peft_lora (custo leve, recursos talvez), destilacao (custo alto, recursos talvez)
+sugeridas   : Grow: modo_raciocinio (custo nenhum, recursos ok)
+aviso       : 69 configurações ficaram fora da análise: raciocínio ligado sem medida (nem do modelo nem de irmão, na mesma classe de prova): sem estimativa
+aviso       : 14 configurações ficaram fora da análise: KV 4 bits sem medida e kv_heads < 8: risco de colapso (Qwen2.5 de 2 e 4 cabeças colapsou)
+aviso       : nota estimada 74.1 ± 1.9 (tag C): conferir medindo a configuração (etapa 8)
+candidatura : 30 modelos, 16 com configuracao, 192 configuracoes
+estimativa  : 109/192 com nota (medida ou estimada); meta de tok/s: {'sim': 0, 'talvez': 0, 'nao': 0, 'sem meta': 192, 'desconhecido': 0}
+
+gravado em /timevoz/QA-SpeechRAG/RESIDENCIA-IA/saidas/c12/
+
+>>> c12: Qwen/Qwen3.5-4B, pesos q8_0, KV 8, raciocínio desligado; provas: MedQA, PubMedQA
+
+##### Qwen3.5-4B q8_0 medqa (2026-11-18T18:18:28Z)
+[transformers] Dequantizing the whole model, because `kernels` is not installed, or not in [0.18.2, 0.19.0) -- install it with `pip install 'kernels>=0.18.2,<0.19.0'`. It will need several times the memory the file does, and load more slowly.
+Loading weights:   0%|          | 0/330 [00:00<?, ?it/s]Loading weights:   5%|▍         | 16/330 [00:00<00:02, 156.03it/s]Loading weights:  60%|██████    | 198/330 [00:00<00:00, 1112.64it/s]Loading weights:  94%|█████████▍| 310/330 [00:00<00:00, 1066.57it/s]Loading weights: 100%|██████████| 330/330 [00:00<00:00, 723.07it/s] 
+[transformers] [1mQwen3_5ForCausalLM LOAD REPORT[0m from: /timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf
+Key                                                  | Status     | 
+-----------------------------------------------------+------------+-
+model.layers.{0...30}.ssm_beta_alpha.weight          | UNEXPECTED | 
+model.layers.{0...30}.attn_qkv_gate.weight           | UNEXPECTED | 
+model.layers.{0...30}.linear_attn.in_proj_qkv.weight | MISSING    | 
+model.layers.{0...30}.linear_attn.in_proj_z.weight   | MISSING    | 
+model.layers.{0...30}.linear_attn.in_proj_a.weight   | MISSING    | 
+model.layers.{0...30}.linear_attn.in_proj_b.weight   | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+TaskManager criado em 2.4 s
+Generating train split:   0%|          | 0/10178 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 10178/10178 [00:00<00:00, 386293.00 examples/s]
+Generating validation split:   0%|          | 0/1272 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 1272/1272 [00:00<00:00, 391255.11 examples/s]
+Generating test split:   0%|          | 0/1273 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1273/1273 [00:00<00:00, 325431.16 examples/s]
+tarefa medqa_4options montada em 8.2 s
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 54189.97it/s]
+Tokenizing inputs:   0%|          | 0/20 [00:00<?, ?it/s]Tokenizing inputs: 100%|██████████| 20/20 [00:00<00:00, 2289.03it/s]
+Running loglikelihood requests:   0%|          | 0/20 [00:00<?, ?it/s][transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Running loglikelihood requests:   5%|▌         | 1/20 [00:00<00:13,  1.45it/s]Running loglikelihood requests: 100%|██████████| 20/20 [00:00<00:00, 28.95it/s]
+teste de 5 exemplos Qwen3.5-4B q8_0 medqa: valor=0.0 n=5
+  0%|          | 0/20 [00:00<?, ?it/s]100%|██████████| 20/20 [00:00<00:00, 144382.24it/s]
+Tokenizing inputs:   0%|          | 0/80 [00:00<?, ?it/s]Tokenizing inputs: 100%|██████████| 80/80 [00:00<00:00, 3121.60it/s]
+Running loglikelihood requests:   0%|          | 0/80 [00:00<?, ?it/s]Running loglikelihood requests:   1%|▏         | 1/80 [00:00<01:01,  1.29it/s]Running loglikelihood requests:  81%|████████▏ | 65/80 [00:00<00:00, 89.70it/s]Running loglikelihood requests: 100%|██████████| 80/80 [00:00<00:00, 83.76it/s]
+teste de 20 exemplos Qwen3.5-4B q8_0 medqa: valor=0.2 n=20
+  0%|          | 0/1273 [00:00<?, ?it/s]100%|██████████| 1273/1273 [00:00<00:00, 184115.48it/s]
+Tokenizing inputs:   0%|          | 0/5092 [00:00<?, ?it/s]Tokenizing inputs:   7%|▋         | 337/5092 [00:00<00:01, 3360.26it/s]Tokenizing inputs:  13%|█▎        | 674/5092 [00:00<00:01, 3304.01it/s]Tokenizing inputs:  20%|██        | 1036/5092 [00:00<00:01, 3445.68it/s]Tokenizing inputs:  27%|██▋       | 1381/5092 [00:00<00:01, 3425.15it/s]Tokenizing inputs:  34%|███▍      | 1724/5092 [00:00<00:01, 3361.89it/s]Tokenizing inputs:  41%|████      | 2065/5092 [00:00<00:00, 3377.83it/s]Tokenizing inputs:  47%|████▋     | 2403/5092 [00:00<00:00, 3288.88it/s]Tokenizing inputs:  54%|█████▎    | 2736/5092 [00:00<00:00, 3298.91it/s]Tokenizing inputs:  60%|██████    | 3070/5092 [00:00<00:00, 3309.84it/s]Tokenizing inputs:  67%|██████▋   | 3414/5092 [00:01<00:00, 3347.66it/s]Tokenizing inputs:  74%|███████▎  | 3749/5092 [00:01<00:00, 3255.59it/s]Tokenizing inputs:  80%|████████  | 4076/5092 [00:01<00:00, 3251.10it/s]Tokenizing inputs:  87%|████████▋ | 4409/5092 [00:01<00:00, 3271.77it/s]Tokenizing inputs:  93%|█████████▎| 4737/5092 [00:01<00:00, 3172.54it/s]Tokenizing inputs:  99%|█████████▉| 5056/5092 [00:01<00:00, 2089.64it/s]Tokenizing inputs: 100%|██████████| 5092/5092 [00:01<00:00, 2938.74it/s]
+Running loglikelihood requests:   0%|          | 0/5092 [00:00<?, ?it/s][W1118 15:18:51.589264789 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 7549747200 bytes (free: 170655744, total: 25250627584).
+Running loglikelihood requests:   0%|          | 1/5092 [00:02<2:51:20,  2.02s/it][W1118 15:18:52.786566121 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 3544186880 bytes (free: 1026293760, total: 25250627584).
+[W1118 15:18:52.005136787 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 3544186880 bytes (free: 1064042496, total: 25250627584).
+ERRO Qwen3.5-4B q8_0 medqa: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 609, in main
+    if bench in LOGLIK: rodar_loglik(m, s, bench, limite)
+                        ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 356, in rodar_loglik
+    res = m.avaliar(task, model=lm, num_fewshot=cfg.get("fewshot"), log_samples=not teste, evaluation_tracker=tracker, **sel)
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 165, in avaliar
+    return simple_evaluate(tasks=[nome], task_manager=Pronto(self._carregado[nome]), **SEMENTES, **kw)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 363, in simple_evaluate
+    results = evaluate(
+        lm=lm,
+    ...<12 lines>...
+        confirm_run_unsafe_code=confirm_run_unsafe_code,
+    )
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 600, in evaluate
+    resps = getattr(lm, reqtype)(cloned_reqs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1224, in loglikelihood
+    return super().loglikelihood(requests, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/api/model.py", line 471, in loglikelihood
+    return self._loglikelihood_tokens(new_reqs, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1503, in _loglikelihood_tokens
+    mul
+Running loglikelihood requests:   1%|▏         | 64/5092 [00:02<03:45, 22.27it/s] 
+##### Qwen3.5-4B q8_0 pubmedqa (2026-11-18T18:18:52Z)
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 112865.40 examples/s]
+tarefa pubmedqa_qiaojin montada em 12.2 s
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 33554.43it/s]
+Tokenizing inputs:   0%|          | 0/15 [00:00<?, ?it/s]Tokenizing inputs: 100%|██████████| 15/15 [00:00<00:00, 1502.44it/s]
+Running loglikelihood requests:   0%|          | 0/15 [00:00<?, ?it/s]Running loglikelihood requests:   7%|▋         | 1/15 [00:00<00:03,  4.56it/s]Running loglikelihood requests: 100%|██████████| 15/15 [00:00<00:00, 68.11it/s]
+teste de 5 exemplos Qwen3.5-4B q8_0 pubmedqa: valor=0.4 n=5
+  0%|          | 0/1000 [00:00<?, ?it/s]100%|██████████| 1000/1000 [00:00<00:00, 180338.12it/s]
+Tokenizing inputs:   0%|          | 0/3000 [00:00<?, ?it/s]Tokenizing inputs:   6%|▌         | 183/3000 [00:00<00:01, 1820.12it/s]Tokenizing inputs:  12%|█▏        | 366/3000 [00:00<00:01, 1801.39it/s]Tokenizing inputs:  18%|█▊        | 547/3000 [00:00<00:01, 1802.19it/s]Tokenizing inputs:  24%|██▍       | 728/3000 [00:00<00:01, 1797.54it/s]Tokenizing inputs:  30%|███       | 908/3000 [00:00<00:01, 1736.97it/s]Tokenizing inputs:  36%|███▌      | 1085/3000 [00:00<00:01, 1744.80it/s]Tokenizing inputs:  42%|████▏     | 1260/3000 [00:00<00:01, 1736.74it/s]Tokenizing inputs:  48%|████▊     | 1439/3000 [00:00<00:00, 1750.95it/s]Tokenizing inputs:  54%|█████▍    | 1619/3000 [00:00<00:00, 1763.91it/s]Tokenizing inputs:  60%|██████    | 1803/3000 [00:01<00:00, 1786.23it/s]Tokenizing inputs:  66%|██████▋   | 1990/3000 [00:01<00:00, 1811.16it/s]Tokenizing inputs:  72%|███████▏  | 2172/3000 [00:01<00:00, 1796.80it/s]Tokenizing inputs:  79%|███████▊  | 2356/3000 [00:01<00:00, 1808.73it/s]Tokenizing inputs:  85%|████████▍ | 2537/3000 [00:01<00:00, 1797.90it/s]Tokenizing inputs:  91%|█████████ | 2717/3000 [00:01<00:00, 1777.86it/s]Tokenizing inputs:  96%|█████████▋| 2895/3000 [00:01<00:00, 1762.66it/s]Tokenizing inputs: 100%|██████████| 3000/3000 [00:01<00:00, 1781.61it/s]
+Running loglikelihood requests:   0%|          | 0/3000 [00:00<?, ?it/s]Running loglikelihood requests:   0%|          | 1/3000 [00:01<1:23:08,  1.66s/it][W1118 15:19:11.634320420 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 4626317312 bytes (free: 1034682368, total: 25250627584).
+[W1118 15:19:11.910225645 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 4626317312 bytes (free: 1064042496, total: 25250627584).
+ERRO Qwen3.5-4B q8_0 pubmedqa: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 609, in main
+    if bench in LOGLIK: rodar_loglik(m, s, bench, limite)
+                        ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 356, in rodar_loglik
+    res = m.avaliar(task, model=lm, num_fewshot=cfg.get("fewshot"), log_samples=not teste, evaluation_tracker=tracker, **sel)
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 165, in avaliar
+    return simple_evaluate(tasks=[nome], task_manager=Pronto(self._carregado[nome]), **SEMENTES, **kw)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 363, in simple_evaluate
+    results = evaluate(
+        lm=lm,
+    ...<12 lines>...
+        confirm_run_unsafe_code=confirm_run_unsafe_code,
+    )
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 600, in evaluate
+    resps = getattr(lm, reqtype)(cloned_reqs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1224, in loglikelihood
+    return super().loglikelihood(requests, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/api/model.py", line 471, in loglikelihood
+    return self._loglikelihood_tokens(new_reqs, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1503, in _loglikelihood_tokens
+    mul
+Running loglikelihood requests:   2%|▏         | 48/3000 [00:02<02:52, 17.07it/s] 
+Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa7_executar_verificar/verificar.py", line 368, in <module>
+    main()
+    ~~~~^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa7_executar_verificar/verificar.py", line 321, in main
+    if not a.caso.endswith(".json") or "gguf_repo" not in json.load(open(a.caso, encoding="utf-8")): return rodar_generico(a)       # pedido da pipeline (texto): modo generico, sem codigo
+                                                                                                            ~~~~~~~~~~~~~~^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa7_executar_verificar/verificar.py", line 243, in rodar_generico
+    subprocess.run(cmd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/home/murilo/miniconda3/bin/python', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py', '--modelo', 'Qwen3.5-4B', '--niveis', 'q8_0', '--benchmarks', 'medqa', 'pubmedqa', '--kv', '8', '--saida', 'kv.csv', '--dir', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/resultados/Qwen3.5-4B/2026-11-17_verificacao_q8_0_kv8', '--batch-hf', '16', '--paralelo', '8']' returned non-zero exit status 1.

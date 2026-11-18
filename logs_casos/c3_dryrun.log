@@ -1,0 +1,22 @@
+etapa 1: mesmo texto ja extraido em saidas/c3/pedido.json, reaproveitando (--reextrair chama o LLM de novo)
+
+--- resumo ---
+pedido      : tarefa=QA dominio=matemática modelo=None
+qualidade   : qa x matematica -> GSM8K, MATH-500 [direta]
+memoria     : orcamento=16.0 GB (pedido), ctx=4096
+latencia    : banda=None GB/s (nao informada; eficiência = 0.45), meta=None tok/s
+aviso       : tarefa 'resolver problemas de matemática' foi encaixada em QA: a nota mede GSM8K, MATH-500, não a tarefa em si
+pareto      : 13 na fronteira, 149 dominadas, 98 fora
+recomendacao: Qwen/Qwen3.5-27B|modo_raciocinio:desligado+quantizacao_kv:8+quantizacao_pesos:4|ctx=4096  nota 93.0 ± 1.7 (tag C), 12.79 GiB
+tecnica     : quantizacao_kv=8 (movimento Shrink)
+tecnica     : quantizacao_pesos=4 (movimento Shrink)
+sugeridas   : Shrink: kv_cache_evicao (custo nenhum, recursos ok), quantizacao_kv (custo nenhum, recursos ok), quantizacao_pesos (custo nenhum, recursos ok), decomposicao_low_rank (custo varia, recursos talvez), early_exit (custo varia, recursos talvez), pruning (custo varia, recursos talvez), token_pruning (custo varia, recursos talvez), weight_sharing (custo varia, recursos talvez)
+sugeridas   : Speed-up: decoding_especulativo (custo nenhum, recursos ok), decoding_paralelo (custo alto, recursos talvez)
+aviso       : 78 configurações ficaram fora da análise: raciocínio ligado sem medida (nem do modelo nem de irmão, na mesma classe de prova): sem estimativa
+aviso       : 20 configurações ficaram fora da análise: KV 4 bits sem medida e kv_heads < 8: risco de colapso (Qwen2.5 de 2 e 4 cabeças colapsou)
+aviso       : nota estimada 93.0 ± 1.7 (tag C): conferir medindo a configuração (etapa 8)
+candidatura : 33 modelos, 27 com configuracao, 264 configuracoes
+estimativa  : 166/264 com nota (medida ou estimada); meta de tok/s: {'sim': 0, 'talvez': 0, 'nao': 0, 'sem meta': 264, 'desconhecido': 0}
+
+gravado em /timevoz/QA-SpeechRAG/RESIDENCIA-IA/saidas/c3/
+[dry-run] mediria Qwen3.5-27B, pesos q4_k_m, KV 8, raciocinio desligado: GSM8K, MATH-500

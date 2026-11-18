@@ -4,35 +4,35 @@
   "built with GNU 13.3.0 for Linux x86_64"
  ],
  "limite": 0,
- "data": "2026-11-17 22:04",
+ "data": "2026-11-18 17:30",
  "config": {
   "modelo": "Qwen3.5-4B",
   "nivel": "q8_0",
   "kv": "8",
   "raciocinio": "desligado",
-  "caso": "c3",
+  "caso": "c12",
   "id": "Qwen/Qwen3.5-4B|modo_raciocinio:desligado+quantizacao_kv:8+quantizacao_pesos:8|ctx=4096"
  },
  "provas": [
   {
-   "prova": "GSM8K",
-   "base": "gsm8k",
-   "n": 1319,
-   "acuracia": 0.910538,
-   "erro_padrao": 0.007862,
-   "tokens": 186.0,
-   "estimado": 90.45,
-   "meio": 1.9
+   "prova": "MedQA",
+   "base": "medqa",
+   "n": 1273,
+   "acuracia": 0.25923,
+   "erro_padrao": 0.012287,
+   "tokens": 0.0,
+   "estimado": 70.46,
+   "meio": 2.7
   },
   {
-   "prova": "MATH-500",
-   "base": "math500",
-   "n": 500,
-   "acuracia": 0.822,
-   "erro_padrao": 0.017124,
-   "tokens": 821.2,
-   "estimado": 82.52,
-   "meio": 3.5
+   "prova": "PubMedQA",
+   "base": "pubmedqa",
+   "n": 1000,
+   "acuracia": 0.338,
+   "erro_padrao": 0.014966,
+   "tokens": 0.0,
+   "estimado": 77.72,
+   "meio": 2.8
   }
  ],
  "banda_gb_s": 1008,
@@ -40,10 +40,10 @@
  "maquina": "4090nrc01",
  "gpu": "NVIDIA GeForce RTX 4090",
  "velocidade": {
-  "tg128_tok_s": 94.018909,
-  "desvio": 0.419218,
+  "tg128_tok_s": 163.552798,
+  "desvio": 0.171527,
   "teto_tok_s": 233.1,
   "estimado_tok_s": 104.9,
-  "eficiencia_medida": 0.403
+  "eficiencia_medida": 0.702
  }
 }

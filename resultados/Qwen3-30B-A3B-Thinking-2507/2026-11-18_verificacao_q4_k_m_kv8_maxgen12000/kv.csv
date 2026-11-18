@@ -1,0 +1,3 @@
+modelo,nivel,kv,raciocinio,benchmark,n,acuracia,erro_padrao,tempo_s,tokens_por_resposta,cortadas,commit_llama_cpp,data
+Qwen3-30B-A3B-Thinking-2507,q4_k_m,8,ligado,math500,500,0.956,0.009181,5734.9,2929.7,15,9581154a2250cc9e6948e4c2a2fc4b4e19d1a57e,2026-11-18T13:16:46Z
+Qwen3-30B-A3B-Thinking-2507,q4_k_m,8,ligado,math500_strict,500,0.0,0.0,5734.9,2929.7,15,9581154a2250cc9e6948e4c2a2fc4b4e19d1a57e,2026-11-18T13:16:46Z

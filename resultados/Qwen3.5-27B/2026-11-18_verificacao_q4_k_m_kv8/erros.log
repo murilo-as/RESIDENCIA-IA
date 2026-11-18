@@ -1,0 +1,105 @@
+2026-11-18T17:14:27Z Qwen3.5-27B q4_k_m mmlu_letra: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 611, in main
+    elif bench in LETRA: rodar_letra(m, s, bench, limite)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 462, in rodar_letra
+    itens, tempo = letra.avaliar(bench, limite)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 78, in avaliar
+    itens = itens_mmlu(limite) if bench == "mmlu_letra" else itens_oab(limite)
+            ~~~~~~~~~~^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 30, in itens_mmlu
+    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+                                     ~~~~~~~~~~^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/cais___mmlu'
+
+2026-11-18T17:45:04Z Qwen3.5-27B q4_k_m mmlu_letra: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 611, in main
+    elif bench in LETRA: rodar_letra(m, s, bench, limite)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 462, in rodar_letra
+    itens, tempo = letra.avaliar(bench, limite)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 78, in avaliar
+    itens = itens_mmlu(limite) if bench == "mmlu_letra" else itens_oab(limite)
+            ~~~~~~~~~~^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 30, in itens_mmlu
+    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+                                     ~~~~~~~~~~^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/cais___mmlu'
+
+2026-11-18T17:45:11Z Qwen3.5-27B q4_k_m mmlu_letra: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 611, in main
+    elif bench in LETRA: rodar_letra(m, s, bench, limite)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 462, in rodar_letra
+    itens, tempo = letra.avaliar(bench, limite)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 78, in avaliar
+    itens = itens_mmlu(limite) if bench == "mmlu_letra" else itens_oab(limite)
+            ~~~~~~~~~~^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 30, in itens_mmlu
+    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+                                     ~~~~~~~~~~^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/cais___mmlu'
+
+2026-11-18T17:45:18Z Qwen3.5-27B q4_k_m mmlu_letra: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 611, in main
+    elif bench in LETRA: rodar_letra(m, s, bench, limite)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 462, in rodar_letra
+    itens, tempo = letra.avaliar(bench, limite)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 78, in avaliar
+    itens = itens_mmlu(limite) if bench == "mmlu_letra" else itens_oab(limite)
+            ~~~~~~~~~~^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 30, in itens_mmlu
+    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+                                     ~~~~~~~~~~^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/cais___mmlu'
+
+2026-11-18T17:45:26Z Qwen3.5-27B q4_k_m mmlu_letra: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 611, in main
+    elif bench in LETRA: rodar_letra(m, s, bench, limite)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 462, in rodar_letra
+    itens, tempo = letra.avaliar(bench, limite)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 78, in avaliar
+    itens = itens_mmlu(limite) if bench == "mmlu_letra" else itens_oab(limite)
+            ~~~~~~~~~~^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 30, in itens_mmlu
+    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+                                     ~~~~~~~~~~^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/cais___mmlu'
+
+2026-11-18T17:45:34Z Qwen3.5-27B q4_k_m mmlu_letra: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 611, in main
+    elif bench in LETRA: rodar_letra(m, s, bench, limite)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 462, in rodar_letra
+    itens, tempo = letra.avaliar(bench, limite)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 78, in avaliar
+    itens = itens_mmlu(limite) if bench == "mmlu_letra" else itens_oab(limite)
+            ~~~~~~~~~~^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 30, in itens_mmlu
+    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+                                     ~~~~~~~~~~^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/cais___mmlu'
+
+2026-11-18T17:45:42Z Qwen3.5-27B q4_k_m mmlu_letra: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 611, in main
+    elif bench in LETRA: rodar_letra(m, s, bench, limite)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 462, in rodar_letra
+    itens, tempo = letra.avaliar(bench, limite)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 78, in avaliar
+    itens = itens_mmlu(limite) if bench == "mmlu_letra" else itens_oab(limite)
+            ~~~~~~~~~~^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/letra.py", line 30, in itens_mmlu
+    for assunto in sorted(d for d in os.listdir(cache) if os.path.isdir(os.path.join(cache, d))):
+                                     ~~~~~~~~~~^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/cais___mmlu'
+

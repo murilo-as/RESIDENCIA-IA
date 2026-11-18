@@ -1,0 +1,22 @@
+etapa 1: mesmo texto ja extraido em saidas/c16/pedido.json, reaproveitando (--reextrair chama o LLM de novo)
+
+--- resumo ---
+pedido      : tarefa=QA dominio=matemática modelo=Qwen/Qwen3-8B, Qwen/Qwen3-8B-Base
+qualidade   : qa x matematica -> GSM8K, MATH-500 [direta]
+memoria     : orcamento=16.0 GB (pedido), ctx=4096
+latencia    : banda=None GB/s (nao informada; eficiência = 0.45), meta=None tok/s
+aviso       : recursos.gpu: valor False descartado (evidencia None nao esta no texto)
+aviso       : modelo: 'Qwen3-8B' corresponde a 2 variantes (Qwen/Qwen3-8B, Qwen/Qwen3-8B-Base); todas entram
+aviso       : tarefa 'resolver problemas de matemática' foi encaixada em QA: a nota mede GSM8K, MATH-500, não a tarefa em si
+pareto      : 2 na fronteira, 16 dominadas, 0 fora
+recomendacao: Qwen/Qwen3-8B|modo_raciocinio:desligado+quantizacao_kv:4+quantizacao_pesos:4|ctx=4096  nota 83.9 ± 2.9 (tag C), 3.95 GiB
+tecnica     : quantizacao_kv=4 (movimento Shrink)
+tecnica     : quantizacao_pesos=4 (movimento Shrink)
+sugeridas   : Shrink: kv_cache_evicao (custo nenhum, recursos ok), quantizacao_kv (custo nenhum, recursos ok), quantizacao_pesos (custo nenhum, recursos ok), decomposicao_low_rank (custo varia, recursos talvez), early_exit (custo varia, recursos talvez), pruning (custo varia, recursos talvez), token_pruning (custo varia, recursos talvez), weight_sharing (custo varia, recursos talvez)
+sugeridas   : Speed-up: decoding_especulativo (custo nenhum, recursos ok), decoding_paralelo (custo alto, recursos talvez)
+aviso       : nota estimada 83.9 ± 2.9 (tag C): conferir medindo a configuração (etapa 8)
+candidatura : 1 modelos, 1 com configuracao, 18 configuracoes
+estimativa  : 18/18 com nota (medida ou estimada); meta de tok/s: {'sim': 0, 'talvez': 0, 'nao': 0, 'sem meta': 18, 'desconhecido': 0}
+
+gravado em /timevoz/QA-SpeechRAG/RESIDENCIA-IA/saidas/c16/
+[dry-run] mediria Qwen3-8B, pesos q4_k_m, KV 4, raciocinio desligado: GSM8K, MATH-500

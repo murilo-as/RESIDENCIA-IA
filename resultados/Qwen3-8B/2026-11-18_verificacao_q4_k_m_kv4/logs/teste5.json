@@ -1,0 +1,18 @@
+{
+ "Qwen3-8B|gsm8k": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-18T18:03:55Z"
+ },
+ "Qwen3-8B|math500": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-18T18:10:54Z"
+ }
+}

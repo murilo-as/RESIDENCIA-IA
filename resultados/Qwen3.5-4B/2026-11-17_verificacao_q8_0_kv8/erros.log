@@ -1,0 +1,100 @@
+2026-11-18T17:50:04Z Qwen3.5-4B q8_0 medqa: teste de 5 exemplos reprovou, prova pulada: erro no teste: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 537, in testar
+    if bench in LOGLIK: valor, n = rodar_loglik(m, s, bench, 0, teste=k)
+                                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 347, in rodar_loglik
+    lm = s.hf(cfg.get("dtype", "float16"))
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 280, in hf
+    from lm_eval.models.huggingface import HFLM
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 13, in <module>
+    from accelerate import (
+    ...<3 lines>...
+    )
+ModuleNotFoundError: No module named 'accelerate'
+
+2026-11-18T17:50:04Z Qwen3.5-4B q8_0 pubmedqa: teste de 5 exemplos reprovou, prova pulada: erro no teste: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 537, in testar
+    if bench in LOGLIK: valor, n = rodar_loglik(m, s, bench, 0, teste=k)
+                                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 347, in rodar_loglik
+    lm = s.hf(cfg.get("dtype", "float16"))
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 280, in hf
+    from lm_eval.models.huggingface import HFLM
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 13, in <module>
+    from accelerate import (
+    ...<3 lines>...
+    )
+ModuleNotFoundError: No module named 'accelerate'
+
+2026-11-18T18:18:52Z Qwen3.5-4B q8_0 medqa: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 609, in main
+    if bench in LOGLIK: rodar_loglik(m, s, bench, limite)
+                        ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 356, in rodar_loglik
+    res = m.avaliar(task, model=lm, num_fewshot=cfg.get("fewshot"), log_samples=not teste, evaluation_tracker=tracker, **sel)
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 165, in avaliar
+    return simple_evaluate(tasks=[nome], task_manager=Pronto(self._carregado[nome]), **SEMENTES, **kw)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 363, in simple_evaluate
+    results = evaluate(
+        lm=lm,
+    ...<12 lines>...
+        confirm_run_unsafe_code=confirm_run_unsafe_code,
+    )
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 600, in evaluate
+    resps = getattr(lm, reqtype)(cloned_reqs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1224, in loglikelihood
+    return super().loglikelihood(requests, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/api/model.py", line 471, in loglikelihood
+    return self._loglikelihood_tokens(new_reqs, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1503, in _loglikelihood_tokens
+    multi_logits = F.log_softmax(
+        self._model_call(batched_inps, **call_kwargs),
+        dim=-1,
+        dtype=self.softmax_dtype,
+    )  # [batch, padding_length (inp or cont), vocab]
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/torch/nn/functional.py", line 2321, in log_softmax
+    ret = input.log_softmax(dim)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.30 GiB. GPU 0 has a total capacity of 23.52 GiB of which 1014.75 MiB is free. Including non-PyTorch memory, this process has 22.48 GiB memory in use. Of the allocated memory 18.18 GiB is allocated by PyTorch, and 3.85 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+2026-11-18T18:19:11Z Qwen3.5-4B q8_0 pubmedqa: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 609, in main
+    if bench in LOGLIK: rodar_loglik(m, s, bench, limite)
+                        ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 356, in rodar_loglik
+    res = m.avaliar(task, model=lm, num_fewshot=cfg.get("fewshot"), log_samples=not teste, evaluation_tracker=tracker, **sel)
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 165, in avaliar
+    return simple_evaluate(tasks=[nome], task_manager=Pronto(self._carregado[nome]), **SEMENTES, **kw)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 363, in simple_evaluate
+    results = evaluate(
+        lm=lm,
+    ...<12 lines>...
+        confirm_run_unsafe_code=confirm_run_unsafe_code,
+    )
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/utils.py", line 580, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/evaluator.py", line 600, in evaluate
+    resps = getattr(lm, reqtype)(cloned_reqs)
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1224, in loglikelihood
+    return super().loglikelihood(requests, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/api/model.py", line 471, in loglikelihood
+    return self._loglikelihood_tokens(new_reqs, disable_tqdm=disable_tqdm)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/models/huggingface.py", line 1503, in _loglikelihood_tokens
+    multi_logits = F.log_softmax(
+        self._model_call(batched_inps, **call_kwargs),
+        dim=-1,
+        dtype=self.softmax_dtype,
+    )  # [batch, padding_length (inp or cont), vocab]
+  File "/home/murilo/miniconda3/lib/python3.13/site-packages/torch/nn/functional.py", line 2321, in log_softmax
+    ret = input.log_softmax(dim)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.31 GiB. GPU 0 has a total capacity of 23.52 GiB of which 1014.75 MiB is free. Including non-PyTorch memory, this process has 22.48 GiB memory in use. Of the allocated memory 18.32 GiB is allocated by PyTorch, and 3.71 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+

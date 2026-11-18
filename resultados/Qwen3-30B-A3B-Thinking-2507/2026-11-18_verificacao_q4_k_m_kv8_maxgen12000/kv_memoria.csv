@@ -1,0 +1,4 @@
+modelo,nivel,kv,momento,ctx_total,kv_formula_mib,gguf_mib,mem_usada_mib,mem_antes_do_servidor_mib,rss_servidor_mib,pico_rss_servidor_mib,nvidia_smi,data
+Qwen3-30B-A3B-Thinking-2507,q4_k_m,8,pronto,65536,3264.0,17697,11063,10627,634,18043,23229 MiB,2026-11-18T06:02:02Z
+Qwen3-30B-A3B-Thinking-2507,q4_k_m,8,pronto,65536,3264.0,17697,14190,13825,634,18043,23229 MiB,2026-11-18T11:41:04Z
+Qwen3-30B-A3B-Thinking-2507,q4_k_m,8,fim,65536,3264.0,17697,22377,13825,8998,18043,23271 MiB,2026-11-18T13:16:46Z

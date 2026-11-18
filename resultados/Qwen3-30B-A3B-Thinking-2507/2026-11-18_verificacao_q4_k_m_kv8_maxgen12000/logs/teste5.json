@@ -1,0 +1,10 @@
+{
+ "Qwen3-30B-A3B-Thinking-2507|math500|raciocinio": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-18T06:03:04Z"
+ }
+}

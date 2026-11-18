@@ -1,0 +1,4250 @@
+{
+  "results": {
+    "mmlu_abstract_algebra": {
+      "name": "mmlu_abstract_algebra",
+      "alias": "abstract_algebra",
+      "sample_len": 25,
+      "acc,none": 0.4,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_anatomy": {
+      "name": "mmlu_anatomy",
+      "alias": "anatomy",
+      "sample_len": 25,
+      "acc,none": 0.4,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_astronomy": {
+      "name": "mmlu_astronomy",
+      "alias": "astronomy",
+      "sample_len": 25,
+      "acc,none": 0.88,
+      "acc_stderr,none": 0.066332495807108
+    },
+    "mmlu_college_biology": {
+      "name": "mmlu_college_biology",
+      "alias": "college_biology",
+      "sample_len": 25,
+      "acc,none": 0.64,
+      "acc_stderr,none": 0.09797958971132711
+    },
+    "mmlu_college_chemistry": {
+      "name": "mmlu_college_chemistry",
+      "alias": "college_chemistry",
+      "sample_len": 25,
+      "acc,none": 0.44,
+      "acc_stderr,none": 0.10132456102380442
+    },
+    "mmlu_college_computer_science": {
+      "name": "mmlu_college_computer_science",
+      "alias": "college_computer_science",
+      "sample_len": 25,
+      "acc,none": 0.52,
+      "acc_stderr,none": 0.10198039027185571
+    },
+    "mmlu_college_mathematics": {
+      "name": "mmlu_college_mathematics",
+      "alias": "college_mathematics",
+      "sample_len": 25,
+      "acc,none": 0.32,
+      "acc_stderr,none": 0.09521904571390466
+    },
+    "mmlu_college_physics": {
+      "name": "mmlu_college_physics",
+      "alias": "college_physics",
+      "sample_len": 25,
+      "acc,none": 0.48,
+      "acc_stderr,none": 0.10198039027185571
+    },
+    "mmlu_computer_security": {
+      "name": "mmlu_computer_security",
+      "alias": "computer_security",
+      "sample_len": 25,
+      "acc,none": 0.64,
+      "acc_stderr,none": 0.09797958971132711
+    },
+    "mmlu_conceptual_physics": {
+      "name": "mmlu_conceptual_physics",
+      "alias": "conceptual_physics",
+      "sample_len": 25,
+      "acc,none": 0.76,
+      "acc_stderr,none": 0.08717797887081347
+    },
+    "mmlu_electrical_engineering": {
+      "name": "mmlu_electrical_engineering",
+      "alias": "electrical_engineering",
+      "sample_len": 25,
+      "acc,none": 0.6,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_elementary_mathematics": {
+      "name": "mmlu_elementary_mathematics",
+      "alias": "elementary_mathematics",
+      "sample_len": 25,
+      "acc,none": 0.48,
+      "acc_stderr,none": 0.10198039027185571
+    },
+    "mmlu_high_school_biology": {
+      "name": "mmlu_high_school_biology",
+      "alias": "high_school_biology",
+      "sample_len": 25,
+      "acc,none": 0.76,
+      "acc_stderr,none": 0.08717797887081347
+    },
+    "mmlu_high_school_chemistry": {
+      "name": "mmlu_high_school_chemistry",
+      "alias": "high_school_chemistry",
+      "sample_len": 25,
+      "acc,none": 0.6,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_high_school_computer_science": {
+      "name": "mmlu_high_school_computer_science",
+      "alias": "high_school_computer_science",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_high_school_mathematics": {
+      "name": "mmlu_high_school_mathematics",
+      "alias": "high_school_mathematics",
+      "sample_len": 25,
+      "acc,none": 0.28,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_high_school_physics": {
+      "name": "mmlu_high_school_physics",
+      "alias": "high_school_physics",
+      "sample_len": 25,
+      "acc,none": 0.48,
+      "acc_stderr,none": 0.10198039027185571
+    },
+    "mmlu_high_school_statistics": {
+      "name": "mmlu_high_school_statistics",
+      "alias": "high_school_statistics",
+      "sample_len": 25,
+      "acc,none": 0.48,
+      "acc_stderr,none": 0.10198039027185571
+    },
+    "mmlu_machine_learning": {
+      "name": "mmlu_machine_learning",
+      "alias": "machine_learning",
+      "sample_len": 25,
+      "acc,none": 0.44,
+      "acc_stderr,none": 0.10132456102380442
+    },
+    "mmlu_business_ethics": {
+      "name": "mmlu_business_ethics",
+      "alias": "business_ethics",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_clinical_knowledge": {
+      "name": "mmlu_clinical_knowledge",
+      "alias": "clinical_knowledge",
+      "sample_len": 25,
+      "acc,none": 0.68,
+      "acc_stderr,none": 0.09521904571390467
+    },
+    "mmlu_college_medicine": {
+      "name": "mmlu_college_medicine",
+      "alias": "college_medicine",
+      "sample_len": 25,
+      "acc,none": 0.76,
+      "acc_stderr,none": 0.08717797887081347
+    },
+    "mmlu_global_facts": {
+      "name": "mmlu_global_facts",
+      "alias": "global_facts",
+      "sample_len": 25,
+      "acc,none": 0.2,
+      "acc_stderr,none": 0.08164965809277261
+    },
+    "mmlu_human_aging": {
+      "name": "mmlu_human_aging",
+      "alias": "human_aging",
+      "sample_len": 25,
+      "acc,none": 0.64,
+      "acc_stderr,none": 0.09797958971132711
+    },
+    "mmlu_management": {
+      "name": "mmlu_management",
+      "alias": "management",
+      "sample_len": 25,
+      "acc,none": 0.8,
+      "acc_stderr,none": 0.08164965809277261
+    },
+    "mmlu_marketing": {
+      "name": "mmlu_marketing",
+      "alias": "marketing",
+      "sample_len": 25,
+      "acc,none": 0.84,
+      "acc_stderr,none": 0.07483314773547882
+    },
+    "mmlu_medical_genetics": {
+      "name": "mmlu_medical_genetics",
+      "alias": "medical_genetics",
+      "sample_len": 25,
+      "acc,none": 0.88,
+      "acc_stderr,none": 0.066332495807108
+    },
+    "mmlu_miscellaneous": {
+      "name": "mmlu_miscellaneous",
+      "alias": "miscellaneous",
+      "sample_len": 25,
+      "acc,none": 0.64,
+      "acc_stderr,none": 0.09797958971132711
+    },
+    "mmlu_nutrition": {
+      "name": "mmlu_nutrition",
+      "alias": "nutrition",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_professional_accounting": {
+      "name": "mmlu_professional_accounting",
+      "alias": "professional_accounting",
+      "sample_len": 25,
+      "acc,none": 0.36,
+      "acc_stderr,none": 0.09797958971132711
+    },
+    "mmlu_professional_medicine": {
+      "name": "mmlu_professional_medicine",
+      "alias": "professional_medicine",
+      "sample_len": 25,
+      "acc,none": 0.64,
+      "acc_stderr,none": 0.09797958971132711
+    },
+    "mmlu_virology": {
+      "name": "mmlu_virology",
+      "alias": "virology",
+      "sample_len": 25,
+      "acc,none": 0.56,
+      "acc_stderr,none": 0.10132456102380442
+    },
+    "mmlu_econometrics": {
+      "name": "mmlu_econometrics",
+      "alias": "econometrics",
+      "sample_len": 25,
+      "acc,none": 0.28,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_high_school_geography": {
+      "name": "mmlu_high_school_geography",
+      "alias": "high_school_geography",
+      "sample_len": 25,
+      "acc,none": 0.68,
+      "acc_stderr,none": 0.09521904571390467
+    },
+    "mmlu_high_school_government_and_politics": {
+      "name": "mmlu_high_school_government_and_politics",
+      "alias": "high_school_government_and_politics",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_high_school_macroeconomics": {
+      "name": "mmlu_high_school_macroeconomics",
+      "alias": "high_school_macroeconomics",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_high_school_microeconomics": {
+      "name": "mmlu_high_school_microeconomics",
+      "alias": "high_school_microeconomics",
+      "sample_len": 25,
+      "acc,none": 0.76,
+      "acc_stderr,none": 0.08717797887081347
+    },
+    "mmlu_high_school_psychology": {
+      "name": "mmlu_high_school_psychology",
+      "alias": "high_school_psychology",
+      "sample_len": 25,
+      "acc,none": 0.76,
+      "acc_stderr,none": 0.08717797887081347
+    },
+    "mmlu_human_sexuality": {
+      "name": "mmlu_human_sexuality",
+      "alias": "human_sexuality",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_professional_psychology": {
+      "name": "mmlu_professional_psychology",
+      "alias": "professional_psychology",
+      "sample_len": 25,
+      "acc,none": 0.84,
+      "acc_stderr,none": 0.07483314773547882
+    },
+    "mmlu_public_relations": {
+      "name": "mmlu_public_relations",
+      "alias": "public_relations",
+      "sample_len": 25,
+      "acc,none": 0.52,
+      "acc_stderr,none": 0.10198039027185571
+    },
+    "mmlu_security_studies": {
+      "name": "mmlu_security_studies",
+      "alias": "security_studies",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_sociology": {
+      "name": "mmlu_sociology",
+      "alias": "sociology",
+      "sample_len": 25,
+      "acc,none": 0.6,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_us_foreign_policy": {
+      "name": "mmlu_us_foreign_policy",
+      "alias": "us_foreign_policy",
+      "sample_len": 25,
+      "acc,none": 0.8,
+      "acc_stderr,none": 0.08164965809277261
+    },
+    "mmlu_formal_logic": {
+      "name": "mmlu_formal_logic",
+      "alias": "formal_logic",
+      "sample_len": 25,
+      "acc,none": 0.4,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_high_school_european_history": {
+      "name": "mmlu_high_school_european_history",
+      "alias": "high_school_european_history",
+      "sample_len": 25,
+      "acc,none": 0.6,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_high_school_us_history": {
+      "name": "mmlu_high_school_us_history",
+      "alias": "high_school_us_history",
+      "sample_len": 25,
+      "acc,none": 0.72,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_high_school_world_history": {
+      "name": "mmlu_high_school_world_history",
+      "alias": "high_school_world_history",
+      "sample_len": 25,
+      "acc,none": 0.8,
+      "acc_stderr,none": 0.08164965809277261
+    },
+    "mmlu_international_law": {
+      "name": "mmlu_international_law",
+      "alias": "international_law",
+      "sample_len": 25,
+      "acc,none": 0.8,
+      "acc_stderr,none": 0.08164965809277261
+    },
+    "mmlu_jurisprudence": {
+      "name": "mmlu_jurisprudence",
+      "alias": "jurisprudence",
+      "sample_len": 25,
+      "acc,none": 0.76,
+      "acc_stderr,none": 0.08717797887081347
+    },
+    "mmlu_logical_fallacies": {
+      "name": "mmlu_logical_fallacies",
+      "alias": "logical_fallacies",
+      "sample_len": 25,
+      "acc,none": 0.6,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_moral_disputes": {
+      "name": "mmlu_moral_disputes",
+      "alias": "moral_disputes",
+      "sample_len": 25,
+      "acc,none": 0.52,
+      "acc_stderr,none": 0.10198039027185571
+    },
+    "mmlu_moral_scenarios": {
+      "name": "mmlu_moral_scenarios",
+      "alias": "moral_scenarios",
+      "sample_len": 25,
+      "acc,none": 0.28,
+      "acc_stderr,none": 0.0916515138991168
+    },
+    "mmlu_philosophy": {
+      "name": "mmlu_philosophy",
+      "alias": "philosophy",
+      "sample_len": 25,
+      "acc,none": 0.68,
+      "acc_stderr,none": 0.09521904571390467
+    },
+    "mmlu_prehistory": {
+      "name": "mmlu_prehistory",
+      "alias": "prehistory",
+      "sample_len": 25,
+      "acc,none": 0.6,
+      "acc_stderr,none": 0.1
+    },
+    "mmlu_professional_law": {
+      "name": "mmlu_professional_law",
+      "alias": "professional_law",
+      "sample_len": 25,
+      "acc,none": 0.36,
+      "acc_stderr,none": 0.09797958971132711
+    },
+    "mmlu_world_religions": {
+      "name": "mmlu_world_religions",
+      "alias": "world_religions",
+      "sample_len": 25,
+      "acc,none": 0.84,
+      "acc_stderr,none": 0.07483314773547882
+    },
+    "mmlu_stem": {
+      "alias": "stem",
+      "name": "mmlu_stem",
+      "sample_len": 475,
+      "acc,none": 0.5431578947368421,
+      "acc_stderr,none": 0.022155331768262305,
+      "sample_count": {
+        "acc,none": 475
+      }
+    },
+    "mmlu_other": {
+      "alias": "other",
+      "name": "mmlu_other",
+      "sample_len": 325,
+      "acc,none": 0.6492307692307693,
+      "acc_stderr,none": 0.024981255300140715,
+      "sample_count": {
+        "acc,none": 325
+      }
+    },
+    "mmlu_social_sciences": {
+      "alias": "social sciences",
+      "name": "mmlu_social_sciences",
+      "sample_len": 300,
+      "acc,none": 0.6766666666666666,
+      "acc_stderr,none": 0.026211391360189885,
+      "sample_count": {
+        "acc,none": 300
+      }
+    },
+    "mmlu_humanities": {
+      "alias": "humanities",
+      "name": "mmlu_humanities",
+      "sample_len": 325,
+      "acc,none": 0.6123076923076923,
+      "acc_stderr,none": 0.025789314791138784,
+      "sample_count": {
+        "acc,none": 325
+      }
+    },
+    "mmlu": {
+      "alias": "mmlu",
+      "name": "mmlu",
+      "sample_len": 1425,
+      "acc,none": 0.6112280701754386,
+      "acc_stderr,none": 0.012330725186530231,
+      "sample_count": {
+        "acc,none": 1425
+      }
+    }
+  },
+  "groups": {
+    "mmlu_stem": {
+      "alias": "stem",
+      "name": "mmlu_stem",
+      "sample_len": 475,
+      "acc,none": 0.5431578947368421,
+      "acc_stderr,none": 0.022155331768262305,
+      "sample_count": {
+        "acc,none": 475
+      }
+    },
+    "mmlu_other": {
+      "alias": "other",
+      "name": "mmlu_other",
+      "sample_len": 325,
+      "acc,none": 0.6492307692307693,
+      "acc_stderr,none": 0.024981255300140715,
+      "sample_count": {
+        "acc,none": 325
+      }
+    },
+    "mmlu_social_sciences": {
+      "alias": "social sciences",
+      "name": "mmlu_social_sciences",
+      "sample_len": 300,
+      "acc,none": 0.6766666666666666,
+      "acc_stderr,none": 0.026211391360189885,
+      "sample_count": {
+        "acc,none": 300
+      }
+    },
+    "mmlu_humanities": {
+      "alias": "humanities",
+      "name": "mmlu_humanities",
+      "sample_len": 325,
+      "acc,none": 0.6123076923076923,
+      "acc_stderr,none": 0.025789314791138784,
+      "sample_count": {
+        "acc,none": 325
+      }
+    },
+    "mmlu": {
+      "alias": "mmlu",
+      "name": "mmlu",
+      "sample_len": 1425,
+      "acc,none": 0.6112280701754386,
+      "acc_stderr,none": 0.012330725186530231,
+      "sample_count": {
+        "acc,none": 1425
+      }
+    }
+  },
+  "group_subtasks": {
+    "mmlu": [
+      "mmlu_stem",
+      "mmlu_other",
+      "mmlu_social_sciences",
+      "mmlu_humanities"
+    ],
+    "mmlu_stem": [
+      "mmlu_abstract_algebra",
+      "mmlu_anatomy",
+      "mmlu_astronomy",
+      "mmlu_college_biology",
+      "mmlu_college_chemistry",
+      "mmlu_college_computer_science",
+      "mmlu_college_mathematics",
+      "mmlu_college_physics",
+      "mmlu_computer_security",
+      "mmlu_conceptual_physics",
+      "mmlu_electrical_engineering",
+      "mmlu_elementary_mathematics",
+      "mmlu_high_school_biology",
+      "mmlu_high_school_chemistry",
+      "mmlu_high_school_computer_science",
+      "mmlu_high_school_mathematics",
+      "mmlu_high_school_physics",
+      "mmlu_high_school_statistics",
+      "mmlu_machine_learning"
+    ],
+    "mmlu_other": [
+      "mmlu_business_ethics",
+      "mmlu_clinical_knowledge",
+      "mmlu_college_medicine",
+      "mmlu_global_facts",
+      "mmlu_human_aging",
+      "mmlu_management",
+      "mmlu_marketing",
+      "mmlu_medical_genetics",
+      "mmlu_miscellaneous",
+      "mmlu_nutrition",
+      "mmlu_professional_accounting",
+      "mmlu_professional_medicine",
+      "mmlu_virology"
+    ],
+    "mmlu_social_sciences": [
+      "mmlu_econometrics",
+      "mmlu_high_school_geography",
+      "mmlu_high_school_government_and_politics",
+      "mmlu_high_school_macroeconomics",
+      "mmlu_high_school_microeconomics",
+      "mmlu_high_school_psychology",
+      "mmlu_human_sexuality",
+      "mmlu_professional_psychology",
+      "mmlu_public_relations",
+      "mmlu_security_studies",
+      "mmlu_sociology",
+      "mmlu_us_foreign_policy"
+    ],
+    "mmlu_humanities": [
+      "mmlu_formal_logic",
+      "mmlu_high_school_european_history",
+      "mmlu_high_school_us_history",
+      "mmlu_high_school_world_history",
+      "mmlu_international_law",
+      "mmlu_jurisprudence",
+      "mmlu_logical_fallacies",
+      "mmlu_moral_disputes",
+      "mmlu_moral_scenarios",
+      "mmlu_philosophy",
+      "mmlu_prehistory",
+      "mmlu_professional_law",
+      "mmlu_world_religions"
+    ]
+  },
+  "configs": {
+    "mmlu_abstract_algebra": {
+      "task": "mmlu_abstract_algebra",
+      "task_alias": "abstract_algebra",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "abstract_algebra",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about abstract algebra.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_abstract_algebra.yaml"
+      }
+    },
+    "mmlu_anatomy": {
+      "task": "mmlu_anatomy",
+      "task_alias": "anatomy",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "anatomy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about anatomy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_anatomy.yaml"
+      }
+    },
+    "mmlu_astronomy": {
+      "task": "mmlu_astronomy",
+      "task_alias": "astronomy",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "astronomy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about astronomy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_astronomy.yaml"
+      }
+    },
+    "mmlu_business_ethics": {
+      "task": "mmlu_business_ethics",
+      "task_alias": "business_ethics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "business_ethics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about business ethics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_business_ethics.yaml"
+      }
+    },
+    "mmlu_clinical_knowledge": {
+      "task": "mmlu_clinical_knowledge",
+      "task_alias": "clinical_knowledge",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "clinical_knowledge",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about clinical knowledge.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_clinical_knowledge.yaml"
+      }
+    },
+    "mmlu_college_biology": {
+      "task": "mmlu_college_biology",
+      "task_alias": "college_biology",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_biology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about college biology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_college_biology.yaml"
+      }
+    },
+    "mmlu_college_chemistry": {
+      "task": "mmlu_college_chemistry",
+      "task_alias": "college_chemistry",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_chemistry",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about college chemistry.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_college_chemistry.yaml"
+      }
+    },
+    "mmlu_college_computer_science": {
+      "task": "mmlu_college_computer_science",
+      "task_alias": "college_computer_science",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_computer_science",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about college computer science.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_college_computer_science.yaml"
+      }
+    },
+    "mmlu_college_mathematics": {
+      "task": "mmlu_college_mathematics",
+      "task_alias": "college_mathematics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_mathematics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about college mathematics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_college_mathematics.yaml"
+      }
+    },
+    "mmlu_college_medicine": {
+      "task": "mmlu_college_medicine",
+      "task_alias": "college_medicine",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_medicine",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about college medicine.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_college_medicine.yaml"
+      }
+    },
+    "mmlu_college_physics": {
+      "task": "mmlu_college_physics",
+      "task_alias": "college_physics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "college_physics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about college physics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_college_physics.yaml"
+      }
+    },
+    "mmlu_computer_security": {
+      "task": "mmlu_computer_security",
+      "task_alias": "computer_security",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "computer_security",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about computer security.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_computer_security.yaml"
+      }
+    },
+    "mmlu_conceptual_physics": {
+      "task": "mmlu_conceptual_physics",
+      "task_alias": "conceptual_physics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "conceptual_physics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about conceptual physics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_conceptual_physics.yaml"
+      }
+    },
+    "mmlu_econometrics": {
+      "task": "mmlu_econometrics",
+      "task_alias": "econometrics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "econometrics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about econometrics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_econometrics.yaml"
+      }
+    },
+    "mmlu_electrical_engineering": {
+      "task": "mmlu_electrical_engineering",
+      "task_alias": "electrical_engineering",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "electrical_engineering",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about electrical engineering.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_electrical_engineering.yaml"
+      }
+    },
+    "mmlu_elementary_mathematics": {
+      "task": "mmlu_elementary_mathematics",
+      "task_alias": "elementary_mathematics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "elementary_mathematics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about elementary mathematics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_elementary_mathematics.yaml"
+      }
+    },
+    "mmlu_formal_logic": {
+      "task": "mmlu_formal_logic",
+      "task_alias": "formal_logic",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "formal_logic",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about formal logic.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_formal_logic.yaml"
+      }
+    },
+    "mmlu_global_facts": {
+      "task": "mmlu_global_facts",
+      "task_alias": "global_facts",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "global_facts",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about global facts.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_global_facts.yaml"
+      }
+    },
+    "mmlu_high_school_biology": {
+      "task": "mmlu_high_school_biology",
+      "task_alias": "high_school_biology",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_biology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school biology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_biology.yaml"
+      }
+    },
+    "mmlu_high_school_chemistry": {
+      "task": "mmlu_high_school_chemistry",
+      "task_alias": "high_school_chemistry",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_chemistry",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school chemistry.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_chemistry.yaml"
+      }
+    },
+    "mmlu_high_school_computer_science": {
+      "task": "mmlu_high_school_computer_science",
+      "task_alias": "high_school_computer_science",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_computer_science",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school computer science.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_computer_science.yaml"
+      }
+    },
+    "mmlu_high_school_european_history": {
+      "task": "mmlu_high_school_european_history",
+      "task_alias": "high_school_european_history",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_european_history",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school european history.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_european_history.yaml"
+      }
+    },
+    "mmlu_high_school_geography": {
+      "task": "mmlu_high_school_geography",
+      "task_alias": "high_school_geography",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_geography",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school geography.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_geography.yaml"
+      }
+    },
+    "mmlu_high_school_government_and_politics": {
+      "task": "mmlu_high_school_government_and_politics",
+      "task_alias": "high_school_government_and_politics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_government_and_politics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school government and politics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_government_and_politics.yaml"
+      }
+    },
+    "mmlu_high_school_macroeconomics": {
+      "task": "mmlu_high_school_macroeconomics",
+      "task_alias": "high_school_macroeconomics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_macroeconomics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school macroeconomics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_macroeconomics.yaml"
+      }
+    },
+    "mmlu_high_school_mathematics": {
+      "task": "mmlu_high_school_mathematics",
+      "task_alias": "high_school_mathematics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_mathematics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school mathematics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_mathematics.yaml"
+      }
+    },
+    "mmlu_high_school_microeconomics": {
+      "task": "mmlu_high_school_microeconomics",
+      "task_alias": "high_school_microeconomics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_microeconomics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school microeconomics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_microeconomics.yaml"
+      }
+    },
+    "mmlu_high_school_physics": {
+      "task": "mmlu_high_school_physics",
+      "task_alias": "high_school_physics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_physics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school physics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_physics.yaml"
+      }
+    },
+    "mmlu_high_school_psychology": {
+      "task": "mmlu_high_school_psychology",
+      "task_alias": "high_school_psychology",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_psychology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school psychology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_psychology.yaml"
+      }
+    },
+    "mmlu_high_school_statistics": {
+      "task": "mmlu_high_school_statistics",
+      "task_alias": "high_school_statistics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_statistics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school statistics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_statistics.yaml"
+      }
+    },
+    "mmlu_high_school_us_history": {
+      "task": "mmlu_high_school_us_history",
+      "task_alias": "high_school_us_history",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_us_history",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school us history.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_us_history.yaml"
+      }
+    },
+    "mmlu_high_school_world_history": {
+      "task": "mmlu_high_school_world_history",
+      "task_alias": "high_school_world_history",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "high_school_world_history",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about high school world history.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_high_school_world_history.yaml"
+      }
+    },
+    "mmlu_human_aging": {
+      "task": "mmlu_human_aging",
+      "task_alias": "human_aging",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "human_aging",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about human aging.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_human_aging.yaml"
+      }
+    },
+    "mmlu_human_sexuality": {
+      "task": "mmlu_human_sexuality",
+      "task_alias": "human_sexuality",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "human_sexuality",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about human sexuality.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_human_sexuality.yaml"
+      }
+    },
+    "mmlu_international_law": {
+      "task": "mmlu_international_law",
+      "task_alias": "international_law",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "international_law",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about international law.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_international_law.yaml"
+      }
+    },
+    "mmlu_jurisprudence": {
+      "task": "mmlu_jurisprudence",
+      "task_alias": "jurisprudence",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "jurisprudence",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about jurisprudence.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_jurisprudence.yaml"
+      }
+    },
+    "mmlu_logical_fallacies": {
+      "task": "mmlu_logical_fallacies",
+      "task_alias": "logical_fallacies",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "logical_fallacies",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about logical fallacies.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_logical_fallacies.yaml"
+      }
+    },
+    "mmlu_machine_learning": {
+      "task": "mmlu_machine_learning",
+      "task_alias": "machine_learning",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "machine_learning",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about machine learning.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_machine_learning.yaml"
+      }
+    },
+    "mmlu_management": {
+      "task": "mmlu_management",
+      "task_alias": "management",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "management",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about management.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_management.yaml"
+      }
+    },
+    "mmlu_marketing": {
+      "task": "mmlu_marketing",
+      "task_alias": "marketing",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "marketing",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about marketing.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_marketing.yaml"
+      }
+    },
+    "mmlu_medical_genetics": {
+      "task": "mmlu_medical_genetics",
+      "task_alias": "medical_genetics",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "medical_genetics",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about medical genetics.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_medical_genetics.yaml"
+      }
+    },
+    "mmlu_miscellaneous": {
+      "task": "mmlu_miscellaneous",
+      "task_alias": "miscellaneous",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "miscellaneous",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about miscellaneous.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_miscellaneous.yaml"
+      }
+    },
+    "mmlu_moral_disputes": {
+      "task": "mmlu_moral_disputes",
+      "task_alias": "moral_disputes",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "moral_disputes",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about moral disputes.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_moral_disputes.yaml"
+      }
+    },
+    "mmlu_moral_scenarios": {
+      "task": "mmlu_moral_scenarios",
+      "task_alias": "moral_scenarios",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "moral_scenarios",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about moral scenarios.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_moral_scenarios.yaml"
+      }
+    },
+    "mmlu_nutrition": {
+      "task": "mmlu_nutrition",
+      "task_alias": "nutrition",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "nutrition",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about nutrition.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_nutrition.yaml"
+      }
+    },
+    "mmlu_philosophy": {
+      "task": "mmlu_philosophy",
+      "task_alias": "philosophy",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "philosophy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about philosophy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_philosophy.yaml"
+      }
+    },
+    "mmlu_prehistory": {
+      "task": "mmlu_prehistory",
+      "task_alias": "prehistory",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "prehistory",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about prehistory.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_prehistory.yaml"
+      }
+    },
+    "mmlu_professional_accounting": {
+      "task": "mmlu_professional_accounting",
+      "task_alias": "professional_accounting",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_accounting",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about professional accounting.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_professional_accounting.yaml"
+      }
+    },
+    "mmlu_professional_law": {
+      "task": "mmlu_professional_law",
+      "task_alias": "professional_law",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_law",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about professional law.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_professional_law.yaml"
+      }
+    },
+    "mmlu_professional_medicine": {
+      "task": "mmlu_professional_medicine",
+      "task_alias": "professional_medicine",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_medicine",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about professional medicine.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_professional_medicine.yaml"
+      }
+    },
+    "mmlu_professional_psychology": {
+      "task": "mmlu_professional_psychology",
+      "task_alias": "professional_psychology",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "professional_psychology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about professional psychology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_professional_psychology.yaml"
+      }
+    },
+    "mmlu_public_relations": {
+      "task": "mmlu_public_relations",
+      "task_alias": "public_relations",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "public_relations",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about public relations.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_public_relations.yaml"
+      }
+    },
+    "mmlu_security_studies": {
+      "task": "mmlu_security_studies",
+      "task_alias": "security_studies",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "security_studies",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about security studies.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_security_studies.yaml"
+      }
+    },
+    "mmlu_sociology": {
+      "task": "mmlu_sociology",
+      "task_alias": "sociology",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "sociology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about sociology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_sociology.yaml"
+      }
+    },
+    "mmlu_us_foreign_policy": {
+      "task": "mmlu_us_foreign_policy",
+      "task_alias": "us_foreign_policy",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "us_foreign_policy",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about us foreign policy.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_us_foreign_policy.yaml"
+      }
+    },
+    "mmlu_virology": {
+      "task": "mmlu_virology",
+      "task_alias": "virology",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "virology",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about virology.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_virology.yaml"
+      }
+    },
+    "mmlu_world_religions": {
+      "task": "mmlu_world_religions",
+      "task_alias": "world_religions",
+      "dataset_path": "cais/mmlu",
+      "dataset_name": "world_religions",
+      "test_split": "test",
+      "fewshot_split": "dev",
+      "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+      "doc_to_target": "answer",
+      "unsafe_code": false,
+      "doc_to_choice": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "description": "The following are multiple choice questions (with answers) about world religions.\n\n",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "first_n",
+        "split": "dev",
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:",
+        "doc_to_choice": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doc_to_target": "answer",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0,
+        "config_source": "/home/murilo/miniconda3/lib/python3.13/site-packages/lm_eval/tasks/mmlu/default/mmlu_world_religions.yaml"
+      }
+    }
+  },
+  "versions": {
+    "mmlu": "2",
+    "mmlu_abstract_algebra": 1.0,
+    "mmlu_anatomy": 1.0,
+    "mmlu_astronomy": 1.0,
+    "mmlu_business_ethics": 1.0,
+    "mmlu_clinical_knowledge": 1.0,
+    "mmlu_college_biology": 1.0,
+    "mmlu_college_chemistry": 1.0,
+    "mmlu_college_computer_science": 1.0,
+    "mmlu_college_mathematics": 1.0,
+    "mmlu_college_medicine": 1.0,
+    "mmlu_college_physics": 1.0,
+    "mmlu_computer_security": 1.0,
+    "mmlu_conceptual_physics": 1.0,
+    "mmlu_econometrics": 1.0,
+    "mmlu_electrical_engineering": 1.0,
+    "mmlu_elementary_mathematics": 1.0,
+    "mmlu_formal_logic": 1.0,
+    "mmlu_global_facts": 1.0,
+    "mmlu_high_school_biology": 1.0,
+    "mmlu_high_school_chemistry": 1.0,
+    "mmlu_high_school_computer_science": 1.0,
+    "mmlu_high_school_european_history": 1.0,
+    "mmlu_high_school_geography": 1.0,
+    "mmlu_high_school_government_and_politics": 1.0,
+    "mmlu_high_school_macroeconomics": 1.0,
+    "mmlu_high_school_mathematics": 1.0,
+    "mmlu_high_school_microeconomics": 1.0,
+    "mmlu_high_school_physics": 1.0,
+    "mmlu_high_school_psychology": 1.0,
+    "mmlu_high_school_statistics": 1.0,
+    "mmlu_high_school_us_history": 1.0,
+    "mmlu_high_school_world_history": 1.0,
+    "mmlu_human_aging": 1.0,
+    "mmlu_human_sexuality": 1.0,
+    "mmlu_humanities": "2",
+    "mmlu_international_law": 1.0,
+    "mmlu_jurisprudence": 1.0,
+    "mmlu_logical_fallacies": 1.0,
+    "mmlu_machine_learning": 1.0,
+    "mmlu_management": 1.0,
+    "mmlu_marketing": 1.0,
+    "mmlu_medical_genetics": 1.0,
+    "mmlu_miscellaneous": 1.0,
+    "mmlu_moral_disputes": 1.0,
+    "mmlu_moral_scenarios": 1.0,
+    "mmlu_nutrition": 1.0,
+    "mmlu_other": "2",
+    "mmlu_philosophy": 1.0,
+    "mmlu_prehistory": 1.0,
+    "mmlu_professional_accounting": 1.0,
+    "mmlu_professional_law": 1.0,
+    "mmlu_professional_medicine": 1.0,
+    "mmlu_professional_psychology": 1.0,
+    "mmlu_public_relations": 1.0,
+    "mmlu_security_studies": 1.0,
+    "mmlu_social_sciences": "2",
+    "mmlu_sociology": 1.0,
+    "mmlu_stem": "2",
+    "mmlu_us_foreign_policy": 1.0,
+    "mmlu_virology": 1.0,
+    "mmlu_world_religions": 1.0
+  },
+  "n-shot": {
+    "mmlu_abstract_algebra": 5,
+    "mmlu_anatomy": 5,
+    "mmlu_astronomy": 5,
+    "mmlu_business_ethics": 5,
+    "mmlu_clinical_knowledge": 5,
+    "mmlu_college_biology": 5,
+    "mmlu_college_chemistry": 5,
+    "mmlu_college_computer_science": 5,
+    "mmlu_college_mathematics": 5,
+    "mmlu_college_medicine": 5,
+    "mmlu_college_physics": 5,
+    "mmlu_computer_security": 5,
+    "mmlu_conceptual_physics": 5,
+    "mmlu_econometrics": 5,
+    "mmlu_electrical_engineering": 5,
+    "mmlu_elementary_mathematics": 5,
+    "mmlu_formal_logic": 5,
+    "mmlu_global_facts": 5,
+    "mmlu_high_school_biology": 5,
+    "mmlu_high_school_chemistry": 5,
+    "mmlu_high_school_computer_science": 5,
+    "mmlu_high_school_european_history": 5,
+    "mmlu_high_school_geography": 5,
+    "mmlu_high_school_government_and_politics": 5,
+    "mmlu_high_school_macroeconomics": 5,
+    "mmlu_high_school_mathematics": 5,
+    "mmlu_high_school_microeconomics": 5,
+    "mmlu_high_school_physics": 5,
+    "mmlu_high_school_psychology": 5,
+    "mmlu_high_school_statistics": 5,
+    "mmlu_high_school_us_history": 5,
+    "mmlu_high_school_world_history": 5,
+    "mmlu_human_aging": 5,
+    "mmlu_human_sexuality": 5,
+    "mmlu_humanities": 5,
+    "mmlu_international_law": 5,
+    "mmlu_jurisprudence": 5,
+    "mmlu_logical_fallacies": 5,
+    "mmlu_machine_learning": 5,
+    "mmlu_management": 5,
+    "mmlu_marketing": 5,
+    "mmlu_medical_genetics": 5,
+    "mmlu_miscellaneous": 5,
+    "mmlu_moral_disputes": 5,
+    "mmlu_moral_scenarios": 5,
+    "mmlu_nutrition": 5,
+    "mmlu_other": 5,
+    "mmlu_philosophy": 5,
+    "mmlu_prehistory": 5,
+    "mmlu_professional_accounting": 5,
+    "mmlu_professional_law": 5,
+    "mmlu_professional_medicine": 5,
+    "mmlu_professional_psychology": 5,
+    "mmlu_public_relations": 5,
+    "mmlu_security_studies": 5,
+    "mmlu_social_sciences": 5,
+    "mmlu_sociology": 5,
+    "mmlu_stem": 5,
+    "mmlu_us_foreign_policy": 5,
+    "mmlu_virology": 5,
+    "mmlu_world_religions": 5
+  },
+  "higher_is_better": {
+    "mmlu_abstract_algebra": {
+      "acc": true
+    },
+    "mmlu_anatomy": {
+      "acc": true
+    },
+    "mmlu_astronomy": {
+      "acc": true
+    },
+    "mmlu_business_ethics": {
+      "acc": true
+    },
+    "mmlu_clinical_knowledge": {
+      "acc": true
+    },
+    "mmlu_college_biology": {
+      "acc": true
+    },
+    "mmlu_college_chemistry": {
+      "acc": true
+    },
+    "mmlu_college_computer_science": {
+      "acc": true
+    },
+    "mmlu_college_mathematics": {
+      "acc": true
+    },
+    "mmlu_college_medicine": {
+      "acc": true
+    },
+    "mmlu_college_physics": {
+      "acc": true
+    },
+    "mmlu_computer_security": {
+      "acc": true
+    },
+    "mmlu_conceptual_physics": {
+      "acc": true
+    },
+    "mmlu_econometrics": {
+      "acc": true
+    },
+    "mmlu_electrical_engineering": {
+      "acc": true
+    },
+    "mmlu_elementary_mathematics": {
+      "acc": true
+    },
+    "mmlu_formal_logic": {
+      "acc": true
+    },
+    "mmlu_global_facts": {
+      "acc": true
+    },
+    "mmlu_high_school_biology": {
+      "acc": true
+    },
+    "mmlu_high_school_chemistry": {
+      "acc": true
+    },
+    "mmlu_high_school_computer_science": {
+      "acc": true
+    },
+    "mmlu_high_school_european_history": {
+      "acc": true
+    },
+    "mmlu_high_school_geography": {
+      "acc": true
+    },
+    "mmlu_high_school_government_and_politics": {
+      "acc": true
+    },
+    "mmlu_high_school_macroeconomics": {
+      "acc": true
+    },
+    "mmlu_high_school_mathematics": {
+      "acc": true
+    },
+    "mmlu_high_school_microeconomics": {
+      "acc": true
+    },
+    "mmlu_high_school_physics": {
+      "acc": true
+    },
+    "mmlu_high_school_psychology": {
+      "acc": true
+    },
+    "mmlu_high_school_statistics": {
+      "acc": true
+    },
+    "mmlu_high_school_us_history": {
+      "acc": true
+    },
+    "mmlu_high_school_world_history": {
+      "acc": true
+    },
+    "mmlu_human_aging": {
+      "acc": true
+    },
+    "mmlu_human_sexuality": {
+      "acc": true
+    },
+    "mmlu_humanities": {
+      "acc": true
+    },
+    "mmlu_international_law": {
+      "acc": true
+    },
+    "mmlu_jurisprudence": {
+      "acc": true
+    },
+    "mmlu_logical_fallacies": {
+      "acc": true
+    },
+    "mmlu_machine_learning": {
+      "acc": true
+    },
+    "mmlu_management": {
+      "acc": true
+    },
+    "mmlu_marketing": {
+      "acc": true
+    },
+    "mmlu_medical_genetics": {
+      "acc": true
+    },
+    "mmlu_miscellaneous": {
+      "acc": true
+    },
+    "mmlu_moral_disputes": {
+      "acc": true
+    },
+    "mmlu_moral_scenarios": {
+      "acc": true
+    },
+    "mmlu_nutrition": {
+      "acc": true
+    },
+    "mmlu_other": {
+      "acc": true
+    },
+    "mmlu_philosophy": {
+      "acc": true
+    },
+    "mmlu_prehistory": {
+      "acc": true
+    },
+    "mmlu_professional_accounting": {
+      "acc": true
+    },
+    "mmlu_professional_law": {
+      "acc": true
+    },
+    "mmlu_professional_medicine": {
+      "acc": true
+    },
+    "mmlu_professional_psychology": {
+      "acc": true
+    },
+    "mmlu_public_relations": {
+      "acc": true
+    },
+    "mmlu_security_studies": {
+      "acc": true
+    },
+    "mmlu_social_sciences": {
+      "acc": true
+    },
+    "mmlu_sociology": {
+      "acc": true
+    },
+    "mmlu_stem": {
+      "acc": true
+    },
+    "mmlu_us_foreign_policy": {
+      "acc": true
+    },
+    "mmlu_virology": {
+      "acc": true
+    },
+    "mmlu_world_religions": {
+      "acc": true
+    }
+  },
+  "n-samples": {
+    "mmlu_abstract_algebra": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_anatomy": {
+      "original": 135,
+      "effective": 25
+    },
+    "mmlu_astronomy": {
+      "original": 152,
+      "effective": 25
+    },
+    "mmlu_college_biology": {
+      "original": 144,
+      "effective": 25
+    },
+    "mmlu_college_chemistry": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_college_computer_science": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_college_mathematics": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_college_physics": {
+      "original": 102,
+      "effective": 25
+    },
+    "mmlu_computer_security": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_conceptual_physics": {
+      "original": 235,
+      "effective": 25
+    },
+    "mmlu_electrical_engineering": {
+      "original": 145,
+      "effective": 25
+    },
+    "mmlu_elementary_mathematics": {
+      "original": 378,
+      "effective": 25
+    },
+    "mmlu_high_school_biology": {
+      "original": 310,
+      "effective": 25
+    },
+    "mmlu_high_school_chemistry": {
+      "original": 203,
+      "effective": 25
+    },
+    "mmlu_high_school_computer_science": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_high_school_mathematics": {
+      "original": 270,
+      "effective": 25
+    },
+    "mmlu_high_school_physics": {
+      "original": 151,
+      "effective": 25
+    },
+    "mmlu_high_school_statistics": {
+      "original": 216,
+      "effective": 25
+    },
+    "mmlu_machine_learning": {
+      "original": 112,
+      "effective": 25
+    },
+    "mmlu_business_ethics": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_clinical_knowledge": {
+      "original": 265,
+      "effective": 25
+    },
+    "mmlu_college_medicine": {
+      "original": 173,
+      "effective": 25
+    },
+    "mmlu_global_facts": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_human_aging": {
+      "original": 223,
+      "effective": 25
+    },
+    "mmlu_management": {
+      "original": 103,
+      "effective": 25
+    },
+    "mmlu_marketing": {
+      "original": 234,
+      "effective": 25
+    },
+    "mmlu_medical_genetics": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_miscellaneous": {
+      "original": 783,
+      "effective": 25
+    },
+    "mmlu_nutrition": {
+      "original": 306,
+      "effective": 25
+    },
+    "mmlu_professional_accounting": {
+      "original": 282,
+      "effective": 25
+    },
+    "mmlu_professional_medicine": {
+      "original": 272,
+      "effective": 25
+    },
+    "mmlu_virology": {
+      "original": 166,
+      "effective": 25
+    },
+    "mmlu_econometrics": {
+      "original": 114,
+      "effective": 25
+    },
+    "mmlu_high_school_geography": {
+      "original": 198,
+      "effective": 25
+    },
+    "mmlu_high_school_government_and_politics": {
+      "original": 193,
+      "effective": 25
+    },
+    "mmlu_high_school_macroeconomics": {
+      "original": 390,
+      "effective": 25
+    },
+    "mmlu_high_school_microeconomics": {
+      "original": 238,
+      "effective": 25
+    },
+    "mmlu_high_school_psychology": {
+      "original": 545,
+      "effective": 25
+    },
+    "mmlu_human_sexuality": {
+      "original": 131,
+      "effective": 25
+    },
+    "mmlu_professional_psychology": {
+      "original": 612,
+      "effective": 25
+    },
+    "mmlu_public_relations": {
+      "original": 110,
+      "effective": 25
+    },
+    "mmlu_security_studies": {
+      "original": 245,
+      "effective": 25
+    },
+    "mmlu_sociology": {
+      "original": 201,
+      "effective": 25
+    },
+    "mmlu_us_foreign_policy": {
+      "original": 100,
+      "effective": 25
+    },
+    "mmlu_formal_logic": {
+      "original": 126,
+      "effective": 25
+    },
+    "mmlu_high_school_european_history": {
+      "original": 165,
+      "effective": 25
+    },
+    "mmlu_high_school_us_history": {
+      "original": 204,
+      "effective": 25
+    },
+    "mmlu_high_school_world_history": {
+      "original": 237,
+      "effective": 25
+    },
+    "mmlu_international_law": {
+      "original": 121,
+      "effective": 25
+    },
+    "mmlu_jurisprudence": {
+      "original": 108,
+      "effective": 25
+    },
+    "mmlu_logical_fallacies": {
+      "original": 163,
+      "effective": 25
+    },
+    "mmlu_moral_disputes": {
+      "original": 346,
+      "effective": 25
+    },
+    "mmlu_moral_scenarios": {
+      "original": 895,
+      "effective": 25
+    },
+    "mmlu_philosophy": {
+      "original": 311,
+      "effective": 25
+    },
+    "mmlu_prehistory": {
+      "original": 324,
+      "effective": 25
+    },
+    "mmlu_professional_law": {
+      "original": 1534,
+      "effective": 25
+    },
+    "mmlu_world_religions": {
+      "original": 171,
+      "effective": 25
+    }
+  },
+  "config": {
+    "model": "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf",
+    "model_args": null,
+    "model_num_parameters": 1543714304,
+    "model_dtype": "torch.float16",
+    "model_revision": "main",
+    "model_sha": "",
+    "batch_size": null,
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": 25,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null,
+    "random_seed": 42,
+    "numpy_seed": 42,
+    "torch_seed": 42,
+    "fewshot_seed": 42
+  },
+  "git_hash": "55d5003",
+  "date": 1795033671.2105753,
+  "pretty_env_info": "PyTorch version: 2.14.0+cu130\nIs debug build: False\nCUDA used to build PyTorch: 13.0\nROCM used to build PyTorch: N/A\n\nOS: Ubuntu 24.04.3 LTS (x86_64)\nGCC version: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nClang version: Could not collect\nCMake version: version 3.28.3\nLibc version: glibc-2.39\n\nPython version: 3.13.13 | packaged by Anaconda, Inc. | (main, Apr 14 2026, 06:19:41) [GCC 14.3.0] (64-bit runtime)\nPython platform: Linux-7.0.0-42-generic-x86_64-with-glibc2.39\nIs CUDA available: True\nCUDA runtime version: 13.1.115\nCUDA_MODULE_LOADING set to: \nGPU models and configuration: GPU 0: NVIDIA GeForce RTX 4090\nNvidia driver version: 580.178.04\ncuDNN version: Could not collect\nIs XPU available: False\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: False\nCaching allocator config: N/A\n\nCPU:\nArquitetura:                             x86_64\nModo(s) operacional da CPU:              32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nOrdem dos bytes:                         Little Endian\nCPU(s):                                  32\nLista de CPU(s) on-line:                 0-31\nID de fornecedor:                        GenuineIntel\nNome do modelo:                          Intel(R) Core(TM) i9-14900K\nFamília da CPU:                          6\nModelo:                                  183\nThread(s) per núcleo:                    2\nNúcleo(s) por soquete:                   24\nSoquete(s):                              1\nStep:                                    1\nCPU(s) scaling MHz:                      69%\nCPU MHz máx.:                            6000,0000\nCPU MHz mín.:                            800,0000\nBogoMIPS:                                6374,40\nOpções:                                  fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\nVirtualização:                           VT-x\ncache de L1d:                            896 KiB (24 instances)\ncache de L1i:                            1,3 MiB (24 instances)\ncache de L2:                             32 MiB (12 instances)\ncache de L3:                             36 MiB (1 instance)\nNó(s) de NUMA:                           1\nCPU(s) de nó0 NUMA:                      0-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Mitigation; Clear Register File\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace\n\nVersions of relevant libraries:\n[pip3] numpy==2.5.5\n[pip3] nvidia-cublas==13.1.1.3\n[pip3] nvidia-cuda-cupti==13.0.85\n[pip3] nvidia-cuda-nvrtc==13.0.88\n[pip3] nvidia-cuda-runtime==13.0.96\n[pip3] nvidia-cudnn-cu13==9.24.0.43\n[pip3] nvidia-cufft==12.0.0.61\n[pip3] nvidia-curand==10.4.0.35\n[pip3] nvidia-cusolver==12.0.4.66\n[pip3] nvidia-cusparse==12.6.3.3\n[pip3] nvidia-cusparselt-cu13==0.8.1\n[pip3] nvidia-nccl-cu13==2.30.7\n[pip3] nvidia-nvjitlink==13.3.33\n[pip3] nvidia-nvtx==13.0.85\n[pip3] torch==2.14.0\n[pip3] triton==3.8.0\n[conda] cuda-cudart                      13.1.80          h7354ed3_0\n[conda] cuda-cudart-dev                  13.1.80          h7354ed3_0\n[conda] cuda-cudart-dev_linux-64         13.1.80          hfb20e49_0\n[conda] cuda-cudart-static               13.1.80          h7354ed3_0\n[conda] cuda-cudart-static_linux-64      13.1.80          hfb20e49_0\n[conda] cuda-cudart_linux-64             13.1.80          hfb20e49_0\n[conda] cuda-cupti                       13.1.115         h7354ed3_0\n[conda] cuda-cupti-dev                   13.1.115         h7354ed3_0\n[conda] cuda-libraries                   13.1.2           h06a4308_0\n[conda] cuda-libraries-dev               13.1.2           h06a4308_0\n[conda] cuda-nvrtc                       13.1.115         h7354ed3_0\n[conda] cuda-nvrtc-dev                   13.1.115         h7354ed3_0\n[conda] cuda-nvtx                        13.1.115         h7354ed3_0\n[conda] cuda-opencl                      13.1.115         h6334c1c_0\n[conda] cuda-opencl-dev                  13.1.115         h7354ed3_0\n[conda] libcublas                        13.2.2.2         h7354ed3_0\n[conda] libcublas-dev                    13.2.2.2         h7354ed3_0\n[conda] libcufft                         12.1.0.78        h7354ed3_0\n[conda] libcufft-dev                     12.1.0.78        h7354ed3_0\n[conda] libcurand                        10.4.1.81        h7354ed3_0\n[conda] libcurand-dev                    10.4.1.81        h7354ed3_0\n[conda] libcusolver                      12.0.9.81        h13f4c66_0\n[conda] libcusolver-dev                  12.0.9.81        h7354ed3_0\n[conda] libcusparse                      12.7.3.1         h41c5c2b_0\n[conda] libcusparse-dev                  12.7.3.1         h41c5c2b_0\n[conda] libnvjitlink                     13.1.115         h7354ed3_0\n[conda] libnvjitlink-dev                 13.1.115         h7354ed3_0\n[conda] numpy                            2.5.5            pypi_0              pypi\n[conda] nvidia-cublas                    13.1.1.3         pypi_0              pypi\n[conda] nvidia-cuda-cupti                13.0.85          pypi_0              pypi\n[conda] nvidia-cuda-nvrtc                13.0.88          pypi_0              pypi\n[conda] nvidia-cuda-runtime              13.0.96          pypi_0              pypi\n[conda] nvidia-cudnn-cu13                9.24.0.43        pypi_0              pypi\n[conda] nvidia-cufft                     12.0.0.61        pypi_0              pypi\n[conda] nvidia-curand                    10.4.0.35        pypi_0              pypi\n[conda] nvidia-cusolver                  12.0.4.66        pypi_0              pypi\n[conda] nvidia-cusparse                  12.6.3.3         pypi_0              pypi\n[conda] nvidia-cusparselt-cu13           0.8.1            pypi_0              pypi\n[conda] nvidia-nccl-cu13                 2.30.7           pypi_0              pypi\n[conda] nvidia-nvjitlink                 13.3.33          pypi_0              pypi\n[conda] nvidia-nvtx                      13.0.85          pypi_0              pypi\n[conda] torch                            2.14.0           pypi_0              pypi\n[conda] triton                           3.8.0            pypi_0              pypi",
+  "transformers_version": "5.23.0",
+  "lm_eval_version": "0.4.13",
+  "upper_git_hash": null,
+  "tokenizer_pad_token": [
+    "<|endoftext|>",
+    "151643"
+  ],
+  "tokenizer_eos_token": [
+    "<|im_end|>",
+    "151645"
+  ],
+  "tokenizer_bos_token": [
+    null,
+    "None"
+  ],
+  "eot_token_id": 151645,
+  "max_length": 32768,
+  "task_hashes": {
+    "mmlu_abstract_algebra": "a7ef94d8003c08b909b40a53249719a00db8cd892cf861a3f1e657eb976f1be6",
+    "mmlu_anatomy": "74a477e3953ae81e611a86ec41d9b383f76323207a50ffdb10a81dac72cb4164",
+    "mmlu_astronomy": "9da93697e1e14e5bb0ca4565e15618fac1b7f710a2b9ca7e7763d738276757e2",
+    "mmlu_college_biology": "f5ec16fe6beeb4e93437ff87dd04118792407f013ddab7303cfabb74a8a73014",
+    "mmlu_college_chemistry": "de320e90e904509a64c11f68495adc0922bbca39f0ea01e1fc805e4db2ee4936",
+    "mmlu_college_computer_science": "c59803f4cf067783ee07b80bf17665a7cd03788d56f3a985f673ee7291ba3f2d",
+    "mmlu_college_mathematics": "7a06e4a3082b9ff1a615a739f234b18c04034c7e23a0de352144511252351ef7",
+    "mmlu_college_physics": "3aa32a494f1da68c7d3e0f977009b7c2fca09e83e8779979a722eda9dd7c42d1",
+    "mmlu_computer_security": "cfd9eb7e9a547a8c2b534e69395b119510ab8c09e5bf7c34d4e7423d50b95da8",
+    "mmlu_conceptual_physics": "bbcdb27e077b1f9b43fe7b4f51a8c8cf7cc1aa7153818fb426bf5109acb70709",
+    "mmlu_electrical_engineering": "0c5d84593e1f645997a43e53eb48222402a96ddc2c235b43dc8940e8907bad84",
+    "mmlu_elementary_mathematics": "cab913dc8eee22f79124ad3440d03d5c57a738309addeca9584f9528a49da6ec",
+    "mmlu_high_school_biology": "cbdb6a5e078c73031bb715fea953b9fc80e97a634e9c43217370d16ca7a9a795",
+    "mmlu_high_school_chemistry": "b20d56f4ac970cca8f1b8b72578b55e66fc9179878e3fe79fd3d81043ed0adf6",
+    "mmlu_high_school_computer_science": "4532c3face0b11d3618d32c2c77a0fa8ef9e1f137e5c354c7d746684204c293e",
+    "mmlu_high_school_mathematics": "5cd2f2d5116e90ce52a45e5a6ed6b4bc4ea2c0fa1b7ced656182f79acca3fd59",
+    "mmlu_high_school_physics": "334e59d553aa09e2ac53b159f038e2080d73cb6e3dc172cdbd86a370892d2da5",
+    "mmlu_high_school_statistics": "03c7c95221b194d95f4cfe430dfbf03c7e8d900c186738ea582bf97a61c2327e",
+    "mmlu_machine_learning": "1973c1acb200a8145ef4f54463dc0031d8741f97edaf703d165d51f34a4f4c88",
+    "mmlu_business_ethics": "bfa9a203b39fdbc8a153fe895b0c269f51b1f0164113610a1a52f1c727c07c64",
+    "mmlu_clinical_knowledge": "ae9380151a856b902847d79530cb60b84d11b743a22339d6b3f7066d4dab5e06",
+    "mmlu_college_medicine": "cdecd3d883cdcbf942706d146763310cb4cff14d7fb10be176a7c09f0ae31ae3",
+    "mmlu_global_facts": "2f50eebd11537e322851616838d5a7d4f174f28309b7e6085554bbfb222cb3ca",
+    "mmlu_human_aging": "9effa49da1e540e23fbafce860ab308ab23dfe6db62d5c6390a77817f67c7f5f",
+    "mmlu_management": "ee4af26713c90bb483a13fd9acc2a2ffce3d30e7db2c96989bbef018b33eae7d",
+    "mmlu_marketing": "ace10b8c5284ce7d8a6c8e9a0a918c0ad548ae0669067ba71850f0d6ae041003",
+    "mmlu_medical_genetics": "c7cfa7883ea0113b959bd0323a93fcf9fb6faf6f85b387a752b807b9b0e27aff",
+    "mmlu_miscellaneous": "6e36529702a048fafdded7d405330801ae550f483b3fa565d4c67090ba66d47e",
+    "mmlu_nutrition": "3fe254ba12f12494a149c3ff6e76d3b1c90e72e4ae4f0edd41f71e3a307c1d2b",
+    "mmlu_professional_accounting": "3df50d6f90de9d06676eeda87af20d64fcedf1606bba65326008afff951a8004",
+    "mmlu_professional_medicine": "855c9d3b94f8d258bdbff4b5153e72cc5138ba81d1ef04ceedab9ee20944b1de",
+    "mmlu_virology": "59795f051c29ec8dd85b8ac455a9794a21c6b752d79e2ec3f48d3766a33ca8b1",
+    "mmlu_econometrics": "a4a6e9383933000e9092c80099fdbe16557765824233f4f9b468112d9e9fdc3e",
+    "mmlu_high_school_geography": "0b0f0930b1b14e14269c61d400b9726f315a90273dd58ad206871c2d7c8d022b",
+    "mmlu_high_school_government_and_politics": "0df0636480a6ae247f6cf5c0cf01fcc1cbeac743109fc9f9de4b13ffcda90051",
+    "mmlu_high_school_macroeconomics": "b65950cfa7acf04c5d88b17373b4d20fc19842e0a992e32e20913d222600b6d6",
+    "mmlu_high_school_microeconomics": "7bf6c6aed99492cf67a02c1d6950747c943cfebb98bec699a33850a01755a2da",
+    "mmlu_high_school_psychology": "e6d48c9d33ddedf595aebe12a2fa6965640cb135b51f426ea58e83595899cfde",
+    "mmlu_human_sexuality": "5eac044a4e90c36fd545c013040f0c6dae8ce36c1f34b5ca673356056c2bb8fd",
+    "mmlu_professional_psychology": "6f697ab7de85e92d61e3001416fc4738b5791f63d986b71edfd39c7826f05087",
+    "mmlu_public_relations": "291392e4c5de86abc05e56c87bc3a6b995f7c1db4b71a2edb641c317e51e15a1",
+    "mmlu_security_studies": "c5e7985277a370c75f7dce5a19a95cd2d88396e01a9d05e432fb8b0f0d5b3c92",
+    "mmlu_sociology": "75e81c082793e4daaa440b40d082a470527e0333133c7ef0ab1b1d083288606e",
+    "mmlu_us_foreign_policy": "3c8fe1b1a0427686744081d5b2f07df455866e26f17236cace7534c9a8588413",
+    "mmlu_formal_logic": "8ef0f10bfa65e294e245072c6ba0c88a91650d5a86fc52995b99f6a9bdb63b3a",
+    "mmlu_high_school_european_history": "828f21e1add6e97ad9ddbcd46154071ff1405bfd638a1c5473da9246408743f6",
+    "mmlu_high_school_us_history": "52e0c5b9909dde7fe19e48d0d41ac6937e8cccdadfe17b05bc76e6984d4ddc2d",
+    "mmlu_high_school_world_history": "f1b7c60c0d511e47d8a7c84f0809ab580b5109105ee51fc466d816d8d1eba3f4",
+    "mmlu_international_law": "e9201ece220aba0dd7e5a3e92821d83ac9c857f6b53c917497f705070bd409e9",
+    "mmlu_jurisprudence": "a46c4efa6752e2ade01a046b57f0209e86c006fcc3b203c8cccf99a18000c1f4",
+    "mmlu_logical_fallacies": "c4dfbc899ff177bd680c00c988228153dfc5a7b5d39c7f1fce620d77c7952b12",
+    "mmlu_moral_disputes": "d6c2a9b64af49643ee4db345083c4b9cc328592406c13e4fee387396b93d18ea",
+    "mmlu_moral_scenarios": "7fa769cb83b52a6ec6acd43da2d1928a8db02ff3cebb5334c323d60e6990d40b",
+    "mmlu_philosophy": "2642cef1f540fe00949694e990473a877bcfebb2425f440059d257df38ae9e4c",
+    "mmlu_prehistory": "bd287801e8fd84450add7be5fc473eb8c29329a51a2a8292c5ccf931ffe2eb5c",
+    "mmlu_professional_law": "77cb273578d610136454e52afb7c7244ac9fe0434fd590f470a3963133389f92",
+    "mmlu_world_religions": "17cd10dceb0db2b012c31309b7ff30e2e0cbc099c4d88dcd4366636c0aed19e3"
+  },
+  "model_source": "CUSTOM",
+  "model_name": "xaji0y6d",
+  "model_name_sanitized": "xaji0y6d",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": true,
+  "chat_template": null,
+  "chat_template_sha": null,
+  "total_evaluation_time_seconds": "38.87072356091812"
+}

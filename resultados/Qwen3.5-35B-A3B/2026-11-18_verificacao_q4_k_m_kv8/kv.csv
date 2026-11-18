@@ -1,0 +1,2 @@
+modelo,nivel,kv,raciocinio,benchmark,n,acuracia,erro_padrao,tempo_s,tokens_por_resposta,cortadas,commit_llama_cpp,data
+Qwen3.5-35B-A3B,q4_k_m,8,desligado,wmt24,960,0.635854,0.004063,180.8,51.9,0,9581154a2250cc9e6948e4c2a2fc4b4e19d1a57e,2026-11-18T20:06:33Z

@@ -1,0 +1,21 @@
+etapa 1: mesmo texto ja extraido em saidas/c13/pedido.json, reaproveitando (--reextrair chama o LLM de novo)
+
+--- resumo ---
+pedido      : tarefa=QA dominio=geral modelo=None
+qualidade   : qa x geral -> MMLU [direta]
+memoria     : orcamento=1.0 GB (pedido), ctx=4096
+latencia    : banda=None GB/s (nao informada; eficiência = 0.45), meta=None tok/s
+pareto      : 2 na fronteira, 18 dominadas, 20 fora
+recomendacao: Qwen/Qwen2.5-1.5B-Instruct|quantizacao_kv:8+quantizacao_pesos:4|ctx=4096  nota 61.3 ± 2.7 (tag C), 0.77 GiB
+tecnica     : quantizacao_kv=8 (movimento Shrink)
+tecnica     : quantizacao_pesos=4 (movimento Shrink)
+sugeridas   : Shrink: kv_cache_evicao (custo nenhum, recursos ok), quantizacao_kv (custo nenhum, recursos ok), quantizacao_pesos (custo nenhum, recursos ok), decomposicao_low_rank (custo varia, recursos talvez), early_exit (custo varia, recursos talvez), pruning (custo varia, recursos talvez), token_pruning (custo varia, recursos talvez), weight_sharing (custo varia, recursos talvez)
+sugeridas   : Speed-up: decoding_especulativo (custo nenhum, recursos ok), decoding_paralelo (custo alto, recursos talvez)
+aviso       : 14 configurações ficaram fora da análise: raciocínio ligado sem medida (nem do modelo nem de irmão, na mesma classe de prova): sem estimativa
+aviso       : 6 configurações ficaram fora da análise: KV 4 bits sem medida e kv_heads < 8: risco de colapso (Qwen2.5 de 2 e 4 cabeças colapsou)
+aviso       : nota estimada 61.3 ± 2.7 (tag C): conferir medindo a configuração (etapa 8)
+candidatura : 30 modelos, 5 com configuracao, 40 configuracoes
+estimativa  : 20/40 com nota (medida ou estimada); meta de tok/s: {'sim': 0, 'talvez': 0, 'nao': 0, 'sem meta': 40, 'desconhecido': 0}
+
+gravado em /timevoz/QA-SpeechRAG/RESIDENCIA-IA/saidas/c13/
+[dry-run] mediria Qwen2.5-1.5B-Instruct, pesos q4_k_m, KV 8, raciocinio desligado: MMLU

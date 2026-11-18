@@ -1,0 +1,3 @@
+modelo,nivel,kv,momento,ctx_total,kv_formula_mib,gguf_mib,mem_usada_mib,mem_antes_do_servidor_mib,rss_servidor_mib,pico_rss_servidor_mib,nvidia_smi,data
+Qwen3-8B,q4_k_m,4,pronto,32768,1296.0,4795,11220,10815,784,5140,6419 MiB,2026-11-18T18:03:43Z
+Qwen3-8B,q4_k_m,4,fim,32768,1296.0,4795,20029,10815,9046,9084,6447 MiB,2026-11-18T18:18:22Z

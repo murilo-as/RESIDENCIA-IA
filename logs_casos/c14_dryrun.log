@@ -1,0 +1,21 @@
+etapa 1: mesmo texto ja extraido em saidas/c14/pedido.json, reaproveitando (--reextrair chama o LLM de novo)
+
+--- resumo ---
+pedido      : tarefa=Tradução dominio=None modelo=None
+qualidade   : traducao x geral -> WMT24++ [direta]
+memoria     : orcamento=24.0 GB (pedido), ctx=4096
+latencia    : banda=None GB/s (nao informada; eficiência = 0.45), meta=None tok/s
+pareto      : 11 na fronteira, 141 dominadas, 110 fora
+recomendacao: Qwen/Qwen3.5-35B-A3B|modo_raciocinio:desligado+quantizacao_kv:8+quantizacao_pesos:4|ctx=4096  nota 63.7 ± 1.3 (tag C), 16.24 GiB
+tecnica     : quantizacao_kv=8 (movimento Shrink)
+tecnica     : quantizacao_pesos=4 (movimento Shrink)
+sugeridas   : Improve: data_augmentation (custo leve, recursos talvez), decoding_recuperacao (custo leve, recursos talvez), peft_lora (custo leve, recursos talvez), destilacao (custo alto, recursos talvez)
+sugeridas   : Grow: modo_raciocinio (custo nenhum, recursos ok)
+aviso       : 87 configurações ficaram fora da análise: raciocínio ligado sem medida (nem do modelo nem de irmão, na mesma classe de prova): sem estimativa
+aviso       : 23 configurações ficaram fora da análise: KV 4 bits sem medida e kv_heads < 8: risco de colapso (Qwen2.5 de 2 e 4 cabeças colapsou)
+aviso       : nota estimada 63.7 ± 1.3 (tag C): conferir medindo a configuração (etapa 8)
+candidatura : 30 modelos, 27 com configuracao, 267 configuracoes
+estimativa  : 157/267 com nota (medida ou estimada); meta de tok/s: {'sim': 0, 'talvez': 0, 'nao': 0, 'sem meta': 267, 'desconhecido': 0}
+
+gravado em /timevoz/QA-SpeechRAG/RESIDENCIA-IA/saidas/c14/
+[dry-run] mediria Qwen3.5-35B-A3B, pesos q4_k_m, KV 8, raciocinio desligado: WMT24++

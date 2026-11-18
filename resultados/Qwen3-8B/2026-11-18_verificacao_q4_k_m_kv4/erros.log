@@ -1,0 +1,28 @@
+2026-11-18T17:50:01Z Qwen3-8B q4_k_m gsm8k: teste de 5 exemplos reprovou, prova pulada: erro no teste: line 295, in servidor
+    cmd = [os.path.join(BIN, "llama-server"), "-m", self.path(), "-ngl", "99", "-np", str(self.paralelo), "-c", str(self.ctx), "--host", "127.0.0.1", "--port", "8080"]
+                                                    ~~~~~~~~~^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 272, in path
+    if self._path is None: self._path = garantir_gguf(self.m, self.modelo, self.nivel)
+                                        ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 184, in garantir_gguf
+    subprocess.run([VENV_PY, os.path.join(LLAMA, "convert_hf_to_gguf.py"), os.path.join(MODELOS, modelo), "--outtype", "f16", "--outfile", parcial], check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/home/murilo/miniconda3/bin/python', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/llama.cpp/convert_hf_to_gguf.py', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/Qwen3-8B', '--outtype', 'f16', '--outfile', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/qwen3-8b-f16.gguf.parcial']' returned non-zero exit status 1.
+
+2026-11-18T17:50:02Z Qwen3-8B q4_k_m math500: teste de 5 exemplos reprovou, prova pulada: erro no teste: line 295, in servidor
+    cmd = [os.path.join(BIN, "llama-server"), "-m", self.path(), "-ngl", "99", "-np", str(self.paralelo), "-c", str(self.ctx), "--host", "127.0.0.1", "--port", "8080"]
+                                                    ~~~~~~~~~^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 272, in path
+    if self._path is None: self._path = garantir_gguf(self.m, self.modelo, self.nivel)
+                                        ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 184, in garantir_gguf
+    subprocess.run([VENV_PY, os.path.join(LLAMA, "convert_hf_to_gguf.py"), os.path.join(MODELOS, modelo), "--outtype", "f16", "--outfile", parcial], check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/murilo/miniconda3/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/home/murilo/miniconda3/bin/python', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/llama.cpp/convert_hf_to_gguf.py', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/Qwen3-8B', '--outtype', 'f16', '--outfile', '/timevoz/QA-SpeechRAG/RESIDENCIA-IA/modelos/hf/qwen3-8b-f16.gguf.parcial']' returned non-zero exit status 1.
+
