@@ -278,7 +278,13 @@ class Sessao:
         if self._lm is None:
             import torch
             from lm_eval.models.huggingface import HFLM
-            self._lm = HFLM(pretrained=MODELOS, gguf_file=os.path.basename(self.path()), tokenizer=os.path.join(MODELOS, self.modelo), dtype=dtype, batch_size=self.batch_hf, device="cuda")
+            if self.modelo.startswith("Qwen3.5"):
+                # o GGUF do Qwen3.5 no transformers deixa as camadas linear_attn sem peso (inicializacao aleatoria: acuracia de acaso, visto na 4090 no c12)
+                if self.nivel not in ("f16", "q8_0"): raise RuntimeError(f"log-prob do {self.modelo} {self.nivel}: o GGUF nao carrega no transformers e o original nao representa esse nivel")
+                print(f"aviso: {self.modelo} {self.nivel} em log-prob usa os pesos originais em fp16 (q8 ~ fp16), nao o GGUF", flush=True)
+                self._lm = HFLM(pretrained=os.path.join(MODELOS, self.modelo), dtype=dtype, batch_size=self.batch_hf, device="cuda")
+            else:
+                self._lm = HFLM(pretrained=MODELOS, gguf_file=os.path.basename(self.path()), tokenizer=os.path.join(MODELOS, self.modelo), dtype=dtype, batch_size=self.batch_hf, device="cuda")
             self._dtype = dtype
             torch.cuda.synchronize()
         return self._lm
