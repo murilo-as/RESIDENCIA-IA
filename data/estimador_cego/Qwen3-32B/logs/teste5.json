@@ -1,0 +1,26 @@
+{
+ "Qwen3-32B|gsm8k": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-19T02:14:59Z"
+ },
+ "Qwen3-32B|wmt24": {
+  "ok": true,
+  "valor": 67.56286396283396,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-19T03:45:12Z"
+ },
+ "Qwen3-32B|math500": {
+  "ok": true,
+  "valor": 0.8,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-19T04:06:02Z"
+ }
+}
