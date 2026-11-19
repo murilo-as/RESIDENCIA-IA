@@ -1,0 +1,20 @@
+2026-11-19T01:47:52Z Qwen3-30B-A3B-Instruct-2507 - -: pasta de modelos com 484 GB (limite 450 GB): parando (criado /timevoz/QA-SpeechRAG/RESIDENCIA-IA/data/medicoes/PARAR)
+2026-11-19T01:47:52Z Qwen3-30B-A3B-Instruct-2507 q4_k_m gsm8k: teste de 5 exemplos reprovou, prova pulada: erro no teste: Traceback (most recent call last):
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 544, in testar
+    elif bench in GERATIVO: valor, n = rodar_gerativo(m, s, bench, 0, teste=k)
+                                       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 419, in rodar_gerativo
+    s.servidor()
+    ~~~~~~~~~~^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 301, in servidor
+    cmd = [os.path.join(BIN, "llama-server"), "-m", self.path(), "-ngl", "99", "-np", str(self.paralelo), "-c", str(self.ctx), "--host", "127.0.0.1", "--port", "8080"]
+                                                    ~~~~~~~~~^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 272, in path
+    if self._path is None: self._path = garantir_gguf(self.m, self.modelo, self.nivel)
+                                        ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/timevoz/QA-SpeechRAG/RESIDENCIA-IA/etapa4_estimativa/medicao/medir.py", line 187, in garantir_gguf
+    if not m.espaco_ok(modelo): raise RuntimeError("sem espaco livre")
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: sem espaco livre
+
+2026-11-19T02:40:40Z Qwen3-30B-A3B-Instruct-2507 - -: pasta de modelos com 484 GB (limite 450 GB): parando (criado /timevoz/QA-SpeechRAG/RESIDENCIA-IA/data/medicoes/PARAR)

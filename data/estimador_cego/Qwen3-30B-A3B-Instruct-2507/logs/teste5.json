@@ -1,0 +1,26 @@
+{
+ "Qwen3-30B-A3B-Instruct-2507|gsm8k": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-19T02:44:40Z"
+ },
+ "Qwen3-30B-A3B-Instruct-2507|wmt24": {
+  "ok": true,
+  "valor": 63.72647420416936,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-19T02:54:15Z"
+ },
+ "Qwen3-30B-A3B-Instruct-2507|math500": {
+  "ok": true,
+  "valor": 1.0,
+  "n": 5,
+  "nivel": "q4_k_m",
+  "motivo": "",
+  "data": "2026-11-19T02:56:35Z"
+ }
+}
