@@ -10,3 +10,19 @@ slurm/
 llama.cpp/
 modelos/
 venv/
+
+# --- trabalho na Spark (nao versionar) ---
+/piloto/
+/logs/
+/etapa4_estimativa/medicao/amostras/
+/etapa4_estimativa/medicao/etapa1/
+/etapa4_estimativa/medicao/etapa1_oab/
+/etapa4_estimativa/medicao/fumaca/
+/etapa4_estimativa/medicao/logs/
+# logs dos jobs de teste do estimador (os logs de casos ja versionados continuam rastreados)
+/logs_casos/.*
+/logs_casos/estado.tsv
+/logs_casos/preflight_*
+/logs_casos/qwen3-32b_*
+/logs_casos/coder32b_*
+/logs_casos/conferencia_*
