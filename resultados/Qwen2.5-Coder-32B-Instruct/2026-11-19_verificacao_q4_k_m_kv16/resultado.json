@@ -1,0 +1,46 @@
+{
+ "modelo": "Qwen/Qwen2.5-Coder-32B-Instruct-GGUF/qwen2.5-coder-32b-instruct-q4_k_m.gguf",
+ "llama_cpp": [
+  "built with GNU 13.3.0 for Linux aarch64"
+ ],
+ "limite": 0,
+ "data": "2026-11-19 08:06",
+ "config": {
+  "modelo": "Qwen2.5-Coder-32B-Instruct",
+  "nivel": "q4_k_m",
+  "kv": "16",
+  "raciocinio": "desligado",
+  "caso": "c8_coder32b"
+ },
+ "estimado": {
+  "humaneval_plus": {
+   "nota": 90.83,
+   "meio": 17.3
+  },
+  "mbpp_plus": {
+   "nota": 79.85,
+   "meio": 17.2
+  }
+ },
+ "banda_gb_s": 1008,
+ "bytes_gib": 19.0,
+ "maquina": "spark14-9931.hpc.ceia",
+ "gpu": "NVIDIA GB10",
+ "codigo": {
+  "HumanEval+": {
+   "passou": 146,
+   "n": 164,
+   "nota": 89.02,
+   "tokens_medios": 241.3,
+   "erro_padrao_pts": 2.44
+  },
+  "MBPP+": {
+   "passou": 297,
+   "n": 378,
+   "nota": 78.57,
+   "tokens_medios": 188.8,
+   "erro_padrao_pts": 2.11
+  },
+  "media": 83.79
+ }
+}
