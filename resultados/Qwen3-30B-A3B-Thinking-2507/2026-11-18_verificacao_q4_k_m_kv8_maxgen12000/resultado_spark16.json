@@ -1,0 +1,49 @@
+{
+ "modelo": "Qwen/Qwen3-30B-A3B-Thinking-2507 (GGUF próprio, q4_k_m)",
+ "llama_cpp": [
+  "built with GNU 13.3.0 for Linux aarch64"
+ ],
+ "limite": 0,
+ "data": "2026-11-18 21:47",
+ "config": {
+  "modelo": "Qwen3-30B-A3B-Thinking-2507",
+  "nivel": "q4_k_m",
+  "kv": "8",
+  "raciocinio": "ligado",
+  "caso": "c7",
+  "id": "Qwen/Qwen3-30B-A3B-Thinking-2507|quantizacao_kv:8+quantizacao_pesos:4|ctx=4096"
+ },
+ "provas": [
+  {
+   "prova": "GSM8K",
+   "base": "gsm8k",
+   "n": 1319,
+   "acuracia": 0.961334,
+   "erro_padrao": 0.005309,
+   "tokens": 794.7,
+   "estimado": 90.48,
+   "meio": 9.6
+  },
+  {
+   "prova": "MATH-500",
+   "base": "math500",
+   "n": 500,
+   "acuracia": 0.948,
+   "erro_padrao": 0.009939,
+   "tokens": 2962.8,
+   "estimado": 84.91,
+   "meio": 9.5
+  }
+ ],
+ "banda_gb_s": 273.0,
+ "bytes_gib": 1.585,
+ "maquina": "spark16-a8f8.hpc.ceia",
+ "gpu": "NVIDIA GB10",
+ "velocidade": {
+  "tg128_tok_s": 89.434788,
+  "desvio": 0.180163,
+  "teto_tok_s": 160.4,
+  "estimado_tok_s": 72.2,
+  "eficiencia_medida": 0.558
+ }
+}
