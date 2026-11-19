@@ -1,6 +1,5 @@
 modelo,nivel,kv,gpu,banda_gb_s,tg_tok_s,desvio,bytes_gib,eficiencia,maquina,llama_cpp,caso,data
 Qwen2.5-Coder-0.5B-Instruct,q8_0,8,NVIDIA GeForce RTX 4090,1008,391.6,9.3,0.483,0.201,4090nrc01,"version: 1.0.0-dev (build 12463, commit 9581154a2)",c8,2026-11-16 21:23
-Qwen2.5-Coder-0.5B-Instruct,q8_0,8,NVIDIA GeForce RTX 4090,1008,374.2,3.2,0.483,0.193,4090nrc01,"version: 1.0.0-dev (build 12463, commit 9581154a2)",c8,2026-11-16 21:26
 Qwen2.5-Coder-1.5B-Instruct,q8_0,8,NVIDIA GeForce RTX 4090,1008,226.2,3.6,1.493,0.36,4090nrc01,"version: 1.0.0-dev (build 12463, commit 9581154a2)",c8_coder15b,2026-11-16 21:53
 Qwen3.5-4B,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,117.5,0.3,2.068,0.259,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c4,2026-11-17 21:07
 Qwen3.5-4B,q8_0,8,NVIDIA GeForce RTX 4090,1008,94.0,0.4,4.027,0.403,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c3,2026-11-17 22:04
@@ -12,5 +11,3 @@ Qwen3.5-27B,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,50.4,0.0,12.792,0.686,4090nrc0
 Qwen3.5-27B,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,50.4,0.0,12.792,0.686,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c3,2026-11-18 16:26
 Qwen3.5-35B-A3B,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,228.8,0.4,1.496,0.365,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c14,2026-11-18 17:06
 Qwen2.5-1.5B-Instruct,q4_k_m,8,NVIDIA GeForce RTX 4090,1008,493.1,0.9,0.774,0.407,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c13,2026-11-18 17:28
-Qwen3.5-4B,q8_0,8,NVIDIA GeForce RTX 4090,1008,163.6,0.2,4.027,0.702,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c12,2026-11-18 17:30
-Qwen3.5-4B,q8_0,8,NVIDIA GeForce RTX 4090,1008,163.6,0.1,4.027,0.702,4090nrc01,built with GNU 13.3.0 for Linux x86_64,c12,2026-11-18 18:45

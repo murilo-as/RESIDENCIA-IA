@@ -1,0 +1,13 @@
+modelo,nivel,benchmark,estimado,meio_pts,metodo,classe_esperada
+Qwen3-4B-Instruct-2507,q4_k_m,gsm8k,0.8191,9.46,interp+media_classe,interpolacao
+Qwen3-4B-Instruct-2507,q4_k_m,math500,0.8032,9.45,interp+media_classe,interpolacao
+Qwen3-4B-Instruct-2507,q4_k_m,wmt24,0.59,9.08,interp+media_classe,interpolacao
+Qwen3-30B-A3B-Instruct-2507,q4_k_m,gsm8k,0.9056,9.55,interp+media_classe,interpolacao
+Qwen3-30B-A3B-Instruct-2507,q4_k_m,math500,0.8498,9.49,interp+media_classe,interpolacao
+Qwen3-30B-A3B-Instruct-2507,q4_k_m,wmt24,0.6257,9.09,interp+media_classe,interpolacao
+Qwen3.6-27B,q4_k_m,gsm8k,0.9597,12.47,irmao_nota+media_classe,irmao
+Qwen3.6-27B,q4_k_m,math500,0.8914,12.41,irmao_nota+media_classe,irmao
+Qwen3.6-27B,q4_k_m,wmt24,0.634,12.07,irmao_nota+media_classe,irmao
+Qwen3.6-35B-A3B,q4_k_m,gsm8k,0.9522,12.46,irmao_nota+media_classe,irmao
+Qwen3.6-35B-A3B,q4_k_m,math500,0.8855,12.4,irmao_nota+media_classe,irmao
+Qwen3.6-35B-A3B,q4_k_m,wmt24,0.6352,12.07,irmao_nota+media_classe,irmao
