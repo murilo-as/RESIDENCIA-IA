@@ -3,7 +3,7 @@
   python estimador_cego.py medir ALVO...     baixa o modelo, mede (medir.py, protocolo da Spark) e apaga f16/HF no fim
   python estimador_cego.py comparar          estimado x medido, dentro/fora da banda
 Os resultados ficam em data/estimador_cego/<modelo>/kv.csv: NAO entram em data/medicoes (o estimador leria como 'medido')."""
-import csv, os, shutil, subprocess, sys
+import csv, json, os, shutil, subprocess, sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, ".."))
@@ -18,11 +18,25 @@ ALVOS = {   # nome: (repo HF, classe esperada)
     "Qwen3-30B-A3B-Instruct-2507": ("Qwen/Qwen3-30B-A3B-Instruct-2507", "interpolacao"),
     "Qwen3.6-27B": ("Qwen/Qwen3.6-27B", "irmao"),
     "Qwen3.6-35B-A3B": ("Qwen/Qwen3.6-35B-A3B", "irmao"),
+    "Qwen3-32B": ("Qwen/Qwen3-32B", "extrapolacao"),
 }
 
 
+def fichas_com_extras():
+    """Qwen3-32B nao tem ficha em data/fichas.json: monta uma em memoria a partir da do Qwen3-14B (mesma arquitetura, valores do config.json publicado: 64 camadas,
+    64 cabecas de atencao, 8 de KV). So tamanho e linha do modelo importam para a estimativa. Contagem de parametros digitada a mao: confira na API do HF."""
+    F = E.fichas()
+    if "Qwen/Qwen3-32B" not in F:
+        f = json.loads(json.dumps(F["Qwen/Qwen3-14B"])); f["id"] = "Qwen/Qwen3-32B"; f["base_de"] = None
+        f["params"].update(total=32762123264, texto=32762123264, por_dtype={"BF16": 32762123264}, disco_bytes=65524246528)
+        f["arquitetura"].update(camadas=64, camadas_por_tipo={"full_attention": 64}, camadas_proprias={"full_attention": 64}, q_heads=64)
+        f["avisos"] = ["ficha montada a mao para o teste cego (nao esta em data/fichas.json)"]
+        F["Qwen/Qwen3-32B"] = f
+    return F
+
+
 def prever():
-    F = E.fichas(); M = E.ler_medicoes(E.CSVS, F); formas = E.ler_forma(F)
+    F = fichas_com_extras(); M = E.ler_medicoes(E.CSVS, F); formas = E.ler_forma(F)
     os.makedirs(PASTA, exist_ok=True)
     arq = os.path.join(PASTA, "previsoes.csv")
     with open(arq, "w", newline="", encoding="utf-8") as f:
